@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="cn-zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录</title>
+    <style rel="stylesheet" href="/layui/css/layui.css"></style>
+    <style>
+
+        /* html,body{padding:0;margin:0;background:url(image/icon_login_bg.png) no-repeat;height:900px;width:1800px;}*/
+        html, body {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            min-height: 700px;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .container {
+            height: 100%;
+            background: url(images/icon_login_bg.png) no-repeat;
+            background-size: contain;
+            padding-left: 60%;
+        }
+
+        .content {
+            width: 400px;
+            margin: auto;
+            height: 80%;
+            padding-top: 10%;
+        }
+
+        .w1 {
+            width: 394px
+        }
+
+        .header {
+            padding-top: 60px;
+            font-size: 36px;
+            line-height: 100px;
+            padding-bottom: 70px;
+        }
+
+        .title {
+            font-size: 30px;
+            color: #338ce4;
+            margin-bottom: 20px;
+        }
+
+        .ts {
+            font-size: 14px;
+            color: #aaa;
+            opacity: 0.8;
+            margin-bottom: 40px;
+        }
+
+        .form-inline {
+            margin-bottom: 35px;
+            background-color: #fff;
+            border: 1px solid #dfdfdf;
+            width: 322px;
+            height: 50px;
+            padding: 0 10px 0 60px;
+            background-position: 19px 12px;
+        }
+
+        .icon-user {
+            background-image: url(images/icon_login_user.png);
+        }
+
+        .icon-key {
+            background-image: url(images/icon_login_key.png);
+        }
+
+        .icon-code {
+            background-image: url(images/icon_login_code.png);
+            width: 170px;
+        }
+
+        .input {
+            border: none;
+            outline: none;
+            line-height: 48px;
+            font-size: 16px;
+            width: 320px;
+        }
+
+        .icon-code .input {
+            width: 170px;
+        }
+
+        .code, .check-group {
+            position: relative;
+        }
+
+        .code img {
+            width: 120px;
+            height: 50px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            cursor: pointer;
+        }
+
+        .check, .form-inline {
+            background-repeat: no-repeat;
+            background-size: 25px;
+        }
+
+        .check-group input {
+            position: absolute;
+            width: 170px;
+            height: 30px;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .check-group input:checked + .check {
+            background-image: url(images/icon_login_cs.png);
+        }
+
+        .check {
+            padding-left: 43px;
+            width: 170px;
+            height: 30px;
+            background-position: 3px 2.5px;
+            background-image: url(images/icon_login_c.png);
+            line-height: 28px;
+        }
+
+        .check-group a {
+            color: #338ce4;
+            font-size: 16px;
+            line-height: 28px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            text-decoration: none
+        }
+
+        button {
+            width: 392px;
+            height: 56px;
+            background-color: #338ce4;
+            cursor: pointer;
+            border-radius: 4px;
+            border: 0;
+            font-size: 24px;
+            color: #fff;
+            letter-spacing: 10px;
+            margin-top: 36px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <h1 class="header">集客通后台管理系统</h1>
+    <div class="title">用户登录</div>
+    <p class="ts">USER LOGIN</p>
+    <form action="" id="login_form_id">
+        <div class="form-inline icon-user">
+            <input class="input" type="text" name="" id="user_telphone" tabindex="1" placeholder="用户名">
+        </div>
+        <div class="form-inline icon-key">
+            <input class="input" type="password" id="user_passward" name="" tabindex="2" placeholder="密码">
+        </div>
+        <div class="w1 code">
+            <div class="form-inline icon-code">
+                <input class="input" type="text" name="" id="verif_code" tabindex="3" placeholder="验证码">
+            </div>
+            <img id="imgVerify" src="getVerify?verify="+Math.random() alt="验证码">
+        </div>
+        <div class="w1 check-group">
+            <input type="checkbox" name="" title="按空格键选中" id="remeberme">
+            <div class="check" tabindex="4">
+                记住用户名和密码
+            </div>
+            <a href="">忘记密码？</a>
+        </div>
+        <button id="login" type="button">登录</button>
+    </form>
+</div>
+<script src="/layui/layui.js"></script>
+<script src="/jquery/jquery.min.js"></script>
+<script src="/layui/layui.js"></script>
+<script src="/custom/javascript/login.js"></script>
+
+</body>
+
+</html>

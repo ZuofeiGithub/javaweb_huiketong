@@ -1,0 +1,86 @@
+server:
+  port: 80
+spring:
+  data:
+    redis:
+      database: 0
+      host: 127.0.0.1
+      port: 6379
+      timeout: 5000ms
+      jedis:
+        pool:
+          max-idle: 8
+          min-idle: 0
+          max-active: 8
+          max-wait: -1ms
+  thymeleaf:
+    #关闭缓存，及时刷新
+    cache: false
+    check-template: true
+    check-template-location: false
+    #开启MVC thymeleaf 视图解析
+    enabled: true
+    encoding: utf-8
+    mode: HTML
+    prefix: classpath:/templates/
+    suffix: .html
+
+  #热部署生效
+  devtools:
+    restart:
+      enabled: true
+      #排除
+      exclude: static/**,public/**
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    generate-ddl: true
+    database: mysql
+    open-in-view: false
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #url: jdbc:mysql://120.27.229.54:3306/huiketong?useSSL=false&characterEncoding=utf-8&allowMultiQueries=true
+    #allowMultiQueries<-->mysql的批量更新 useSSL<-->MySQL在高版本需要指明是否进行SSL连接
+    url: jdbc:mysql://127.0.0.1:3306/huiketong?useSSL=false&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    #url: jdbc:mysql://192.168.0.116:3306/huiketong?useSSL=false&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    username: root
+    #password: gxmy2018
+    password: 123456
+
+    other:
+      jdbc-url: jdbc:mysql://120.27.229.54:3306/fhadmin?useSSL=false&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=UTC
+      username: root
+      password: gxmy2018
+
+
+  mail:
+    host: smtp.163.com
+    username: zuofei_2017@163.com
+    password: 3BA512987B116026
+    default-encoding: utf-8
+
+pay:
+  wxpay:
+    #appID: wxb5192e48650a4d77
+    appID: wx59b7423faba3495a
+    #mchID: 1511035751
+    mchID: 1521344991
+    #key: BDC8D2693BA512987B11602663771306
+    key: 423d8d3db6887e97a6054b34ee29e985
+    sandboxKey: c9ab1957323e200c0f6c1439a37b0eba
+    #cerPath: /user/server/cert/apiclient_cert.p12
+    cerPath: D:/cert/apiclient_cert.p12
+    useSandbox: false
+  alipay:
+    gatewayUrl: https://openapi.alipaydev.com/gateway.do
+    appid: 2016091100486192
+    appPrivateKey: MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCICD8tM3gYvgK1WgebU9KmEkB5aytZZuAwwH4VtGpRS6bEZL/gtLWtjXBoOp+PZcvvrBasLoBgNsz9CU8WiuXbjpEv9SxuAvVelSIFinm4eHBIFglS/pGQr/iZDCCCSIrzbNIQnal/hgc/12AfHtmaOxFNv6aoJi/rTUQN/1xJZXDTcIzx0hcgLvv57mX2frXd4cOkI8GUZt1WVik10dnQsKM3bsvy8JZrTKO8KibiPqwpafcJlf/gpCQcispnl1X4ri1C/loR0eUbmR2osKda6k/V5HJdteb6TSkVxMkZYvDPB7By6/GEsvRB4Pa9PwivyiyY5Lz0b/d6m9M0F8EtAgMBAAECggEATxOELjF6Qd/K0UNJoriiflmj0zFCXNEZyB1N7i4Xk7SHeCkdBXHnHsFWs7BIauKBH40JDQRnKgcROJK9v9v0bKI+sgMy1aywmE/XHCN4SIzysGTm/LDxS4uP1uAe0b170K/UmUYdbv0pn6oCvXSAiFCH6YtcROkV+BHNWtmz+xG9AvWy3hj9g0lyGffEmTAD/gpbHjot1JPCAlyYetERbPrKykie/YIA/P7uESIBusyT/Ithc2N4cVoNlo+uCiit3AyH8MFFrhA62tY7Y3WR7La0dJbzPsh6BDo4onkkLwGbW+lgjCVo1lgYL8E169cKOzNcytBu+kQ7dYTztqpRHQKBgQC7gTiFe3hLdx2PxAn2YYt4Y19bz/fxdfyneVWSpqiyY9tzhI3nENzlnGhjJ79VeFfrF4xMDPB7a7YztO7Fg/cofUifohga5M9c42qSyCUX/U+oGwU/j/x73NSaHjswnVKmrRfAlHP0ffskaoNnwm1hq4KpmnbUcCMjBoyobP3T0wKBgQC5uX7nIp/YHerBR2zEkOhRx0Jki7DJ25H3hGflzvedZUqzqNRtXaikhkrqTiRqsOtyKpeFZ70f85lWrlUWt7NzGY4uOG8F6/vrpL6ZAQWNq52QTZtkJDA7B/B/xpl4SGrhySbamrpRjFN4TFUZwSMs2eTvFDFg8vcb0XCkL1f2/wKBgQCjjsmN7jD1qxbXREroZxgw0IXq4ZNHRgM41yclAElhKqfPsU3SxCvcAj4wWAiXdp1CTc0svZC8KC3MFsS8+CsNX5OM4+kg9HxJa3qYRQvOTEFCwycl1eSI6w1szngVJPZmu9BfRV+MYqRClMLBLKEbNG+KoFmNX6/WqqzhcglLzwKBgCgnQ5mDMd3OsgdxgsGItsGfe+ozDVjHAOrrlG7p7Tz5PkpTcQHoIuLXKfE4TcVHVNANB09PW2NCDl/gNwM/WivDVasGhnJYT9Hlf1OjFelINjuRm8vtywOoNsXZUSrhNUJ1c9IFa8zfstgqYKe9yvYScd2Clx5nyScZg+nrVnBPAoGAOLMu9sQtCZt2yvcqlkmjrcOBfn8IejtZ5rf7cWvs7qkNQdP796WSuVwqT9HXDvkjC1WVgFalquGpFXxn/gmJQtO/njsfga40aDtjdf8ZNCMYNSjBem7LLxnsA6In5dXrKllwfyogCLH8sQ3nSFRAoPPweIyRSa9f5JucqH7QL7A=
+    alipayPublicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiAg/LTN4GL4CtVoHm1PSphJAeWsrWWbgMMB+FbRqUUumxGS/4LS1rY1waDqfj2XL76wWrC6AYDbM/QlPForl246RL/UsbgL1XpUiBYp5uHhwSBYJUv6RkK/4mQwggkiK82zSEJ2pf4YHP9dgHx7ZmjsRTb+mqCYv601EDf9cSWVw03CM8dIXIC77+e5l9n613eHDpCPBlGbdVlYpNdHZ0LCjN27L8vCWa0yjvCom4j6sKWn3CZX/4KQkHIrKZ5dV+K4tQv5aEdHlG5kdqLCnWupP1eRyXbXm+k0pFcTJGWLwzwewcuvxhLL0QeD2vT8Ir8osmOS89G/3epvTNBfBLQIDAQAB
+    returnUrl: http://yxep7y.natappfree.cc/alipay/return
+    notifyUrl: http://yxep7y.natappfree.cc/alipay/notify
+
+jiguang:
+  appkey: 1cb4077c3dc3741a279a9a25
+  masterSecret: ed6ef3b9bc7835095e31f97c
+

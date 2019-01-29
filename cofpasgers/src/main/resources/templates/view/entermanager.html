@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>经纪人管理</title>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+</head>
+<body>
+
+<table class="layui-hide" id="enter_table" lay-filter="test"></table>
+
+<script type="text/html" id="toolbar">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="addEnter">添加企业</button>
+        <button class="layui-btn layui-btn-sm" lay-event="ModifyEnter">修改企业</button>
+    </div>
+</script>
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit" th:text="禁用"></a>
+</script>
+<script src="/layui/layui.js"></script>
+<script>
+    //一般直接写在一个js文件中
+    layui.use(['layer', 'form', 'table'], function () {
+        var layer = layui.layer, form = layui.form, table = layui.table, $ = layui.$;
+
+        function isObjectEmpty(obj) {
+            for (var key in obj) {
+                if (key) {
+                    return false
+                }
+            }
+            return true
+        }
+
+        Date.prototype.Format = function (fmt) {
+            var o = {
+                "M+": this.getMonth() + 1,//月份
+                "d+": this.getDate(),//日
+                "H+": this.getHours(),//小时
+                "m+": this.getMinutes(),//分
+                "s+": this.getSeconds(),//秒
+                "q+": Math.floor((this.getMonth() + 3) / 3),//季度
+                "S+": this.getMilliseconds()//毫毛
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        };
+        table.render({
+            elem: '#enter_table'
+            , url: 'getcommonyinfo'
+            , toolbar: '#toolbar'
+            , cellMinWidth: 80     //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            , cols: [
+                [
+                    {type: 'checkbox', fixed: 'left'},
+                    {
+                        title: '序号', templet: function (d) {
+                            return d.LAY_TABLE_INDEX + 1
+                        }, align: 'center'
+                    },
+                    {field: 'id', title: 'ID', width: 80, sort: true, align: 'center'}
+                    , {field: 'enterName', title: '企业名', align: 'center'}
+                    , {field: 'enterLoginName', title: '登陆名', align: 'center'}
+                    , {field: 'enterTelphone', title: '电话', sort: true, align: 'center'}
+                    , {field: 'enterLegalperson', title: '企业法人', sort: true, align: 'center'}
+                    , {
+                    field: 'establelishDate', title: '成立时间', templet: function (d) {
+                        return new Date(new Date(d.establelishDate).toString()).Format("yyyy-MM-dd");
+                    }, align: 'center'
+                }
+                    , {
+                    field: 'enterStatus', title: '企业状态', templet: function (d) {
+                        if(d.enterStatus == 0){
+                            return "未启用";
+                        }else if(d.enterStatus == 1){
+                            return "启用";
+                        }
+                    }, sort: true, align: 'center'
+                }
+                    , {fixed: 'right', title: '操作', toolbar: '#bar', width: 150}
+                ]
+            ]
+            , page: true
+        });
+
+        //判断浏览器大小方法
+        function screen() {
+            //获取当前窗口的宽度
+            var width = $(window).width();
+            if (width > 1200) {
+                return 3;   //大屏幕
+            } else if (width > 992) {
+                return 2;   //中屏幕
+            } else if (width > 768) {
+                return 1;   //小屏幕
+            } else {
+                return 0;   //超小屏幕
+            }
+        }
+
+        /**
+         * 修改公司
+         * @param obj
+         */
+        function modifyEnter(obj) {
+            layer.open({
+                type: 2,
+                title:"修改企业信息",
+                anim: 1,
+                maxmin: true,
+                offset: 'auto',
+                content: 'modifyenter?id='+obj[0].id,
+                area: screen() < 2 ? ['90%', '80%'] : ['1000px', '680px'],
+            });
+        }
+
+        /**
+         * 添加公司
+         */
+        function addEnter(){
+            layer.open({
+                type: 2,
+                title:"添加企业信息",
+                anim: 1,
+                maxmin: true,
+                offset: 'auto',
+                content: 'addenter',
+                area: screen() < 2 ? ['90%', '80%'] : ['1000px', '680px'],
+                end:function () {
+                    location.reload();
+                }
+            });
+        }
+
+
+        //头工具栏事件
+        table.on('toolbar(test)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'addEnter':
+                    addEnter();
+                    break;
+                case 'ModifyEnter':
+                    var data = checkStatus.data;
+                    if (isObjectEmpty(data)) {
+                        return layer.msg("请先选择一家企业");
+                    } else if (data.length > 1) {
+                        return layer.msg("只能选择一家企业修改")
+                    }
+                    modifyEnter(data);
+                    break;
+                case 'isAll':
+                    layer.msg(checkStatus.isAll ? '全选' : '未全选');
+                    break;
+            }
+            ;
+        });
+
+        //监听行工具事件
+        table.on('tool(test)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'del') {
+                layer.confirm('真的删除行么', function (index) {
+                    obj.del();
+                    layer.close(index);
+                });
+            } else if (obj.event === 'edit') {
+                layer.prompt({
+                    formType: 2
+                    , value: data.enterName
+                }, function (value, index) {
+                    obj.update({
+                        enterName: value,
+                    });
+                    layer.close(index);
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+.iconfont {
+  font-size:0.16rem;
+}
+.icon-go:before {color: #999;}
+.icon-phone:before {font-size: .30rem;}
+.icon-talk:before {font-size: .36rem;top: -0.01em;position: relative;  }
+.icon-qrcode:before {font-size: .36rem;top: -0.01em;position: relative; }
+.icon-refresh:before {font-size: .36rem;top: -0.01em;position: relative;  }
+.icon-favor-checked:before {content: "\e645"; color: #FE434C;}
+.icon-x03:before { content: "\e652"; -webkit-text-stroke-width: 1px;}
+.icon-x09:before { content: "\e655"; font-size: .56rem;}
+.icon-x10:before { content: "\e656"; font-size: .6rem;}
+.icon-x11:before { content: "\e657"; font-size: .6rem;}
+.icon-xuanzeshangjia:before { content: "\e601"; font-size: .35rem;top: 0.01em;position: relative;}

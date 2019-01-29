@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>推广活动</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="layui/layui.js"></script>
+    <script src="kindeditor/kindeditor-all.js"></script>
+    <script src="kindeditor/lang/zh-CN.js"></script>
+    <style>
+        .layui-body {
+            left: 0;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-row">
+    <div class="layui-col-lg10">
+        <form class="layui-form" style="margin-top: 50px">
+            <div class="layui-form-item">
+                <label class="layui-form-label"><i
+                        style="color: #f00; margin-right: 5px">*</i>活动标题</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" lay-verify="title" autocomplete="off"
+                           placeholder="请输入标题"
+                           class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label"><i
+                        style="color: #f00; margin-right: 5px">*</i>活动类型</label>
+                <div class="layui-input-block">
+                    <select name="city" lay-verify="required">
+                        <option value=""></option>
+                        <option value="0">邀请经纪人活动</option>
+                        <option value="1">推荐客户活动</option>
+                        <option value="2">红包活动</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label"><i style="color: #f00; margin-right: 5px">*</i>开始时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="date" id="date1" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label"><i style="color: #f00; margin-right: 5px">*</i>结束时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="date" id="date2" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><i
+                        style="color: #f00; margin-right: 5px">*</i>上传封面图</label>
+                <div class="layui-input-block">
+                    <div class="layui-upload-drag" id="test10">
+                        <i class="layui-icon layui-icon-upload-drag"></i>
+                        <p>点击上传，或将文件拖拽到此处</p>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><i
+                        style="color: #f00; margin-right: 5px">*</i>活动详情</label>
+                <div class="layui-input-block">
+                    <textarea id="activity_context" class="layui-textarea"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+<script>
+    KindEditor.ready(function(K) {
+        window.editor = K.create('#activity_context', {
+            items: ['source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+                'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+                'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage',
+                'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+                'anchor', 'link', 'unlink', '|', 'about'],
+            allowFileManager: true,
+            filePostName: 'file',//跟服务端参数对应
+            uploadJson: "/kindeditor/fileUpload",
+            fileManagerJson: "/kindeditor/fileManager",//指定浏览远程图片的服务器端程序
+            minHeight: 500,
+            afterUpload: function (url) {
+                alert("上传成功");
+            }
+        });
+    });
+    //使用指定的模块
+    layui.use(['layer', 'form', 'laydate', 'upload', 'table'], function () {
+        var layer = layui.layer, form = layui.form, laydate = layui.laydate, upload = layui.upload, $ = layui.$;
+        var table = layui.table;
+        laydate.render({
+            elem: '#date1',
+            type: 'datetime',
+            format: 'yyyy-MM-dd H:m:s'
+        });
+        console.log("Editor:" + editor);
+        laydate.render({
+            elem: '#date2',
+            type: 'datetime',
+            format: 'yyyy-MM-dd H:m:s'
+        });
+
+        upload.render({
+            elem: '#test10'
+            , url: '/upload/'
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#test10').empty().append("<img src='" + result + "' width='300px' height='300px'>"); //图片链接（base64）
+                });
+            }, done: function (res) {
+                //如果上传失败
+                if (res.code > 0) {
+                    return layer.msg('上传失败');
+                }
+                //上传成功
+            }, error: function () {
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function () {
+                    uploadInst.upload();
+                });
+            }
+        });
+
+    });
+
+
+</script>
+</html>

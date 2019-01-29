@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<!-- saved from url=(0017)http://localhost/ -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <title>企业管理后台</title>
+    <link rel="shortcut icon" href="">
+    <link href="/front/style/bootstrap.min.css" rel="stylesheet">
+    <link href="/front/style/font-awesome.min.css" rel="stylesheet">
+    <link href="/front/style/style.css" rel="stylesheet">
+    <!--<link rel="stylesheet" href="/front/style/layer.css" id="layuicss-layer">-->
+    <link rel="stylesheet" href="/res/layui/css/layui.css">
+    <link rel="stylesheet" href="/layui/css/layui.css">
+</head>
+
+<body class="fixed-sidebar full-height-layout gray-bg  pace-done" style="overflow:hidden">
+<div class="pace  pace-inactive">
+    <div class="pace-progress" data-progress-text="100%" data-progress="99" style="width: 100%;">
+        <div class="pace-progress-inner"></div>
+    </div>
+    <div class="pace-activity"></div>
+</div>
+<div id="wrapper">
+
+    <!--左侧导航开始-->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="nav-close"><i class="fa fa-times-circle"></i>
+        </div>
+        <div class="slimScrollDiv" style="position: relative; width: auto; height: 100%;">
+            <div class="sidebar-collapse" style="width: auto; height: 100%;">
+                <ul class="nav" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element" style="text-align:center">
+                            <span><img alt="image" class="img-circle" id="headphoto"
+                                       src="/front/images/headphone.jpg" width="64px"
+                                       height="64px"></span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="http://localhost/#">
+                        <span class="clear">
+                       <span class="block m-t-xs"><strong class="font-bold" id="username"></strong></span>
+                        <span class="text-muted text-xs block" id="rightname"><b class="caret"></b></span>
+                        </span>
+                            </a>
+                            <!--<ul class="dropdown-menu m-t-xs">-->
+                                <!--<li><a class="J_menuItem" href="user_info" data-index="0">个人资料</a>-->
+                                <!--</li>-->
+                                <!--<li><a class="J_menuItem" href="http://localhost/mgr/user_chpwd" data-index="1">修改密码</a>-->
+                                <!--</li>-->
+                                <!--<li class="divider"></li>-->
+                                <!--<li><a href="/">安全退出</a>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                        </div>
+                        <div class="logo-element" id="logname">汇客通吉林大街塑料袋
+                        </div>
+                    </li>
+                    <li class="active">
+                        <a href="http://localhost/#">
+                            <i class="fa fa-user fa-fw" id="menuicon" style="margin-right: 0px;"></i>
+                            <span class="nav-label" id="top_item">系统管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level collapse in" aria-expanded="true" id="menu" style="">
+                            <!--<li>-->
+                                <!--<a class="J_menuItem" href="enterprise" name="tabMenuItem"-->
+                                   <!--data-index="5">企业管理</a>-->
+                            <!--</li>-->
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="slimScrollBar"
+                 style="background: rgb(0, 0, 0); width: 4px; position: absolute; top: 26px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 600.116px;"></div>
+            <div class="slimScrollRail"
+                 style="width: 4px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.9; z-index: 90; right: 1px;"></div>
+        </div>
+    </nav>        <!--左侧导航结束-->
+
+    <!--右侧部分开始-->
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-primary "
+                                              href="javascript:void(0)"><i class="fa fa-bars"></i> </a>
+                    <!--<form role="search" class="navbar-form-custom" method="post"-->
+                          <!--action="http://localhost/search_results.html">-->
+                        <!--<div class="form-group">-->
+                            <!--<input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search"-->
+                                   <!--id="top-search">-->
+                        <!--</div>-->
+                    <!--</form>-->
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li class="dropdown hidden-xs">
+                        <a class="right-sidebar-toggle" aria-expanded="false">
+                            <i class="fa fa-tasks"></i> 主题
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="row content-tabs">
+            <button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i>
+            </button>
+            <nav class="page-tabs J_menuTabs">
+                <div class="page-tabs-content" style="margin-left: 0px;">
+                    <a href="javascript:;" class="active J_menuTab" data-id="/blackboard">首页</a>
+                </div>
+            </nav>
+            <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
+            </button>
+            <div class="btn-group roll-nav roll-right">
+                <button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作<span class="caret"></span>
+
+                </button>
+                <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                    <li class="J_tabShowActive"><a>定位当前选项卡</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="J_tabCloseAll"><a>关闭全部选项卡</a>
+                    </li>
+                    <li class="J_tabCloseOther"><a>关闭其他选项卡</a>
+                    </li>
+                </ul>
+            </div>
+            <a href="/login" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+        </div>
+        <div class="row J_mainContent" id="content-main">
+            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="/front/view/blackboard.html"
+                    frameborder="0" data-id="/blackboard" seamless=""></iframe>
+            <!--<iframe class="J_iframe" name="iframe5" width="100%" height="100%" src="./Guns - 主页_files/mgr.html"-->
+                    <!--frameborder="0" data-id="/mgr" seamless="" style="display: none;"></iframe>-->
+            <!--<iframe class="J_iframe" name="iframe7" width="100%" height="100%" src="./Guns - 主页_files/dept.html"-->
+                    <!--frameborder="0" data-id="/dept" seamless="" style="display: inline;"></iframe>-->
+            <!--<iframe class="J_iframe" name="iframe8" width="100%" height="100%" src="./Guns - 主页_files/menu.html"-->
+                    <!--frameborder="0" data-id="/menu" seamless="" style="display: none;"></iframe>-->
+            <!--<iframe class="J_iframe" name="iframe10" width="100%" height="100%" src="./Guns - 主页_files/log.html"-->
+                    <!--frameborder="0" data-id="/log" seamless="" style="display: none;"></iframe>-->
+            <!--<iframe class="J_iframe" name="iframe11" width="100%" height="100%" src="./Guns - 主页_files/loginLog.html"-->
+                    <!--frameborder="0" data-id="/loginLog" seamless="" style="display: none;"></iframe>-->
+        </div>
+        <!--<div class="footer">-->
+            <!--<div class="pull-right">© 2016-2017 <a href="http://git.oschina.net/naan1993/guns" target="_blank">guns</a>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>        <!--右侧部分结束-->
+
+    <!--右侧边栏开始-->
+    <div id="right-sidebar">
+        <div class="slimScrollDiv" style="position: relative; width: auto; height: 100%;">
+            <div class="sidebar-container" style="width: auto; height: 100%;">
+
+                <ul class="nav nav-tabs navs-3">
+                    <li class="active"><a data-toggle="tab" href="#tab-1"> <i class="fa fa-gear"></i>
+                        主题
+                    </a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <div class="sidebar-title">
+                            <h3>
+                                <i class="fa fa-comments-o"></i> 主题设置
+                            </h3>
+                            <small><i class="fa fa-tim"></i>
+                                你可以从这里选择和预览主题的布局和样式，这些设置会被保存在本地，下次打开的时候会直接应用这些设置。
+                            </small>
+                        </div>
+                        <div class="skin-setttings">
+                            <div class="title">主题设置</div>
+                            <div class="setings-item">
+                                <span>收起左侧菜单</span>
+                                <div class="switch">
+                                    <div class="onoffswitch">
+                                        <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox"
+                                               id="collapsemenu"> <label class="onoffswitch-label" for="collapsemenu">
+                                        <span class="onoffswitch-inner"></span> <span class="onoffswitch-switch"></span>
+                                    </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="setings-item">
+                                <span>固定顶部</span>
+
+                                <div class="switch">
+                                    <div class="onoffswitch">
+                                        <input type="checkbox" name="fixednavbar" class="onoffswitch-checkbox"
+                                               id="fixednavbar"> <label class="onoffswitch-label" for="fixednavbar">
+                                        <span class="onoffswitch-inner"></span> <span class="onoffswitch-switch"></span>
+                                    </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="setings-item">
+                                <span> 固定宽度 </span>
+
+                                <div class="switch">
+                                    <div class="onoffswitch">
+                                        <input type="checkbox" name="boxedlayout" class="onoffswitch-checkbox"
+                                               id="boxedlayout"> <label class="onoffswitch-label" for="boxedlayout">
+                                        <span class="onoffswitch-inner"></span> <span class="onoffswitch-switch"></span>
+                                    </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="title">皮肤选择</div>
+                            <div class="setings-item default-skin nb">
+						<span class="skin-name "> <a href="http://localhost/#" class="s-skin-0">
+                            默认皮肤 </a>
+						</span>
+                            </div>
+                            <div class="setings-item blue-skin nb">
+						<span class="skin-name "> <a href="http://localhost/#" class="s-skin-1">
+                            蓝色主题 </a>
+						</span>
+                            </div>
+                            <div class="setings-item yellow-skin nb">
+						<span class="skin-name "> <a href="http://localhost/#" class="s-skin-3">
+                            黄色/紫色主题 </a>
+						</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="slimScrollBar"
+                 style="background: rgb(0, 0, 0); width: 4px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 565px;"></div>
+            <div class="slimScrollRail"
+                 style="width: 4px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.4; z-index: 90; right: 1px;"></div>
+        </div>
+    </div>        <!--右侧边栏结束-->
+
+</div>
+
+<!-- 全局js -->
+<script src="/front/script/jquery.min.js"></script>
+<script src="/front/script/bootstrap.min.js"></script>
+<script src="/front/script/jquery.metisMenu.js"></script>
+<script src="/front/script/jquery.slimscroll.min.js"></script>
+<script src="/layui/layui.js"></script>
+<script src="/res/layui/layui.js"></script>
+
+
+
+<!-- 自定义js -->
+<script type="text/javascript" src="custom/javascript/admin.js"></script>
+<script src="/front/script/hplus.js"></script>
+<script type="text/javascript" src="/front/script/contabs.js"></script>
+
+
+<!-- 第三方插件 -->
+<script src="/front/script/pace.min.js"></script>
+
+<script src="/jmessage/jmessage-sdk-web.2.6.0.min.js"></script>
+<script src="/jmessage/md5.js"></script>
+<div class="layui-layer-move"></div>
+
+</body>
+<script>
+    layui.use('layim', function(layim){
+
+        function sendSingleMsg(to_user,context) {
+            JIM.sendSingleMsg({
+                'target_username' : to_user,
+                'content' : context,
+            }).onSuccess(function(data,msg) {
+                //console.log('success data:' + JSON.stringify(data));
+                //console.log('succes msg:' + JSON.stringify(msg));
+            }).onFail(function(data) {
+                //console.log('error:' + JSON.stringify(data));
+            });
+        }
+        var user_id = getCookie("telphone");
+        //console.log("user_id="+user_id);
+        var json = {};
+        json.user_id = user_id;
+        $.post('chat/chatinit',json,function (resp) {
+            layim.config({
+                brief: false, //是否简约模式（如果true则不显示主面板）
+                init:resp.data,
+                notice: true,
+                msgbox:'chat/msgbox'
+            });
+            layim.on('sendMessage', function(res){
+                var mine = res.mine;
+               // console.log(mine);
+                var to = res.to;
+                //console.log(to);
+                sendSingleMsg(to.id,mine.content)
+            });
+            layim.on('chatChange', function(res){
+                //console.log(res);
+            });
+        })
+        var across_user = 'mrcdh';
+        var across_appkey = '1cb4077c3dc3741a279a9a25';
+        var target_nickname='xuqiin1';
+        var gid=23364029;
+        var target_gname='xu_test';
+        var msg_ids = [56562546,57865421,45875642,14236589];
+        var msg_id = 451732948;
+        var room_id = 68;
+        window.JIM = new JMessage({
+            debug : false
+        });
+
+        JIM.onDisconnect(function(){
+            //console.log("【disconnect】");
+        }); //异常断线监听
+
+        function randomWord(randomFlag, min, max){
+            var str = "",
+                range = min,
+                arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+            // 随机产生
+            if(randomFlag){
+                range = Math.round(Math.random() * (max-min)) + min;
+            }
+            for(var i=0; i<range; i++){
+                pos = Math.round(Math.random() * (arr.length-1));
+                str += arr[pos];
+            }
+            return str;
+        }
+
+        var timestamp = new Date().getTime();
+        var randomword = randomWord(true,20,36);
+        var signature = hex_md5("appkey=1cb4077c3dc3741a279a9a25&timestamp="+timestamp+"&random_str="+randomword+"&key=ed6ef3b9bc7835095e31f97c")
+        function login(uname) {
+            JIM.login({
+                'username' : uname,
+                'password': '123456'
+            }).onSuccess(function(data) {
+               // console.log('success:' + JSON.stringify(data));
+                JIM.onMsgReceive(function(data) {
+                    data = JSON.stringify(data);
+                    var jsondata = JSON.parse(data);
+                    var reqJson = {};
+                    reqJson.user_id = jsondata.messages[0].from_username.substring(1);
+                    $.post('/chat/getusername',reqJson,function (resp) {
+                       if(resp.code === "1"){
+                           layim.getMessage({
+                               username: resp.data.username //消息来源用户名
+                               ,avatar: resp.data.avatar //消息来源用户头像
+                               ,id: jsondata.messages[0].from_username //消息的来源ID（如果是私聊，则是用户id，如果是群聊，则是群组id）
+                               ,type: "friend" //聊天窗口来源类型，从发送消息传递的to里面获取
+                               ,content: jsondata.messages[0].content.msg_body.text//消息内容
+                               ,cid: 0 //消息id，可不传。除非你要对消息进行一些操作（如撤回）
+                               ,mine: false //是否我发送的消息，如果为true，则会显示在右方
+                               ,fromid: jsondata.messages[0].from_username //消息的发送者id（比如群组中的某个消息发送者），可用于自动解决浏览器多窗口时的一些问题
+                               ,timestamp: jsondata.messages[0].content.create_time //服务端时间戳毫秒数。注意：如果你返回的是标准的 unix 时间戳，记得要 *1000
+                           });
+                       }else{
+                           return false;
+                       }
+                    });
+                });
+                JIM.onEventNotification(function(data) {
+                    //console.log('event_receive: ' + JSON.stringify(data));
+
+                });
+
+                JIM.onSyncConversation(function(data) { //离线消息同步监听
+                    //console.log( data);
+
+                });
+
+                JIM.onUserInfUpdate(function(data) {
+                    //console.log('onUserInfUpdate : ' + JSON.stringify(data));
+
+                });
+
+                JIM.onSyncEvent(function(data) {
+                    //console.log('onSyncEvent : ' + JSON.stringify(data));
+
+                });
+
+                JIM.onMsgReceiptChange(function(data){
+                    //console.log('onMsgReceiptChange : ' + JSON.stringify(data));
+
+                });
+
+                JIM.onSyncMsgReceipt(function(data){
+                    //console.log('onSyncMsgReceipt : ' + JSON.stringify(data));
+
+                });
+
+                JIM.onMutiUnreadMsgUpdate(function(data){
+                    //console.log('onConversationUpdate : ' + JSON.stringify(data));
+
+
+                });
+
+                JIM.onTransMsgRec(function(data){
+                    //console.log('onTransMsgRec : ' + JSON.stringify(data));
+
+                });
+
+                JIM.onRoomMsg (function(data){
+                    //console.log('onRoomMsg  : ' + JSON.stringify(data));
+
+                });
+            }).onFail(function(data) {
+
+                // console.log('error:' + JSON.stringify(data));
+
+            }).onTimeout(function(data) {
+                // console.log('timeout:' + JSON.stringify(data));
+
+            });
+        }
+        function init() {
+            JIM.init({
+                "appkey":"1cb4077c3dc3741a279a9a25",
+                "random_str":  randomword,
+                "signature":  signature,
+                "timestamp":  timestamp,
+                "flag": 1
+            }).onSuccess(function(data) {
+                register(user_id,"123456","左飞飞1234");
+                //console.log('success:' + JSON.stringify(data));
+            }).onFail(function(data) {
+                //console.log('error:' + JSON.stringify(data))
+            });
+        }
+        init();
+
+
+        function register(uname,pword,nickname){
+            JIM.register({
+                'username' : uname,
+                'password': pword,
+                'nickname' : nickname
+            }).onSuccess(function(data) {
+                login(user_id);
+                //console.log('success:' + JSON.stringify(data));
+            }).onFail(function(data) {
+                login(user_id);
+                //console.log('error:' + JSON.stringify(data))
+            });
+        }
+        //先来个客服模式压压精
+    });
+</script>
+</html>

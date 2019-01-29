@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>分佣指南</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/layui/css/layui.css"  media="all">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css"  media="all">
+    <script src="/front/script/jquery.min.js" charset="utf-8"></script>
+    <script src="/bootstrap/js/bootstrap.js" charset="utf-8"></script>
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+
+    <style>
+        .layui-form-label{
+            width:150px;
+        }
+    </style>
+</head>
+<body>
+<form class="layui-form"  id="form1" action="" onsubmit="return false" style="margin-top:30px">
+    <div class="layui-form-item">
+        <label class="layui-form-label">分佣指南:</label>
+        <div class="layui-input-inline" style="width:700px;">
+            <textarea id="demo" name="yongjinContent" style="display: none;" ></textarea>
+        </div>
+
+    </div>
+    <input type="hidden" name="telphone">
+    <div class="modal-footer">
+        <button  class="layui-btn" lay-submit="" lay-filter="demo1">提交更改</button>
+    </div>
+
+</form>
+
+
+<script src="/layui/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+     var  layedit;
+     var index;
+     layui.use(['form','layedit'], function() {
+        var form = layui.form;
+        layedit = layui.layedit;
+        layedit.set({
+            uploadImage: {
+                url: '/uploadYongJinImg' //接口url
+                ,type: 'post' //默认post
+            }
+        });
+        index= layedit.build('demo'); //建立编辑器
+        form.render();
+        // cookie操作
+        function getCookie(name) {
+            var arr = document.cookie.split('; ');
+            for (var i = 0; i < arr.length; i++) {
+                var arr2 = arr[i].split('=');
+                if (trim(arr2[0]) === name) {
+                    return unescape(trim(arr2[1]));
+                }
+            }
+            return '';
+        }
+        function trim(str) {
+            return str.replace(/(^\s*)|(\s*$)/g, "");
+        }
+        $("input[name='telphone']").val(getCookie("telphone"));
+    });
+
+    $("#form1").submit(function() {
+        var yongjinContent=  layedit.getContent(index);
+        if(yongjinContent==null||yongjinContent==""){
+            alert("请输入分佣指南!")
+            return false;
+        }
+        var formData= new FormData(document.getElementById("form1"));
+        formData.set("guideContext",yongjinContent);
+        $.ajax({
+            async: false,
+            type: "POST",
+            url:"/addYongjinGuide",
+            data:formData,
+            dataType: "json",
+            contentType: false, //不设置内容类型
+            processData: false, //不处理数据
+            success: function (data) {
+                if(data>0){
+                    alert("添加成功")
+                }else{
+                    alert("添加失败")
+                }
+            },
+            error: function () {
+            }
+        })
+
+    });
+
+</script>
+</body>
+</html>

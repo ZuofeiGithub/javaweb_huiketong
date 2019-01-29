@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>邀请客户</title>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+</head>
+<body>
+<div class="layui-container">
+    <table class="layui-hide" id="customer_table" lay-filter="customer_table"></table>
+</div>
+<script src="/layui/layui.js"></script>
+<script>
+    layui.use(['table','util'], function () {
+        let table = layui.table,util = layui.util;
+        function getParam(paramName){
+            paramValue = "", isFound = !1;
+            if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+                arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0;
+                while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++
+            }
+            return paramValue == "" && (paramValue = null), paramValue
+        }
+        let agentid = getParam("id");
+        let companyId= getParam("companyId");
+        table.render({
+            elem: '#customer_table',
+            url: 'agentcustomer?id='+agentid,
+            cellMinWidth: 80, //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            cols: [
+                [
+                    {
+                        title: '序号', templet: function (d) {
+                            return d.LAY_TABLE_INDEX + 1
+                        }, align: 'center'
+                    },
+                    {field: 'customerName', title: '客户姓名', align: 'center'},
+                    {field: 'telphone', title: '客户手机', align: 'center'},
+                    {field: 'detailAddress', title: '客户地址', sort: true, align: 'center'},
+                    { field: 'agentName', title: '邀请的经纪人',align: 'center'},
+                    {
+                        field: 'style', title: '客户装修类型', align: 'center', templet: function (d) {
+                                return d.style;
+                        }
+                    },
+                    {field: 'scheme', title: '装修方案', sort: true, align: 'center'},
+                    {
+                        field: 'recomDatetime', title: '推荐时间', templet: function (d) {
+                            return util.toDateString(d.recomDatetime, "yyyy-MM-dd HH:mm:ss");
+                        }, align: 'center'
+                    },
+
+                    {
+                        field: 'verifyStatus', title: '客户状态', align: 'center', templet: function (d) {
+                           return d.verifyStatus;
+                        }
+                    }
+                ]
+            ]
+            , page: true
+            , done: function (res, curr, count) {
+                console.log("%c"+res,'color:red');
+            }
+        });
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!-- saved from url=(0020)http://localhost/log -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit"><!-- 让360浏览器默认选择webkit内核 -->
+
+    <!-- 全局css -->
+    <link rel="shortcut icon" href="http://localhost/static/favicon.ico">
+    <link href="./bootstrap.min.css" rel="stylesheet">
+    <link href="./font-awesome.css" rel="stylesheet">
+    <link href="./chosen.css" rel="stylesheet">
+    <link href="./bootstrap-table.min.css" rel="stylesheet">
+    <link href="./bootstrapValidator.min.css" rel="stylesheet">
+    <link href="./style.css" rel="stylesheet">
+    <link href="./_fstyle.css" rel="stylesheet">
+    <link href="./custom.css" rel="stylesheet">
+    <link href="./webuploader.css" rel="stylesheet">
+    <link href="./zTreeStyle.css" rel="stylesheet">
+    <link href="./bootstrap-treetable.css" rel="stylesheet">
+    <!-- <link href="/static/css/plugins/ztree/demo.css" rel="stylesheet"> -->
+
+    <!-- 全局js -->
+    <script src="./jquery.min.js.下载"></script>
+    <script src="./bootstrap.min.js.下载"></script>
+    <script src="./jquery.ztree.all.min.js.下载"></script>
+    <script src="./bootstrap-table.min.js.下载"></script>
+    <script src="./bootstrapValidator.min.js.下载"></script>
+    <script src="./zh_CN.js.下载"></script>
+    <script src="./bootstrap-table-mobile.min.js.下载"></script>
+    <script src="./bootstrap-table-zh-CN.min.js.下载"></script>
+    <script src="./bootstrap-treetable.js.下载"></script>
+    <script src="./layer.js.下载"></script><link rel="stylesheet" href="./layer.css" id="layuicss-layer">
+    <script src="./chosen.jquery.js.下载"></script>
+    <script src="./icheck.min.js.下载"></script>
+    <script src="./laydate.js.下载"></script><link rel="stylesheet" href="./laydate.css" id="layuicss-laydate">
+    <script src="./webuploader.min.js.下载"></script>
+    <script src="./ajax-object.js.下载"></script>
+    <script src="./bootstrap-table-object.js.下载"></script>
+    <script src="./tree-table-object.js.下载"></script>
+    <script src="./web-upload-object.js.下载"></script>
+    <script src="./ztree-object.js.下载"></script>
+    <script src="./Feng.js.下载"></script>
+
+    <style type="text/css">
+        table{  
+            width:100px;  
+            table-layout:fixed;/* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */  
+        }
+        td{  
+            width:100%;  
+            word-break:keep-all;/* 不换行 */  
+            white-space:nowrap;/* 不换行 */  
+            overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */  
+            text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用*/  
+        }
+    </style>
+
+    <script type="text/javascript">
+        Feng.addCtx("");
+        Feng.sessionTimeoutRegistry();
+    </script>
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>业务日志</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-2">
+<div class="input-group">
+    <div class="input-group-btn">
+        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">开始时间
+        </button>
+    </div>
+    <input type="text" class="form-control layer-date" id="beginTime">
+</div>                            </div>
+                            <div class="col-sm-2">
+<div class="input-group">
+    <div class="input-group-btn">
+        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">结束时间
+        </button>
+    </div>
+    <input type="text" class="form-control layer-date" id="endTime">
+</div>                            </div>
+                            <div class="col-sm-2">
+<div class="input-group">
+    <div class="input-group-btn">
+        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">日志名称
+        </button>
+    </div>
+    <input type="text" class="form-control" id="logName" placeholder="">
+</div>                            </div>
+                            <div class="col-sm-2">
+<div class="input-group">
+    <div class="input-group-btn">
+        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">
+            日志类型
+        </button>
+    </div>
+    <select class="form-control" id="logType">
+                                            <option value="0">全部</option>
+                                    <option value="1">业务日志</option>
+                                    <option value="2">异常日志</option>
+
+    </select>
+</div>                            </div>
+                            <div class="col-sm-2">
+
+<button type="button" class="btn btn-primary " onclick="OptLog.search()" id="">
+    <i class="fa fa-search"></i>&nbsp;搜索
+</button>
+
+                            </div>
+                        </div>
+                        
+<div class="bootstrap-table"><div class="fixed-table-toolbar"><div class="bs-bars pull-left"><div class="hidden-xs" id="OptLogTableToolbar" role="group">
+
+<button type="button" class="btn btn-primary " onclick="OptLog.detail()" id="">
+    <i class="fa fa-plus"></i>&nbsp;查看详情
+</button>
+
+
+<button type="button" class="btn btn-primary button-margin" onclick="OptLog.delLog()" id="">
+    <i class="fa fa-plus"></i>&nbsp;清空日志
+</button>
+
+                        </div></div><div class="columns columns-right btn-group pull-right"><button class="btn btn-default btn-outline" type="button" name="refresh" aria-label="refresh" title="刷新"><i class="glyphicon glyphicon-repeat"></i></button><div class="keep-open btn-group" title="列"><button type="button" aria-label="columns" class="btn btn-default btn-outline dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-list"></i> <span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li role="menuitem"><label><input type="checkbox" data-field="id" value="1"> id</label></li><li role="menuitem"><label><input type="checkbox" data-field="logtype" value="2" checked="checked"> 日志类型</label></li><li role="menuitem"><label><input type="checkbox" data-field="logname" value="3" checked="checked"> 日志名称</label></li><li role="menuitem"><label><input type="checkbox" data-field="userName" value="4" checked="checked"> 用户名称</label></li><li role="menuitem"><label><input type="checkbox" data-field="classname" value="5" checked="checked"> 类名</label></li><li role="menuitem"><label><input type="checkbox" data-field="method" value="6" checked="checked"> 方法名</label></li><li role="menuitem"><label><input type="checkbox" data-field="createtime" value="7" checked="checked"> 时间</label></li><li role="menuitem"><label><input type="checkbox" data-field="message" value="8" checked="checked"> 具体消息</label></li></ul></div></div></div><div class="fixed-table-container" style="height: 547px; padding-bottom: 40px;"><div class="fixed-table-header" style="margin-right: 0px;"><table class="table table-hover table-striped" style="width: 1058px;"><thead><tr><th class="bs-checkbox " style="width: 36px; " data-field="selectItem"><div class="th-inner "></div><div class="fht-cell" style="width: 36px;"></div></th><th style="text-align: center; vertical-align: middle; " data-field="logtype"><div class="th-inner sortable both">日志类型</div><div class="fht-cell" style="width: 145px;"></div></th><th style="text-align: center; vertical-align: middle; " data-field="logname"><div class="th-inner sortable both">日志名称</div><div class="fht-cell" style="width: 145px;"></div></th><th style="text-align: center; vertical-align: middle; " data-field="userName"><div class="th-inner ">用户名称</div><div class="fht-cell" style="width: 145px;"></div></th><th style="text-align: center; vertical-align: middle; " data-field="classname"><div class="th-inner sortable both">类名</div><div class="fht-cell" style="width: 145px;"></div></th><th style="text-align: center; vertical-align: middle; " data-field="method"><div class="th-inner sortable both">方法名</div><div class="fht-cell" style="width: 145px;"></div></th><th style="text-align: center; vertical-align: middle; " data-field="createtime"><div class="th-inner sortable both">时间</div><div class="fht-cell" style="width: 145px;"></div></th><th style="text-align: center; vertical-align: middle; " data-field="message"><div class="th-inner sortable both">具体消息</div><div class="fht-cell" style="width: 145px;"></div></th></tr></thead></table></div><div class="fixed-table-body"><div class="fixed-table-loading" style="top: 41px; display: none;">正在努力地加载数据中，请稍候……</div><table id="OptLogTable" data-mobile-responsive="true" data-click-to-select="true" class="table table-hover table-striped" style="margin-top: -40px;">
+    <thead><tr><th class="bs-checkbox " style="width: 36px; " data-field="selectItem"><div class="th-inner "></div><div class="fht-cell"></div></th><th style="text-align: center; vertical-align: middle; " data-field="logtype"><div class="th-inner sortable both">日志类型</div><div class="fht-cell"></div></th><th style="text-align: center; vertical-align: middle; " data-field="logname"><div class="th-inner sortable both">日志名称</div><div class="fht-cell"></div></th><th style="text-align: center; vertical-align: middle; " data-field="userName"><div class="th-inner ">用户名称</div><div class="fht-cell"></div></th><th style="text-align: center; vertical-align: middle; " data-field="classname"><div class="th-inner sortable both">类名</div><div class="fht-cell"></div></th><th style="text-align: center; vertical-align: middle; " data-field="method"><div class="th-inner sortable both">方法名</div><div class="fht-cell"></div></th><th style="text-align: center; vertical-align: middle; " data-field="createtime"><div class="th-inner sortable both">时间</div><div class="fht-cell"></div></th><th style="text-align: center; vertical-align: middle; " data-field="message"><div class="th-inner sortable both">具体消息</div><div class="fht-cell"></div></th></tr></thead>
+<tbody><tr data-index="0"> <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="radio"></td> <td style="text-align: center; vertical-align: middle; ">业务日志</td> <td style="text-align: center; vertical-align: middle; ">修改管理员</td> <td style="text-align: center; vertical-align: middle; ">左飞</td> <td style="text-align: center; vertical-align: middle; ">cn.stylefeng.guns.modular.system.controller.UserMgrController</td> <td style="text-align: center; vertical-align: middle; ">edit</td> <td style="text-align: center; vertical-align: middle; ">2018-12-26 20:08:51</td> <td style="text-align: center; vertical-align: middle; ">账号=zuofei;;;字段名称:头像,旧值:3096a93b-7574-4a4e-b2c4-25007f275baa.png,新值:e34463f5-b1bd-4c70-87cf-5589cb75c...</td> </tr><tr data-index="1"> <td class="bs-checkbox "><input data-index="1" name="btSelectItem" type="radio"></td> <td style="text-align: center; vertical-align: middle; ">业务日志</td> <td style="text-align: center; vertical-align: middle; ">修改管理员</td> <td style="text-align: center; vertical-align: middle; ">左飞</td> <td style="text-align: center; vertical-align: middle; ">cn.stylefeng.guns.modular.system.controller.UserMgrController</td> <td style="text-align: center; vertical-align: middle; ">edit</td> <td style="text-align: center; vertical-align: middle; ">2018-12-19 21:43:35</td> <td style="text-align: center; vertical-align: middle; ">账号=zuofei;;;字段名称:头像,旧值:,新值:3096a93b-7574-4a4e-b2c4-25007f275baa.png;;;字段名称:null,旧值:7fc7383a27bfe7b7f...</td> </tr><tr data-index="2"> <td class="bs-checkbox "><input data-index="2" name="btSelectItem" type="radio"></td> <td style="text-align: center; vertical-align: middle; ">异常日志</td> <td style="text-align: center; vertical-align: middle; "></td> <td style="text-align: center; vertical-align: middle; ">左飞</td> <td style="text-align: center; vertical-align: middle; ">-</td> <td style="text-align: center; vertical-align: middle; ">-</td> <td style="text-align: center; vertical-align: middle; ">2018-12-19 21:30:51</td> <td style="text-align: center; vertical-align: middle; ">org.springframework.dao.DataIntegrityViolationException: 
+### Error updating database.  Cause: java...</td> </tr><tr data-index="3"> <td class="bs-checkbox "><input data-index="3" name="btSelectItem" type="radio"></td> <td style="text-align: center; vertical-align: middle; ">异常日志</td> <td style="text-align: center; vertical-align: middle; "></td> <td style="text-align: center; vertical-align: middle; ">左飞</td> <td style="text-align: center; vertical-align: middle; ">-</td> <td style="text-align: center; vertical-align: middle; ">-</td> <td style="text-align: center; vertical-align: middle; ">2018-12-19 21:26:49</td> <td style="text-align: center; vertical-align: middle; ">org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.reflection.Reflecti...</td> </tr><tr data-index="4"> <td class="bs-checkbox "><input data-index="4" name="btSelectItem" type="radio"></td> <td style="text-align: center; vertical-align: middle; ">异常日志</td> <td style="text-align: center; vertical-align: middle; "></td> <td style="text-align: center; vertical-align: middle; ">左飞</td> <td style="text-align: center; vertical-align: middle; ">-</td> <td style="text-align: center; vertical-align: middle; ">-</td> <td style="text-align: center; vertical-align: middle; ">2018-12-19 21:26:23</td> <td style="text-align: center; vertical-align: middle; ">org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.reflection.Reflecti...</td> </tr><tr data-index="5"> <td class="bs-checkbox "><input data-index="5" name="btSelectItem" type="radio"></td> <td style="text-align: center; vertical-align: middle; ">异常日志</td> <td style="text-align: center; vertical-align: middle; "></td> <td style="text-align: center; vertical-align: middle; ">左飞</td> <td style="text-align: center; vertical-align: middle; ">-</td> <td style="text-align: center; vertical-align: middle; ">-</td> <td style="text-align: center; vertical-align: middle; ">2018-12-19 21:18:31</td> <td style="text-align: center; vertical-align: middle; ">org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): cn.stylefeng.guns.m...</td> </tr><tr data-index="6"> <td class="bs-checkbox "><input data-index="6" name="btSelectItem" type="radio"></td> <td style="text-align: center; vertical-align: middle; ">异常日志</td> <td style="text-align: center; vertical-align: middle; "></td> <td style="text-align: center; vertical-align: middle; ">左飞</td> <td style="text-align: center; vertical-align: middle; ">-</td> <td style="text-align: center; vertical-align: middle; ">-</td> <td style="text-align: center; vertical-align: middle; ">2018-12-19 21:07:11</td> <td style="text-align: center; vertical-align: middle; ">org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): cn.stylefeng.guns.m...</td> </tr><tr data-index="7"> <td class="bs-checkbox "><input data-index="7" name="btSelectItem" type="radio"></td> <td style="text-align: center; vertical-align: middle; ">异常日志</td> <td style="text-align: center; vertical-align: middle; "></td> <td style="text-align: center; vertical-align: middle; ">左飞</td> <td style="text-align: center; vertical-align: middle; ">-</td> <td style="text-align: center; vertical-align: middle; ">-</td> <td style="text-align: center; vertical-align: middle; ">2018-12-19 21:01:48</td> <td style="text-align: center; vertical-align: middle; ">org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): cn.stylefeng.guns.m...</td> </tr><tr data-index="8"> <td class="bs-checkbox "><input data-index="8" name="btSelectItem" type="radio"></td> <td style="text-align: center; vertical-align: middle; ">异常日志</td> <td style="text-align: center; vertical-align: middle; "></td> <td style="text-align: center; vertical-align: middle; ">左飞</td> <td style="text-align: center; vertical-align: middle; ">-</td> <td style="text-align: center; vertical-align: middle; ">-</td> <td style="text-align: center; vertical-align: middle; ">2018-12-19 21:01:15</td> <td style="text-align: center; vertical-align: middle; ">org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): cn.stylefeng.guns.m...</td> </tr><tr data-index="9"> <td class="bs-checkbox "><input data-index="9" name="btSelectItem" type="radio"></td> <td style="text-align: center; vertical-align: middle; ">异常日志</td> <td style="text-align: center; vertical-align: middle; "></td> <td style="text-align: center; vertical-align: middle; ">左飞</td> <td style="text-align: center; vertical-align: middle; ">-</td> <td style="text-align: center; vertical-align: middle; ">-</td> <td style="text-align: center; vertical-align: middle; ">2018-12-19 20:57:06</td> <td style="text-align: center; vertical-align: middle; ">org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): cn.stylefeng.guns.m...</td> </tr><tr data-index="10"> <td class="bs-checkbox "><input data-index="10" name="btSelectItem" type="radio"></td> <td style="text-align: center; vertical-align: middle; ">异常日志</td> <td style="text-align: center; vertical-align: middle; "></td> <td style="text-align: center; vertical-align: middle; ">左飞</td> <td style="text-align: center; vertical-align: middle; ">-</td> <td style="text-align: center; vertical-align: middle; ">-</td> <td style="text-align: center; vertical-align: middle; ">2018-12-19 20:54:16</td> <td style="text-align: center; vertical-align: middle; ">cn.stylefeng.roses.kernel.model.exception.ServiceException: 请求有错误
+	at cn.stylefeng.guns.modular.com...</td> </tr><tr data-index="11"> <td class="bs-checkbox "><input data-index="11" name="btSelectItem" type="radio"></td> <td style="text-align: center; vertical-align: middle; ">业务日志</td> <td style="text-align: center; vertical-align: middle; ">修改角色</td> <td style="text-align: center; vertical-align: middle; ">张三</td> <td style="text-align: center; vertical-align: middle; ">cn.stylefeng.guns.modular.system.controller.RoleController</td> <td style="text-align: center; vertical-align: middle; ">edit</td> <td style="text-align: center; vertical-align: middle; ">2018-12-19 20:53:02</td> <td style="text-align: center; vertical-align: middle; ">角色名称=超级用户;;;字段名称:备注,旧值:admin,新值:administrator</td> </tr><tr data-index="12"> <td class="bs-checkbox "><input data-index="12" name="btSelectItem" type="radio"></td> <td style="text-align: center; vertical-align: middle; ">业务日志</td> <td style="text-align: center; vertical-align: middle; ">分配角色</td> <td style="text-align: center; vertical-align: middle; ">张三</td> <td style="text-align: center; vertical-align: middle; ">cn.stylefeng.guns.modular.system.controller.UserMgrController</td> <td style="text-align: center; vertical-align: middle; ">setRole</td> <td style="text-align: center; vertical-align: middle; ">2018-12-19 20:52:12</td> <td style="text-align: center; vertical-align: middle; ">账号=zuofei,角色名称集合=超级用户</td> </tr><tr data-index="13"> <td class="bs-checkbox "><input data-index="13" name="btSelectItem" type="radio"></td> <td style="text-align: center; vertical-align: middle; ">业务日志</td> <td style="text-align: center; vertical-align: middle; ">分配角色</td> <td style="text-align: center; vertical-align: middle; ">张三</td> <td style="text-align: center; vertical-align: middle; ">cn.stylefeng.guns.modular.system.controller.UserMgrController</td> <td style="text-align: center; vertical-align: middle; ">setRole</td> <td style="text-align: center; vertical-align: middle; ">2018-12-19 20:51:56</td> <td style="text-align: center; vertical-align: middle; ">账号=zuofei,角色名称集合=超级管理员</td> </tr></tbody></table></div><div class="fixed-table-footer" style="display: none;"><table><tbody><tr></tr></tbody></table></div><div class="fixed-table-pagination" style="display: block;"><div class="pull-left pagination-detail"><span class="pagination-info">显示第 1 到第 14 条记录，总共 39 条记录</span><span class="page-list">每页显示 <span class="btn-group dropup"><button type="button" class="btn btn-default btn-outline dropdown-toggle" data-toggle="dropdown"><span class="page-size">14</span> <span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li role="menuitem" class="active"><a href="http://localhost/log#">14</a></li><li role="menuitem"><a href="http://localhost/log#">50</a></li></ul></span> 条记录</span></div><div class="pull-right pagination"><ul class="pagination pagination-outline"><li class="page-pre"><a href="http://localhost/log#">‹</a></li><li class="page-number active"><a href="http://localhost/log#">1</a></li><li class="page-number"><a href="http://localhost/log#">2</a></li><li class="page-number"><a href="http://localhost/log#">3</a></li><li class="page-next"><a href="http://localhost/log#">›</a></li></ul></div></div></div></div><div class="clearfix"></div>                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="./log.js.下载"></script>
+
+</div>
+<script src="./content.js.下载"></script>
+
+
+</body></html>

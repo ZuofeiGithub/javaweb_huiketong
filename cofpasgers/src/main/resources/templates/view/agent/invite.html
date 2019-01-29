@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)http://www.yunjike365.com/m/agent/invitation?invitationCode=tdHZCn8B -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>注册-集客通</title>
+
+
+    <link rel="stylesheet" type="text/css" href="/custom/invite/inviteagent/res/style/api.css">
+    <link rel="stylesheet" type="text/css" href="/custom/invite/inviteagent/res/style/common.css">
+    <link rel="stylesheet" type="text/css" href="/custom/invite/inviteagent/res/style/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="/custom/invite/inviteagent/res/style/iconfont-ext.css">
+    <link rel="stylesheet" type="text/css" href="/custom/invite/inviteagent/res/style/grid.css">
+    <link rel="stylesheet" type="text/css" href="/custom/invite/inviteagent/res/style/buttons.css">
+    <link rel="stylesheet" type="text/css" href="/custom/invite/inviteagent/res/style/list.css">
+    <link rel="stylesheet" type="text/css" href="/custom/invite/inviteagent/res/style/switch.css">
+    <link rel="stylesheet" type="text/css" href="/custom/invite/inviteagent/res/style/tabs.css">
+    <link rel="stylesheet" type="text/css" href="/custom/invite/inviteagent/res/style/index.css">
+
+
+    <script type="text/javascript" src="/custom/invite/inviteagent/res/script/viewport.js"></script>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <script type="text/javascript">
+        jll = window.jll || {};
+        jll.path = '';
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="/custom/invite/inviteagent/res/style/android.css">
+    <link rel="stylesheet" type="/layui/css/layui.css">
+</head>
+<body>
+<div id="wrap" class="layui-container">
+    <div id="main" style="overflow-y:auto;">
+        <div class="padding">
+            <div class="list list-cut add-bank-card-form list-form">
+                <div class="item item-input item-icon-right valign-center">
+                    <label class="txt-666">用户类型</label>
+                    <input type="text" readonly="" id="agentTypeName" placeholder="选择经纪人类型">
+                    <select id="agentType" style="position: absolute;right:0;width: 100%;opacity: 0; ">
+                        <option value="">请选择 ...</option>
+                        <option value="2">老客户</option>
+                        <option value="3">小区物业</option>
+                        <option value="4">楼盘销售</option>
+                        <option value="5">建材异业</option>
+                        <option value="8">设计师</option>
+                        <option value="9">项目经理</option>
+                        <option value="10">二手房中介</option>
+                        <option value="11">一线师傅</option>
+                        <option value="12">其他</option>
+                    </select>
+                    <!--<i class="iconfont icon-xiangyou txt-999" style="font-size:.28rem;"></i>-->
+                    <i class="iconfont" style="font-size:.28rem;"></i>
+                </div>
+                <div class="item item-input valign-center">
+                    <label class="txt-666">姓名</label>
+                    <input type="text" id="agentName" placeholder="请输入姓名">
+                </div>
+                <!--<div class="item item-input valign-center">-->
+                    <!--<label class="txt-666">登录账号</label>-->
+                    <!--<input type="text" id="agentCode" placeholder="登录名只包含字母、数字"-->
+                           <!--onkeyup="value=value.replace(/[^\w\.\/]/ig,&#39;&#39;)">-->
+                <!--</div>-->
+                <div class="item item-input valign-center">
+                    <label class="txt-666">手机号</label>
+                    <input type="number" id="phone" placeholder="请输入手机号">
+                </div>
+                <div class="item item-input valign-center">
+                    <label class="txt-666">验证码</label>
+                    <input type="number" name="verifyCode" id="verifyCode" placeholder="请输入验证码" maxlength="6">
+                    <a href="javascript:void(0);" id="verifyButton" class="btn btn-blue btn-outline">获取验证码</a>
+                </div>
+                <div class="item item-input valign-center">
+                    <label class="txt-666">登录密码</label>
+                    <input type="password" id="password" placeholder="请输入登录密码">
+                </div>
+                <div class="item item-input valign-center">
+                    <label class="txt-666">确认密码</label>
+                    <input type="password" id="password-repeat" placeholder="请输入确认密码">
+                </div>
+            </div>
+            <div class="list list-cut add-bank-card-form list-form">
+                <div class="item item-input valign-center">
+                    <label class="txt-666">邀请码</label>
+                    <input type="text" class="inputtext" id="parentInvitationCode" placeholder="请输入邀请码（非必填）" readonly=""
+                           value="">
+                </div>
+
+                <div class="item item-input valign-center">
+                    <label class="txt-666">企业名称</label>
+                    <input type="text" id="company_text" class="inputtext" value="" readonly="">
+                </div>
+
+            </div>
+            <a href="javascript:;" class="btn btn-lg btn-block btn-radius btn-orange btn-reg"
+               style="margin-top: .5rem;">注册</a>
+        </div>
+    </div>
+
+    <!--<div class="flex flex-center">-->
+    <!--<a href="/actStaff/login?actAlias=" class="txt-blue footer-tip-btn">使用已有账号登录</a>-->
+    <!--</div>-->
+</div>
+
+
+<script type="text/javascript" src="/custom/invite/inviteagent/res/script/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="/custom/invite/inviteagent/res/script/api.js"></script>
+<script type="text/javascript" src="/custom/invite/inviteagent/res/script/common.js"></script>
+<script type="text/javascript" src="/custom/invite/inviteagent/res/script/hmac-sha256.js"></script>
+<script type="text/javascript" src="/custom/invite/inviteagent/res/script/dialog.js"></script>
+<script type="text/javascript" src="/layui/layui.js"></script>
+<script type="text/javascript">
+    ;(function () {
+
+    })(jQuery);
+    // 短信验证码发送倒计时
+    var delayTime = 120;
+    var timeOut;
+
+    function getParam(paramName) {
+        paramValue = "", isFound = !1;
+        if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+            arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0;
+            while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++
+        }
+        return paramValue == "" && (paramValue = null), paramValue
+    }
+
+    function resetForm() {
+        $('#agentType').val('');
+        $('#agentName').val('');
+        $('#phone').val('');
+        $('#password').val('');
+        $('#password-repeat').val('');
+        $('#agentTypeName').val('');
+        $('#verifyCode').val('');
+        $('#parentInvitationCode').val('');
+
+    }
+
+    // 发送短信验证码
+    function sendVerifyCode() {
+        var mobilePhone = $("#phone").val().trim();
+        // 短信验证码接收者
+        if (!mobilePhone.isMobile()) {
+            alert("请填写正确的手机号码");
+            return;
+        }
+        showLoading('正在发送验证码');
+        jll.ajax({
+            url: "/invite/recvcode",
+            method: 'post',
+            data: {
+                recevier: mobilePhone
+            }
+        }, function (ret) {
+            hideLoading();
+            if (ret.code == 1) {
+                // 验证码发送成功禁用发送按钮120秒
+                $("#verifyButton").html("重新获取120秒");
+                $("#verifyButton").removeClass("btn-blue");
+                $("#verifyButton").removeClass("btn-outline");
+                $("#verifyButton").addClass("btn-grey");
+                $("#verifyButton").unbind("click");
+                delayTime = 120;
+                setTimeout(countDown, 1000);
+            }else if(ret.code == 300){
+                return alert("该号码已经注册过");
+            }
+        }, function (responseText) {
+            hideLoading();
+            alert(responseText);
+        }, function () {
+            hideLoading();
+        });
+    }
+
+    function countDown() {
+        delayTime--;
+        $("#verifyButton").html('重新获取' + delayTime + '秒');
+        if (delayTime == 0) {
+            // 恢复
+            delayTime = 120;
+            $("#verifyButton").html("获取验证码");
+            $("#verifyButton").addClass("btn-blue");
+            $("#verifyButton").addClass("btn-outline");
+            $("#verifyButton").removeClass("btn-grey");
+            $("#verifyButton").bind("click", sendVerifyCode);
+        } else {
+            timeOut = setTimeout(countDown, 1000);
+        }
+    }
+
+    layui.use('layer', function () { //独立版的layer无需执行这一句
+        var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+        var inviteCode = getParam('inviteCode')
+
+        $('#parentInvitationCode').val(inviteCode);
+        $.post('/invite/getInviteCompany', {'inviteCode': inviteCode}, function (resp) {
+            $("#company_text").val(resp.msg)
+        })
+
+        $("#verifyButton").click(sendVerifyCode);
+
+        $('.btn-reg').click(function () {
+            var agentName = $('#agentName').val().trim();
+            var phone = $('#phone').val().trim();
+            var password = $('#password').val().trim();
+            var passwordRepeat = $('#password-repeat').val().trim();
+            var agentType = $('#agentType').val().trim();
+            var verifyCode = $('#verifyCode').val().trim();
+            var parentInvitationCode = $('#parentInvitationCode').val().trim();
+
+            if (agentName.isBlank() || phone.isBlank()
+                || password.isBlank() || passwordRepeat.isBlank() || verifyCode.isBlank()) {
+                return layer.msg('请将信息填写完整');
+            }
+
+            if (!phone.isMobile()) {
+                return layer.msg('请填写正确的手机号码');
+            }
+
+            if (password.length < 6 || password.length > 16) {
+                return layer.msg('密码长度介于6-16位');
+            }
+
+            if (password != passwordRepeat) {
+                return layer.msg('两次输入的密码不一致');
+            }
+
+            if (agentType.isBlank()) {
+                return layer.msg('请选择用户类型');
+            }
+
+            showLoading('正在提交...');
+            jll.ajax({
+                url: '/invite/register',
+                method: 'post',
+                data: {
+                    agentName: agentName,
+                    phone: phone,
+                    password: password,
+                    agentType: agentType,
+                    verifyCode: verifyCode,
+                    parentInvitationCode: parentInvitationCode,
+                }
+            }, function (ret) {
+                hideLoading();
+                if (ret.code != 1) {
+                    alert(ret.msg);
+                } else {
+                    alert('恭喜您，注册成功');
+                    resetForm();
+                    // 恢复
+                    delayTime = 120;
+                    $("#verifyButton").html("获取验证码");
+                    $("#verifyButton").addClass("btn-blue");
+                    $("#verifyButton").addClass("btn-outline");
+                    $("#verifyButton").removeClass("btn-grey");
+                    $("#verifyButton").bind("click", sendVerifyCode);
+                    clearTimeout(timeOut);
+                    //跳转到下载页面
+                    window.location.href = "/appdownload";
+                }
+            }, function (msg) {
+                hideLoading();
+                alert('注册失败，' + msg);
+            }, function () {
+                hideLoading();
+            });
+        });
+        $('#agentType').change(function () {
+            var agentType = $(this).val();
+            if (agentType != "") {
+                $('#agentTypeName').val($(this).find("option:selected").text());
+            } else {
+                $('#agentTypeName').val("");
+            }
+        });
+    });
+</script>
+</body>
+</html>

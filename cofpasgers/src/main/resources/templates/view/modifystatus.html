@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>修改状态</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<body>
+<form class="layui-form layui-container" action="" lay-filter="example">
+    <div class="layui-form-item">
+        <label class="layui-form-label">客户状态</label>
+        <div class="layui-input-block">
+            <input type="radio" name="status" lay-filter="radioitem" value="1" th:checked="${status == 1}" title="待审核">
+            <input type="radio" name="status" lay-filter="radioitem" value="2" th:checked="${status == 2}" title="期房">
+            <input type="radio" name="status" lay-filter="radioitem" value="3" th:checked="${status == 3}" title="暂时不装">
+            <input type="radio" name="status" id="liangfang" lay-filter="radioitem" value="4" th:checked="${status == 4}" title="已量房">
+            <input type="radio" name="status" lay-filter="radioitem" value="5" th:checked="${status == 5}" title="已进店">
+            <input type="radio" name="status" lay-filter="radioitem" value="6" th:checked="${status == 6}" title="跟踪中">
+            <input type="radio" name="status" lay-filter="radioitem" value="7" th:checked="${status == 7}" title="已交定金">
+            <input type="radio" name="status" lay-filter="radioitem" value="8" th:checked="${status == 8}" title="已签合同">
+            <input type="radio" name="status" lay-filter="radioitem" value="9" th:checked="${status == 9}" title="无效客户">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline layui-hide" id="price">
+            <label class="layui-form-label">成交总价:</label>
+            <div class="layui-input-inline">
+                <input type="number" name="signprice" lay-verify="" class="layui-input" placeholder="输入成交总价">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline layui-hide" id="reason">
+            <label class="layui-form-label">无效理由:</label>
+            <div class="layui-input-inline">
+                <input type="text" name="reason" lay-verify="" class="layui-input" placeholder="输入无效理由">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <button class="layui-btn layui-input-block" lay-submit lay-filter="formDemo">立即提交</button>
+    </div>
+</form>
+<script src="layui/layui.js"></script>
+<script>
+    layui.use('form', function () {
+        var $ = layui.jquery, form = layui.form
+            , layer = layui.layer;
+
+        function getCookie(name) {
+            var arr = document.cookie.split('; ');
+            for (var i = 0; i < arr.length; i++) {
+                var arr2 = arr[i].split('=');
+                if (trim(arr2[0]) === name) {
+                    return unescape(trim(arr2[1]));
+                }
+            }
+            return '';
+        }
+
+
+        function trim(str) {
+            return str.replace(/(^\s*)|(\s*$)/g, "");
+        }
+
+        function getParam(paramName) {
+            paramValue = "", isFound = !1;
+            if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+                arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0;
+                while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++
+            }
+            return paramValue == "" && (paramValue = null), paramValue
+        }
+
+        var id = getParam("id");
+        var user_id = getCookie("telphone");
+
+        form.on('radio(radioitem)', function (data) {
+            console.log(data.value);
+            if (data.value == 8) {
+                $('#price').removeClass("layui-hide");
+            } else {
+                $('#price').addClass("layui-hide");
+            }
+
+            if (data.value == 9) {
+                $('#reason').removeClass("layui-hide");
+            } else {
+                $('#reason').addClass("layui-hide");
+            }
+
+        })
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            var jsondata = {};
+            jsondata.id = id;
+            jsondata.status = data.field.status;
+            jsondata.user_id = user_id;
+            jsondata.signprice = data.field.signprice;
+            jsondata.reason = data.field.reason;
+            $.post('modifycuststatus', jsondata, function (resp) {
+                if (resp.code == "0") {
+                    layer.msg(resp.msg);
+                } else if (resp.code == "1") {
+                    layer.msg(resp.msg);
+                    setTimeout(function () {
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);//关闭
+                    }, 2000);
+                } else if (resp.code == "4") {
+                    $('#liangfang').attr("disabled", "");
+                    layer.msg(resp.msg);
+                } else if (resp.code == "8") {
+                    layer.msg(resp.msg);
+                } else if (resp.code == "9") {
+                    layer.msg(resp.msg);
+                } else {
+                    layer.msg(resp.msg);
+                }
+                setTimeout(function () {
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);//关闭
+                },1500);
+            })
+            return false;
+        });
+    })
+    ;
+</script>
+</body>
+</html>

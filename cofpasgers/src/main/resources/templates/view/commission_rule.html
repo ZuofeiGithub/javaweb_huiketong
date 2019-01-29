@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>佣金规则</title>
+</head>
+<body>
+<div class="container-fluid am-cf">
+    <div class="row">
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-9">
+            <div class="page-header-heading">佣金规则
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row-content am-cf">
+    <div class="row">
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+            <div class="widget am-cf">
+                <div class="widget-head am-cf">
+                    <div class="widget-title am-cf"><span class="am-text-lg">佣金比例设置</span></div>
+                </div>
+                <div class="widget-body am-fr">
+                    <div class="am-fl am-container">
+                        <form class="am-form tpl-form-line-form">
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label"><i class="am-text-danger am-margin-right-sm">*</i>佣金:</label>
+                                <div class="am-u-sm-9">
+                                    <input type="number" class="tpl-form-input" id="commission_score" min="10" max="100" value="10">
+                                    <small>请填写佣金金额。</small>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <div class="am-u-sm-9 am-u-sm-push-3">
+                                    <button type="button" id="modify_commission_btn" class="am-btn am-btn-primary tpl-btn-bg-color-success ">修改
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="assets/js/jquery.min.js"></script>
+<script src="javascript/commission_rule.js"></script>
+</body>
+</html>

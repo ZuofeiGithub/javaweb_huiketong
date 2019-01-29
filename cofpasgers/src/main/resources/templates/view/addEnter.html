@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加企业</title>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+</head>
+<body>
+<form class="layui-form layui-container" action="#" lay-filter="example">
+    <div class="layui-row layui-col-xs6">
+        <div>
+            <label class="layui-form-label">企业名字</label>
+            <div class="layui-input-block">
+                <input type="text" name="enter_name" lay-verify="enter_name" autocomplete="off" placeholder="输入企业名字"
+                       class="layui-input">
+            </div>
+        </div>
+        <hr class="layui-col-lg-offset1">
+        <div>
+            <label class="layui-form-label">企业地址</label>
+            <div class="layui-input-block">
+                <input type="text" name="enter_address" lay-verify="enter_address" autocomplete="off"
+                       placeholder="输入企业地址"
+                       class="layui-input">
+            </div>
+        </div>
+        <hr class="layui-col-lg-offset1">
+        <div>
+            <label class="layui-form-label">企业法人</label>
+            <div class="layui-input-block">
+                <input type="text" name="enter_legal" lay-verify="enter_legal" autocomplete="off"
+                       placeholder="输入企业法人"
+                       class="layui-input">
+            </div>
+        </div>
+        <hr class="layui-col-lg-offset1">
+        <div>
+            <label class="layui-form-label">企业联系方式</label>
+            <div class="layui-input-block">
+                <input type="number" name="enter_telphone" lay-verify="enter_telphone" autocomplete="off"
+                       placeholder="输入企业联系方式"
+                       class="layui-input">
+            </div>
+        </div>
+        <hr class="layui-col-lg-offset1">
+        <div>
+            <label class="layui-form-label">企业成立日期</label>
+            <div class="layui-input-block">
+                <input type="text" name="establish_date" id="establish_date" lay-verify="establish_date"
+                       placeholder="输入企业成立日期"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <hr class="layui-col-lg-offset1">
+        <div>
+            <label class="layui-form-label">企业LOGO</label>
+            <div class="layui-upload">
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img" name="logo" id="logo" style="width: 150px;height: 150px;">
+                    <p id="demoText"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row layui-col-xs6">
+        <div>
+            <label class="layui-form-label">企业登录账号</label>
+            <div class="layui-input-block">
+                <input type="text" name="enter_loginame" lay-verify="enter_loginame" autocomplete="off"
+                       placeholder="输入企业登录账号"
+                       class="layui-input">
+            </div>
+        </div>
+        <hr class="layui-col-lg-offset1">
+        <div>
+            <label class="layui-form-label">企业排序</label>
+            <div class="layui-input-block">
+                <input type="number" name="enter_order" lay-verify="enter_order" autocomplete="off"
+                       placeholder="输入企业排序"
+                       class="layui-input">
+            </div>
+        </div>
+        <hr class="layui-col-lg-offset1">
+        <div>
+            <label class="layui-form-label">企业状态</label>
+            <div class="layui-input-block">
+                <select name="enter_status" lay-verify="enter_status">
+                    <option value=""></option>
+                    <option value="0">不启用</option>
+                    <option value="1">启用</option>
+                </select>
+            </div>
+        </div>
+        <hr class="layui-col-lg-offset1">
+        <div>
+            <label class="layui-form-label">企业人员上限</label>
+            <div class="layui-input-block">
+                <input type="number" name="person_num" lay-verify="person_num" autocomplete="off"
+                       placeholder="输入企业人数上限"
+                       class="layui-input">
+            </div>
+        </div>
+        <hr class="layui-col-lg-offset1">
+        <div class=" layui-form-text">
+            <label class="layui-form-label">企业评价</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入内容" name="comment_id" lay-verify="comment_id"
+                          class="layui-textarea"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="sumitid">提交</button>
+        </div>
+    </div>
+</form>
+<script src="/layui/layui.js"></script>
+<script>
+    layui.use(['form', 'laydate', 'upload'], function () {
+        var $ = layui.jquery, form = layui.form
+            , layer = layui.layer
+            , laydate = layui.laydate,
+            upload = layui.upload;
+        //上传图片
+        var filename;
+        var uploadInst = upload.render({
+            elem: '#logo'
+            , url: '/upload/'
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#logo').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                //如果上传失败
+                if (res.code > 0) {
+                    return layer.msg('上传失败');
+                }
+                filename = res.data.filename;
+                //上传成功
+            }
+            , error: function () {
+
+            }
+        });
+        //日期
+        laydate.render({
+            elem: '#establish_date'
+        });
+
+        //自定义验证规则
+        form.verify({
+            enter_name: function (value) {
+                if (value == "") {
+                    return '请输入企业名字';
+                }
+            },
+            enter_address: function (value) {
+                if (value == "") {
+                    return '请输入企业地址';
+                }
+            },
+            enter_legal: function (value) {
+                if (value == "") {
+                    return '请输入企业法人';
+                }
+            },
+            enter_telphone: function (value) {
+                if (value == "") {
+                    return '请输入企业联系方式';
+                }
+            },
+            establish_date: function (value) {
+                if (value == "") {
+                    return '请输入企业成立日期';
+                }
+            },
+            enter_loginame: function (value) {
+                if (value == "") {
+                    return '请输入企业登录账号';
+                }
+            },
+            enter_order: function (value) {
+                if (value == "") {
+                    return '请输入企业排序';
+                }
+            },
+            comment_id: function (value) {
+                if (value == "") {
+                    return '请输入企业评价';
+                }
+            },enter_status:function (value) {
+                if (value == "") {
+                    return '请选择企业状态';
+                }
+            },person_num:function (value) {
+                if (value == "") {
+                    return '设置企业人数上限';
+                }
+            }
+
+        });
+
+        //监听提交
+        form.on('submit(sumitid)', function (data) {
+            var jsondata = {};
+            jsondata.logo = filename;
+            jsondata.enter_name = data.field.enter_name;
+            jsondata.enter_address = data.field.enter_address;
+            jsondata.enter_legal = data.field.enter_legal;
+            jsondata.enter_telphone = data.field.enter_telphone;
+            jsondata.establish_date = data.field.establish_date;
+            jsondata.enter_order = data.field.enter_order;
+            jsondata.enter_status = data.field.enter_status;
+            jsondata.person_num = data.field.person_num;
+            jsondata.comment_id = data.field.comment_id;
+            jsondata.enter_loginame = data.field.enter_loginame;
+            $.post('addeter', jsondata, function (resp) {
+                if(resp.code == "1"){
+                    layer.msg(resp.msg);
+                    setTimeout(function () {
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);//关闭
+                    },1500);
+
+                }else if(resp.code == "3"){
+                    layer.msg(resp.msg);
+                }
+            })
+            return false;
+        });
+
+    });
+</script>
+</body>
+</html>

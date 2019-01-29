@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<!-- saved from url=(0093)http://www.yunjike365.com/m/cust/addCustomerByArt?articleId=263&parentInvitationCode=UvzC8v60 -->
+<html style="font-size: 15px;">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>客户预约-集客通</title>
+    <link rel="stylesheet" type="text/css" href="/custom/invite/inviteagent/res/style/api.css">
+    <link rel="stylesheet" type="text/css" href="/custom/invite/inviteagent/res/style/common.css">
+    <link rel="stylesheet" type="text/css" href="/custom/invite/inviteagent/res/style/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="/custom/invite/inviteagent/res/style/iconfont-ext.css">
+    <link rel="stylesheet" type="text/css" href="/custom/invite/inviteagent/res/style/grid.css">
+    <link rel="stylesheet" type="text/css" href="/custom/invite/inviteagent/res/style/buttons.css">
+    <link rel="stylesheet" type="text/css" href="/custom/invite/inviteagent/res/style/list.css">
+    <link rel="stylesheet" type="text/css" href="/custom/invite/inviteagent/res/style/switch.css">
+    <link rel="stylesheet" type="text/css" href="/custom/invite/inviteagent/res/style/tabs.css">
+    <link rel="stylesheet" type="text/css" href="/custom/invite/inviteagent/res/style/index.css">
+    <script type="text/javascript" src="/custom/invite/inviteagent/res/script/viewport.js"></script>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <script type="text/javascript">
+        jll = window.jll || {};
+        jll.path = '';
+    </script>
+    <link rel="stylesheet" type="text/css" href="/custom/invite/inviteagent/res/style/android.css">
+</head>
+<body>
+<input type="hidden" id="_context" value="">
+<input type="hidden" id="merchantId" value="">
+<input type="hidden" id="agentId" value="">
+<div>
+    <div id="main" style="overflow-y:auto;">
+        <div class="padding">
+            <form class="list list-cut add-bank-card-form list-form layui-form">
+                <div class="item item-input valign-center">
+                    <label class="txt-666">客户姓名</label>
+                    <input type="text" placeholder="请输入姓名" id="custName">
+                </div>
+                <div class="item item-input item-icon-right valign-center">
+                    <label class="txt-666">性别</label>
+                    <input type="text" class="inputtext" placeholder="选择性别" id="sexname">
+                    <select id="sex" style="position: absolute;right: 0;width: 100%;opacity: 0;" tapmode="">
+                        <option value="">请选择</option>
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select>
+                    <!--<i class="iconfont icon-xiangyou txt-999" style="font-size:.28rem;"></i>-->
+                    <i class="iconfont" style="font-size:.28rem;"></i>
+                </div>
+                <div class="item item-input valign-center">
+                    <label class="txt-666">客户电话</label>
+                    <input type="number" placeholder="请输入联系方式" id="phone">
+                </div>
+                <div class="item item-input valign-center">
+                    <label class="txt-666">楼盘地址</label>
+                    <input type="text" placeholder="请输入地址" id="address">
+                </div>
+                <!--<div class="item item-input valign-center">-->
+                <!--<label class="txt-666">装修风格</label>-->
+                <!--<input type="text" readonly="" class="inputtext" placeholder="请选择装修风格" id="styleName">-->
+                <!--<select id="style" style="position: absolute;right: 0;width: 100%;opacity: 0;" tapmode="">-->
+                <!--<option value="">请选择</option>-->
+                <!--<option value="1">现代</option>-->
+                <!--<option value="2">欧式</option>-->
+                <!--<option value="3">美式</option>-->
+                <!--<option value="4">中式</option>-->
+                <!--<option value="5">日式</option>-->
+                <!--<option value="6">北欧</option>-->
+                <!--<option value="7">其他</option>-->
+                <!--</select>-->
+                <!--&lt;!&ndash;<i class="iconfont icon-xiangyou txt-999" style="font-size:.28rem;"></i>&ndash;&gt;-->
+                <!--<i class="iconfont" style="font-size:.28rem;"></i>-->
+                <!--</div>-->
+                <!--<div class="item item-input item-icon-right valign-center">-->
+                <!--<label class="txt-666">装修方案</label>-->
+                <!--<input type="text" readonly="" class="inputtext" placeholder="请选择装修方案" id="typeName">-->
+                <!--<select id="type" style="position: absolute;right: 0;width: 100%;opacity: 0;" tapmode="">-->
+                <!--<option value="">请选择</option>-->
+                <!--<option value="1">全包</option>-->
+                <!--<option value="2">半包</option>-->
+                <!--<option value="3">其他</option>-->
+                <!--</select>-->
+                <!--<i class="iconfont icon-xiangyou txt-999" style="font-size:.28rem;"></i>-->
+                <!--<i class="iconfont" style="font-size:.28rem;"></i>-->
+                <!--</div>-->
+                <!--<div class="item item-input valign-center">-->
+                <!--<label class="txt-666">房屋面积</label>-->
+                <!--<input type="number" placeholder="请输入房屋面积(m²)" id="area">-->
+                <!--</div>-->
+                <!--<div class="item item-input valign-center">-->
+                <!--<label class="txt-666">装修预算</label>-->
+                <!--<input type="text" placeholder="请输入装修预算金额(万)" id="budget">-->
+                <!--</div>-->
+                <div class="item item-input valign-center">
+                    <label class="txt-666">备注</label>
+                    <textarea type="text" placeholder="请输入装修备注(非必填)" minlength="300px"
+                              style="min-width: 60%; min-height: 100px;" id="occupation"></textarea>
+                </div>
+            </form>
+            <div class="list list-cut add-bank-card-form list-form">
+                <div class="item item-input valign-center layui-hide">
+                    <label class="txt-666">推荐人</label>
+                    <input type="text" value="" readonly="" id="agent_name">
+                </div>
+            </div>
+            <a href="javascript:;" class="btn btn-red btn-orange btn-radius btn-lg btn-block btn-reg 、"
+               style="position: absolute;width: 100%;bottom: 0px;left: 0;">提交</a>
+        </div>
+    </div>
+    <!--<div class="flex flex-center">-->
+    <!--<a href="/actStaff/login?actAlias=" class="txt-blue footer-tip-btn">使用已有账号登录</a>-->
+    <!--</div>-->
+</div>
+
+
+<script type="text/javascript" src="/custom/invite/inviteagent/res/script/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="/custom/invite/inviteagent/res/script/api.js"></script>
+<script type="text/javascript" src="/custom/invite/inviteagent/res/script/common.js"></script>
+
+<script type="text/javascript" src="/custom/invite/inviteagent/res/script/hmac-sha256.js"></script>
+<script type="text/javascript" src="/layui/layui.js"></script>
+<script type="text/javascript">
+    function getParam(paramName) {
+        paramValue = "", isFound = !1;
+        if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+            arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0;
+            while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++
+        }
+        return paramValue == "" && (paramValue = null), paramValue
+    }
+
+    var inviteCode = getParam("inviteCode");
+
+    $.post('getAgentName', {'inviteCode': inviteCode}, function (resp) {
+        $('#agent_name').val(resp.msg);
+        $('#agentId').val(resp.code);
+    })
+
+    function resetForm() {
+        $('#custName').val('');
+        $('#phone').val('');
+        $('#address').val('');
+        $('#occupation').val('');
+        // $('#style').val('');
+        // $('#typeName').val('');
+        // $('#type').val('');
+        // $('#area').val('');
+        // $('#budget').val('');
+        $('#styleName').val('');
+    }
+
+    $(function () {
+        $('#sex').change(function () {
+            var type = $(this).val();
+            if (type != "") {
+                $('#sexname').val($(this).find("option:selected").text());
+            } else {
+                $('#sexname').val("");
+            }
+        });
+        // $('#style').change(function () {
+        //     var style = $(this).val();
+        //     if (style != "") {
+        //         $('#styleName').val($(this).find("option:selected").text());
+        //     } else {
+        //         $('#styleName').val("");
+        //     }
+        // });
+        $('.btn-reg').click(function () {
+            var custName = $('#custName').val().trim();
+            var phone = $('#phone').val().trim();
+            var address = $('#address').val().trim();
+            var occupation = $('#occupation').val().trim();
+            var sex = $('#sex').val().trim();
+            // var style = $('#style').val().trim();
+            // var type = $('#type').val().trim();
+            // var area = $('#area').val().trim();
+            // var budget = $('#budget').val().trim();
+            var agentId = $('#agentId').val().trim();
+            var data = {};
+            data.custName = custName;
+            data.phone = phone;
+            data.address = address;
+            data.occupation = occupation;
+            data.sex = sex;
+            // data.area = area;
+            // data.budget = budget;
+            // data.style = style
+            // data.type = type;
+            if (agentId != "") {
+                data.agentId = agentId;
+            }
+
+            if (custName.isBlank() || phone.isBlank()
+                || address.isBlank() || area.isBlank() || budget.isBlank()) {
+                alert('请将信息填写完整');
+                return;
+            }
+
+            if (!phone.isMobile()) {
+                alert('请填写正确的手机号码');
+                return;
+            }
+
+            if (style.isBlank()) {
+                alert('请选择装修风格');
+                return;
+            }
+
+            if (type.isBlank()) {
+                alert('请选择装修方案');
+                return;
+            }
+
+            showLoading('正在提交...');
+            jll.ajax({
+                url: '/add_customer',
+                method: 'post',
+                data: data
+            }, function (ret) {
+                if (ret.code == 1) {
+                    alert('预约信息提交成功');
+                    resetForm();
+                }
+                if (ret.code == 2) {
+                    alert('对不起，该客户已被推荐');
+                }
+                if (ret.code == 0) {
+                    alert('对不起，当天报备客户数已用完');
+                }
+            }, function (resp) {
+                layer.msg('预约失败，' + resp.msg);
+            }, function () {
+                hideLoading();
+            });
+        });
+    });
+</script>
+
+
+</body>
+</html>

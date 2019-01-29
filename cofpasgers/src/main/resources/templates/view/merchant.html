@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>商家</title>
+    <link rel="stylesheet" href="assets/css/amazeui.min.css">
+    <style>
+        .textcenter {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="row">
+    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+        <div class="widget am-cf">
+            <div class="widget-head am-cf">
+                <div class="widget-title am-fl">合作商家</div>
+            </div>
+            <div class="widget-body am-fr">
+                <div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
+                    <div class="am-form-group">
+                        <div class="am-btn-toolbar">
+                            <div class="am-btn-group am-btn-group-xs">
+                                <button type="button" id="addAgent" class="am-btn am-btn-default am-btn-success"
+                                        data-am-modal="{target: '#merchant-modal'}"><span class="am-icon-plus"></span>添加合作商家
+                                </button>
+                                <button class="am-btn am-btn-default am-btn-danger"><span
+                                        class="am-icon-download"></span>导出Excel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="am-u-sm-12">
+                    <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black"
+                           id="merchant_table_id">
+                        <thead>
+                        <tr>
+                            <th class="am-text-center">商家logo</th>
+                            <th class="am-text-center">商家名称</th>
+                            <th class="am-text-center">商家地址</th>
+                            <th class="am-text-center">网址url</th>
+                            <th class="am-text-center">绑定企业账号</th>
+                            <th class="am-text-center">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="am-modal am-modal-no-btn" tabindex="-1" id="merchant-modal">
+                    <div class="am-modal-dialog">
+                        <div class="am-modal-hd">
+                            <h4 class="am-popup-title">合作商家</h4>
+                            <span data-am-modal-close
+                                  class="am-close" onclick="javascript:$('.am-dimmer').hide();">&times;</span>
+                        </div>
+                        <div class="am-modal-bd">
+                            <form class="am-form tpl-form-line-form">
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-4 am-form-label">商家名称</label>
+                                    <div class="am-u-sm-8">
+                                        <input type="text" class="tpl-form-input" id="merchant_name">
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-4 am-form-label">商家地址</label>
+                                    <div class="am-u-sm-8">
+                                        <input type="text" class="tpl-form-input" id="merchant_address">
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-4 am-form-label">商家LOGO</label>
+                                    <div class="am-u-sm-8">
+                                        <div class="am-form-group am-form-file">
+                                            <div class="layui-upload">
+                                                <div class="tpl-form-file-img" id="merchant_logo">
+                                                    <img id="logo_img" style="max-width: 520px;max-height: 300px"
+                                                         src="assets/img/a5.png" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-4 am-form-label">网址URL</label>
+                                    <div class="am-u-sm-8">
+                                        <input type="text" class="tpl-form-input" id="merchant_url">
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-4 am-form-label">排序</label>
+                                    <div class="am-u-sm-8">
+                                        <input type="text" class="tpl-form-input" id="merchant_order"
+                                               placeholder="数值越小,排序靠前">
+                                    </div>
+                                </div>
+
+                                <!--<div class="am-form-group">-->
+                                <!--<label class="am-u-sm-4 am-form-label">绑定企业账号</label>-->
+                                <!--<div class="am-u-sm-8">-->
+                                <!--<input type="text" class="tpl-form-input" id="enter_id"-->
+                                <!--placeholder="商家开通集客通后分配的企业账号">-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <div class="am-form-group">
+                                    <div class="am-u-sm-9 am-u-sm-push-3">
+                                        <button type="button" id="add_merchant_btn"
+                                                class="am-btn am-btn-primary tpl-btn-bg-color-success ">
+                                            提交
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="javascript/merchant.js"></script>
+</body>
+
+</html>
