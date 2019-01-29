@@ -1,10 +1,16 @@
 package com.huiketong.cofpasgers.controller;
 
-import cn.jmessage.api.JMessageClient;
 import com.alibaba.fastjson.JSON;
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.AlipayClient;
+import com.alipay.api.request.AlipayTradeAppPayRequest;
+import com.alipay.api.request.AlipayTradePagePayRequest;
+import com.alipay.api.response.AlipayTradeAppPayResponse;
+import com.alipay.api.response.AlipayTradePagePayResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.github.wxpay.sdk.WXPay;
 import com.github.wxpay.sdk.WXPayConstants;
+import com.huiketong.cofpasgers.alipay.config.AlipayProperties;
 import com.huiketong.cofpasgers.constant.*;
 import com.huiketong.cofpasgers.entity.*;
 import com.huiketong.cofpasgers.getui.AppPush;
@@ -98,6 +104,10 @@ public class AppController {
     PointDetailRepository pointDetailRepository;
     @Autowired
     private WXPay wxPay;
+    @Autowired
+    private AlipayProperties alipayProperties;
+    @Autowired
+    private AlipayClient alipayClient;
 
     @PostMapping(value = "/get_version")
     @CrossOrigin
@@ -763,7 +773,7 @@ public class AppController {
      */
     @PostMapping(value = "signin")
     @CrossOrigin
-    public BaseJsonResponse Signin(String user_id, String token) throws ParseException {
+    public BaseJsonResponse Signin(String user_id, String token) throws ParseException, AlipayApiException {
         BaseJsonResponse response = new BaseJsonResponse();
         verifyUser(user_id, token, response, o -> {
             Agent agent = (Agent) o;
@@ -1222,7 +1232,7 @@ public class AppController {
 
     @PostMapping(value = "get_point_detail")
     @CrossOrigin
-    public BaseJsonResponse get_point_detail(String user_id,String token,Integer page,Integer limit,String type) throws ParseException {
+    public BaseJsonResponse get_point_detail(String user_id,String token,Integer page,Integer limit,String type) throws ParseException, AlipayApiException {
 
         BaseJsonResponse response = new BaseJsonResponse();
         verifyUser(user_id, token, response, o -> {
@@ -1263,7 +1273,7 @@ public class AppController {
 
     @PostMapping(value = "get_point_rule")
     @CrossOrigin
-    public BaseJsonResponse get_point_rule(String user_id, String token) throws ParseException {
+    public BaseJsonResponse get_point_rule(String user_id, String token) throws ParseException, AlipayApiException {
         PointRuleData data = new PointRuleData();
         TaskData taskData = new TaskData();
         List<PointDialsData> pointDialsDataList = new ArrayList<>();
@@ -1558,7 +1568,7 @@ public class AppController {
 
     @PostMapping(value = "get_guide")
     @CrossOrigin
-    public BaseJsonResponse GetGuide(String user_id, String token) throws ParseException {
+    public BaseJsonResponse GetGuide(String user_id, String token) throws ParseException, AlipayApiException {
         BaseJsonResponse response = new BaseJsonResponse();
         verifyUser(user_id, token, response, o -> {
             Agent agent = (Agent) o;
@@ -2464,7 +2474,7 @@ public class AppController {
      */
     @PostMapping(value = "get_specialoffer_categorize_info")
     @CrossOrigin
-    public BaseJsonResponse getSpecialofferInfo(String user_id, String token) throws ParseException {
+    public BaseJsonResponse getSpecialofferInfo(String user_id, String token) throws ParseException, AlipayApiException {
         List<SpecialofferType> typeList = new ArrayList<>();
         List<SpecialofferStyle> styleList = new ArrayList<>();
         SpecialofferData data = new SpecialofferData();
@@ -2523,7 +2533,7 @@ public class AppController {
      * @param response
      * @param demand
      */
-    private void verifyUser(String user_id, String token, BaseJsonResponse response, IDemand demand) throws ParseException {
+    private void verifyUser(String user_id, String token, BaseJsonResponse response, IDemand demand) throws ParseException, AlipayApiException {
         if (ObjectUtils.isNotEmpty(user_id)) {
             DefaultEnter defaultEnter = defaultEnterRepository.findDefaultEnterByUserIdOrUserTelphone(user_id, user_id);
             if (ObjectUtils.isNotNull(defaultEnter)) {
@@ -2548,7 +2558,7 @@ public class AppController {
 
     @PostMapping(value = "get_specialoffer_product_info")
     @CrossOrigin
-    public BaseJsonResponse getSpecialofferProductInfo(String user_id, String token, Integer type, Integer style, Integer sort, Integer page, Integer limit) throws ParseException {
+    public BaseJsonResponse getSpecialofferProductInfo(String user_id, String token, Integer type, Integer style, Integer sort, Integer page, Integer limit) throws ParseException, AlipayApiException {
         BaseJsonResponse response = new BaseJsonResponse();
         verifyUser(user_id, token, response, o -> {
             Agent agent = (Agent) o;
@@ -2593,7 +2603,7 @@ public class AppController {
 
     @PostMapping(value = "get_specialer_product_detail_info")
     @CrossOrigin
-    public BaseJsonResponse getSpecialofferProductDetailInfo(String user_id, String token, Integer id) throws ParseException {
+    public BaseJsonResponse getSpecialofferProductDetailInfo(String user_id, String token, Integer id) throws ParseException, AlipayApiException {
         BaseJsonResponse response = new BaseJsonResponse();
         verifyUser(user_id, token, response, o -> {
             Agent agent = (Agent) o;
@@ -2645,7 +2655,7 @@ public class AppController {
 
     @PostMapping(value = "focus_specialer_product")
     @CrossOrigin
-    public BaseJsonResponse focusSpecialerProduct(String user_id, String token, Integer id, Integer status) throws ParseException {
+    public BaseJsonResponse focusSpecialerProduct(String user_id, String token, Integer id, Integer status) throws ParseException, AlipayApiException {
         BaseJsonResponse response = new BaseJsonResponse();
         verifyUser(user_id, token, response, o -> {
             focusGoods(id, status, response, (Agent) o);
@@ -2713,7 +2723,7 @@ public class AppController {
 
     @PostMapping(value = "pay_specialer_product")
     @CrossOrigin
-    public BaseJsonResponse paySpecialerProduct(String user_id, String token, Integer id) throws ParseException {
+    public BaseJsonResponse paySpecialerProduct(String user_id, String token, Integer id,String pay_type) throws ParseException, AlipayApiException {
         BaseJsonResponse response = new BaseJsonResponse();
 
         verifyUser(user_id, token, response, o -> {
@@ -2726,90 +2736,11 @@ public class AppController {
                     if (!ObjectUtils.isNotEmpty(money)) {
                         response.setCode("2").setMsg("您输入的金额错误");
                     } else {
-                        OrderInfoData data = new OrderInfoData();
-                        String ordernumber = OrderUtil.getInstance().getOrderCode() + OrderUtil.getOrderCodePostfix();
-                        Map<String, String> reqData = new HashMap<>();
-                        reqData.put("out_trade_no", ordernumber);
-                        reqData.put("trade_type", "APP");
-//                        reqData.put("product_id",  commodity.getId().toString());
-                        reqData.put("body", "集客通-特价购");
-                        reqData.put("total_fee", money.toString());
-                        // APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP。
-                        reqData.put("spbill_create_ip", RequestUtil.GetIp());
-                        // 异步接收微信支付结果通知的回调地址，通知url必须为外网可访问的url，不能携带参数。
-                        reqData.put("notify_url", "http://jkt365.com/notify");
-                        // 自定义参数, 可以为终端设备号(门店号或收银设备ID)，PC网页或公众号内支付可以传"WEB"
-                        reqData.put("device_info", "WEB");
-                        // 附加数据，在查询API和支付通知中原样返回，可作为自定义参数使用。
-                        reqData.put("attach", "");
-
-                        Map<String, String> responseMap = new HashMap<>();
-                        try {
-                            responseMap = wxPay.unifiedOrder(reqData);
-                            logger.error(responseMap.toString());
-                            String returnCode = responseMap.get("return_code");
-                            MyWXPayConfig config = new MyWXPayConfig();
-                            if (WXPayConstants.SUCCESS.equals(returnCode)) {
-                                String resultCode = responseMap.get("result_code");
-                                if (WXPayConstants.SUCCESS.equals(resultCode)) {
-                                    String appid = responseMap.get("appid");
-                                    String noncestr = responseMap.get("nonce_str");
-                                    String pack = "Sign=WXPay";
-                                    String partnerid = responseMap.get("mch_id");
-                                    String prepayid = responseMap.get("prepay_id");
-                                    String timestamp = WxPayApiConfig.New().getTimestamp();
-                                    CommodityOrder order = new CommodityOrder();
-                                    order.setCompanyId(agent.getCompanyId());
-                                    order.setUserId(agent.getId());
-                                    order.setActivityPrice(commodity.getActivityPrice());
-                                    order.setOrderNum(ordernumber);
-                                    order.setInsertTime(new Date());
-                                    order.setUserId(agent.getId());
-                                    order.setStatus(0);
-                                    order.setCommodityId(id);
-                                    order.setOrderStatus(0);
-                                    order.setCompanyId(agent.getCompanyId());
-                                    order.setCommodityName(commodity.getCommodityName());
-                                    CommodityImg commodityImg = commodityImgRepository.findFirstByCommodityd(id);
-                                    if (ObjectUtils.isNotNull(commodityImg)) {
-                                        order.setCommodityOrderImg(commodityImg.getCommodityImgUrl());
-                                    } else {
-                                        order.setCommodityOrderImg("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547526427629&di=2317ed8ee57a95c83ceeb2a31395e435&imgtype=0&src=http%3A%2F%2Fpic.baike.soso.com%2Fp%2F20140611%2F20140611145529-1600143101.jpg");
-                                    }
-
-                                    order.setPayType("App支付");
-                                    try {
-                                        Map<String, String> map = new HashMap<String, String>();
-                                        map.put("appid", appid);
-                                        map.put("noncestr", noncestr);
-                                        map.put("package", pack);
-                                        map.put("partnerid", partnerid);
-                                        map.put("prepayid", prepayid);
-                                        map.put("timestamp", timestamp);
-                                        String sign = config.getSign(map);
-                                        Map<String, String> respmap = new HashMap<String, String>();
-                                        respmap.put("appid", appid);
-                                        respmap.put("noncestr", noncestr);
-                                        respmap.put("package", pack);
-                                        respmap.put("partnerid", partnerid);
-                                        respmap.put("prepayid", prepayid);
-                                        respmap.put("timestamp", timestamp);
-                                        respmap.put("sign", sign);
-                                        data.setOrderInfo(JSONObject.fromObject(respmap).toString());
-                                        data.setOrder_num(ordernumber);
-                                        orderRepository.save(order);
-                                        response.setData(data).setMsg("下单成功").setCode("1");
-                                    } catch (Exception e) {
-                                        response.setMsg("下单失败").setCode("2");
-                                    }
-                                } else {
-                                    response.setMsg("下单失败").setCode("2");
-                                }
-                            } else {
-                                response.setMsg("下单失败").setCode("2");
-                            }
-                        } catch (Exception e) {
-                            response.setMsg("下单失败").setCode("3");
+                        if(ObjectUtils.isNotEmpty(pay_type)&&pay_type.equals("wxpay")) {
+                            weixinPay(id, response, agent, commodity, money);
+                        }
+                        else if(ObjectUtils.isNotEmpty(pay_type)&&pay_type.equals("alipay")){
+                            aliPay(id, response, agent, commodity, money);
                         }
                     }
                 } else {
@@ -2822,6 +2753,152 @@ public class AppController {
         });
         return response;
     }
+
+    private void aliPay(Integer id, BaseJsonResponse response, Agent agent, Commodity commodity, BigDecimal money) throws AlipayApiException {
+        OrderInfoData data = new OrderInfoData();
+        String ordernumber = OrderUtil.getInstance().getOrderCode() + OrderUtil.getOrderCodePostfix();
+        JSONObject reqData = new JSONObject ();
+        //订单号,必填
+        reqData.put("out_trade_no", ordernumber);
+        //PC支付 FAST_INSTANT_TRADE_PAY, APP支付 QUICK_MSECURITY_PAY, 移动H5支付 QUICK_WAP_PAY
+        reqData.put("product_code","FAST_INSTANT_TRADE_PAY");
+        //付款金额,必填
+        reqData.put("total_amount", money.divide(new BigDecimal(100)));
+        //订单描述,必填
+        reqData.put("subject","特价购");
+        //该笔订单允许的最晚付款时间，逾期将关闭交易
+        //data.put("timeout_express","");
+        //公共校验参数
+        //data.put("passback_params","");
+        //PC支付
+        //AlipayTradePagePayRequest request = new AlipayTradePagePayRequest();
+        //APP支付
+        AlipayTradeAppPayRequest request = new AlipayTradeAppPayRequest();
+        //移动H5支付
+        //AlipayTradeWapPayRequest request = new AlipayTradeWapPayRequest();
+        //异步通知地址
+        request.setNotifyUrl(alipayProperties.getNotifyUrl());
+        //同步通知地址
+        request.setReturnUrl("");
+        //业务参数
+        request.setBizContent(reqData.toString());
+        AlipayTradeAppPayResponse alipayResponse=alipayClient.sdkExecute(request);
+        String order_info = alipayResponse.getBody();
+
+        CommodityOrder order = new CommodityOrder();
+        order.setCompanyId(agent.getCompanyId());
+        order.setUserId(agent.getId());
+        order.setActivityPrice(commodity.getActivityPrice());
+        order.setOrderNum(ordernumber);
+        order.setInsertTime(new Date());
+        order.setUserId(agent.getId());
+        order.setStatus(0);
+        order.setCommodityId(id);
+        order.setOrderStatus(0);
+        order.setCompanyId(agent.getCompanyId());
+        order.setCommodityName(commodity.getCommodityName());
+        CommodityImg commodityImg = commodityImgRepository.findFirstByCommodityd(id);
+        if (ObjectUtils.isNotNull(commodityImg)) {
+            order.setCommodityOrderImg(commodityImg.getCommodityImgUrl());
+        } else {
+            order.setCommodityOrderImg("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547526427629&di=2317ed8ee57a95c83ceeb2a31395e435&imgtype=0&src=http%3A%2F%2Fpic.baike.soso.com%2Fp%2F20140611%2F20140611145529-1600143101.jpg");
+        }
+
+        order.setPayType("支付宝App支付");
+        orderRepository.save(order);
+        data.setOrderInfo(order_info);
+        data.setOrder_num(ordernumber);
+        response.setCode("1").setMsg("下单成功").setData(data);
+    }
+
+    private void weixinPay(Integer id, BaseJsonResponse response, Agent agent, Commodity commodity, BigDecimal money) {
+        OrderInfoData data = new OrderInfoData();
+        String ordernumber = OrderUtil.getInstance().getOrderCode() + OrderUtil.getOrderCodePostfix();
+        Map<String, String> reqData = new HashMap<>();
+        reqData.put("out_trade_no", ordernumber);
+        reqData.put("trade_type", "APP");
+//                        reqData.put("product_id",  commodity.getId().toString());
+        reqData.put("body", "集客通-特价购");
+        reqData.put("total_fee", money.toString());
+        // APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP。
+        reqData.put("spbill_create_ip", RequestUtil.GetIp());
+        // 异步接收微信支付结果通知的回调地址，通知url必须为外网可访问的url，不能携带参数。
+        reqData.put("notify_url", "http://jkt365.com/notify");
+        // 自定义参数, 可以为终端设备号(门店号或收银设备ID)，PC网页或公众号内支付可以传"WEB"
+        reqData.put("device_info", "WEB");
+        // 附加数据，在查询API和支付通知中原样返回，可作为自定义参数使用。
+        reqData.put("attach", "");
+
+        Map<String, String> responseMap = new HashMap<>();
+        try {
+            responseMap = wxPay.unifiedOrder(reqData);
+            logger.error(responseMap.toString());
+            String returnCode = responseMap.get("return_code");
+            MyWXPayConfig config = new MyWXPayConfig();
+            if (WXPayConstants.SUCCESS.equals(returnCode)) {
+                String resultCode = responseMap.get("result_code");
+                if (WXPayConstants.SUCCESS.equals(resultCode)) {
+                    String appid = responseMap.get("appid");
+                    String noncestr = responseMap.get("nonce_str");
+                    String pack = "Sign=WXPay";
+                    String partnerid = responseMap.get("mch_id");
+                    String prepayid = responseMap.get("prepay_id");
+                    String timestamp = WxPayApiConfig.New().getTimestamp();
+                    CommodityOrder order = new CommodityOrder();
+                    order.setCompanyId(agent.getCompanyId());
+                    order.setUserId(agent.getId());
+                    order.setActivityPrice(commodity.getActivityPrice());
+                    order.setOrderNum(ordernumber);
+                    order.setInsertTime(new Date());
+                    order.setUserId(agent.getId());
+                    order.setStatus(0);
+                    order.setCommodityId(id);
+                    order.setOrderStatus(0);
+                    order.setCompanyId(agent.getCompanyId());
+                    order.setCommodityName(commodity.getCommodityName());
+                    CommodityImg commodityImg = commodityImgRepository.findFirstByCommodityd(id);
+                    if (ObjectUtils.isNotNull(commodityImg)) {
+                        order.setCommodityOrderImg(commodityImg.getCommodityImgUrl());
+                    } else {
+                        order.setCommodityOrderImg("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547526427629&di=2317ed8ee57a95c83ceeb2a31395e435&imgtype=0&src=http%3A%2F%2Fpic.baike.soso.com%2Fp%2F20140611%2F20140611145529-1600143101.jpg");
+                    }
+
+                    order.setPayType("微信App支付");
+                    try {
+                        Map<String, String> map = new HashMap<String, String>();
+                        map.put("appid", appid);
+                        map.put("noncestr", noncestr);
+                        map.put("package", pack);
+                        map.put("partnerid", partnerid);
+                        map.put("prepayid", prepayid);
+                        map.put("timestamp", timestamp);
+                        String sign = config.getSign(map);
+                        Map<String, String> respmap = new HashMap<String, String>();
+                        respmap.put("appid", appid);
+                        respmap.put("noncestr", noncestr);
+                        respmap.put("package", pack);
+                        respmap.put("partnerid", partnerid);
+                        respmap.put("prepayid", prepayid);
+                        respmap.put("timestamp", timestamp);
+                        respmap.put("sign", sign);
+                        data.setOrderInfo(JSONObject.fromObject(respmap).toString());
+                        data.setOrder_num(ordernumber);
+                        orderRepository.save(order);
+                        response.setData(data).setMsg("下单成功").setCode("1");
+                    } catch (Exception e) {
+                        response.setMsg("下单失败").setCode("2");
+                    }
+                } else {
+                    response.setMsg("下单失败").setCode("2");
+                }
+            } else {
+                response.setMsg("下单失败").setCode("2");
+            }
+        } catch (Exception e) {
+            response.setMsg("下单失败").setCode("3");
+        }
+    }
+
     /**
      * 获取订单状态
      *
@@ -2832,7 +2909,7 @@ public class AppController {
      */
     @PostMapping("get_order_status")
     @CrossOrigin
-    public BaseJsonResponse getOrderStatus(String user_id, String token, String order_id) throws ParseException {
+    public BaseJsonResponse getOrderStatus(String user_id, String token, String order_id) throws ParseException, AlipayApiException {
         BaseJsonResponse response = new BaseJsonResponse();
         verifyUser(user_id, token, response, o -> {
             if (ObjectUtils.isNotEmpty(order_id)) {
@@ -2852,7 +2929,7 @@ public class AppController {
 
     @PostMapping("get_my_order")
     @CrossOrigin
-    public BaseJsonResponse getMyOrder(String user_id, String token, Integer page, Integer limit) throws ParseException {
+    public BaseJsonResponse getMyOrder(String user_id, String token, Integer page, Integer limit) throws ParseException, AlipayApiException {
         BaseJsonResponse response = new BaseJsonResponse();
         verifyUser(user_id, token, response, o -> {
             Agent agent = (Agent) o;
@@ -2998,7 +3075,7 @@ public class AppController {
 
     @PostMapping("reporte_customer")
     @CrossOrigin
-    public BaseJsonResponse reporteCustomer(String user_id, String token, String name, String sex, String tel, String address, String remark) throws ParseException {
+    public BaseJsonResponse reporteCustomer(String user_id, String token, String name, String sex, String tel, String address, String remark) throws ParseException, AlipayApiException {
         BaseJsonResponse response = new BaseJsonResponse();
         verifyUser(user_id, token, response, o -> {
             reporteCustomer(name, sex, tel, address, remark, response, (Agent) o);
@@ -3078,7 +3155,7 @@ public class AppController {
 
     @PostMapping("get_chat_info")
     @CrossOrigin
-    public BaseJsonResponse getChatInfo(String user_id, String token) throws ParseException {
+    public BaseJsonResponse getChatInfo(String user_id, String token) throws ParseException, AlipayApiException {
         BaseJsonResponse response = new BaseJsonResponse();
         verifyUser(user_id, token, response, o -> {
             Agent agent = (Agent) o;
@@ -3150,7 +3227,7 @@ public class AppController {
 
     @PostMapping(value = "point_lotto")
     @CrossOrigin
-    public BaseJsonResponse luckyDraw(String user_id,String token) throws ParseException {
+    public BaseJsonResponse luckyDraw(String user_id,String token) throws ParseException, AlipayApiException {
         BaseJsonResponse response = new BaseJsonResponse();
         verifyUser(user_id, token, response, o -> {
             Agent agent = (Agent) o;
@@ -3243,7 +3320,7 @@ public class AppController {
 
     @PostMapping(value = "redeem")
     @CrossOrigin
-    public BaseJsonResponse RedeemPoint(String user_id,String token,String money) throws ParseException {
+    public BaseJsonResponse RedeemPoint(String user_id,String token,String money) throws ParseException,AlipayApiException {
         BaseJsonResponse response = new BaseJsonResponse();
         verifyUser(user_id, token, response, o -> {
             Agent agent = (Agent) o;
@@ -3314,7 +3391,7 @@ public class AppController {
 
     @PostMapping(value = "get_navigate_info")
     @CrossOrigin
-    public BaseJsonResponse getNavigateInfo(String user_id,String token) throws ParseException {
+    public BaseJsonResponse getNavigateInfo(String user_id,String token) throws ParseException,AlipayApiException {
         BaseJsonResponse response = new BaseJsonResponse();
         verifyUser(user_id, token, response, o -> {
             Agent agent = (Agent) o;

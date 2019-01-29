@@ -1,5 +1,7 @@
 package com.huiketong.cofpasgers.service;
 
+import com.alipay.api.AlipayApiException;
+
 import java.text.ParseException;
 
 /**
@@ -10,5 +12,5 @@ import java.text.ParseException;
  */
 public interface IDemand {
     //业务函数
-    void bussiness(Object o) throws ParseException;
+    void bussiness(Object o) throws ParseException, AlipayApiException;
 }
