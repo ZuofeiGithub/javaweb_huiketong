@@ -81,6 +81,14 @@ public class AlipayController {
         log.info(notifyBuild.toString());
 
 
+        //交易状态
+        String tradeStatus = new String(request.getParameter("trade_status").getBytes("ISO-8859-1"),"UTF-8");
+        // 商户订单号
+        String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"),"UTF-8");
+        //支付宝交易号
+        String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"),"UTF-8");
+        //付款金额
+        String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"),"UTF-8");
         boolean flag = this.rsaCheckV1(request);
         if (flag) {
             /**
@@ -95,15 +103,7 @@ public class AlipayController {
              * 在支付宝的业务通知中，只有交易通知状态为TRADE_SUCCESS或TRADE_FINISHED时，支付宝才会认定为买家付款成功。
              */
 
-            //交易状态
-            String tradeStatus = new String(request.getParameter("trade_status").getBytes("ISO-8859-1"),"UTF-8");
-            // 商户订单号
-            String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"),"UTF-8");
-            //支付宝交易号
-            String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"),"UTF-8");
-            //付款金额
-            String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"),"UTF-8");
-            orderRepository.updateStatusByOrderStatusNum(9,out_trade_no);
+            orderRepository.updateStatusByOrderStatusNum(1,out_trade_no);
             // TRADE_FINISHED(表示交易已经成功结束，并不能再对该交易做后续操作);
             // TRADE_SUCCESS(表示交易已经成功结束，可以对该交易做后续操作，如：分润、退款等);
             if(tradeStatus.equals("TRADE_FINISHED")){
@@ -130,7 +130,7 @@ public class AlipayController {
 
             return "success";
         }
-
+        orderRepository.updateStatusByOrderStatusNum(9,out_trade_no);
         return "fail";
     }
 
