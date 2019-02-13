@@ -12,7 +12,7 @@
 <script src="/layui/layui.js"></script>
 <script>
     layui.use(['table','util'], function () {
-        let table = layui.table,util = layui.util;
+        var table = layui.table,util = layui.util;
         function getParam(paramName){
             paramValue = "", isFound = !1;
             if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
@@ -21,8 +21,8 @@
             }
             return paramValue == "" && (paramValue = null), paramValue
         }
-        let agentid = getParam("id");
-        let companyId= getParam("companyId");
+        var agentid = getParam("id");
+        var companyId= getParam("companyId");
         table.render({
             elem: '#customer_table',
             url: 'agentcustomer?id='+agentid,

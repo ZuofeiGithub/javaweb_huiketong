@@ -113,6 +113,7 @@ $(function () {
             $("#rule_comm").attr("href", 'yongjinGuiZeJsp?user_id=' + user_id);
             $("#enterId").attr("href", "enterinfomain?user_id=" + user_id);
             $("#integral").attr("href","integralRuleJsp?user_id=" + user_id);
+            $("#fenyong").attr("href","fenyongJsp?user_id=" + user_id);
 
 
             $("#side-menu").append('<li id="caiwu"></li>');

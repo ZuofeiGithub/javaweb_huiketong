@@ -1573,17 +1573,14 @@ public class AppController {
         verifyUser(user_id, token, response, o -> {
             Agent agent = (Agent) o;
             ShareFeeGuide shareFeeGuide = shareGuideRepository.findShareFeeGuideByCompanyId(agent.getCompanyId());
-            ShareFreeData data = new ShareFreeData();
             if (ObjectUtils.isNotEmpty(shareFeeGuide)) {
                 if (!shareFeeGuide.getGuideContext().isEmpty()) {
-                    data.setData(shareFeeGuide.getGuideContext());
+                    response.setData(shareFeeGuide.getGuideContext()).setMsg("获取规则成功").setCode("1");
                 } else {
-                    data.setData("暂无规则");
+                    response.setData("暂无规则").setMsg("获取规则成功").setCode("1");
                 }
-                response.setMsg("获取规则成功").setCode("1").setData(data);
             } else {
-                data.setData("");
-                response.setData(data).setCode("1").setMsg("获取失败");
+                response.setData("").setCode("1").setMsg("获取失败");
             }
         });
         return response;

@@ -100,8 +100,15 @@ public class NewYongJinController {
      * @return
      */
     @RequestMapping(value = "/fenyongJsp")
-    public ModelAndView fenyongJsp() {
+    public ModelAndView fenyongJsp(String user_id,Map<String,Object> map) {
         ModelAndView mv = new ModelAndView(Constant.PREFIX + "newFenyong");
+        Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(user_id);
+        if(ObjectUtils.isNotNull(enterprise)){
+            ShareFeeGuide shareFeeGuide = shareGuideRepository.findShareFeeGuideByCompanyId(enterprise.getId());
+            if(ObjectUtils.isNotNull(shareFeeGuide)){
+                map.put("context",shareFeeGuide.getGuideContext());
+            }
+        }
         return mv;
     }
 
@@ -375,7 +382,14 @@ public class NewYongJinController {
         shareFeeGuide.setGuideContext(guideContext);
         boolean flag=false;
         try {
-          shareGuideRepository.save(shareFeeGuide);
+            ShareFeeGuide existshareguide = shareGuideRepository.findShareFeeGuideByCompanyId(comId);
+            if(existshareguide != null)
+            {
+                shareGuideRepository.updateShareGuide(guideContext,comId);
+            }
+            else{
+                shareGuideRepository.save(shareFeeGuide);
+            }
             flag=true;
         } catch (Exception e) {
             e.printStackTrace();
