@@ -49,9 +49,10 @@ public class LoginController {
 
     @GetMapping(value = "/login")
     public ModelAndView Login(HttpSession session) {
-        ModelAndView mv = new ModelAndView(Constant.PREFIX + "newlogin");
-        session.setAttribute("userinfo", null);
-        session.setAttribute("iswitch",null);
+//        ModelAndView mv = new ModelAndView(Constant.PREFIX + "newlogin");
+//        session.setAttribute("userinfo", null);
+//        session.setAttribute("iswitch",null);
+        ModelAndView mv = new ModelAndView("cptsbpm/index");
         return mv;
     }
 
