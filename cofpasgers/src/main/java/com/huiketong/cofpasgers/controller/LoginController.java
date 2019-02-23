@@ -47,12 +47,25 @@ public class LoginController {
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
     private boolean bPasswordCorrect = false;
 
-    @GetMapping(value = "/login")
+    //@GetMapping(value = "/login")
+    @GetMapping(value = "/")
     public ModelAndView Login(HttpSession session) {
 //        ModelAndView mv = new ModelAndView(Constant.PREFIX + "newlogin");
 //        session.setAttribute("userinfo", null);
 //        session.setAttribute("iswitch",null);
         ModelAndView mv = new ModelAndView("cptsbpm/index");
+        return mv;
+    }
+
+    @GetMapping(value = "/bkabout")
+    public ModelAndView bkabout(){
+        ModelAndView mv = new ModelAndView("cptsbpm/about");
+        return mv;
+    }
+
+    @GetMapping(value = "/info")
+    public ModelAndView info(){
+        ModelAndView mv = new ModelAndView("cptsbpm/info");
         return mv;
     }
 
