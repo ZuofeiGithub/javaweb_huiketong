@@ -116,15 +116,15 @@ $(function () {
             $("#fenyong").attr("href","fenyongJsp?user_id=" + user_id);
 
 
-            $("#side-menu").append('<li id="caiwu"></li>');
-            $("#caiwu").append('<a href="#" data-toggle="collapse" data-target="#menu1"><i class="fa fa-money fa-fw"></i>财务管理<span class="fa fa-angle-down" id="arrowId1" style="float: right"></span></a>');
+            $("#side-menu").append('<li id="caiwu" style="margin-right: 0px;"></li>');
+            $("#caiwu").append('<a href="#" data-toggle="collapse" data-target="#menu1"><i class="fa fa-money fa-fw"></i><span class="nav-label">财务管理</span><span class="fa fa-angle-down" id="arrowId1" style="float: right"></span></a>');
             $("#caiwu").append('<ul class="nav nav-second-level collapse in" aria-expanded="true" id="menu1" style=""></ul>')
             $("#menu1").append('<li><a class="J_menuItem" href="jiangliJsp" name="tabMenuItem" data-index="5">奖励明细</a></li>')
             $("#menu1").append('<li><a class="J_menuItem" href="tixianJsp" name="tabMenuItem" data-index="5">提现明细</a></li>')
             $("#menu1").append('<li><a class="J_menuItem" href="tixianspJsp" name="tabMenuItem" data-index="5">提现审批</a></li>')
 
-            $("#side-menu").append('<li id="caiwu1"></li>');
-            $("#caiwu1").append('<a href="#" data-toggle="collapse" data-target="#menu2"><i class="fa fa-heart fa-fw"></i>特价购<span class="fa fa-angle-down" id="arrowId2" style="float: right"></span></a>');
+            $("#side-menu").append('<li id="caiwu1" style="margin-right: 0px;"></li>');
+            $("#caiwu1").append('<a href="#" data-toggle="collapse" data-target="#menu2"><i class="fa fa-heart fa-fw"></i><span class="nav-label">特价购</span><span class="fa fa-angle-down" id="arrowId2" style="float: right"></span></a>');
             $("#caiwu1").append('<ul class="nav nav-second-level collapse in" aria-expanded="true" id="menu2" style=""></ul>')
             $("#menu2").append('<li><a class="J_menuItem" href="commodityCategoryJsp" name="tabMenuItem" data-index="5">品类管理</a></li>')
                 .append('<li><a class="J_menuItem" href="commodityStyleJsp" name="tabMenuItem" data-index="5">风格管理</a></li>')
