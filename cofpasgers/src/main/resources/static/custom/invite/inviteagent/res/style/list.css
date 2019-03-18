@@ -1,5 +1,6 @@
 html{
-    font-size : 190%;
+    /*font-size : 190%;*/
+    font-size: 60px !important
 }
 body{
     font-size: 0.16rem;
@@ -97,7 +98,7 @@ input[type="email"], input[type="url"], input[type="search"], input[type="tel"],
     -webkit-box-align:center;
 
     /* W3C */
-    display:box !important;
+    display:-moz-box !important;
     box-pack:center;
 
     -webkit-box-align: center;
