@@ -1,5 +1,5 @@
 server:
-  port: 80
+  port: 9005
 spring:
   data:
     redis:
@@ -40,13 +40,13 @@ spring:
     open-in-view: false
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    #url: jdbc:mysql://120.27.229.54:3306/huiketong?useSSL=false&characterEncoding=utf-8&allowMultiQueries=true
+    url: jdbc:mysql://120.27.229.54:3306/huiketong?useSSL=false&characterEncoding=utf-8&allowMultiQueries=true
     #allowMultiQueries<-->mysql的批量更新 useSSL<-->MySQL在高版本需要指明是否进行SSL连接
-    url: jdbc:mysql://127.0.0.1:3306/huiketong?useSSL=false&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    #url: jdbc:mysql://127.0.0.1:3306/huiketong?useSSL=false&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     #url: jdbc:mysql://192.168.0.116:3306/huiketong?useSSL=false&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
-    #password: gxmy2018
-    password: 123456
+    password: gxmy2018
+    #password: 123456
 
     other:
       jdbc-url: jdbc:mysql://120.27.229.54:3306/fhadmin?useSSL=false&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=UTC

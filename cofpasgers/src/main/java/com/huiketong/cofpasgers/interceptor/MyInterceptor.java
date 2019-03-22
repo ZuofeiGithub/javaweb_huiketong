@@ -106,6 +106,7 @@ public class MyInterceptor implements HandlerInterceptor {
         notLoginPaths.add("/notify");
         notLoginPaths.add("/bkabout");
         notLoginPaths.add("/info");
+        notLoginPaths.add("/weinxin");
         if(notLoginPaths.contains(path)) return false;
         return true;
     }
