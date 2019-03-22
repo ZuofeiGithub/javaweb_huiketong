@@ -19,7 +19,7 @@ public class MessageUtil {
      * @param request
      * @return
      */
-    public static Map<String,String> xmlToMap(HttpServletRequest request){
+    public static Map<String,String> xmlToMap(HttpServletRequest request) throws DocumentException {
         Map<String,String> map = new HashMap<>();
         SAXReader reader = new SAXReader();
         InputStream ins = null;
@@ -34,8 +34,6 @@ public class MessageUtil {
             ins.close();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (DocumentException e) {
-            e.printStackTrace();
         }
         return map;
     }
@@ -47,6 +45,7 @@ public class MessageUtil {
      */
     public static String textMessageToXml(TextMessage textMessage){
         XStream xStream = new XStream();
+        xStream.alias("xml",textMessage.getClass());
         return xStream.toXML(textMessage);
     }
 }
