@@ -1,7 +1,6 @@
 package com.huiketong.cofpasgers;
 
 import com.alibaba.fastjson.JSON;
-import com.huiketong.cofpasgers.jni_native.HelloJni;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.List;
 
@@ -46,7 +44,7 @@ public class CofpasgersApplicationTests {
 //        JdbcTemplate jdbcTemplate = new JdbcTemplate(myDataSource);
 //        List<?> resultList = jdbcTemplate.queryForList("select * from app_banner");
 //        System.out.println("=====>>>>>>>"+JSON.toJSONString(resultList));
-        new HelloJni().displayHelloWorld();
+//        new HelloJni().displayHelloWorld();
     }
 
 }

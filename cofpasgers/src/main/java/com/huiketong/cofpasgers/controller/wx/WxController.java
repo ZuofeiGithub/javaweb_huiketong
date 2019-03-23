@@ -31,6 +31,13 @@ public class WxController {
         return signature + timestamp + nonce + echostr;
     }
 
+    /**
+     * 微信消息类型有:text,image,voice,video,link,location
+     * 事件推送消息:event:包括:关注subscribe,取消关注unsubscribe,菜单点击CLICK,VIEW
+     * @param request
+     * @param response
+     * @throws IOException
+     */
     @PostMapping("/weinxin")
     public void Wx(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("UTF-8");
@@ -45,16 +52,21 @@ public class WxController {
             String content = map.get("Content");
 
             String message = null;
-            if ("text".equals(msgType)) {
-                TextMessage text = new TextMessage();
-                text.setFromUserName(toUserName);
-                text.setToUserName(fromUserName);
-                text.setMsgType("text");
-                text.setCreateTime(new Date().getTime());
-                text.setContent("您发送的消息是:" + content);
-                message = MessageUtil.textMessageToXml(text);
-                out.print(message);
+            if (MessageUtil.MESSAGE_TEXT.equals(msgType)) {
+                if("1".equals(content)){
+                    message = MessageUtil.initText(toUserName,fromUserName,MessageUtil.firstMenu());
+                }else if("2".equals(content)){
+                    message = MessageUtil.initImageTextMessage(toUserName,fromUserName);
+                }else if("?".equals(content) || "？".equals(content)){
+                    message = MessageUtil.initText(toUserName,fromUserName,MessageUtil.menuText());
+                }
+            }else if(MessageUtil.MESSAGE_EVENT.equals(msgType)){
+                String eventType = map.get("Event");
+                if(MessageUtil.MESSAGE_SUBSCRIBE.equals(eventType)){
+
+                }
             }
+            out.print(message);
         } catch (DocumentException e) {
             e.printStackTrace();
         } finally {
