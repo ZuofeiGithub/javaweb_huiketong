@@ -108,7 +108,7 @@ $(function () {
                 .append('<li><a class="J_menuItem" id="rule_comm" href="yongjinGuiZeJsp" name="tabMenuItem" data-index="6">佣金规则</a></li>')
                 .append('<li><a class="J_menuItem" id="fenyong" href="fenyongJsp" name="tabMenuItem" data-index="6">分佣指南</a></li>')
                 .append('<li><a class="J_menuItem" id="integral" href="integralRuleJsp" name="tabMenuItem" data-index="6">积分规则</a></li>')
-                .append('<li><a class="J_menuItem" id="extend" href="exten" name="tabMenuItem" data-index="6">推广活动</a></li>');
+                .append('<li><a class="J_menuItem layui-hide" id="extend" href="exten" name="tabMenuItem" data-index="6">推广活动</a></li>');
 
             $("#rule_comm").attr("href", 'yongjinGuiZeJsp?user_id=' + user_id);
             $("#enterId").attr("href", "enterinfomain?user_id=" + user_id);
