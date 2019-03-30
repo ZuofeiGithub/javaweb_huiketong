@@ -171,7 +171,7 @@ public class KindEditorController {
         return msg;
     }
 
-    @RequestMapping(value = "/fileManager", method = RequestMethod.POST)
+    @RequestMapping(value = "/fileManager", method = RequestMethod.GET)
     @CrossOrigin
     public void fileManager(HttpServletRequest request,
                             HttpServletResponse response) throws ServletException, IOException {
