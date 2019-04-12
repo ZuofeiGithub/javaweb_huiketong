@@ -33,6 +33,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
@@ -3413,6 +3414,29 @@ public class AppController {
 
 
         });
+        return response;
+    }
+
+    /**
+     * 获取爆款推荐商品列表
+     * @param user_id
+     * @param token
+     * @return
+     * @throws ParseException
+     * @throws AlipayApiException
+     * @throws IOException
+     */
+    @PostMapping(value = "get_goodslist")
+    @CrossOrigin
+    public Object getGoodsList(String user_id,String token) throws ParseException, AlipayApiException, IOException {
+        BaseJsonResponse response = new BaseJsonResponse();
+//        verifyUser(user_id, token, response, new IDemand() {
+//            @Override
+//            public void bussiness(Object o) throws ParseException, AlipayApiException, IOException {
+                GoodsListData data = JsonUtils.readJsonFromClassPath("/static/json/goodslist.json",GoodsListData.class);
+                response.setCode("1").setMsg("获取商品列表成功").setData(data.getData());
+//            }
+//        });
         return response;
     }
 }
