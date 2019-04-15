@@ -4,9 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.request.AlipayTradeAppPayRequest;
-import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.alipay.api.response.AlipayTradeAppPayResponse;
-import com.alipay.api.response.AlipayTradePagePayResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.github.wxpay.sdk.WXPay;
 import com.github.wxpay.sdk.WXPayConstants;
@@ -30,6 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.FileNotFoundException;
@@ -3417,6 +3416,11 @@ public class AppController {
         return response;
     }
 
+
+
+    @Resource
+    private GoodsRepository goodsRepository;
+
     /**
      * 获取爆款推荐商品列表
      * @param user_id
@@ -3428,15 +3432,69 @@ public class AppController {
      */
     @PostMapping(value = "get_goodslist")
     @CrossOrigin
-    public Object getGoodsList(String user_id,String token) throws ParseException, AlipayApiException, IOException {
+    public Object getGoodsList(String user_id,String token,Integer page,Integer limit) throws ParseException, AlipayApiException{
         BaseJsonResponse response = new BaseJsonResponse();
-//        verifyUser(user_id, token, response, new IDemand() {
-//            @Override
-//            public void bussiness(Object o) throws ParseException, AlipayApiException, IOException {
-                GoodsListData data = JsonUtils.readJsonFromClassPath("/static/json/goodslist.json",GoodsListData.class);
-                response.setCode("1").setMsg("获取商品列表成功").setData(data.getData());
-//            }
-//        });
+
+        verifyUser(user_id, token, response, o -> {
+            GoodsListData data = new GoodsListData();
+            List<Goods> goodsList = goodsRepository.findAll();
+            if(goodsList.size() > 0){
+                for(Goods goods:goodsList){
+
+                }
+            }
+//                GoodsListData data = JsonUtils.readJsonFromClassPath("/static/json/goodslist.json",GoodsListData.class);
+            response.setCode("1").setMsg("获取商品列表成功").setData(data);
+        });
         return response;
+    }
+
+
+    /**
+     * 抵用券分享
+     * @return
+     */
+    @PostMapping(value = "voucher_share")
+    @CrossOrigin
+    public Object voucherShare(){
+        return null;
+    }
+
+    /**
+     * 抵用券
+     */
+    @PostMapping(value = "voucher")
+    @CrossOrigin
+    public Object vocher(){
+        return null;
+    }
+
+    /**
+     * 抵用券报备
+     * @return
+     */
+    @PostMapping(value = "voucher_report")
+    @CrossOrigin
+    public Object voucherReport(){
+        return null;
+    }
+
+    /**
+     * 抵用券详情
+     * @return
+     */
+    @PostMapping(value = "voucher_detail")
+    @CrossOrigin
+    public Object voucherDetail(){
+        return null;
+    }
+
+    /**
+     * 获取领券接口详情
+     * @return
+     */
+    @PostMapping(value = "get_coupon")
+    public Object getCoupon(){
+        return null;
     }
 }
