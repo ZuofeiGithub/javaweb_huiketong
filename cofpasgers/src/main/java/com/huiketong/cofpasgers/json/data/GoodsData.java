@@ -3,7 +3,7 @@ package com.huiketong.cofpasgers.json.data;
 import lombok.Data;
 
 @Data
-public class GoodsListData {
+public class GoodsData {
     private Integer goodsId;
     private String title;
     private String subtitle;

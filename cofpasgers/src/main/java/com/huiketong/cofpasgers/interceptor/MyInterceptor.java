@@ -100,13 +100,14 @@ public class MyInterceptor implements HandlerInterceptor {
         Set<String> notLoginPaths = new HashSet<>();
         //设置不进行登录拦截的路径：登录注册和验证码
         notLoginPaths.add("/login");
-        notLoginPaths.add("/getVerify");
-        notLoginPaths.add("/yinsi.html");
-        notLoginPaths.add("/about");
-        notLoginPaths.add("/notify");
-        notLoginPaths.add("/bkabout");
-        notLoginPaths.add("/info");
-        notLoginPaths.add("/weinxin");
+        notLoginPaths.add("/getVerify");//获取验证码
+        notLoginPaths.add("/yinsi.html");//隐私协议
+        notLoginPaths.add("/about"); //关于我们
+        notLoginPaths.add("/notify");//支付异步通知
+//        notLoginPaths.add("/bkabout");//个人博客关于
+//        notLoginPaths.add("/info"); //个人博客
+//        notLoginPaths.add("/weinxin");// 微信公众号
+//        notLoginPaths.add("/hplus");
         if(notLoginPaths.contains(path)) return false;
         return true;
     }

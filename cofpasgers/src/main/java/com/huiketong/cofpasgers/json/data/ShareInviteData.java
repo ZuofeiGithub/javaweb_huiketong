@@ -11,4 +11,7 @@ public class ShareInviteData {
     String image;
     String invite_num;
     String invite_money;
+    String benefits; //邀请好友有奖
+    String ruleDesc; //规则说明
+    String rewardDesc; //奖励说明
 }

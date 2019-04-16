@@ -28,7 +28,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.FileNotFoundException;
@@ -108,6 +107,8 @@ public class AppController {
     private AlipayProperties alipayProperties;
     @Autowired
     private AlipayClient alipayClient;
+    @Autowired
+    private InstructionsRepository instructionsRepository;
 
     @PostMapping(value = "/get_version")
     @CrossOrigin
@@ -3417,10 +3418,8 @@ public class AppController {
     }
 
 
-
-    @Resource
+    @Autowired
     private GoodsRepository goodsRepository;
-
     /**
      * 获取爆款推荐商品列表
      * @param user_id
@@ -3434,30 +3433,64 @@ public class AppController {
     @CrossOrigin
     public Object getGoodsList(String user_id,String token,Integer page,Integer limit) throws ParseException, AlipayApiException{
         BaseJsonResponse response = new BaseJsonResponse();
-
         verifyUser(user_id, token, response, o -> {
-            GoodsListData data = new GoodsListData();
-            List<Goods> goodsList = goodsRepository.findAll();
-            if(goodsList.size() > 0){
-                for(Goods goods:goodsList){
-
+            Agent agent = (Agent) o;
+            CompanyBindUser user = companyUserRepository.findCompanyBindUserByInviteCode(agent.getInitCode());
+            List<GoodsData> goodsDataList = new ArrayList<>();
+            if(!ObjectUtils.isEmpty(user)){
+                List<Goods> goodsList = goodsRepository.findAllByCompanyIdLimit(user.getCompanyId(),(page-1)*limit,limit);
+                if(goodsList.size() > 0){
+                    for(Goods goods:goodsList){
+                        GoodsData data = new GoodsData();
+                        data.setGoodsId(goods.getId());
+                        data.setImage(goods.getImage());
+                        data.setLabel(goods.getLabel());
+                        data.setLinkname(goods.getLinkname());
+                        data.setSubtitle(goods.getSubtitle());
+                        data.setTitle(goods.getTitle());
+                        goodsDataList.add(data);
+                    }
+                    response.setCode("1").setMsg("获取商品列表成功").setData(goodsDataList);
+                }else{
+                    response.setCode("0").setMsg("没有商品").setData(new ArrayList<>());
                 }
+                //GoodsData data = JsonUtils.readJsonFromClassPath("/static/json/goodslist.json",GoodsData.class); //从json文件中读取数据
+            }else{
+                response.setCode("0").setMsg("该用户没有绑定公司").setData(null);
             }
-//                GoodsListData data = JsonUtils.readJsonFromClassPath("/static/json/goodslist.json",GoodsListData.class);
-            response.setCode("1").setMsg("获取商品列表成功").setData(data);
         });
         return response;
     }
 
 
+    @Autowired
+    private VoucherShareRepository voucherShareRepository;
     /**
      * 抵用券分享
      * @return
      */
     @PostMapping(value = "voucher_share")
     @CrossOrigin
-    public Object voucherShare(){
-        return null;
+    public Object voucherShare(String user_id,String token) throws ParseException, AlipayApiException {
+        BaseJsonResponse response = new BaseJsonResponse();
+        verifyUser(user_id,token,response, o -> {
+            Agent agent = (Agent) o;
+            VoucherShare voucherShare = voucherShareRepository.findVoucherShareByCompanyId(agent.getCompanyId());
+            if(!ObjectUtils.isEmpty(voucherShare)){
+                VoucherShareData data = new VoucherShareData();
+                data.setContext(voucherShare.getContext());
+                data.setImage(voucherShare.getImage());
+                data.setLink_url(voucherShare.getLink_url());
+                data.setContext(voucherShare.getContext());
+                data.setTitle(voucherShare.getTitle());
+                data.setUser_id(agent.getId());
+                response.setCode("1").setMsg("成功").setData(data);
+            }else{
+                response.setCode("0").setMsg("没有数据").setData(null);
+            }
+
+        });
+        return response;
     }
 
     /**
@@ -3465,36 +3498,112 @@ public class AppController {
      */
     @PostMapping(value = "voucher")
     @CrossOrigin
-    public Object vocher(){
-        return null;
+    public Object vocher(String user_id,String token) throws ParseException, AlipayApiException {
+        BaseJsonResponse response = new BaseJsonResponse();
+        verifyUser(user_id,token,response, o -> {
+            String price = "50";
+            PriceData data = new PriceData();
+            data.setPrice(price);
+            response.setData(data).setMsg("成功").setCode("1");
+        });
+        return response;
     }
 
+    @Autowired
+    private CouponUserRepository couponUserRepository;
+
+    @Autowired
+    private ReportCustomerRepository reportCustomerRepository;
     /**
      * 抵用券报备
      * @return
      */
     @PostMapping(value = "voucher_report")
     @CrossOrigin
-    public Object voucherReport(){
-        return null;
+    public Object voucherReport(String user_id,String token,String cus_name,String cus_phone) throws ParseException, AlipayApiException {
+        BaseJsonResponse response = new BaseJsonResponse();
+        verifyUser(user_id,token,response, o -> {
+            Agent agent = (Agent) o;
+            if(!ObjectUtils.isEmpty(cus_name)&&!ObjectUtils.isEmpty(cus_phone)){
+                ReportCustomer customer = new ReportCustomer();
+                customer.setAgentId(agent.getId());
+                customer.setCustomerName(cus_name);
+                customer.setCustomerPhone(cus_phone);
+                customer.setReportTime(new Date());
+                try {
+                    reportCustomerRepository.save(customer);
+                    response.setMsg("报备成功").setCode("1");
+                }catch (Exception e){
+                    response.setMsg("报备失败").setCode("0");
+                }
+            }else{
+                response.setMsg("信息不完整").setCode("0");
+            }
+
+        });
+        return response;
     }
 
+
+    @Autowired
+    private VoucherDetailRepository voucherDetailRepository;
     /**
      * 抵用券详情
      * @return
      */
     @PostMapping(value = "voucher_detail")
     @CrossOrigin
-    public Object voucherDetail(){
-        return null;
+    public Object voucherDetail(String user_id,String token) throws ParseException, AlipayApiException {
+        BaseJsonResponse response = new BaseJsonResponse();
+        verifyUser(user_id,token,response, o -> {
+            Agent agent = (Agent) o;
+           VoucherDetail voucherDetail = voucherDetailRepository.findVoucherDetailByCompanyId(agent.getCompanyId());
+           if(!ObjectUtils.isEmpty(voucherDetail)){
+                VoucherDetailData data = new VoucherDetailData();
+                data.setContext(voucherDetail.getContext());
+                data.setStart_time(DateUtils.dateFormat(voucherDetail.getStartTime(),DateUtils.DATE_PATIERN_DOT));
+                data.setEnd_time(DateUtils.dateFormat(voucherDetail.getEndTime(),DateUtils.DATE_PATIERN_DOT));
+                data.setPrice(voucherDetail.getPrice());
+                data.setTitle(voucherDetail.getTitle());
+                response.setCode("1").setMsg("获取详情页成功").setData(data);
+           }else{
+               response.setCode("0").setMsg("没有详情页").setData(null);
+           }
+        });
+        return response;
     }
 
     /**
-     * 获取领券接口详情
+     * 获取领券
      * @return
      */
     @PostMapping(value = "get_coupon")
-    public Object getCoupon(){
-        return null;
+    public Object getCoupon(String user_id,String telphone){
+        BaseJsonResponse response = new BaseJsonResponse();
+        if(!ObjectUtils.isEmpty(user_id)&&!ObjectUtils.isEmpty(telphone)){
+            DefaultEnter defaultEnter = defaultEnterRepository.findDefaultEnterByUserId(user_id);
+            if(!ObjectUtils.isEmpty(defaultEnter)){
+                CouponUser user = new CouponUser();
+                user.setCouponPhone(telphone);
+                user.setCompanyId(defaultEnter.getCompayId());
+                Agent agent = agentRepository.findAgentByTelphone(defaultEnter.getUserId());
+                if(!ObjectUtils.isEmpty(agent)){
+                    user.setShareUser(agent.getAgentName());
+                    user.setSharePhone(agent.getTelphone());
+                    user.setCouponPhone(telphone);
+                    user.setGetTime(new Date());
+                    user.setCompanyId(agent.getCompanyId());
+                    couponUserRepository.save(user);
+                    response.setCode("1").setMsg("领取成功").setData(null);
+                }
+
+            }else{
+                response.setCode("0").setMsg("信息错误").setData(null);
+            }
+        }else{
+            response.setCode("0").setMsg("信息错误").setData(null);
+        }
+
+        return response;
     }
 }
