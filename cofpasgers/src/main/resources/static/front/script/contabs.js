@@ -134,7 +134,7 @@ $(function () {
             $("#side-menu").append('<li id="voucher" style="margin-right: 0px;"></li>');
             $("#voucher").append('<a href="#"  data-toggle="collapse" data-target="#menu3"><i class="fa fa-money fa-fw"></i><span class="nav-label">抵用券管理</span><span class="fa fa-angle-down" id="arrowId3" style="float: right"></span></a>')
             $("#voucher").append('<ul class="nav nav-second-level collapse in" aria-expanded="true" id="menu3" style=""></ul>')
-            $("#menu3").append('<li><a class="J_menuItem" href="/voucher" name="tabMenuItem" data-index="5">抵用券价格</a></li>')
+            $("#menu3").append('<li><a class="J_menuItem" href="/list" name="tabMenuItem" data-index="5">抵用券价格</a></li>')
             $('#menu1').on('hidden.bs.collapse', function () {
                 $('#arrowId1').removeClass('fa-angle-down').addClass('fa-angle-left');
             }).on('show.bs.collapse', function () {
