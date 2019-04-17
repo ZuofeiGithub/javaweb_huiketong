@@ -50,7 +50,10 @@ public class Commodity {
 
     @Column(columnDefinition = "text  COMMENT '产品详情'")
     String  productDetails ;
-
+    @Column(columnDefinition = "varchar(1024) COMMENT '标签'")
+    String label;
+    @Column(columnDefinition = "varchar(32) COMMENT '推荐按钮的名字'")
+    String linkname;
     @Column(columnDefinition = "datetime COMMENT '添加商品时间'")
     Date addTime;
 

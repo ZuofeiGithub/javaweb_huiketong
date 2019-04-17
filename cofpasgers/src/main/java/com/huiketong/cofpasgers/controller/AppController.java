@@ -186,7 +186,7 @@ public class AppController {
                             response.setData(data);
                             response.setMsg("登陆成功");
                             int times = pointDetailRepository.findCurLoginPointCount();
-                            if(times < 1) {
+                            if (times < 1) {
                                 PointDetail pointDetail = new PointDetail();
                                 pointDetail.setAddTime(new Date());
                                 pointDetail.setCompanyId(agentUser.getCompanyId());
@@ -197,7 +197,7 @@ public class AppController {
                                 IntegralRule integralRule = integralRuleRepository.findIntegralRuleByCompanyId(agentUser.getCompanyId());
                                 if (ObjectUtils.isNotNull(integralRule)) {
                                     pointDetail.setPoint(integralRule.getLoginIntegral());
-                                    agentRepository.updatePoint(integralRule.getLoginIntegral(),agentUser.getId());
+                                    agentRepository.updatePoint(integralRule.getLoginIntegral(), agentUser.getId());
                                     pointDetailRepository.save(pointDetail);
                                 }
                             }
@@ -378,19 +378,18 @@ public class AppController {
                         }
                         userData.setCompany_id(defaultEnter.getCompayId().toString());
                         userData.setInvite_code(agent.getInitCode());
-                        Integer points1 = pointDetailRepository.findAllGetPoints(agent.getId(),agent.getCompanyId());
-                        Integer points2 = pointDetailRepository.findAllResumPoints(agent.getId(),agent.getCompanyId());
-                        if(ObjectUtils.isEmpty(points1)){
+                        Integer points1 = pointDetailRepository.findAllGetPoints(agent.getId(), agent.getCompanyId());
+                        Integer points2 = pointDetailRepository.findAllResumPoints(agent.getId(), agent.getCompanyId());
+                        if (ObjectUtils.isEmpty(points1)) {
                             points1 = 0;
                         }
-                        if(ObjectUtils.isEmpty(points2)){
+                        if (ObjectUtils.isEmpty(points2)) {
                             points2 = 0;
                         }
                         Integer points = 0;
-                        if(points1 < points2)
-                        {
+                        if (points1 < points2) {
                             points = 0;
-                        }else{
+                        } else {
                             points = points1 - points2;
                         }
                         userData.setPoint(points.toString());
@@ -782,7 +781,7 @@ public class AppController {
 
             if (count >= 1) {
                 response.setMsg("您已经签到").setCode("2");
-            }else{
+            } else {
                 PointDetail pointDetail = new PointDetail();
                 pointDetail.setAddTime(new Date());
                 pointDetail.setCompanyId(agent.getCompanyId());
@@ -791,13 +790,12 @@ public class AppController {
                 pointDetail.setType(PointType.SIGN.ordinal());
                 pointDetail.setUserId(agent.getId());
                 IntegralRule integralRule = integralRuleRepository.findIntegralRuleByCompanyId(agent.getCompanyId());
-                if(ObjectUtils.isNotNull(integralRule))
-                {
+                if (ObjectUtils.isNotNull(integralRule)) {
                     pointDetail.setPoint(integralRule.getSignIntegral());
                     try {
                         pointDetailRepository.save(pointDetail);
                         response.setCode("1").setMsg("签到成功");
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         response.setCode("200").setMsg("签到失败");
                     }
                 }
@@ -1233,39 +1231,36 @@ public class AppController {
 
     @PostMapping(value = "get_point_detail")
     @CrossOrigin
-    public BaseJsonResponse get_point_detail(String user_id,String token,Integer page,Integer limit,String type) throws ParseException, AlipayApiException {
+    public BaseJsonResponse get_point_detail(String user_id, String token, Integer page, Integer limit, String type) throws ParseException, AlipayApiException {
 
         BaseJsonResponse response = new BaseJsonResponse();
         verifyUser(user_id, token, response, o -> {
             Agent agent = (Agent) o;
             List<PointDetailRespData> dataList = new ArrayList<>();
-            if(ObjectUtils.isNotEmpty(page)&&ObjectUtils.isNotEmpty(limit)&&ObjectUtils.isNotEmpty(type))
-            {
+            if (ObjectUtils.isNotEmpty(page) && ObjectUtils.isNotEmpty(limit) && ObjectUtils.isNotEmpty(type)) {
                 List<PointDetail> pointDetailList = new ArrayList<>();
-                if(type.equals("income"))
-                {
-                    pointDetailList  = pointDetailRepository.findDetailPoints(agent.getId(),agent.getCompanyId(),1,(page-1)*limit,limit);
-                }else if(type.equals("expend")){
-                    pointDetailList  = pointDetailRepository.findDetailPoints(agent.getId(),agent.getCompanyId(),2,(page-1)*limit,limit);
-                }
-                else{
-                    pointDetailList  = pointDetailRepository.findDetailPoints(agent.getId(),agent.getCompanyId(),0,(page-1)*limit,limit);
+                if (type.equals("income")) {
+                    pointDetailList = pointDetailRepository.findDetailPoints(agent.getId(), agent.getCompanyId(), 1, (page - 1) * limit, limit);
+                } else if (type.equals("expend")) {
+                    pointDetailList = pointDetailRepository.findDetailPoints(agent.getId(), agent.getCompanyId(), 2, (page - 1) * limit, limit);
+                } else {
+                    pointDetailList = pointDetailRepository.findDetailPoints(agent.getId(), agent.getCompanyId(), 0, (page - 1) * limit, limit);
                 }
 
-                if(pointDetailList.size() > 0){
-                    for(PointDetail pointDetail:pointDetailList){
+                if (pointDetailList.size() > 0) {
+                    for (PointDetail pointDetail : pointDetailList) {
                         PointDetailRespData data = new PointDetailRespData();
                         data.setDesc(pointDetail.getDescript());
                         data.setPoint(pointDetail.getPoint().toString());
                         data.setStatus(pointDetail.getStatus().toString());
-                        data.setTime(DateUtils.dateFormat(pointDetail.getAddTime(),DateUtils.DATE_TIME_PATTERN));
+                        data.setTime(DateUtils.dateFormat(pointDetail.getAddTime(), DateUtils.DATE_TIME_PATTERN));
                         dataList.add(data);
                     }
                     response.setMsg("获取详情").setCode("1").setData(dataList);
-                }else{
+                } else {
                     response.setMsg("获取详情").setCode("1").setData(new ArrayList<>());
                 }
-            }else{
+            } else {
                 response.setMsg("信息不完整").setCode("2");
             }
         });
@@ -1292,41 +1287,36 @@ public class AppController {
                     pointDialsData.setPoint(String.valueOf(integral));
                     pointDialsDataList.add(pointDialsData);
                 }
-                Integer curdaypoint = pointDetailRepository.findCurGetPoint(agent.getId(),agent.getCompanyId());
-                if(ObjectUtils.isNotEmpty(curdaypoint))
-                {
+                Integer curdaypoint = pointDetailRepository.findCurGetPoint(agent.getId(), agent.getCompanyId());
+                if (ObjectUtils.isNotEmpty(curdaypoint)) {
                     data.setDay_point(curdaypoint.toString());
-                }else{
+                } else {
                     data.setDay_point("0");
                 }
-                if(ObjectUtils.isNotEmpty(rule.getConsume()))
-                {
+                if (ObjectUtils.isNotEmpty(rule.getConsume())) {
                     data.setConsume(rule.getConsume().toString());
-                }else{
+                } else {
                     data.setConsume("0");
                 }
-                if(ObjectUtils.isNotEmpty(rule.getIsOpenLotto()))
-                {
+                if (ObjectUtils.isNotEmpty(rule.getIsOpenLotto())) {
                     data.setIs_open_lotto(rule.getIsOpenLotto().toString());
                 }
-                if(ObjectUtils.isNotEmpty(rule.getIsPoint()))
-                {
+                if (ObjectUtils.isNotEmpty(rule.getIsPoint())) {
                     data.setIs_point(rule.getIsPoint().toString());
                 }
                 data.setDials(pointDialsDataList);
-                Integer point1 = pointDetailRepository.findAllGetPoints(agent.getId(),agent.getCompanyId());
-                Integer point2 = pointDetailRepository.findAllResumPoints(agent.getId(),agent.getCompanyId());
-                if(!ObjectUtils.isNotEmpty(point1)) {
+                Integer point1 = pointDetailRepository.findAllGetPoints(agent.getId(), agent.getCompanyId());
+                Integer point2 = pointDetailRepository.findAllResumPoints(agent.getId(), agent.getCompanyId());
+                if (!ObjectUtils.isNotEmpty(point1)) {
                     point1 = 0;
                 }
-                if(!ObjectUtils.isNotEmpty(point2))
-                {
+                if (!ObjectUtils.isNotEmpty(point2)) {
                     point2 = 0;
                 }
                 Integer point = point1 - point2;
-                if(point > 0){
+                if (point > 0) {
                     data.setPoint(point.toString());
-                }else{
+                } else {
                     data.setPoint(point.toString());
                 }
                 data.setRmb_for_point(rule.getRmbForPoint().toString());
@@ -1336,38 +1326,37 @@ public class AppController {
 //                Integer loginpoints = pointDetailRepository.findAllPoints(PointType.LOGIN.ordinal(),agent.getId(),agent.getCompanyId());
 //                Integer invitepoints = pointDetailRepository.findAllPoints(PointType.INVITE.ordinal(),agent.getId(),agent.getCompanyId());
 //                Integer authpoints = pointDetailRepository.findAllPoints(PointType.AUTH.ordinal(),agent.getId(),agent.getCompanyId());
-                if(ObjectUtils.isNotEmpty(rule.getSignIntegral()))
-                {
+                if (ObjectUtils.isNotEmpty(rule.getSignIntegral())) {
                     taskData.setSign(rule.getSignIntegral().toString());
-                }else{
+                } else {
                     taskData.setSign("0");
                 }
 
-                if(ObjectUtils.isNotEmpty(rule.getRecomIntegral())){
+                if (ObjectUtils.isNotEmpty(rule.getRecomIntegral())) {
                     taskData.setRecom(rule.getRecomIntegral().toString());
-                }else{
+                } else {
                     taskData.setRecom("0");
                 }
-                if(ObjectUtils.isNotEmpty(rule.getLoginIntegral())){
+                if (ObjectUtils.isNotEmpty(rule.getLoginIntegral())) {
                     taskData.setLogin(rule.getLoginIntegral().toString());
-                }else{
+                } else {
                     taskData.setLogin("0");
                 }
 
-                if(ObjectUtils.isNotEmpty(rule.getInviteIntegral())){
+                if (ObjectUtils.isNotEmpty(rule.getInviteIntegral())) {
                     taskData.setInvite(rule.getInviteIntegral().toString());
-                }else{
+                } else {
                     taskData.setInvite("0");
                 }
-                if(ObjectUtils.isNotEmpty(rule.getAuthIntegral())){
+                if (ObjectUtils.isNotEmpty(rule.getAuthIntegral())) {
                     taskData.setAuth(rule.getAuthIntegral().toString());
-                }else{
+                } else {
                     taskData.setAuth("0");
                 }
                 data.setTask(taskData);
                 data.setDials(pointDialsDataList);
                 response.setCode("1").setMsg("获取成功").setData(data);
-            }else{
+            } else {
                 response.setCode("2").setMsg("未设置积分规则");
             }
         });
@@ -1728,9 +1717,8 @@ public class AppController {
                         customerRepository.save(customer);
                         //agentRepository.updateScore();
                         Agent cagent = agentRepository.findIsCusAgents(agent.getCompanyId());
-                        if(ObjectUtils.isNotNull(cagent))
-                        {
-                            AppPush.pushToSigle(cagent.getDeviceId(),"客户报备",agent.getAgentName()+"报备了新客户");
+                        if (ObjectUtils.isNotNull(cagent)) {
+                            AppPush.pushToSigle(cagent.getDeviceId(), "客户报备", agent.getAgentName() + "报备了新客户");
                         }
 
 
@@ -2721,7 +2709,7 @@ public class AppController {
 
     @PostMapping(value = "pay_specialer_product")
     @CrossOrigin
-    public BaseJsonResponse paySpecialerProduct(String user_id, String token, Integer id,String pay_type) throws ParseException, AlipayApiException {
+    public BaseJsonResponse paySpecialerProduct(String user_id, String token, Integer id, String pay_type) throws ParseException, AlipayApiException {
         BaseJsonResponse response = new BaseJsonResponse();
 
         verifyUser(user_id, token, response, o -> {
@@ -2734,10 +2722,9 @@ public class AppController {
                     if (!ObjectUtils.isNotEmpty(money)) {
                         response.setCode("2").setMsg("您输入的金额错误");
                     } else {
-                        if(ObjectUtils.isNotEmpty(pay_type)&&pay_type.equals("wxpay")) {
+                        if (ObjectUtils.isNotEmpty(pay_type) && pay_type.equals("wxpay")) {
                             weixinPay(id, response, agent, commodity, money);
-                        }
-                        else if(ObjectUtils.isNotEmpty(pay_type)&&pay_type.equals("alipay")){
+                        } else if (ObjectUtils.isNotEmpty(pay_type) && pay_type.equals("alipay")) {
                             aliPay(id, response, agent, commodity, money);
                         }
                     }
@@ -2755,15 +2742,15 @@ public class AppController {
     private void aliPay(Integer id, BaseJsonResponse response, Agent agent, Commodity commodity, BigDecimal money) throws AlipayApiException {
         OrderInfoData data = new OrderInfoData();
         String ordernumber = OrderUtil.getInstance().getOrderCode() + OrderUtil.getOrderCodePostfix();
-        JSONObject reqData = new JSONObject ();
+        JSONObject reqData = new JSONObject();
         //订单号,必填
         reqData.put("out_trade_no", ordernumber);
         //PC支付 FAST_INSTANT_TRADE_PAY, APP支付 QUICK_MSECURITY_PAY, 移动H5支付 QUICK_WAP_PAY
-        reqData.put("product_code","FAST_INSTANT_TRADE_PAY");
+        reqData.put("product_code", "FAST_INSTANT_TRADE_PAY");
         //付款金额,必填
         reqData.put("total_amount", money.divide(new BigDecimal(100)));
         //订单描述,必填
-        reqData.put("subject","特价购");
+        reqData.put("subject", "特价购");
         //该笔订单允许的最晚付款时间，逾期将关闭交易
         //data.put("timeout_express","");
         //公共校验参数
@@ -2780,7 +2767,7 @@ public class AppController {
         request.setReturnUrl("");
         //业务参数
         request.setBizContent(reqData.toString());
-        AlipayTradeAppPayResponse alipayResponse=alipayClient.sdkExecute(request);
+        AlipayTradeAppPayResponse alipayResponse = alipayClient.sdkExecute(request);
         String order_info = alipayResponse.getBody();
 
         CommodityOrder order = new CommodityOrder();
@@ -3118,27 +3105,25 @@ public class AppController {
                     }
                     customerRepository.save(customer);
                     Agent cagent = agentRepository.findIsCusAgents(agent.getCompanyId());
-                    if(ObjectUtils.isNotNull(cagent))
-                    {
+                    if (ObjectUtils.isNotNull(cagent)) {
                         JPUserService service = new JPUserService();
                         StringBuffer context = new StringBuffer();
-                        if(ObjectUtils.isNotEmpty(remark))
-                        {
-                            context.append("经纪人姓名:"+agent.getAgentName()+"\r\n"+
-                                    "客户姓名:"+name+"\r\n"+
-                                    "性别:"+sex +"\r\n"+
-                                    "客户电话:"+tel +"\r\n"+
-                                    "楼盘地址:"+address +"\r\n"+
-                                    "备注:"+remark);
-                        }else{
-                            context.append("经纪人姓名:"+agent.getAgentName()+
-                                    "客户姓名:"+name+"\r\n"+
-                                    "性别:"+sex +"\r\n"+
-                                    "客户电话:"+tel +"\r\n"+
-                                    "楼盘地址:"+address);
+                        if (ObjectUtils.isNotEmpty(remark)) {
+                            context.append("经纪人姓名:" + agent.getAgentName() + "\r\n" +
+                                    "客户姓名:" + name + "\r\n" +
+                                    "性别:" + sex + "\r\n" +
+                                    "客户电话:" + tel + "\r\n" +
+                                    "楼盘地址:" + address + "\r\n" +
+                                    "备注:" + remark);
+                        } else {
+                            context.append("经纪人姓名:" + agent.getAgentName() +
+                                    "客户姓名:" + name + "\r\n" +
+                                    "性别:" + sex + "\r\n" +
+                                    "客户电话:" + tel + "\r\n" +
+                                    "楼盘地址:" + address);
                         }
-                        service.sendSingleTextByAdmin("admin","c"+cagent.getInitCode(),context.toString());
-                        AppPush.pushToSigle(cagent.getDeviceId(),"客户报备",agent.getAgentName()+"报备了新客户");
+                        service.sendSingleTextByAdmin("admin", "c" + cagent.getInitCode(), context.toString());
+                        AppPush.pushToSigle(cagent.getDeviceId(), "客户报备", agent.getAgentName() + "报备了新客户");
                     }
 
                     response.setMsg("报备客户成功").setCode("1");
@@ -3161,8 +3146,7 @@ public class AppController {
             if (ObjectUtils.isNotNull(enterprise)) {
                 ChatData data = new ChatData();
                 List<AgentListData> dataList = new ArrayList<>();
-                if(agent.getType() == AgentType.CUSERVICE.ordinal())
-                {
+                if (agent.getType() == AgentType.CUSERVICE.ordinal()) {
                     data.setUsername("c" + agent.getInitCode());
                     data.setCompany_username(enterprise.getEnterName());
                     if (ObjectUtils.isNotEmpty(enterprise.getEnterLogo())) {
@@ -3177,29 +3161,27 @@ public class AppController {
                         data.setUser_avatar("");
                     }
                     List<Agent> agentList = agentRepository.findNotCusAgents(agent.getCompanyId());
-                    if(agentList.size() > 0){
-                        for(Agent agent1 : agentList){
+                    if (agentList.size() > 0) {
+                        for (Agent agent1 : agentList) {
                             AgentListData listData = new AgentListData();
-                            if(ObjectUtils.isNotEmpty(agent1.getAvatar()))
-                            {
-                                listData.setAvatar(Constant.IMAGE_URL+agent1.getAvatar());
-                            }else{
+                            if (ObjectUtils.isNotEmpty(agent1.getAvatar())) {
+                                listData.setAvatar(Constant.IMAGE_URL + agent1.getAvatar());
+                            } else {
                                 listData.setAvatar("");
                             }
 
                             listData.setName(agent1.getAgentName());
-                            listData.setUsername("c"+agent1.getInitCode());
+                            listData.setUsername("c" + agent1.getInitCode());
                             dataList.add(listData);
                         }
                         data.setUser_list(dataList);
                     }
-                }else{
+                } else {
                     data.setUsername("c" + agent.getInitCode());
                     Agent cagent = agentRepository.findIsCusAgents(agent.getCompanyId());
-                    if(ObjectUtils.isNotNull(cagent))
-                    {
-                        data.setCompany_username("c"+cagent.getInitCode());
-                    }else{
+                    if (ObjectUtils.isNotNull(cagent)) {
+                        data.setCompany_username("c" + cagent.getInitCode());
+                    } else {
                         data.setCompany_username(enterprise.getEnterLoginName());
                     }
 
@@ -3225,41 +3207,39 @@ public class AppController {
 
     @PostMapping(value = "point_lotto")
     @CrossOrigin
-    public BaseJsonResponse luckyDraw(String user_id,String token) throws ParseException, AlipayApiException {
+    public BaseJsonResponse luckyDraw(String user_id, String token) throws ParseException, AlipayApiException {
         BaseJsonResponse response = new BaseJsonResponse();
         verifyUser(user_id, token, response, o -> {
             Agent agent = (Agent) o;
             LottoData data = new LottoData();
 
             IntegralRule rule = integralRuleRepository.findIntegralRuleByCompanyId(agent.getCompanyId());
-            if(ObjectUtils.isNotNull(rule)){
-                if(rule.getIsOpenLotto() != 2)
-                {
+            if (ObjectUtils.isNotNull(rule)) {
+                if (rule.getIsOpenLotto() != 2) {
                     response.setMsg("未开启抽奖活动").setCode("1");
-                }else{
+                } else {
                     JSONArray jsonArray = JSONArray.fromObject(rule.getDials());
-                    if(jsonArray.size() > 0){
+                    if (jsonArray.size() > 0) {
                         List<Gift> giftList = new ArrayList<>();
-                        for(int i = 0;i < jsonArray.size();i++){
+                        for (int i = 0; i < jsonArray.size(); i++) {
                             Gift gift = new Gift();
                             gift.setId(jsonArray.getJSONObject(i).getInt("id"));
-                            gift.setProb(jsonArray.getJSONObject(i).getInt("probability")/100D);
+                            gift.setProb(jsonArray.getJSONObject(i).getInt("probability") / 100D);
                             gift.setPoint(jsonArray.getJSONObject(i).getInt("integral"));
                             giftList.add(gift);
                         }
                         int index = DrawLotteryUtil.drawGift(giftList);
                         data.setId(giftList.get(index).getId().toString());
-                        Integer point1 = pointDetailRepository.findAllGetPoints(agent.getId(),agent.getCompanyId());
-                        Integer point2 = pointDetailRepository.findAllResumPoints(agent.getId(),agent.getCompanyId());
-                        if(!ObjectUtils.isNotEmpty(point1)) {
+                        Integer point1 = pointDetailRepository.findAllGetPoints(agent.getId(), agent.getCompanyId());
+                        Integer point2 = pointDetailRepository.findAllResumPoints(agent.getId(), agent.getCompanyId());
+                        if (!ObjectUtils.isNotEmpty(point1)) {
                             point1 = 0;
                         }
-                        if(!ObjectUtils.isNotEmpty(point2))
-                        {
+                        if (!ObjectUtils.isNotEmpty(point2)) {
                             point2 = 0;
                         }
                         Integer point = point1 - point2;
-                        if(rule.getConsume() > 0&&point >= rule.getConsume()){
+                        if (rule.getConsume() > 0 && point >= rule.getConsume()) {
                             PointDetail pointDetail = new PointDetail();
                             pointDetail.setAddTime(new Date());
                             pointDetail.setCompanyId(agent.getCompanyId());
@@ -3279,37 +3259,36 @@ public class AppController {
                             try {
                                 pointDetailRepository.save(pointDetail);
                                 pointDetailRepository.save(pointDetail1);
-                                Integer point11 = pointDetailRepository.findAllGetPoints(agent.getId(),agent.getCompanyId());
-                                Integer point21 = pointDetailRepository.findAllResumPoints(agent.getId(),agent.getCompanyId());
-                                if(!ObjectUtils.isNotEmpty(point1)) {
+                                Integer point11 = pointDetailRepository.findAllGetPoints(agent.getId(), agent.getCompanyId());
+                                Integer point21 = pointDetailRepository.findAllResumPoints(agent.getId(), agent.getCompanyId());
+                                if (!ObjectUtils.isNotEmpty(point1)) {
                                     point1 = 0;
                                 }
-                                if(!ObjectUtils.isNotEmpty(point2))
-                                {
+                                if (!ObjectUtils.isNotEmpty(point2)) {
                                     point2 = 0;
                                 }
                                 Integer point33 = point11 - point21;
-                                if(point33 > 0){
+                                if (point33 > 0) {
                                     data.setPoint(point33.toString());
-                                }else{
+                                } else {
                                     data.setPoint("0");
                                 }
                                 response.setCode("1").setMsg("抽奖成功").setData(data);
-                            }catch (Exception e){
+                            } catch (Exception e) {
                                 response.setCode("2").setMsg("抽奖失败");
                             }
-                        }else{
-                           response.setMsg("您的积分余额不足").setCode("2");
+                        } else {
+                            response.setMsg("您的积分余额不足").setCode("2");
                         }
 
 
-                    }else{
+                    } else {
                         response.setMsg("未开启抽奖活动").setCode("1");
                     }
 
 
                 }
-            }else{
+            } else {
                 response.setMsg("未开启积分抽奖活动").setCode("1");
             }
         });
@@ -3318,33 +3297,32 @@ public class AppController {
 
     @PostMapping(value = "redeem")
     @CrossOrigin
-    public BaseJsonResponse RedeemPoint(String user_id,String token,String money) throws ParseException,AlipayApiException {
+    public BaseJsonResponse RedeemPoint(String user_id, String token, String money) throws ParseException, AlipayApiException {
         BaseJsonResponse response = new BaseJsonResponse();
         verifyUser(user_id, token, response, o -> {
             Agent agent = (Agent) o;
             IntegralRule rule = integralRuleRepository.findIntegralRuleByCompanyId(agent.getCompanyId());
-            if(ObjectUtils.isNotEmpty(money)&&ObjectUtils.isNotNull(rule)){
-                Integer point1 = pointDetailRepository.findAllGetPoints(agent.getId(),agent.getCompanyId());
-                Integer point2 = pointDetailRepository.findAllResumPoints(agent.getId(),agent.getCompanyId());
-                if(new BigDecimal(money).compareTo(new BigDecimal(rule.getMinPrice())) == -1){
+            if (ObjectUtils.isNotEmpty(money) && ObjectUtils.isNotNull(rule)) {
+                Integer point1 = pointDetailRepository.findAllGetPoints(agent.getId(), agent.getCompanyId());
+                Integer point2 = pointDetailRepository.findAllResumPoints(agent.getId(), agent.getCompanyId());
+                if (new BigDecimal(money).compareTo(new BigDecimal(rule.getMinPrice())) == -1) {
                     response.setMsg("不能小于兑换最低限额").setCode("2");
-                }else{
-                    if(!ObjectUtils.isNotEmpty(point1)) {
+                } else {
+                    if (!ObjectUtils.isNotEmpty(point1)) {
                         point1 = 0;
                     }
-                    if(!ObjectUtils.isNotEmpty(point2))
-                    {
+                    if (!ObjectUtils.isNotEmpty(point2)) {
                         point2 = 0;
                     }
                     Integer point = point1 - point2;
-                    if(point < 0){
-                        point  = 0;
+                    if (point < 0) {
+                        point = 0;
                     }
-                    Double needpoint = Math.ceil(rule.getRmbForPoint()*new BigDecimal(money).setScale(2).doubleValue());
-                    if(point >= needpoint.intValue()){
+                    Double needpoint = Math.ceil(rule.getRmbForPoint() * new BigDecimal(money).setScale(2).doubleValue());
+                    if (point >= needpoint.intValue()) {
                         try {
-                            agentRepository.updatePoint(point - needpoint.intValue(),agent.getId());
-                            agentRepository.updateScore(new BigDecimal(money),agent.getId(),agent.getCompanyId());
+                            agentRepository.updatePoint(point - needpoint.intValue(), agent.getId());
+                            agentRepository.updateScore(new BigDecimal(money), agent.getId(), agent.getCompanyId());
                             Earnings earnings = new Earnings();
                             earnings.setCusnamePhone(agent.getTelphone());
                             earnings.setCusname("");
@@ -3369,18 +3347,17 @@ public class AppController {
                                 earningsRepository.save(earnings);
                                 pointDetailRepository.save(pointDetail);
                                 response.setMsg("积分兑换成功").setCode("1");
-                            }catch (Exception e)
-                            {
+                            } catch (Exception e) {
                                 response.setMsg("积分兑换失败").setCode("2");
                             }
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             response.setMsg("积分兑换失败").setCode("2");
                         }
-                    }else{
+                    } else {
                         response.setMsg("积分不足无法兑换").setCode("2");
                     }
                 }
-            }else{
+            } else {
                 response.setMsg("积分兑换失败").setCode("2");
             }
         });
@@ -3389,17 +3366,16 @@ public class AppController {
 
     @PostMapping(value = "get_navigate_info")
     @CrossOrigin
-    public BaseJsonResponse getNavigateInfo(String user_id,String token) throws ParseException,AlipayApiException {
+    public BaseJsonResponse getNavigateInfo(String user_id, String token) throws ParseException, AlipayApiException {
         BaseJsonResponse response = new BaseJsonResponse();
         verifyUser(user_id, token, response, o -> {
             Agent agent = (Agent) o;
-            Map<String,String> map = new HashMap<>();
+            Map<String, String> map = new HashMap<>();
             Enterprise enterprise = enterpriseRepository.findEnterpriseById(agent.getCompanyId());
-            if(ObjectUtils.isNotNull(enterprise))
-            {
-                map.put("key","df546a50e9475878c39f203a8987b032");
-                map.put("address",enterprise.getEnterAddress());
-                String resp  = HttpClientUtil.sendPostSSLRequest("https://restapi.amap.com/v3/geocode/geo",map,"utf-8");
+            if (ObjectUtils.isNotNull(enterprise)) {
+                map.put("key", "df546a50e9475878c39f203a8987b032");
+                map.put("address", enterprise.getEnterAddress());
+                String resp = HttpClientUtil.sendPostSSLRequest("https://restapi.amap.com/v3/geocode/geo", map, "utf-8");
                 com.alibaba.fastjson.JSONObject object = JSON.parseObject(resp);
                 String localtion = object.getJSONArray("geocodes").getJSONObject(0).getString("location");
                 String[] localArray = localtion.split(",");
@@ -3408,7 +3384,7 @@ public class AppController {
                 data.setLatitude(localArray[1]);
                 data.setCompany_name(enterprise.getEnterName());
                 response.setCode("1").setMsg("获取信息成功").setData(data);
-            }else{
+            } else {
                 response.setMsg("该企业不存在").setCode("2");
             }
 
@@ -3420,8 +3396,10 @@ public class AppController {
 
     @Autowired
     private GoodsRepository goodsRepository;
+
     /**
      * 获取爆款推荐商品列表
+     *
      * @param user_id
      * @param token
      * @return
@@ -3431,31 +3409,33 @@ public class AppController {
      */
     @PostMapping(value = "get_goodslist")
     @CrossOrigin
-    public Object getGoodsList(String user_id,String token,Integer page,Integer limit) throws ParseException, AlipayApiException{
+    public Object getGoodsList(String user_id, String token, Integer page, Integer limit) throws ParseException, AlipayApiException {
         BaseJsonResponse response = new BaseJsonResponse();
         verifyUser(user_id, token, response, o -> {
             Agent agent = (Agent) o;
-            CompanyBindUser user = companyUserRepository.findCompanyBindUserByInviteCode(agent.getInitCode());
             List<GoodsData> goodsDataList = new ArrayList<>();
-            if(!ObjectUtils.isEmpty(user)){
-                List<Goods> goodsList = goodsRepository.findAllByCompanyIdLimit(user.getCompanyId(),(page-1)*limit,limit);
-                if(goodsList.size() > 0){
-                    for(Goods goods:goodsList){
+            if (!ObjectUtils.isEmpty(agent)) {
+                List<Commodity> goodsList = commodityRepository.findPageCommodityASC(0, 0, agent.getCompanyId(), 0, (page - 1) * limit, limit);
+                if (goodsList.size() > 0) {
+                    for (Commodity goods : goodsList) {
+                        CommodityImg commodityImg = commodityImgRepository.findFirstByCommodityd(goods.getId());
                         GoodsData data = new GoodsData();
                         data.setGoodsId(goods.getId());
-                        data.setImage(goods.getImage());
+                        if (!ObjectUtils.isEmpty(commodityImg)) {
+                            data.setImage(commodityImg.getCommodityImgUrl());
+                        }
                         data.setLabel(goods.getLabel());
                         data.setLinkname(goods.getLinkname());
-                        data.setSubtitle(goods.getSubtitle());
-                        data.setTitle(goods.getTitle());
+                        data.setSubtitle(goods.getActivityDescription());
+                        data.setTitle(goods.getCommodityName());
                         goodsDataList.add(data);
                     }
                     response.setCode("1").setMsg("获取商品列表成功").setData(goodsDataList);
-                }else{
+                } else {
                     response.setCode("0").setMsg("没有商品").setData(new ArrayList<>());
                 }
                 //GoodsData data = JsonUtils.readJsonFromClassPath("/static/json/goodslist.json",GoodsData.class); //从json文件中读取数据
-            }else{
+            } else {
                 response.setCode("0").setMsg("该用户没有绑定公司").setData(null);
             }
         });
@@ -3465,18 +3445,25 @@ public class AppController {
 
     @Autowired
     private VoucherShareRepository voucherShareRepository;
+
     /**
      * 抵用券分享
+     *
      * @return
      */
-    @PostMapping(value = "voucher_share")
+    @PostMapping(value = "all_share")
     @CrossOrigin
-    public Object voucherShare(String user_id,String token) throws ParseException, AlipayApiException {
+    public Object voucherShare(String user_id, String token, Integer sharetype, Integer goodsId) throws ParseException, AlipayApiException {
         BaseJsonResponse response = new BaseJsonResponse();
-        verifyUser(user_id,token,response, o -> {
+        verifyUser(user_id, token, response, o -> {
             Agent agent = (Agent) o;
-            VoucherShare voucherShare = voucherShareRepository.findVoucherShareByCompanyId(agent.getCompanyId());
-            if(!ObjectUtils.isEmpty(voucherShare)){
+            VoucherShare voucherShare = null;
+            if (sharetype == 1) {
+                voucherShare = voucherShareRepository.findVoucherShareByCompanyIdAndSharetype(agent.getCompanyId(), sharetype);
+            } else if (sharetype == 2) {
+                voucherShare = voucherShareRepository.findVoucherShareByCompanyIdAndGoodsIdAndSharetype(agent.getCompanyId(), goodsId, sharetype);
+            }
+            if (!ObjectUtils.isEmpty(voucherShare)) {
                 VoucherShareData data = new VoucherShareData();
                 data.setContext(voucherShare.getContext());
                 data.setImage(voucherShare.getImage());
@@ -3485,10 +3472,9 @@ public class AppController {
                 data.setTitle(voucherShare.getTitle());
                 data.setUser_id(agent.getId());
                 response.setCode("1").setMsg("成功").setData(data);
-            }else{
+            } else {
                 response.setCode("0").setMsg("没有数据").setData(null);
             }
-
         });
         return response;
     }
@@ -3498,9 +3484,9 @@ public class AppController {
      */
     @PostMapping(value = "voucher")
     @CrossOrigin
-    public Object vocher(String user_id,String token) throws ParseException, AlipayApiException {
+    public Object vocher(String user_id, String token) throws ParseException, AlipayApiException {
         BaseJsonResponse response = new BaseJsonResponse();
-        verifyUser(user_id,token,response, o -> {
+        verifyUser(user_id, token, response, o -> {
             String price = "50";
             PriceData data = new PriceData();
             data.setPrice(price);
@@ -3514,17 +3500,20 @@ public class AppController {
 
     @Autowired
     private ReportCustomerRepository reportCustomerRepository;
+
     /**
      * 抵用券报备
+     *
      * @return
      */
     @PostMapping(value = "voucher_report")
     @CrossOrigin
-    public Object voucherReport(String user_id,String token,String cus_name,String cus_phone) throws ParseException, AlipayApiException {
+    public Object voucherReport(String user_id, String token, String cus_name, String cus_phone) throws
+            ParseException, AlipayApiException {
         BaseJsonResponse response = new BaseJsonResponse();
-        verifyUser(user_id,token,response, o -> {
+        verifyUser(user_id, token, response, o -> {
             Agent agent = (Agent) o;
-            if(!ObjectUtils.isEmpty(cus_name)&&!ObjectUtils.isEmpty(cus_phone)){
+            if (!ObjectUtils.isEmpty(cus_name) && !ObjectUtils.isEmpty(cus_phone)) {
                 ReportCustomer customer = new ReportCustomer();
                 customer.setAgentId(agent.getId());
                 customer.setCustomerName(cus_name);
@@ -3533,10 +3522,10 @@ public class AppController {
                 try {
                     reportCustomerRepository.save(customer);
                     response.setMsg("报备成功").setCode("1");
-                }catch (Exception e){
+                } catch (Exception e) {
                     response.setMsg("报备失败").setCode("0");
                 }
-            }else{
+            } else {
                 response.setMsg("信息不完整").setCode("0");
             }
 
@@ -3547,47 +3536,50 @@ public class AppController {
 
     @Autowired
     private VoucherDetailRepository voucherDetailRepository;
+
     /**
      * 抵用券详情
+     *
      * @return
      */
     @PostMapping(value = "voucher_detail")
     @CrossOrigin
-    public Object voucherDetail(String user_id,String token) throws ParseException, AlipayApiException {
+    public Object voucherDetail(String user_id, String token) throws ParseException, AlipayApiException {
         BaseJsonResponse response = new BaseJsonResponse();
-        verifyUser(user_id,token,response, o -> {
+        verifyUser(user_id, token, response, o -> {
             Agent agent = (Agent) o;
-           VoucherDetail voucherDetail = voucherDetailRepository.findVoucherDetailByCompanyId(agent.getCompanyId());
-           if(!ObjectUtils.isEmpty(voucherDetail)){
+            VoucherDetail voucherDetail = voucherDetailRepository.findVoucherDetailByCompanyId(agent.getCompanyId());
+            if (!ObjectUtils.isEmpty(voucherDetail)) {
                 VoucherDetailData data = new VoucherDetailData();
                 data.setContext(voucherDetail.getContext());
-                data.setStart_time(DateUtils.dateFormat(voucherDetail.getStartTime(),DateUtils.DATE_PATIERN_DOT));
-                data.setEnd_time(DateUtils.dateFormat(voucherDetail.getEndTime(),DateUtils.DATE_PATIERN_DOT));
+                data.setStart_time(DateUtils.dateFormat(voucherDetail.getStartTime(), DateUtils.DATE_PATIERN_DOT));
+                data.setEnd_time(DateUtils.dateFormat(voucherDetail.getEndTime(), DateUtils.DATE_PATIERN_DOT));
                 data.setPrice(voucherDetail.getPrice());
                 data.setTitle(voucherDetail.getTitle());
                 response.setCode("1").setMsg("获取详情页成功").setData(data);
-           }else{
-               response.setCode("0").setMsg("没有详情页").setData(null);
-           }
+            } else {
+                response.setCode("0").setMsg("没有详情页").setData(null);
+            }
         });
         return response;
     }
 
     /**
      * 获取领券
+     *
      * @return
      */
     @PostMapping(value = "get_coupon")
-    public Object getCoupon(String user_id,String telphone){
+    public Object getCoupon(String user_id, String telphone) {
         BaseJsonResponse response = new BaseJsonResponse();
-        if(!ObjectUtils.isEmpty(user_id)&&!ObjectUtils.isEmpty(telphone)){
+        if (!ObjectUtils.isEmpty(user_id) && !ObjectUtils.isEmpty(telphone)) {
             DefaultEnter defaultEnter = defaultEnterRepository.findDefaultEnterByUserId(user_id);
-            if(!ObjectUtils.isEmpty(defaultEnter)){
+            if (!ObjectUtils.isEmpty(defaultEnter)) {
                 CouponUser user = new CouponUser();
                 user.setCouponPhone(telphone);
                 user.setCompanyId(defaultEnter.getCompayId());
                 Agent agent = agentRepository.findAgentByTelphone(defaultEnter.getUserId());
-                if(!ObjectUtils.isEmpty(agent)){
+                if (!ObjectUtils.isEmpty(agent)) {
                     user.setShareUser(agent.getAgentName());
                     user.setSharePhone(agent.getTelphone());
                     user.setCouponPhone(telphone);
@@ -3597,10 +3589,10 @@ public class AppController {
                     response.setCode("1").setMsg("领取成功").setData(null);
                 }
 
-            }else{
+            } else {
                 response.setCode("0").setMsg("信息错误").setData(null);
             }
-        }else{
+        } else {
             response.setCode("0").setMsg("信息错误").setData(null);
         }
 

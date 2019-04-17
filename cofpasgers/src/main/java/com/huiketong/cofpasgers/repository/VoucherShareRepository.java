@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VoucherShareRepository extends JpaRepository<VoucherShare,Integer> {
-
-    VoucherShare findVoucherShareByCompanyId(Integer companyId);
+    VoucherShare findVoucherShareByCompanyIdAndSharetype(Integer companyId,Integer type);
+    VoucherShare findVoucherShareByCompanyIdAndGoodsIdAndSharetype(Integer companyId,Integer goodsId,Integer type);
 }

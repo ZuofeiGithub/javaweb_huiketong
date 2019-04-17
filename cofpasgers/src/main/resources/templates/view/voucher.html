@@ -2,9 +2,268 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1">
+    <title>现金抵用券</title>
+    <style>
+        @font-face {
+            font-family: 苹方;
+            src: url(front/fonts/苹方字体.ttf);
+        }
+        html,body {/*高度自适应,这里是关键*/
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #da2f54;
+        }
+        a:link{ text-decoration: none;}
+        a:visited{text-decoration: none; }
+        a:hover{text-decoration: none}
+        .container{
+            background-color: #da2f54;
+            height: 100%;
+            display: grid;
+            grid-template-columns:40px auto 40px;
+            grid-template-rows: 80px auto 80px;
+        }
+        .context{
+            position: relative;
+        }
+        .price{
+            width: 100%;
+            position: absolute;
+            top: 5%;
+            display: flex;
+            display: -webkit-flex; /* Safari */
+            justify-content: center;
+            align-items: center;
+        }
+        .price i{
+            font-family: "苹方 粗体";
+            font-size: 20px;
+            color: #d72d4b;
+        }
+        .price p{
+            font-family: "苹方 粗体";
+            font-size: 40px;
+            line-height: 10px;
+            color: #d72d4b;
+        }
+        .unused{
+            width: 100%;
+            position: absolute;
+            top: 20%;
+            text-align: center;
+            font-family: 苹方;
+            color: #d72d4b;
+        }
+        .dot{
+            width: 100%;
+            position: absolute;
+            top: 29%;
+            display: flex;
+            display: -webkit-flex; /* Safari */
+            justify-content: center;
+            align-items: center;
+        }
+        .dot li{
+            width: 10px;
+            height: 10px;
+            margin: 3px;
+            border-radius: 5px;
+            background-color: #da2f4b;
+            list-style: none;
+        }
+        .title{
+            position: absolute;
+            width: 100%;
+            top: 40%;
+            text-align: center;
+            font-family: 苹方;
+        }
+        .condition{
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            text-align: center;
+        }
+        .condition p{
+            font-size: 0.5em;
+            font-family: 苹方;
+        }
+        .sprit{
+            position: absolute;
+            width: 100%;
+            top: 65%;
+            display: flex;
+            display: -webkit-flex; /* Safari */
+            justify-content: center;
+            align-items: center;
+        }
+        .sprit li{
+            list-style: none;
+            margin: 1px;
+            width: 3px;
+            height: 18px;
+            background-color: #de3455;
+            transform:rotate(30deg);
+            -ms-transform:rotate(30deg); 	/* IE 9 */
+            -moz-transform:rotate(30deg); 	/* Firefox */
+            -webkit-transform:rotate(30deg); /* Safari 和 Chrome */
+            -o-transform:rotate(30deg); 	/* Opera */
+        }
+        .instructions{
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: 68%;
+        }
+        .instructions p{
+            font-family: 苹方;
+        }
+        .btn_container{
+            position: absolute;
+            width: 100%;
+            top: 85%;
+            display: flex;
+            display: -webkit-flex; /* Safari */
+            justify-content: center;
+            align-items: center;
+        }
+        .btn_container a{
+            width: 100px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            background-color: #ffe21a;
+            margin: 10px;
+            box-shadow: 0 2px 5px #f3cc12;
+            color: #924a30;
+            font-family: 苹方;
+        }
+    </style>
 </head>
 <body>
-    <h1>抵用券</h1>
+    <div class="container">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div class="context">
+            <img src="images/bk.png" width="100%" height="100%">
+            <div class="price"><i>￥</i><p>50</p></div>
+            <div class="unused">未使用</div>
+            <div class="dot">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </div>
+            <div class="title">现金抵用券</div>
+            <div class="condition"></div>
+            <div class="sprit">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </div>
+            <div class="instructions"></div>
+            <div class="btn_container">
+                <a href="javascript:;">分享</a>
+                <a href="javascript:;">报备</a>
+            </div>
+        </div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
 </body>
+<script type="text/javascript" src="jquery/jquery.min.js"></script>
+<script type="text/javascript" src="hplus/js/plugins/handlebars/handlebars.js"></script>
+<script id="condition" type="text/x-handlebars-template">
+    <p class="first">{{first}}</p><p class="second">{{second}}</p>
+</script>
+<script id="instructions" type="text/x-handlebars-template">
+    <p class="time">{{time}}</p><p class="desc">{{desc}}</p>
+</script>
+<script>
+    $(function(){
+        var text1 = "使用条件：最低消费Y5000消费满100可使用，可同时使用相同抵用券";
+        var text2 = "有效期:2019.4.15至2020.4.15 不允许和其他抵用券叠加使用";
+        //计算字符串长度包含中文
+        function getByteLen(val) {
+            var len = 0;
+            for (var i = 0; i < val.length; i++) {
+                var a = val.charAt(i);
+                if (a.match(/[^\x00-\xff]/ig) != null)
+                {
+                    len += 1;
+                }
+                else
+                {
+                    len += 1;
+                }
+            }
+            return len;
+        }
+
+        var first_str = text1.substr(0,text1.indexOf("消费满"));
+        var second_str = text1.substr(text1.indexOf("消费满"),getByteLen(text1)-text1.indexOf("消费满"))
+
+        var time_str = text2.substr(0,text2.indexOf("不允许"));
+        var desc_str = text2.substr(text2.indexOf("不允许"),getByteLen(text2)-text2.indexOf("不允许"));
+        var data1 = {
+            first:first_str,
+            second:second_str
+        }
+        var data2 = {
+            time:time_str,
+            desc:desc_str
+        }
+
+        var t1 = $("#condition").html();
+        var f1 = Handlebars.compile(t1);
+        var h1 = f1(data1);
+        $(".condition").html(h1);
+
+        var t2 = $("#instructions").html();
+        var f2 = Handlebars.compile(t2);
+        var h2 = f2(data2);
+        $(".instructions").html(h2);
+    })
+</script>
 </html>

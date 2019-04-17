@@ -19,4 +19,6 @@ public class VoucherShare {
     String link_url;
     Integer user_id;
     Integer companyId;
+    Integer sharetype;
+    Integer goodsId;
 }
