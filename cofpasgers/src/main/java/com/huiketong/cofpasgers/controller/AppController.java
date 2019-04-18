@@ -3467,7 +3467,7 @@ public class AppController {
                 VoucherShareData data = new VoucherShareData();
                 data.setContext(voucherShare.getContext());
                 data.setImage(voucherShare.getImage());
-                data.setLink_url(voucherShare.getLink_url());
+                data.setLink_url(voucherShare.getLinkUrl());
                 data.setContext(voucherShare.getContext());
                 data.setTitle(voucherShare.getTitle());
                 data.setUser_id(agent.getId());

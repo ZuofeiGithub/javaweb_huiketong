@@ -80,6 +80,10 @@ $(function () {
         setCookie("usertype", usertype);
         setCookie("rightname",rightname);
         setCookie("headphoto",headphoto);
+        layui.data('user',{
+            key:'user_id',
+            value:telphone
+        })
     }
 
     //获取验证码

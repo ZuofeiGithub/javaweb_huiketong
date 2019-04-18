@@ -19,6 +19,8 @@ public interface CommodityRepository  extends JpaRepository<Commodity,Integer>, 
 
     Commodity findCommodityById(Integer id);
 
+    List<Commodity> findAllByCompanyId(Integer companyId);
+
     @Query(value = "select * from commodity t where t.company_id = ?1 and case when ?4 != '' then t.commodity_name like CONCAT('%',?4,'%') else 1=1 end order by add_time desc  limit ?2,?3",nativeQuery = true)
     List<Commodity> findPagesByLimit(Integer comId, int page , int limit,String commodityName);
 

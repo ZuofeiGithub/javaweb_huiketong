@@ -234,7 +234,7 @@ public class EnterpriseController {
                 UserRights rights = new UserRights();
                 rights.setLoginName(loginname);
                 rights.setUserRight(UserType.COMPANY.ordinal());
-                rights.setRightName("装修公司");
+                rights.setRightName("集");
                 userRightsRepository.save(rights);
                 enterprise.setEnterLoginName(loginname);
                 enterprise.setBrokerage(0);

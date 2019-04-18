@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 @Entity
 @Data
@@ -16,9 +17,9 @@ public class VoucherShare {
     String title;
     String context;
     String image;
-    String link_url;
-    Integer user_id;
+    String linkUrl;
     Integer companyId;
     Integer sharetype;
     Integer goodsId;
+    Date createTime;
 }

@@ -389,6 +389,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <!--指定包含本地库-->
                 <!--<configuration>-->
                     <!--<includeSystemScope>true</includeSystemScope>-->
                 <!--</configuration>-->
@@ -402,6 +403,7 @@
                 </dependencies>
             </plugin>
         </plugins>
+        <!--加载本地库文件-->
         <!--<resources>-->
             <!--<resource>-->
                 <!--<directory>lib</directory>-->
@@ -416,6 +418,4 @@
             <!--</resource>-->
         <!--</resources>-->
     </build>
-
-
 </project>
