@@ -84,6 +84,7 @@ $(document).ready(function () {
     });
 
     $('#side-menu>li').click(function () {
+        console.log("li被点击")
         if ($('body').hasClass('mini-navbar')) {
             NavToggle();
         }
