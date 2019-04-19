@@ -31,6 +31,11 @@ public class VoucherController {
     private EnterpriseRepository enterpriseRepository;
     @Autowired
     private CommodityRepository commodityRepository;
+
+    @GetMapping("voucherdetail")
+    public String voucherDetail(){
+        return "/view/voucher.html";
+    }
     @GetMapping("voucher_share")
     public String voucher(){
         return "view/vouchers/vouchers_share_list.html";
