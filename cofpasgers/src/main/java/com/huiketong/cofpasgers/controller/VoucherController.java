@@ -32,9 +32,9 @@ public class VoucherController {
     @Autowired
     private CommodityRepository commodityRepository;
 
-    @GetMapping("voucherdetail")
+    @GetMapping("diyongquan")
     public String voucherDetail(){
-        return "/view/voucher.html";
+        return "view/voucher.html";
     }
     @GetMapping("voucher_share")
     public String voucher(){

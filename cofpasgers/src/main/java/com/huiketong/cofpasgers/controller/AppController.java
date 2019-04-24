@@ -3467,7 +3467,11 @@ public class AppController {
                 VoucherShareData data = new VoucherShareData();
                 data.setContext(voucherShare.getContext());
                 data.setImage(voucherShare.getImage());
-                data.setLink_url(voucherShare.getLinkUrl());
+                if(goodsId == 0) {
+                    data.setLink_url(voucherShare.getLinkUrl() + "?user_id=" + agent.getId());
+                }else{
+                    data.setLink_url(voucherShare.getLinkUrl() + "?goods_id="+goodsId);
+                }
                 data.setContext(voucherShare.getContext());
                 data.setTitle(voucherShare.getTitle());
                 data.setUser_id(agent.getId());
@@ -3594,6 +3598,48 @@ public class AppController {
             }
         } else {
             response.setCode("0").setMsg("信息错误").setData(null);
+        }
+
+        return response;
+    }
+
+    @Autowired
+    private VoucherUserRepository voucherUserRepository;
+    /**
+     * 添加优惠券用户
+     */
+    @PostMapping("addvoucheruser")
+    public BaseJsonResponse addVoucherUser(Integer user_id,String user_name,String telphone){
+        BaseJsonResponse response = new BaseJsonResponse();
+        if(!ObjectUtils.isEmpty(user_id)&&!ObjectUtils.isEmpty(user_name)&&!ObjectUtils.isEmpty(telphone))
+        {
+            VoucherUser user = new VoucherUser();
+            user.setUserId(user_id);
+            user.setUserName(user_name);
+            user.setTelphone(telphone);
+            user.setGetTime(new Date());
+            VoucherUser existuser = voucherUserRepository.findVoucherUserByTelphone(telphone);
+            if(!ObjectUtils.isEmpty(existuser)){
+                if(user_name.equals(existuser.getUserName())){
+                    response.setCode("1").setMsg("您已经领取优惠券").setData(null);
+                }else{
+                    try {
+                        voucherUserRepository.save(user);
+                        response.setCode("0").setMsg("领取成功").setData(null);
+                    }catch (Exception e){
+                        response.setCode("2").setMsg("领取失败").setData(null);
+                    }
+                }
+            }else{
+                try {
+                    voucherUserRepository.save(user);
+                    response.setCode("0").setMsg("领取成功").setData(null);
+                }catch (Exception e){
+                    response.setCode("2").setMsg("领取失败").setData(null);
+                }
+            }
+        }else{
+            response.setCode("4").setMsg("请将您的信息填写完整").setData(null);
         }
 
         return response;

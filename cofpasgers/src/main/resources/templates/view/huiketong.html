@@ -292,6 +292,7 @@
                 var to = res.to;
                 //console.log(to);
                 sendSingleMsg(to.id,mine.content)
+                console.log(to.id,mine.content);
             });
             layim.on('chatChange', function(res){
                 //console.log(res);
@@ -333,11 +334,12 @@
         var randomword = randomWord(true,20,36);
         var signature = hex_md5("appkey=1cb4077c3dc3741a279a9a25&timestamp="+timestamp+"&random_str="+randomword+"&key=ed6ef3b9bc7835095e31f97c")
         function login(uname) {
+            console.log(uname);
             JIM.login({
                 'username' : uname,
                 'password': '123456'
             }).onSuccess(function(data) {
-               // console.log('success:' + JSON.stringify(data));
+               console.log('success:' + JSON.stringify(data));
                 JIM.onMsgReceive(function(data) {
                     data = JSON.stringify(data);
                     var jsondata = JSON.parse(data);
@@ -424,7 +426,7 @@
                 "flag": 1
             }).onSuccess(function(data) {
                 register(user_id,"123456","左飞飞1234");
-                //console.log('success:' + JSON.stringify(data));
+                console.log('success:' + JSON.stringify(data));
             }).onFail(function(data) {
                 //console.log('error:' + JSON.stringify(data))
             });
