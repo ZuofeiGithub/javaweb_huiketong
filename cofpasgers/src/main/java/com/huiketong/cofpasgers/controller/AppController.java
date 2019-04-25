@@ -109,6 +109,8 @@ public class AppController {
     private AlipayClient alipayClient;
     @Autowired
     private InstructionsRepository instructionsRepository;
+    @Autowired
+    private VoucherUserRepository voucherUserRepository;
 
     @PostMapping(value = "/get_version")
     @CrossOrigin
@@ -3467,7 +3469,7 @@ public class AppController {
                 VoucherShareData data = new VoucherShareData();
                 data.setContext(voucherShare.getContext());
                 data.setImage(voucherShare.getImage());
-                if(goodsId == 0) {
+                if(voucherShare.getGoodsId() == 0) {
                     data.setLink_url(voucherShare.getLinkUrl() + "?user_id=" + agent.getId());
                 }else{
                     data.setLink_url(voucherShare.getLinkUrl() + "?goods_id="+goodsId);
@@ -3558,6 +3560,12 @@ public class AppController {
                 data.setContext(voucherDetail.getContext());
                 data.setStart_time(DateUtils.dateFormat(voucherDetail.getStartTime(), DateUtils.DATE_PATIERN_DOT));
                 data.setEnd_time(DateUtils.dateFormat(voucherDetail.getEndTime(), DateUtils.DATE_PATIERN_DOT));
+                List<VoucherUser> userList = voucherUserRepository.findAll();
+                if(userList.size() > 200){
+                    data.setUser_count(String.valueOf(userList.size()));
+                }else{
+                    data.setUser_count("78");
+                }
                 data.setPrice(voucherDetail.getPrice());
                 data.setTitle(voucherDetail.getTitle());
                 response.setCode("1").setMsg("获取详情页成功").setData(data);
@@ -3603,8 +3611,7 @@ public class AppController {
         return response;
     }
 
-    @Autowired
-    private VoucherUserRepository voucherUserRepository;
+
     /**
      * 添加优惠券用户
      */
