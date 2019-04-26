@@ -34,7 +34,7 @@ public class VoucherController {
 
     @GetMapping("diyongquan")
     public String voucherDetail(){
-        return "view/voucher.html";
+        return "view/vouchers/voucher.html";
     }
     @GetMapping("voucher_share")
     public String voucher(){

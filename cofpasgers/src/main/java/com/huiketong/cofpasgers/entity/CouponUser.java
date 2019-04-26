@@ -22,5 +22,6 @@ public class CouponUser {
     String shareUser;
     String sharePhone;
     String couponPhone;
+    String address;
     Date getTime;
 }

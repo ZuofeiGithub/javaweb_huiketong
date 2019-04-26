@@ -3582,9 +3582,9 @@ public class AppController {
      * @return
      */
     @PostMapping(value = "get_coupon")
-    public Object getCoupon(String user_id, String telphone) {
+    public Object getCoupon(String user_id, String telphone,String address) {
         BaseJsonResponse response = new BaseJsonResponse();
-        if (!ObjectUtils.isEmpty(user_id) && !ObjectUtils.isEmpty(telphone)) {
+        if (!ObjectUtils.isEmpty(user_id) && !ObjectUtils.isEmpty(telphone)&&!ObjectUtils.isEmpty(address)) {
             DefaultEnter defaultEnter = defaultEnterRepository.findDefaultEnterByUserId(user_id);
             if (!ObjectUtils.isEmpty(defaultEnter)) {
                 CouponUser user = new CouponUser();
@@ -3596,6 +3596,7 @@ public class AppController {
                     user.setSharePhone(agent.getTelphone());
                     user.setCouponPhone(telphone);
                     user.setGetTime(new Date());
+                    user.setAddress(address);
                     user.setCompanyId(agent.getCompanyId());
                     couponUserRepository.save(user);
                     response.setCode("1").setMsg("领取成功").setData(null);
@@ -3616,31 +3617,26 @@ public class AppController {
      * 添加优惠券用户
      */
     @PostMapping("addvoucheruser")
-    public BaseJsonResponse addVoucherUser(Integer user_id,String user_name,String telphone){
+    public BaseJsonResponse addVoucherUser(Integer user_id,String user_name,String phone,String address){
         BaseJsonResponse response = new BaseJsonResponse();
-        if(!ObjectUtils.isEmpty(user_id)&&!ObjectUtils.isEmpty(user_name)&&!ObjectUtils.isEmpty(telphone))
+        if(!ObjectUtils.isEmpty(user_id)&&!ObjectUtils.isEmpty(phone))
         {
+            String code = AlicomDysmsUtil.getCode();
             VoucherUser user = new VoucherUser();
             user.setUserId(user_id);
             user.setUserName(user_name);
-            user.setTelphone(telphone);
+            user.setTelphone(phone);
             user.setGetTime(new Date());
-            VoucherUser existuser = voucherUserRepository.findVoucherUserByTelphone(telphone);
+            user.setVerifyCode(code);
+            user.setAddress(address);
+            VoucherUser existuser = voucherUserRepository.findVoucherUserByTelphone(phone);
             if(!ObjectUtils.isEmpty(existuser)){
-                if(user_name.equals(existuser.getUserName())){
                     response.setCode("1").setMsg("您已经领取优惠券").setData(null);
-                }else{
-                    try {
-                        voucherUserRepository.save(user);
-                        response.setCode("0").setMsg("领取成功").setData(null);
-                    }catch (Exception e){
-                        response.setCode("2").setMsg("领取失败").setData(null);
-                    }
-                }
             }else{
                 try {
                     voucherUserRepository.save(user);
                     response.setCode("0").setMsg("领取成功").setData(null);
+                    AlicomDysmsUtil.sendSms(phone,code,"SMS_164277629");
                 }catch (Exception e){
                     response.setCode("2").setMsg("领取失败").setData(null);
                 }

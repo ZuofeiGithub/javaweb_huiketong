@@ -17,5 +17,7 @@ public class VoucherUser {
     Integer userId;
     String userName;
     String telphone;
+    String verifyCode;
+    String address;
     Date getTime;
 }

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>优惠券领取</title>
+    <!-- 引入 WeUI -->
+    <link rel="stylesheet" href="weui/style/weui.min.css"/>
+    <link rel="stylesheet" href="weui/style/jquery-weui.min.css">
+    <style>
+        .container {
+            margin-right: 50px;
+            margin-left: 50px;
+        }
+
+        .red_package {
+            background: -webkit-linear-gradient(left, #e62168, #f87f30); /* Safari 5.1 - 6.0 */
+            background: -o-linear-gradient(left,  #e62168, #f87f30); /* Opera 11.1 - 12.0 */
+            background: -moz-linear-gradient(left,  #e62168, #f87f30); /* Firefox 3.6 - 15 */
+            background: linear-gradient(left,  #e62168, #f87f30); /* 标准的语法 */
+            height:200px;
+            margin-top: 30px;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 300px;
+            position: relative;
+        }
+
+        .triangle {
+            float: right;
+            margin-top: -25px;
+            width: 0;
+            height: 0;
+            border-right: 150px solid #fa9e53;
+            border-top: 130px solid transparent;
+            border-bottom: 130px solid transparent;
+        }
+
+        .circle {
+            margin-top: -50px;
+            width: 100px;
+            height: 100px;
+            border-radius: 100px;
+            background-color: #ffee08;
+            font-size: 40px;
+            text-align: center;
+            font-weight: bold;
+            line-height: 90px;
+            color: #f3484e;
+        }
+
+        .money {
+            display: flex;
+            position: absolute;
+            right: 180px;
+            top: 50px;
+        }
+
+        .money i {
+            font-style: normal;
+            font-size: 25px;
+            line-height: 125px;
+            color: #fff;
+        }
+
+        .money p {
+            font-size: 80px;
+            line-height: 85px;
+            color: #fff;
+        }
+
+        .people {
+            top: 60px;
+            left: 50px;
+            position: absolute;
+            font-size: 45px;
+            color: #fff;
+        }
+
+        .people i {
+            font-style: normal;
+            margin: 0px 3px;
+            font-size: 45px;
+            color: #ffef22;
+        }
+
+        .touch{
+           width: 90%;
+            margin: 80px 50px 0 50px;
+            height: 100px;
+            border: 1px #ccc solid;
+            text-indent: 20px;
+            font-size: 30px;
+            border-radius: 5px;
+        }
+
+        .promptly_get{
+            background: -webkit-linear-gradient(left, #fa4716, #fc9622); /* Safari 5.1 - 6.0 */
+            background: -o-linear-gradient(left,  #fa4716, #fc9622); /* Opera 11.1 - 12.0 */
+            background: -moz-linear-gradient(left,  #fa4716, #fc9622); /* Firefox 3.6 - 15 */
+            background: linear-gradient(left,  #fa4716, #fc9622); /* 标准的语法 */
+            font-size: 30px;
+            color: #fff;
+            height: 100px;
+            width: 90% !important;
+            margin-top: 80px;
+            margin-left: 50px;
+            margin-right: 50px;
+        }
+        .descript_title{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .descript_title div{
+            width: 100px;
+            height: 5px;
+            background-color: #0d0d0d;
+            margin: 0 10px 0 10px;
+        }
+        .descript_title p{
+            font-size: 30px;
+            font-weight: bold;
+
+        }
+        .descript{
+            width: 90%;
+            margin:  30px 50px 0 50px;
+        }
+        .descript p{
+            font-size: 30px;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="weui-flex">
+    <div class="weui-flex__item">
+        <div class="swiper-container" data-space-between='10' data-pagination='.swiper-pagination' data-autoplay="1000">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="images/banner1.jpg" alt="" width="100%"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="weui-flex container">
+    <div class="weui-flex__item red_package">
+        <div class="people">已有<i>78</i>人领取红包</div>
+        <div class=" weui-flex__item money"><i>￥</i>
+            <p>199</p></div>
+        <div class="triangle">
+            <div class="circle">领</div>
+        </div>
+    </div>
+</div>
+<div class="weui-flex">
+    <div class="weui-flex__item">
+        <input class="weui-input touch" name="address" id="address" type="text" placeholder="请输入小区地址">
+    </div>
+</div>
+<div class="weui-flex">
+    <div class="weui-flex__item">
+        <input class="weui-input touch" name="telphone" id="telphone" type="tel" placeholder="请输入电话号码">
+    </div>
+</div>
+
+<div class="weui-flex">
+    <div class="weui-flex__item">
+        <button class="weui-btn promptly_get">立即领取</button>
+    </div>
+</div>
+
+<div class="weui-flex">
+    <div class="weui-flex__item descript_title">
+        <div></div><p>优惠券使用说明</p><div></div>
+    </div>
+</div>
+<div class="weui-flex">
+    <div class="weui-flex__item descript">
+        <p>1.199元红包专享仅限爱空间线上用户领取并使用，交订时直接
+            抵扣装修款，每位客户限领一-次;</p>
+        <p>2.该红包仅限交订时使用且不与其他优惠叠加使用;</p>
+        <p>3.本活动最终解释权归爱空间科技(北京)有限公司所有，本次
+            活动规则由爱空间科技(北京)有限公司制定并在法律允许范围
+            内享有最终解释权。</p>
+    </div>
+</div>
+</body>
+<script src="weui/script/jquery-2.1.4.js"></script>
+<script src="weui/script/jquery-weui.min.js"></script>
+<script src="weui/script/swiper.min.js"></script>
+<script src="weui/script/city-picker.min.js"></script>
+<script>
+
+    function isPhoneNo(phone) {
+        var pattern = /^1[34578]\d{9}$/;
+        return pattern.test(phone);
+    }
+
+    function GetQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+    }
+    var mySwiper = new Swiper('.swiper-container', {
+        speed: 2000,
+        spaceBetween: 0,
+        autoplay: {
+            delay: 5000,
+        },
+    });
+    $('.promptly_get').click(function () {
+        var address = $('#address').val();
+        var phone = $('#telphone').val();
+        if(!isPhoneNo(phone)){
+           return alert("请输入正确的手机号")
+        }
+        $.post('api/addvoucheruser',{'user_id':GetQueryString('user_id'),'address':address,'phone':phone},function (resp) {
+            if(resp.code == "0"){
+                alert(resp.msg)
+            }
+            else{
+                alert(resp.msg);
+            }
+        });
+    })
+
+</script>
+</html>
