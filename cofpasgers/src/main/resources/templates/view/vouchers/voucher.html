@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>优惠券领取</title>
@@ -150,7 +150,7 @@
     <div class="weui-flex__item red_package">
         <div class="people">已有<i>78</i>人领取红包</div>
         <div class=" weui-flex__item money"><i>￥</i>
-            <p>199</p></div>
+            <p></p></div>
         <div class="triangle">
             <div class="circle">领</div>
         </div>
@@ -180,10 +180,10 @@
 </div>
 <div class="weui-flex">
     <div class="weui-flex__item descript">
-        <p>1.199元红包专享仅限爱空间线上用户领取并使用，交订时直接
+        <p>1.199元红包专享仅限集客通线上用户领取并使用，交订时直接
             抵扣装修款，每位客户限领一-次;</p>
         <p>2.该红包仅限交订时使用且不与其他优惠叠加使用;</p>
-        <p>3.本活动最终解释权归爱空间科技(北京)有限公司所有，本次
+        <p>3.本活动最终解释权归汇客通网络技术有限公司所有，本次
             活动规则由爱空间科技(北京)有限公司制定并在法律允许范围
             内享有最终解释权。</p>
     </div>
@@ -199,6 +199,8 @@
         var pattern = /^1[34578]\d{9}$/;
         return pattern.test(phone);
     }
+    
+    
 
     function GetQueryString(name)
     {
@@ -213,6 +215,17 @@
             delay: 5000,
         },
     });
+    
+    $.get('voucherdetail',{'user_id':GetQueryString('user_id')},function (resp) {
+        if(resp.code == "0"){
+            $('.money p').text(resp.data.price);
+            $('.people i').text(resp.data.user_count)
+        }else{
+            $('.money p').text('1000');
+            $('.people i').text('99')
+        }
+        console.log(resp);
+    })
     $('.promptly_get').click(function () {
         var address = $('#address').val();
         var phone = $('#telphone').val();

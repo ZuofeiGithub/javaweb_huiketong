@@ -14,7 +14,7 @@
             field: "image",
             title: "分享图片",
             templet:function (d) {
-                return "<img src='http://www.jkt365.com/'"+d.image+" width='30' height='30'>"
+                return "<img src='http://image.jkt365.com/"+d.image+"' width='30' height='30'>"
             }
         }, {field: "link_url", title: "分享链接"},{field:'sharetype',title:'分享类型',templet:function (d) {
                 if(d.sharetype == 1){
@@ -72,6 +72,7 @@
                 }), a.trigger("click")
             }
         })
+        console.log(field)
     }), i.render({
         elem: "#LAY-app-content-tags",
         url: layui.setter.base + "json/content/tags.js",

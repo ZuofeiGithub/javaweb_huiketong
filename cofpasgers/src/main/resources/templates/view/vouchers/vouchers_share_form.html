@@ -62,6 +62,12 @@
             </select>
         </div>
     </div>
+    <div class="layui-form-item" id="price">
+        <label class="layui-form-label">分享金额:</label>
+        <div class="layui-input-inline">
+            <input name="price" placeholder="优惠券分享金额" class="layui-input">
+        </div>
+    </div>
     <div class="layui-form-item layui-hide" id="goods">
         <label class="layui-form-label">分享商品:</label>
         <div class="layui-input-inline">
@@ -123,11 +129,13 @@
          */
         form.on('select(share_select)',function (data) {
             if(data.value == "1"){
-                $('#goods').addClass("layui-hide")
-                $('#goods_select').attr("lay-verify","")
+                $('#goods').addClass("layui-hide");
+                $('#goods_select').attr("lay-verify","");
+                $('#price').removeClass("layui-hide");
             }else if(data.value == "2"){
-                $('#goods').removeClass("layui-hide")
-                $('#goods_select').attr("lay-verify","required")
+                $('#goods').removeClass("layui-hide");
+                $('#goods_select').attr("lay-verify","required");
+                $('#price').addClass("layui-hide");
             }
         })
         //监听提交

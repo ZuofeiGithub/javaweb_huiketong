@@ -6,6 +6,7 @@ import com.huiketong.cofpasgers.constant.JSONData;
 import com.huiketong.cofpasgers.entity.*;
 import com.huiketong.cofpasgers.repository.*;
 import com.huiketong.cofpasgers.util.FileUploadUtil;
+import com.huiketong.cofpasgers.util.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,8 @@ public class CommodityController {
 
     CommodityOrderRepository  commodityOrderRepository;
 
-
+     @Autowired
+     VoucherShareRepository voucherShareRepository;
 
 
     /**
@@ -405,13 +407,12 @@ public class CommodityController {
 
     /**
      * 添加商品
-     * @param request
      * @param telphone
      * @return
      */
     @RequestMapping(value = "/addCommodity")
     @ResponseBody
-    public String addCommodity(HttpServletRequest request,Integer commodityStyleId,Integer commodityCategoryId, String  telphone, String commodityName, String danwei,BigDecimal originalPrice, BigDecimal activityPrice, BigDecimal depositMoney, String activityDescription, String productDetails) {
+    public String addCommodity(Integer commodityStyleId,Integer commodityCategoryId, String  telphone, String commodityName, String danwei,BigDecimal originalPrice, BigDecimal activityPrice, BigDecimal depositMoney, String activityDescription, String productDetails,String label) {
         Enterprise enterprise=enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
         int comId=enterprise.getId();
         boolean flag=false;
@@ -431,7 +432,25 @@ public class CommodityController {
                 commodityStyle.setAddTime(new Date());
                 commodityStyle.setCategoryId(commodityCategoryId);
                 commodityStyle.setStyleId(commodityStyleId);
+                commodityStyle.setLabel(label);
+                commodityStyle.setLinkname("推荐");
                commodityRepository.save(commodityStyle);
+
+               VoucherShare voucherShare = new VoucherShare();
+               voucherShare.setCreateTime(new Date());
+               voucherShare.setGoodsId(commodityStyle.getId());
+               voucherShare.setSharetype(2);
+               CommodityImg commodityImg = commodityImgRepository.findFirstByCommodityd(commodityStyle.getId());
+               if(!ObjectUtils.isEmpty(commodityImg)){
+                   voucherShare.setImage(commodityImg.getCommodityImgUrl());
+               }else{
+                   voucherShare.setImage("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556354874615&di=cff504226314007b171234ee2246ea78&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fb7b5b489ab8adb866af91fee3019886c5389ff9d67ab-hH0Mm2_fw658");
+               }
+               voucherShare.setContext(commodityStyle.getActivityDescription());
+               voucherShare.setTitle(commodityStyle.getCommodityName());
+               voucherShare.setLinkUrl(Constant.URL+"product_details");
+               voucherShare.setCompanyId(comId);
+               voucherShareRepository.save(voucherShare);
                 flag=true;
             }else{
                 return "2";

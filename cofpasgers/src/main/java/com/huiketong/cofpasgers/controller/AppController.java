@@ -102,15 +102,15 @@ public class AppController {
     @Autowired
     PointDetailRepository pointDetailRepository;
     @Autowired
-    private WXPay wxPay;
+    InviteNotesRepository inviteNotesRepository;
     @Autowired
-    private AlipayProperties alipayProperties;
+    WXPay wxPay;
     @Autowired
-    private AlipayClient alipayClient;
+    AlipayProperties alipayProperties;
     @Autowired
-    private InstructionsRepository instructionsRepository;
+    AlipayClient alipayClient;
     @Autowired
-    private VoucherUserRepository voucherUserRepository;
+    VoucherUserRepository voucherUserRepository;
 
     @PostMapping(value = "/get_version")
     @CrossOrigin
@@ -2399,6 +2399,7 @@ public class AppController {
                             data.setUrl(Constant.URL + "invite/agent?inviteCode=" + companyBindUser.getInviteCode());
                             data.setTitle("邀请您注册成为经纪人");
                             data.setText(agent.getAgentName() + "邀请你成为经纪人");
+
                             data.setImage("http://image.yzcang.com/static/install/jiketong/image/logo.png");
                             Integer inviteMoneys = earningsRepository.getShareInviteMoneys(agent.getId(), agent.getCompanyId());
                             if (ObjectUtils.isNotEmpty(inviteMoneys)) {
@@ -2408,6 +2409,18 @@ public class AppController {
                             }
 
                             data.setInvite_num(agent.getInitAgentNam().toString());
+                            InviteNotes inviteNotes = inviteNotesRepository.findInviteNotesByCompayId(agent.getCompanyId());
+                            if(!ObjectUtils.isEmpty(inviteNotes)){
+                                data.setRewardDesc(inviteNotes.getRewardDesc());
+                                data.setRuleDesc(inviteNotes.getRuleDesc());
+                                data.setBenefits(inviteNotes.getBenefits());
+                            }else{
+                                data.setBenefits("邀请成功最低获得100元代金券\t\n活动时间: 2019-05-01至2019-05-07");
+                                data.setRuleDesc("1、会员通过您分享的邀请码注册即视为您邀请成功；\t\n" +
+                                        "2、会员邀请关系传递，A成功邀请B，B即为A的一度人脉，B成功邀请C，C即为A的二度人脉；\t\n");
+                                data.setRewardDesc("1、会员通过您分享的邀请码注册即视为您邀请成功；\t\n" +
+                                        "2、会员邀请关系传递，A成功邀请B，B即为A的一度人脉，B成功邀请C，C即为A的二度人脉；\t\n");
+                            }
                             response.setData(data);
                             response.setCode("1");
                             response.setMsg("获取邀请信息成功");
@@ -3434,7 +3447,7 @@ public class AppController {
                     }
                     response.setCode("1").setMsg("获取商品列表成功").setData(goodsDataList);
                 } else {
-                    response.setCode("0").setMsg("没有商品").setData(new ArrayList<>());
+                    response.setCode("1").setMsg("没有商品").setData(new ArrayList<>());
                 }
                 //GoodsData data = JsonUtils.readJsonFromClassPath("/static/json/goodslist.json",GoodsData.class); //从json文件中读取数据
             } else {
@@ -3493,9 +3506,15 @@ public class AppController {
     public Object vocher(String user_id, String token) throws ParseException, AlipayApiException {
         BaseJsonResponse response = new BaseJsonResponse();
         verifyUser(user_id, token, response, o -> {
-            String price = "50";
+            Agent agent = (Agent) o;
             PriceData data = new PriceData();
-            data.setPrice(price);
+           VoucherDetail voucherDetail = voucherDetailRepository.findVoucherDetailByCompanyId(agent.getCompanyId());
+           if(!ObjectUtils.isEmpty(voucherDetail)){
+               data.setPrice(voucherDetail.getPrice());
+           }else{
+               data.setPrice("0");
+           }
+
             response.setData(data).setMsg("成功").setCode("1");
         });
         return response;
@@ -3570,6 +3589,7 @@ public class AppController {
                 data.setTitle(voucherDetail.getTitle());
                 response.setCode("1").setMsg("获取详情页成功").setData(data);
             } else {
+                VoucherDetailData data = new VoucherDetailData();
                 response.setCode("0").setMsg("没有详情页").setData(null);
             }
         });
@@ -3623,6 +3643,10 @@ public class AppController {
         {
             String code = AlicomDysmsUtil.getCode();
             VoucherUser user = new VoucherUser();
+            Agent agent = agentRepository.findAgentById(user_id);
+            if(!ObjectUtils.isEmpty(agent)) {
+                user.setCompanyId(agent.getCompanyId());
+            }
             user.setUserId(user_id);
             user.setUserName(user_name);
             user.setTelphone(phone);

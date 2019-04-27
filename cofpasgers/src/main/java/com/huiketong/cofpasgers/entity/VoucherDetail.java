@@ -11,9 +11,8 @@ import java.util.Date;
 @Entity
 @Data
 public class VoucherDetail {
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
     String price;
     String title;

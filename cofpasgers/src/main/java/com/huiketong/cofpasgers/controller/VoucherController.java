@@ -1,15 +1,10 @@
 package com.huiketong.cofpasgers.controller;
 
-import com.huiketong.cofpasgers.entity.Commodity;
-import com.huiketong.cofpasgers.entity.DefaultEnter;
-import com.huiketong.cofpasgers.entity.Enterprise;
-import com.huiketong.cofpasgers.entity.VoucherShare;
+import com.huiketong.cofpasgers.entity.*;
+import com.huiketong.cofpasgers.json.data.VoucherDetailData;
 import com.huiketong.cofpasgers.json.layuidata.VoucherShareResp;
 import com.huiketong.cofpasgers.json.response.BaseJsonResponse;
-import com.huiketong.cofpasgers.repository.CommodityRepository;
-import com.huiketong.cofpasgers.repository.DefaultEnterRepository;
-import com.huiketong.cofpasgers.repository.EnterpriseRepository;
-import com.huiketong.cofpasgers.repository.VoucherShareRepository;
+import com.huiketong.cofpasgers.repository.*;
 import com.huiketong.cofpasgers.util.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -26,39 +22,46 @@ import java.util.List;
 public class VoucherController {
 
     @Autowired
-    private VoucherShareRepository voucherShareRepository;
+    VoucherShareRepository voucherShareRepository;
     @Autowired
-    private EnterpriseRepository enterpriseRepository;
+    EnterpriseRepository enterpriseRepository;
     @Autowired
-    private CommodityRepository commodityRepository;
+    CommodityRepository commodityRepository;
+    @Autowired
+    VoucherDetailRepository voucherDetailRepository;
+    @Autowired
+    DefaultEnterRepository defaultEnterRepository;
+    @Autowired
+    VoucherUserRepository voucherUserRepository;
 
     @GetMapping("diyongquan")
-    public String voucherDetail(){
+    public String voucherDetail() {
         return "view/vouchers/voucher.html";
     }
+
     @GetMapping("voucher_share")
-    public String voucher(){
+    public String voucher() {
         return "view/vouchers/vouchers_share_list.html";
     }
 
     @GetMapping("voucherform")
-    public String voucherForm(String user_id, Model model){
+    public String voucherForm(String user_id, Model model) {
         Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(user_id);
-        if(!ObjectUtils.isEmpty(enterprise)){
-           List<Commodity> commodityList =  commodityRepository.findAllByCompanyId(enterprise.getId());
-           if(commodityList.size() > 0){
-                model.addAttribute("goodslist",commodityList);
-           }
+        if (!ObjectUtils.isEmpty(enterprise)) {
+            List<Commodity> commodityList = commodityRepository.findAllByCompanyId(enterprise.getId());
+            if (commodityList.size() > 0) {
+                model.addAttribute("goodslist", commodityList);
+            }
         }
         return "view/vouchers/vouchers_share_form.html";
     }
 
     @PostMapping("addvoucher")
     @ResponseBody
-    public BaseJsonResponse addVoucher(String title, String context, String imagefile, String link_url, Integer sharetype, Integer goodsid, String user_id){
-       BaseJsonResponse response = new BaseJsonResponse();
+    public BaseJsonResponse addVoucher(String title, String context, String imagefile, String link_url, Integer sharetype, Integer goodsid, String user_id, String price) {
+        BaseJsonResponse response = new BaseJsonResponse();
         Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(user_id);
-        if(!ObjectUtils.isEmpty(enterprise)){
+        if (!ObjectUtils.isEmpty(enterprise)) {
             VoucherShare voucherShare = new VoucherShare();
             voucherShare.setCompanyId(enterprise.getId());
             voucherShare.setTitle(title);
@@ -67,18 +70,31 @@ public class VoucherController {
             voucherShare.setLinkUrl(link_url);
             voucherShare.setSharetype(sharetype);
             voucherShare.setCreateTime(new Date());
-            if(ObjectUtils.isEmpty(goodsid)){
+            if (!ObjectUtils.isEmpty(price)) {
+                VoucherDetail voucherDetail = new VoucherDetail();
+                voucherDetail.setCompanyId(enterprise.getId());
+                voucherDetail.setContext(context);
+                voucherDetail.setTitle(title);
+                voucherDetail.setStartTime(new Date());
+                Calendar cal = Calendar.getInstance();
+                cal.add(Calendar.DATE, 30);
+                Date date = cal.getTime();
+                voucherDetail.setEndTime(date);
+                voucherDetail.setPrice(price);
+                voucherDetailRepository.save(voucherDetail);
+            }
+            if (ObjectUtils.isEmpty(goodsid)) {
                 voucherShare.setGoodsId(0);
-            }else{
+            } else {
                 voucherShare.setGoodsId(goodsid);
             }
             try {
                 voucherShareRepository.save(voucherShare);
                 response.setCode("0").setMsg("添加成功").setData(null);
-            }catch (Exception e){
+            } catch (Exception e) {
                 response.setCode("500").setMsg("添加失败").setData(null);
             }
-        }else{
+        } else {
             response.setCode("500").setMsg("添加失败").setData(null);
         }
         return response;
@@ -86,14 +102,14 @@ public class VoucherController {
 
     @GetMapping("voucherlist")
     @ResponseBody
-    public VoucherShareResp voucherList(String user_id){
+    public VoucherShareResp voucherList(String user_id) {
         VoucherShareResp resp = new VoucherShareResp();
         List<VoucherShareResp.DataBean> dataBeanList = new ArrayList<>();
         Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(user_id);
-        if(!ObjectUtils.isEmpty(enterprise)){
+        if (!ObjectUtils.isEmpty(enterprise)) {
             List<VoucherShare> voucherShareList = voucherShareRepository.findVoucherSharesByCompanyId(enterprise.getId());
-            if(voucherShareList.size() > 0){
-                for(VoucherShare voucherShare:voucherShareList){
+            if (voucherShareList.size() > 0) {
+                for (VoucherShare voucherShare : voucherShareList) {
                     VoucherShareResp.DataBean bean = new VoucherShareResp.DataBean();
                     bean.setTitle(voucherShare.getTitle());
                     bean.setContext(voucherShare.getContext());
@@ -108,13 +124,13 @@ public class VoucherController {
                 resp.setCount(String.valueOf(voucherShareList.size()));
                 resp.setMsg("获取数据成功");
                 resp.setData(dataBeanList);
-            }else{
+            } else {
                 resp.setCode(0);
                 resp.setCount("0");
                 resp.setMsg("无数据");
                 resp.setData(new ArrayList<>());
             }
-        }else{
+        } else {
             resp.setCode(0);
             resp.setCount("0");
             resp.setMsg("无数据");
@@ -126,17 +142,43 @@ public class VoucherController {
 
     @PostMapping("delvoucher")
     @ResponseBody
-    public BaseJsonResponse delVoucher(Integer shareid){
+    public BaseJsonResponse delVoucher(Integer shareid) {
         BaseJsonResponse response = new BaseJsonResponse();
         VoucherShare voucherShare = new VoucherShare();
         voucherShare.setId(shareid);
         try {
             voucherShareRepository.delete(voucherShare);
             response.setCode("0").setMsg("删除成功").setData(null);
-        }catch (Exception e){
+        } catch (Exception e) {
             response.setCode("1").setMsg("删除失败").setData(null);
         }
 
+        return response;
+    }
+
+    @GetMapping("voucherdetail")
+    @ResponseBody
+    public BaseJsonResponse voucherDetail(String user_id) {
+        BaseJsonResponse response = new BaseJsonResponse();
+
+        DefaultEnter defaultEnter = defaultEnterRepository.findDefaultEnterByUserId(user_id);
+        if (!ObjectUtils.isEmpty(defaultEnter)) {
+            VoucherDetail voucherDetail = voucherDetailRepository.findVoucherDetailByCompanyId(defaultEnter.getCompayId());
+            if (!ObjectUtils.isEmpty(voucherDetail)) {
+                VoucherDetailData data = new VoucherDetailData();
+                data.setTitle(voucherDetail.getTitle());
+                List<VoucherUser> userList = voucherUserRepository.findAllByCompanyId(defaultEnter.getCompayId());
+                if(userList.size() > 0) {
+                    data.setUser_count(String.valueOf(userList.size()));
+                }else{
+                    data.setUser_count("78");
+                }
+                data.setPrice(voucherDetail.getPrice());
+                response.setCode("0").setMsg("").setData(data);
+            } else {
+                response.setCode("1").setMsg("没有数据").setData(null);
+            }
+        }
         return response;
     }
 }

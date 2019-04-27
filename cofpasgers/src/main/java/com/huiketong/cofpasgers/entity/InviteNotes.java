@@ -6,19 +6,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
 
-@Entity
+/**
+ * 邀请说明
+ */
 @Data
-public class VoucherUser {
+@Entity
+public class InviteNotes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
-    Integer userId;
-    Integer companyId;
-    String userName;
-    String telphone;
-    String verifyCode;
-    String address;
-    Date getTime;
+    Integer compayId;
+    String benefits;//邀请好友奖励
+    String rewardDesc; //奖励说明
+    String ruleDesc; //规则说明
 }
