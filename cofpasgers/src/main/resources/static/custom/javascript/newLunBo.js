@@ -103,7 +103,15 @@ layui.use(['form', 'table'], function(){
             $("#myfile").val("");
         }
     });
+    form.on('select(share_select)',function (data) {
+        if(data.value == "1"){
+            $('#banner_link_url').removeClass('layui-hide')
+        }else if(data.value == "2"){
+            $('#banner_link_url').addClass('layui-hide')
+        }
+    })
 });
+
 
 $("#myfile").change(function(){
     var imgPath = getObjectURL(this.files[0]);

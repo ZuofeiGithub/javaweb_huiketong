@@ -270,13 +270,14 @@ public class CustomerController {
                                                         earnings1.setType(4);
                                                         agentRepository.updateScore(money2, superAgent.getId(), superAgent.getCompanyId());
                                                         earningsRepository.save(earnings1);
-                                                        Notice notice = new Notice();
-                                                        notice.setAgentName(superAgent.getAgentName());
-                                                        notice.setCompanyId(customer.getCompanyId());
-                                                        notice.setContext(superAgent.getAgentName()+"的下线客户已签约,获得佣金"+money2);
-                                                        notice.setScore(money2);
-                                                        notice.setAddTime(new Date());
-                                                        noticeRepository.save(notice);
+                                                        //下线客户成功签约
+//                                                        Notice notice = new Notice();
+//                                                        notice.setAgentName(superAgent.getAgentName());
+//                                                        notice.setCompanyId(customer.getCompanyId());
+//                                                        notice.setContext(superAgent.getAgentName()+"的下线客户已签约,获得佣金"+money2);
+//                                                        notice.setScore(money2);
+//                                                        notice.setAddTime(new Date());
+//                                                        noticeRepository.save(notice);
                                                     }
                                                     response.setMsg("签单佣金发放成功").setCode("8");
                                                     customerRepository.updateVerifyStatus(status, id);

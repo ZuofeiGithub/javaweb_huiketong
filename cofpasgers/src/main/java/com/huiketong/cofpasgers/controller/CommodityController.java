@@ -382,6 +382,7 @@ public class CommodityController {
             commodityImg.setCommodityd(id);
             commodityImg.setCommodityImgUrl(fileUrl);
             commodityImgRepository.save(commodityImg);
+            voucherShareRepository.updateImageUrl(id,fileUrl);
             flag=true;
         } catch (Exception e) {
             e.printStackTrace();

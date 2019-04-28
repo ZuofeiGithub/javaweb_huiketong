@@ -108,7 +108,7 @@ public class NewLunBoImgController {
      */
     @RequestMapping(value = "/uploadLunBo")
     @ResponseBody
-    public String uploadLunBo(HttpServletRequest request, String name, String descript, String trankurl, Integer sort,  String telphone, @RequestParam("imgurl") MultipartFile file ) {
+    public String uploadLunBo(HttpServletRequest request, String name, String descript, String trankurl, Integer sort,  String telphone,Integer type, @RequestParam("imgurl") MultipartFile file ) {
         Enterprise  enterprise=enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
         int comId=enterprise.getId();
         String fileUrl= null;
@@ -124,6 +124,7 @@ public class NewLunBoImgController {
       banner.setImgurl(fileUrl);
       banner.setTrankurl(trankurl);
       banner.setCompanyId(comId);
+      banner.setType(type);
       banner.setSort(sort);
       banner.setCreateDate(new Date());
         boolean flag=false;
@@ -156,7 +157,7 @@ public class NewLunBoImgController {
      */
     @RequestMapping(value = "/updateLunBo")
     @ResponseBody
-    public String updateYongjin(HttpServletRequest request, Integer id, String imgSrc, String name, String descript, String trankurl, Integer sort,  String telphone, @RequestParam("imgurl") MultipartFile file) {
+    public String updateYongjin(HttpServletRequest request, Integer id, String imgSrc, String name, String descript, String trankurl, Integer sort,Integer type,  String telphone, @RequestParam("imgurl") MultipartFile file) {
 
         Enterprise  enterprise=enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
         int comId=enterprise.getId();
@@ -171,7 +172,7 @@ public class NewLunBoImgController {
 
         boolean flag=false;
         try {
-           bannerRepository.updateLunBo(name,descript,trankurl,imgSrc,sort,id);
+           bannerRepository.updateLunBo(name,descript,trankurl,imgSrc,sort,type,id);
             flag=true;
         } catch (Exception e) {
             e.printStackTrace();

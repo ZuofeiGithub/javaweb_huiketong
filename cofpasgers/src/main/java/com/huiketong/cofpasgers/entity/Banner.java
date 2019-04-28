@@ -31,4 +31,6 @@ public class Banner {
     String trankurl;
     @Column(columnDefinition = "int(11) default 0 COMMENT '排序'")
     Integer sort;
+    @Column(columnDefinition = "int(11) default 0 COMMENT '类型 1.外部url 2.内部view'")
+    Integer type;
 }

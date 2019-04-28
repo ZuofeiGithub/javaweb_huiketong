@@ -1,11 +1,11 @@
-/** layuiAdmin.std-v1.2.1 LPPL License By http://www.layui.com/admin/ */
+/** 客服管理 */
 ;layui.define(["table", "form"], function (t) {
     var user = layui.data('user');
     var $ = layui.$, i = layui.table, n = layui.form;
     i.render({
         elem: "#LAY-app-content-list",
         //url: layui.setter.base + "json/content/list.js",
-        url: "/voucherlist?user_id="+user.user_id,
+        url: "/showcusser_list?user_id="+user.user_id,
         cols: [[{type: "checkbox", fixed: "left"}, {field: "id", width: 100, title: "分享ID", sort: !0}, {
             field: "title",
             title: "分享标题",
@@ -72,7 +72,7 @@
                 }), a.trigger("click")
             }
         })
-        console.log(title)
+        console.log(field)
     }), i.render({
         elem: "#LAY-app-content-tags",
         url: layui.setter.base + "json/content/tags.js",

@@ -257,6 +257,7 @@ public class AppController {
                                     bannerData.setTitle(banner.getDescript());
                                     bannerData.setUrl(banner.getTrankurl());
                                     bannerData.setImage(banner.getImgurl());
+                                    bannerData.setType(String.valueOf(banner.getType()));
                                     bannerDataList.add(bannerData);
                                 }
                                 response.setData(bannerDataList).setCode("1").setMsg("获取banner");
@@ -278,7 +279,7 @@ public class AppController {
                             homeInfoData.setCompany(defaultEnter.getCompayName());
                             List<Agent> agentList = agentRepository.findAgentsByCompanyId(defaultEnter.getCompayId());
                             if (defaultEnter.getCompayId() == 28) {
-                                homeInfoData.setNum("516");
+                                homeInfoData.setNum("156");
                             } else if (agentList.size() > 0) {
                                 homeInfoData.setNum(String.valueOf(agentList.size()));
                             } else {
@@ -2333,12 +2334,19 @@ public class AppController {
                                                 data.setAddress(customer.getDetailAddress());
                                                 data.setName(customer.getCustomerName());
                                                 data.setTel(customer.getTelphone());
+                                                if(!ObjectUtils.isEmpty(customer.getStyle()))
                                                 data.setStyle(DecorationStyle.STYLE(customer.getStyle()));
+                                                if(!ObjectUtils.isEmpty(customer.getRenovRemark()))
                                                 data.setRemark(customer.getRenovRemark());
+                                                if(!ObjectUtils.isEmpty(customer.getRecomDatetime()))
                                                 data.setAdd_time(DateUtils.dateFormat(customer.getRecomDatetime(), DateUtils.DATE_TIME_PATTERN));
+                                                if(!ObjectUtils.isEmpty(customer.getSignPrice()))
                                                 data.setSign_price(customer.getSignPrice().toString());
+                                                if(!ObjectUtils.isEmpty(customer.getRevokeReason()))
                                                 data.setReject(customer.getRevokeReason());
+                                                if(!ObjectUtils.isEmpty(customer.getVerifyStatus()))
                                                 data.setStatus(customer.getVerifyStatus().toString());
+                                                if(!ObjectUtils.isEmpty(customer.getSex()))
                                                 data.setSex(customer.getSex());
                                                 dataList.add(data);
                                             }
@@ -3131,7 +3139,7 @@ public class AppController {
                                     "楼盘地址:" + address + "\r\n" +
                                     "备注:" + remark);
                         } else {
-                            context.append("经纪人姓名:" + agent.getAgentName() +
+                            context.append("经纪人姓名:" + agent.getAgentName() + "\r\n"+
                                     "客户姓名:" + name + "\r\n" +
                                     "性别:" + sex + "\r\n" +
                                     "客户电话:" + tel + "\r\n" +
@@ -3610,7 +3618,7 @@ public class AppController {
                 CouponUser user = new CouponUser();
                 user.setCouponPhone(telphone);
                 user.setCompanyId(defaultEnter.getCompayId());
-                Agent agent = agentRepository.findAgentByTelphone(defaultEnter.getUserId());
+                Agent agent = agentRepository.findAgentByTelphoneAndCompanyId(defaultEnter.getUserId(),defaultEnter.getCompayId());
                 if (!ObjectUtils.isEmpty(agent)) {
                     user.setShareUser(agent.getAgentName());
                     user.setSharePhone(agent.getTelphone());

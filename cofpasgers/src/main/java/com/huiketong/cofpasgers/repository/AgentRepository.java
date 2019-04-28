@@ -23,7 +23,7 @@ public interface AgentRepository extends JpaRepository<Agent,Integer>, JpaSpecif
 
     Agent findAgentByTelphoneAndCompanyIdOrLoginUsernameAndCompanyId(String telphone,Integer  comId,String LoginUsername,Integer companyId);
 
-    Agent findAgentByTelphone(String telphone);
+    Agent findAgentByTelphoneAndInitCode(String telphone,String inviteCode);
 
     Agent findAgentByTelphoneAndCompanyId(String telphone,Integer companyId);
 
@@ -139,7 +139,7 @@ public interface AgentRepository extends JpaRepository<Agent,Integer>, JpaSpecif
     @Query(value = "select GROUP_CONCAT(id) from agent where company_id = ?1",nativeQuery = true)
     String findUserIds(int companId);
 
-    @Query(value = "select * from agent where company_id = ?1 and type != 9 limit ?2,?3",nativeQuery = true)
+    @Query(value = "select * from agent where company_id = ?1  limit ?2,?3",nativeQuery = true)
     List<Agent> findPagesAgent(Integer companyId,Integer page,Integer limit);
 
     @Query(value = "select count(1) from agent where company_id = ?1",nativeQuery = true)

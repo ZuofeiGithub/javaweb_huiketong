@@ -146,10 +146,11 @@ public class InviteAgentController {
     @CrossOrigin
     public BaseJsonResponse GetCode(HttpServletRequest request) {
         String telphone = request.getParameter("recevier");
+        String inviteCode = request.getParameter("inviteCode");
         BaseJsonResponse response = new BaseJsonResponse();
         try {
             if (ObjectUtils.isNotEmpty(telphone)) {
-                Agent agent = agentRepository.findAgentByTelphone(telphone);
+                Agent agent = agentRepository.findAgentByTelphoneAndInitCode(telphone,inviteCode);
                 if (ObjectUtils.isNotNull(agent)) {
                     response.setMsg("该号码已经注册过经纪人");
                     response.setCode("300");
@@ -276,8 +277,8 @@ public class InviteAgentController {
                                         Commission commission = commissionRepository.findCommissionByCompanyId(companyBindUser.getCompanyId());
                                         if (!ObjectUtils.isEmpty(commission)) {
                                             agentRepository.updateScore(commission.getInvitScore(), superAgent.getId(), superAgent.getCompanyId());
-                                            if (ObjectUtils.isNotEmpty(commission.getScore())) {
-                                                if (commission.getScore().compareTo(new BigDecimal(0)) == 1) {
+//                                            if (ObjectUtils.isNotEmpty(commission.getScore())) {
+//                                                if (commission.getScore().compareTo(new BigDecimal(0)) == 1) {
                                                     Notice notice = new Notice();
                                                     notice.setAgentName(superAgent.getAgentName());
                                                     notice.setCompanyId(defaultEnter.getCompayId());
@@ -307,14 +308,18 @@ public class InviteAgentController {
                                                         pointDetail.setPoint(integralRule.getInviteIntegral());
                                                         pointDetailRepository.save(pointDetail);
                                                     }
-                                                }
-                                            }
+//                                                }
+//                                            }
 
                                         }
                                         saveUserRight(agentName, phone, agentCode);
 
                                         agentRepository.save(agent);
-                                        defaultEnterRepository.save(defaultEnter);
+
+                                        DefaultEnter existdefault = defaultEnterRepository.findDefaultEnterByUserIdOrUserTelphone(phone,phone);
+                                        if(ObjectUtils.isEmpty(existdefault)) {
+                                            defaultEnterRepository.save(defaultEnter);
+                                        }
 
                                         response.setCode("1");
                                         response.setMsg("注册成功");

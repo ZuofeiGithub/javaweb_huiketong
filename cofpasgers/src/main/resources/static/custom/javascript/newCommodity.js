@@ -183,7 +183,6 @@ layui.use(['form', 'table','layedit','upload'], function(){
 
             });
         } else if(obj.event === 'edit'){
-            debugger
             $("#myModal").modal('show');  //手动开启
             $("#myModalLabel").text("修改商品")  //手动开启
             $("input[name='flag']").val("2");

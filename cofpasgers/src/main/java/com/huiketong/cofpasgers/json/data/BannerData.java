@@ -7,4 +7,5 @@ public class BannerData {
     String image;
     String url;
     String title;
+    String type; //1.外部url,2.内部view
 }

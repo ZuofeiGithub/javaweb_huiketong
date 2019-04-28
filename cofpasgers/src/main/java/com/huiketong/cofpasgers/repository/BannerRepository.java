@@ -41,10 +41,10 @@ public interface BannerRepository extends JpaRepository<Banner, Integer> {
     void updateLunBo( Integer id);
 
 
-    @Query(value = "update banner  set name=?1 ,descript=?2,trankurl=?3,imgurl=?4,sort=?5 where banner_id=?6 ",nativeQuery = true)
+    @Query(value = "update banner  set name=?1 ,descript=?2,trankurl=?3,imgurl=?4,sort=?5,type=?6 where banner_id=?7 ",nativeQuery = true)
     @Modifying
     @Transactional
-    void updateLunBo(String name, String descript, String trankurl, String imgSrc, Integer sort, Integer id);
+    void updateLunBo(String name, String descript, String trankurl, String imgSrc, Integer sort,Integer type, Integer id);
 
 
 }
