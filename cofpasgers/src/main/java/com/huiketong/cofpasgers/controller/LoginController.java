@@ -184,15 +184,33 @@ public class LoginController {
                     } else if (userRights3 != null && (userRights3.getUserRight().equals(UserType.COMPANY.ordinal()))) {
                         Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
                         if (enterprise != null) {
-                            session.setAttribute("userinfo", enterprise);
-                            session.setAttribute("iswitch",3);
-                            isWhich = 3;
-                            if (MD5Util.validPassword(passward, enterprise.getEnterLoginPwd())) {
-                                bPasswordCorrect = true;
-                            } else {
+                            if(enterprise.getEnterStatus() == 0){
                                 json.clear();
-                                json.put("islogin", EnumLogin.PASSWORDERROR.ordinal());
-                                return JSON.toJSONString(json);
+                                json.put("islogin",EnumLogin.AUTHFIRST.ordinal());
+                            }else{
+                                session.setAttribute("userinfo", enterprise);
+                                session.setAttribute("iswitch",3);
+                                isWhich = 3;
+                                if (MD5Util.validPassword(passward, enterprise.getEnterLoginPwd())) {
+                                    bPasswordCorrect = true;
+                                } else {
+                                    json.clear();
+                                    json.put("islogin", EnumLogin.PASSWORDERROR.ordinal());
+                                    return JSON.toJSONString(json);
+                                }
+
+                                if (random != null && random.equals(verif_code) && bPasswordCorrect) {
+                                    json.clear();
+                                    json.put("islogin", EnumLogin.LOGINSUCCESS.ordinal());
+                                    json.put("username", enterprise.getEnterName());
+                                    json.put("telphone", enterprise.getEnterLoginName());
+                                    json.put("headphoto",enterprise.getEnterLogo());
+                                    json.put("usertype", UserType.COMPANY.ordinal());
+                                    json.put("rightname",userRights3.getRightName());
+                                } else {
+                                    json.clear();
+                                    json.put("islogin", EnumLogin.LOGINFAILED.ordinal());
+                                }
                             }
                         } else {
                             bPasswordCorrect = false;
@@ -200,18 +218,7 @@ public class LoginController {
                             json.put("islogin", EnumLogin.NOUSER.ordinal());
                             return JSON.toJSONString(json);
                         }
-                        if (random != null && random.equals(verif_code) && bPasswordCorrect) {
-                            json.clear();
-                            json.put("islogin", EnumLogin.LOGINSUCCESS.ordinal());
-                            json.put("username", enterprise.getEnterName());
-                            json.put("telphone", enterprise.getEnterLoginName());
-                            json.put("headphoto",enterprise.getEnterLogo());
-                            json.put("usertype", UserType.COMPANY.ordinal());
-                            json.put("rightname",userRights3.getRightName());
-                        } else {
-                            json.clear();
-                            json.put("islogin", EnumLogin.LOGINFAILED.ordinal());
-                        }
+
                     } else {
                         bPasswordCorrect = false;
                         json.clear();

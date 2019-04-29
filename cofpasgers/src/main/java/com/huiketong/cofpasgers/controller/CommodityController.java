@@ -482,10 +482,10 @@ public class CommodityController {
      */
     @RequestMapping(value = "/updateCommodity")
     @ResponseBody
-    public String updateCommodity(HttpServletRequest request, Integer commodityStyleId,Integer commodityCategoryId,Integer id , String commodityName,String danwei, Integer originalPrice, Integer activityPrice, BigDecimal depositMoney, String activityDescription, String productDetails) {
+    public String updateCommodity(HttpServletRequest request, Integer commodityStyleId,Integer commodityCategoryId,Integer id , String commodityName,String danwei, Integer originalPrice, Integer activityPrice, BigDecimal depositMoney, String activityDescription, String productDetails,String label) {
         boolean flag=false;
         try {
-           commodityRepository.updateCommodity(id, commodityName, originalPrice, activityPrice, depositMoney, activityDescription, productDetails,danwei,commodityStyleId,commodityCategoryId);
+           commodityRepository.updateCommodity(id, commodityName, originalPrice, activityPrice, depositMoney, activityDescription, productDetails,danwei,commodityStyleId,commodityCategoryId,label);
            flag=true;
 
         } catch (Exception e) {

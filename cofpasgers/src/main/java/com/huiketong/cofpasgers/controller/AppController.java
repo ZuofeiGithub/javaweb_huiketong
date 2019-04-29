@@ -440,6 +440,59 @@ public class AppController {
         return response;
     }
 
+
+    /**
+     * 企业加盟
+     * @return
+     * @throws FileNotFoundException
+     * @throws ParseException
+     */
+    @PostMapping("joinus")
+    @CrossOrigin
+    public BaseJsonResponse joinUs(String user_id,String token,String enter_name,String enter_contact,String enter_phone,String enter_address) throws ParseException, AlipayApiException {
+        BaseJsonResponse response = new BaseJsonResponse();
+        verifyUser(user_id, token, response, o -> {
+            if(!ObjectUtils.isEmpty(enter_name)&&!ObjectUtils.isEmpty(enter_contact)&&!ObjectUtils.isEmpty(enter_phone)&&!ObjectUtils.isEmpty(enter_address))
+            {
+                if(!ObjectUtils.isEmpty(enterpriseRepository.findEnterpriseByEnterLoginName(enter_phone))){
+                    response.setMsg("您已经加入我们公司,请联系官方人员").setCode("0").setData(null);
+                }else{
+                    Enterprise enterprise = new Enterprise();
+                    enterprise.setEnterLoginName(enter_phone);
+                    enterprise.setEnterStatus(0);
+                    enterprise.setEnterAddress(enter_address);
+                    enterprise.setBrokerage(3000);
+                    enterprise.setEntercomment("");
+                    enterprise.setEnterLegalperson(enter_contact);
+                    try {
+                        enterprise.setEnterLoginPwd(MD5Util.getEncryptedPwd("123456"));
+                    } catch (NoSuchAlgorithmException e) {
+                        e.printStackTrace();
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    enterprise.setEnterName(enter_name);
+                    enterprise.setEnterTelphone(enter_phone);
+                    enterprise.setEstablelishDate(new Date());
+                    enterprise.setPersonOnline(0);
+                    enterprise.setEnterOrder(0);
+                    enterprise.setEnterLogo("");
+                    try {
+                        enterpriseRepository.save(enterprise);
+                        response.setMsg("成功加入").setCode("1").setData(null);
+                    }catch (Exception e){
+                        response.setMsg("加入失败").setCode("0").setData(null);
+                    }
+                }
+
+
+
+            }else{
+                response.setMsg("请将信息填写完整").setCode("0").setData(null);
+            }
+        });
+        return response;
+    }
     /**
      * 修改头像
      *
@@ -575,15 +628,15 @@ public class AppController {
 
                                     if (type.equals(VerifyCodeType.WDPWORD)) {
                                         AlicomDysmsUtil.sendSms(agent.getTelphone(), code, "SMS_152543005");
-                                        saveVerifyCode(type, agent, code, agent.getTelphone());
+                                        sendVerifyCode(type, code, agent);
                                         response.setCode("1").setMsg("发送验证码成功");
                                     } else if (type.equals(VerifyCodeType.CPPWORD)) {
                                         AlicomDysmsUtil.sendSms(agent.getTelphone(), code, "SMS_152547925");
-                                        saveVerifyCode(type, agent, code, agent.getTelphone());
+                                        sendVerifyCode(type, code, agent);
                                         response.setCode("1").setMsg("发送验证码成功");
                                     } else if (type.equals(VerifyCodeType.LOGINEDPWORD)) {
                                         AlicomDysmsUtil.sendSms(agent.getTelphone(), code, "SMS_15242995");
-                                        saveVerifyCode(type, agent, code, agent.getTelphone());
+                                        sendVerifyCode(type, code, agent);
                                         response.setCode("1").setMsg("发送验证码成功");
                                     } else {
                                         response.setMsg("无效类型").setCode("1");
@@ -609,6 +662,15 @@ public class AppController {
         }
 
         return response;
+    }
+
+    private void sendVerifyCode(String type, String code, Agent agent) {
+        Smscode smscode = smscodeRepository.findSmscodeByTelphoneAndType(agent.getTelphone(), type);
+        if (!ObjectUtils.isEmpty(smscode)) {
+            smscodeRepository.updateCodebyTelphone(code, agent.getTelphone(), type);
+        } else {
+            saveVerifyCode(type, agent, code, agent.getTelphone());
+        }
     }
 
     private void saveVerifyCode(String type, Agent agent, String code, String phone) {
@@ -678,21 +740,21 @@ public class AppController {
                                         agentRepository.updateDralPwd(pwordmd5, agent.getId());
                                         response.setCode("1").setMsg("修改提现密码成功");
                                     } catch (Exception e) {
-                                        response.setCode("1").setMsg("修改提现密码失败");
+                                        response.setCode("0").setMsg("修改提现密码失败");
                                         e.printStackTrace();
                                     }
 
                                 } else {
                                     response.setMsg("密码为空");
-                                    response.setCode("1");
+                                    response.setCode("0");
                                 }
                             } else {
-                                response.setMsg("验证码不正确").setCode("1");
+                                response.setMsg("验证码不正确").setCode("0");
                             }
 
                         } else {
                             response.setMsg("验证码不存在");
-                            response.setCode("1");
+                            response.setCode("0");
                         }
                     } else {
                         response.setCode("500").setMsg("Token过时");
@@ -801,6 +863,8 @@ public class AppController {
                     } catch (Exception e) {
                         response.setCode("200").setMsg("签到失败");
                     }
+                }else{
+                    response.setCode("200").setMsg("未开启签到功能");
                 }
             }
         });
@@ -2988,6 +3052,7 @@ public class AppController {
                                 bannerData.setImage(context.getImgurl());
                                 bannerData.setUrl(context.getTrankurl());
                                 bannerData.setTitle(context.getDescript());
+                                bannerData.setType(String.valueOf(context.getType()));
                                 bannerDataList.add(bannerData);
                             }
                             data.setBanner(bannerDataList);
@@ -3668,7 +3733,7 @@ public class AppController {
                 try {
                     voucherUserRepository.save(user);
                     response.setCode("0").setMsg("领取成功").setData(null);
-                    AlicomDysmsUtil.sendSms(phone,code,"SMS_164277629");
+                    AlicomDysmsUtil.sendSms(phone,code,"SMS_164505370");
                 }catch (Exception e){
                     response.setCode("2").setMsg("领取失败").setData(null);
                 }

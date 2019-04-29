@@ -1388,9 +1388,30 @@ html {
     /* 以下为业务自定义样式 */
 }
 
-.bottom-bar .bottom-bar-btn .btn-title {
-    font-size: 0.14rem;
-    font-weight: bold;
+
+/*通用样式*/
+/*手机*/
+@media screen and (max-width:600px){
+    .bottom-bar .bottom-bar-btn .btn-title {
+        font-size: 0.14rem;
+        font-weight: bold;
+    }
+}
+/*平板*/
+@media screen and (min-width:600px) and (max-width:960px){
+    .bottom-bar .bottom-bar-btn .btn-title {
+        font-size: 0.14rem;
+        font-weight: bold;
+        line-height: 83px;
+    }
+}
+/*PC*/
+@media screen and (min-width:960px){
+    .bottom-bar .bottom-bar-btn .btn-title {
+        font-size: 0.14rem;
+        font-weight: bold;
+        line-height: 83px;
+    }
 }
 
 .bottom-bar .bottom-bar-btn .btn-sub-title {
@@ -1403,9 +1424,11 @@ html {
 }
 
 .bottom-bar .bottom-bar-btn.btn-pos-left {
-    border-radius: 0.2rem 0 0 0.2rem;
     background-image: -webkit-linear-gradient(left, #FFC500, #FF9402);
     background-image: linear-gradient(to right, #FFC500, #FF9402);
+    display: block;
+    width: 100% !important;
+    line-height: 44px;
 }
 
 .bottom-bar .bottom-bar-btn.btn-pos-right {

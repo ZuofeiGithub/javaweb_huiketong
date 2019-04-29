@@ -54,10 +54,10 @@ public interface CommodityRepository  extends JpaRepository<Commodity,Integer>, 
     Commodity findPagesByCommodityName(Integer comId, String commodityName);
 
 
-    @Query(value = "update commodity t set t.commodity_name=?2,t.original_price=?3,t.activity_price=?4,t.deposit_money=?5,t.activity_description=?6,t.product_details=?7,t.danwei=?8,t.style_id=?9,t.category_id=?10 where t.id=?1  ",nativeQuery = true)
+    @Query(value = "update commodity t set t.commodity_name=?2,t.original_price=?3,t.activity_price=?4,t.deposit_money=?5,t.activity_description=?6,t.product_details=?7,t.danwei=?8,t.style_id=?9,t.category_id=?10,label=?11 where t.id=?1  ",nativeQuery = true)
     @Modifying
     @Transactional
-    void updateCommodity (Integer id , String commodityName, Integer originalPrice, Integer activityPrice, BigDecimal depositMoney, String activityDescription, String productDetails,String danwei,Integer commodityStyleId,Integer commodityCategoryId);
+    void updateCommodity (Integer id , String commodityName, Integer originalPrice, Integer activityPrice, BigDecimal depositMoney, String activityDescription, String productDetails,String danwei,Integer commodityStyleId,Integer commodityCategoryId,String label);
 
     Commodity findCommoditieByIdAndCompanyId(Integer id,Integer companyId);
 

@@ -3,6 +3,8 @@ package com.huiketong.cofpasgers.service;
 import com.alipay.api.AlipayApiException;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 
 /**

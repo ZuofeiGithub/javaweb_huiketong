@@ -151,6 +151,7 @@ public interface AgentRepository extends JpaRepository<Agent,Integer>, JpaSpecif
 
     @Query(value = "update agent set drawl_pad = ?1 where id = ?2",nativeQuery = true)
     @Modifying
+    @Transactional
     void updateDralPwd(String pwd,Integer userId);
 
     @Query(value = "update agent set password = ?1 where login_username = ?2 or telphone = ?3",nativeQuery = true)

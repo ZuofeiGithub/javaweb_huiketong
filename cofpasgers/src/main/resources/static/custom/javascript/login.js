@@ -65,6 +65,11 @@ $(function () {
                         case 4:
                             layer.msg("验证码失效");
                             break;
+                        case 5:
+                            layer.msg("该企业没有认证");
+                            break;
+                        default:
+                            break;
                     }
                 }
             })

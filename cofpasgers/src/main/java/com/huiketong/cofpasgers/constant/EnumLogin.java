@@ -5,5 +5,6 @@ public enum EnumLogin {
     PASSWORDERROR,//密码错误
     LOGINSUCCESS,//登录成功
     LOGINFAILED,//登录失败
-    CODENOUSED //验证码失效
+    CODENOUSED, //验证码失效
+    AUTHFIRST //请先认证
 }

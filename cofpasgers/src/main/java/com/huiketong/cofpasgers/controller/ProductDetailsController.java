@@ -2,6 +2,7 @@ package com.huiketong.cofpasgers.controller;
 
 import com.huiketong.cofpasgers.entity.Commodity;
 import com.huiketong.cofpasgers.entity.CommodityImg;
+import com.huiketong.cofpasgers.json.data.SpecialofferProductDetailData;
 import com.huiketong.cofpasgers.json.response.BaseJsonResponse;
 import com.huiketong.cofpasgers.repository.CommodityImgRepository;
 import com.huiketong.cofpasgers.repository.CommodityRepository;
@@ -31,23 +32,40 @@ public class ProductDetailsController {
     @ResponseBody
     public BaseJsonResponse pro(Integer goods_id) {
         BaseJsonResponse response = new BaseJsonResponse();
-        if (!ObjectUtils.isEmpty(goods_id)) {
+        if (ObjectUtils.isNotEmpty(goods_id)) {
             Commodity commodity = commodityRepository.findCommodityById(goods_id);
-            if (!ObjectUtils.isEmpty(commodity)) {
-                List<CommodityImg> commodityImgList = commodityImgRepository.findCommodityImgsByCommodityd(commodity.getId());
-                List<String> imageUrl = new ArrayList<>();
-                if(commodityImgList.size() > 0) {
-                    for(CommodityImg commodityImg:commodityImgList) {
-                        imageUrl.add(commodityImg.getCommodityImgUrl());
+            if (ObjectUtils.isNotNull(commodity)) {
+                SpecialofferProductDetailData data = new SpecialofferProductDetailData();
+                List<CommodityImg> commodityImgList = commodityImgRepository.findCommodityImgsByCommodityd(goods_id);
+                List<String> images = new ArrayList<>();
+                if (commodityImgList.size() > 0) {
+
+                    for (CommodityImg commodityImg : commodityImgList) {
+                        images.add(commodityImg.getCommodityImgUrl());
                     }
-                    response.setData(imageUrl).setMsg("获取图片列表成功").setCode("0");
+                    data.setImage(images);
+                    if (ObjectUtils.isNotEmpty(images.get(0))) {
+                        data.setLogo(images.get(0));
+                    }
+                } else {
+                    data.setImage(new ArrayList<>());
+                    data.setLogo("");
                 }
+                data.setTitle(commodity.getCommodityName());
+                data.setId(commodity.getId().toString());
+                data.setUnit(commodity.getDanwei());
+                data.setSale_price(commodity.getActivityPrice().toString());
+                data.setRaw_price(commodity.getOriginalPrice().toString());
+                data.setConcern(commodity.getConcernedPeople().toString());
+                data.setActivity(commodity.getActivityDescription());
+                data.setDetail(commodity.getProductDetails());
+                data.setDeposit(commodity.getDepositMoney().toString());
+                response.setData(data).setMsg("获取商品详情").setCode("1");
             } else {
-                response.setCode("1").setMsg("没有该货物").setData(null);
+                response.setMsg("商品不存在").setCode("2");
             }
-            response.setCode("0").setMsg("获取成功").setData(null);
         } else {
-            response.setCode("1").setMsg("没有该货物详情页").setData(null);
+            response.setMsg("商品不存在").setCode("2");
         }
         return response;
     }
