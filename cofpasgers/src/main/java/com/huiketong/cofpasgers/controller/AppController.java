@@ -3558,7 +3558,7 @@ public class AppController {
                 if(voucherShare.getGoodsId() == 0) {
                     data.setLink_url(voucherShare.getLinkUrl() + "?user_id=" + agent.getId());
                 }else{
-                    data.setLink_url(voucherShare.getLinkUrl() + "?goods_id="+goodsId);
+                    data.setLink_url(voucherShare.getLinkUrl() + "?goods_id="+goodsId+"&user_id="+agent.getId());
                 }
                 data.setContext(voucherShare.getContext());
                 data.setTitle(voucherShare.getTitle());

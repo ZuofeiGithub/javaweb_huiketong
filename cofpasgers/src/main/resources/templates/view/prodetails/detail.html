@@ -379,8 +379,8 @@
                                 <!--<div class="btn-wangwang"><span class="taobao-iconfont ">쁭</span><span class="btn-text">客服</span>-->
                                 <!--</div>-->
                                 <!--<div class="btn-fav"><span class="taobao-iconfont ">뀝</span><span class="btn-text">收藏</span></div>-->
-                                <div class="bottom-bar-btn cart btn-pos-left "><span
-                                        class="btn-title just_pay">立即购买</span>
+                                <div class="bottom-bar-btn just_pay btn-pos-left "><span
+                                        class="btn-title">立即购买</span>
                                     <!-- empty -->
                                 </div>
                                 <!--<div class="bottom-bar-btn buy btn-pos-right "><span class="btn-title">立即购买</span>&lt;!&ndash; empty &ndash;&gt;-->
@@ -444,9 +444,13 @@
                         </div>
                     </div>
                     <style>
+                        @font-face {
+                            font-family: 苹方;
+                            src: url(front/fonts/苹方字体.ttf);
+                        }
                         .report_user {
                             width: 80%;
-                            height: 200px;
+                            height: 250px;
                             top: 50%;
                             left: 50%;
                             margin-top: -75px;
@@ -458,7 +462,7 @@
                             flex-direction: column;
                             justify-content: center;
                             display: none;
-                            border-radius: 4px;
+                            border-radius: 8px;
                         }
 
                         .name {
@@ -475,8 +479,9 @@
                         .name label {
                             font-size: 0.15em;
                             margin-right: 5px;
-                            color: #828282;
+                            color: #333333;
                             font-weight: bold;
+                            font-family: "苹方";
                         }
 
                         .name input {
@@ -485,6 +490,7 @@
                             text-indent: 10px;
                             height: 28px;
                             border-bottom: 1px #ccc solid;
+                            color: #333333;
                         }
 
 
@@ -499,21 +505,36 @@
                             margin: auto;
                         }
                         .title{
+                            margin-top: 30px;
                             text-align: center;
+                            font-family: "苹方 粗体";
                         }
 
                         .phone label {
                             font-size: 0.15em;
                             margin-right: 5px;
-                            color: #828282;
+                            color: #333333;
                             font-weight: bold;
+                            font-family: 苹方;
                         }
-
+                        input::-webkit-input-placeholder{
+                            color:#ccc;
+                        }
+                        input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+                            color:#ccc;
+                        }
+                        input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+                            color:#ccc;
+                        }
+                        input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
+                            color:#ccc;
+                        }
                         .phone input {
                             border: none;
                             font-size: 0.15em;
                             text-indent: 10px;
                             height: 28px;
+                            color: #333333;
                             border-bottom: 1px #ccc solid;
                         }
 
@@ -525,32 +546,53 @@
 
                         .sumit_btn {
                             display: block;
-                            width: 60%;
+                            width: 150px;
                             height: 30px;
-                            background-color: #3341ff;
+                            background-color: #ff5220;
                             color: #fff;
                             font-size: 0.15em;
-                            margin: 10px auto;
+                            margin: 30px auto;
                             border: none;
+                            border-radius: 5px;
                         }
 
                         .sumit_btn:hover {
-                            background-color: #506eff;
+                            background-color: #ff5220;
                         }
 
                         .sumit_btn:focus {
-                            background-color: #4e93ff;
+                            background-color: #ff5220;
                         }
 
                         .sumit_btn:active {
-                            background-color: #5599ff;
+                            background-color: #ff5220;
+                        }
+                        .close {
+                            color: red;
+
+                            border-radius: 12px;
+                            line-height: 20px;
+                            text-align: center;
+                            height: 20px;
+                            width: 20px;
+                            font-size: 18px;
+                            line-height: 18px;
+                            padding: 1px;
+                            top: 0px;
+                            right: 0px;
+                            position: absolute;
+                        }
+                        /* use cross as close button */
+                        .close::before {
+                            content: "\2716";
                         }
                     </style>
                     <div class="report_user" hidden>
+                        <span class="close"></span>
                         <div class="title"><p>请填写您的资料</p></div>
                         <div class="context">
-                            <div class="name"><label>客户姓名</label><input type="text" placeholder="请输入姓名"></div>
-                            <div class="phone"><label>客户电话</label><input type="tel" placeholder="请输入联系方式"></div>
+                            <div class="name"><label>客户姓名:</label><input id="name" type="text" placeholder="请输入姓名"></div>
+                            <div class="phone"><label>客户电话:</label><input id="phone" type="tel" placeholder="请输入联系方式"></div>
                         </div>
 
                         <button class="sumit_btn">提交</button>
@@ -587,8 +629,32 @@
             $('.detail-content').append(resp.data.detail)
 
         })
+
+        $('body').click(function(e) {
+            var target = $(e.target);
+            console.log(target);
+            if(target.is('.close')) {
+                if ( $('.report_user').is(':visible') ) {
+                    $('.report_user').hide();
+                }
+            }
+        });
         $('.just_pay').click(function () {
             $('.report_user').show();
+        })
+
+        $('.sumit_btn').click(function(){
+            var name = $('#name').val();
+            var phone = $('#phone').val();
+            
+            $.post('api/addvoucheruser',{user_id:GetQueryString('user_id'),user_name:name,phone:phone},function (resp) {
+                if(resp.code == "0"){
+                    alert(resp.msg);
+                }else{
+                    alert(resp.msg);
+                }
+            })
+
         })
     });
 </script>
