@@ -20,7 +20,7 @@ public interface BannerRepository extends JpaRepository<Banner, Integer> {
 
     Banner findBannerByName(String name);
 
-    List<Banner> findBannersByCompanyIdAndStatusOrderByCreateDate(Integer company_id,Integer status);
+    List<Banner> findBannersByCompanyIdAndStatusOrderBySortAsc(Integer company_id, Integer status);
 
     @Override
     @Transactional

@@ -250,7 +250,7 @@ public class AppController {
                 if (agent != null) {
                     if (token != null && token.equals(agent.getAccessToken())) {
                         if (defaultEnter != null) {
-                            List<Banner> bannerList = bannerRepository.findBannersByCompanyIdAndStatusOrderByCreateDate(defaultEnter.getCompayId(), 1);
+                            List<Banner> bannerList = bannerRepository.findBannersByCompanyIdAndStatusOrderBySortAsc(defaultEnter.getCompayId(), 1);
                             if (bannerList.size() > 0) {
                                 for (Banner banner : bannerList) {
                                     BannerData bannerData = new BannerData();
@@ -3044,7 +3044,7 @@ public class AppController {
                 Agent agent = agentRepository.findAgentByTelphoneAndCompanyIdOrLoginUsernameAndCompanyId(defaultEnter.getUserTelphone(), defaultEnter.getCompayId(), defaultEnter.getUserId(), defaultEnter.getCompayId());
                 if (ObjectUtils.isNotNull(agent)) {
                     if (ObjectUtils.isNotEmpty(token) && token.equals(agent.getAccessToken())) {
-                        List<Banner> bannerList = bannerRepository.findBannersByCompanyIdAndStatusOrderByCreateDate(agent.getCompanyId(), 1);
+                        List<Banner> bannerList = bannerRepository.findBannersByCompanyIdAndStatusOrderBySortAsc(agent.getCompanyId(), 1);
                         List<BannerData> bannerDataList = new ArrayList<>();
                         if (bannerList.size() > 0) {
                             for (Banner context : bannerList) {
