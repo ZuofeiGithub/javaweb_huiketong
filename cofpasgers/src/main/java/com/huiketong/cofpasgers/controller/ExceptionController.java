@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ExceptionController {
 
     @GetMapping(value = "hello")
-    public void hello(){
-        int a = 1/0;
+    public void hello() {
+        int a = 1 / 0;
     }
 
     @GetMapping(value = "/aerator")
-    public String error(){
+    public String error() {
         return "aerator";
     }
 
     @PostMapping(value = "/getAjaxerror")
     @ResponseBody
-    public JSONResult getAjaxerror(){
-        int a = 1/0;
+    public JSONResult getAjaxerror() {
+        int a = 1 / 0;
         return JSONResult.ok();
     }
 }

@@ -77,10 +77,10 @@ public class CustomerController {
 
     @PostMapping(value = "add_customer")
     @ResponseBody
-    public BaseJsonResponse addCustomer(String custName, String phone, String address, String occupation, String sex,Integer agentId) {
+    public BaseJsonResponse addCustomer(String custName, String phone, String address, String occupation, String sex, Integer agentId) {
         BaseJsonResponse response = new BaseJsonResponse();
 
-        if (custName != null && phone != null && address != null && sex != null  && agentId != null) {
+        if (custName != null && phone != null && address != null && sex != null && agentId != null) {
             Customer existCustomer = customerRepository.findCustomerByCustomerNameAndTelphone(custName, phone);
             if (existCustomer != null) {
                 response.setCode("2");
@@ -99,8 +99,7 @@ public class CustomerController {
                 if (agent != null) {
                     agentRepository.updateCustomeNum(agentId, agent.getCompanyId());
                     customer.setCompanyId(agent.getCompanyId());
-                    if(ObjectUtils.isNotEmpty(agent.getAgentName()))
-                    {
+                    if (ObjectUtils.isNotEmpty(agent.getAgentName())) {
                         customer.setAgentName(agent.getAgentName());
                     }
                     customerRepository.save(customer);
@@ -114,10 +113,9 @@ public class CustomerController {
                     pointDetail.setType(PointType.RECOM.ordinal());
                     pointDetail.setUserId(agent.getId());
                     IntegralRule integralRule = integralRuleRepository.findIntegralRuleByCompanyId(agent.getCompanyId());
-                    if(ObjectUtils.isNotNull(integralRule))
-                    {
+                    if (ObjectUtils.isNotNull(integralRule)) {
                         pointDetail.setPoint(integralRule.getRecomIntegral());
-                    }else{
+                    } else {
                         pointDetail.setPoint(0);
                     }
                     pointDetailRepository.save(pointDetail);
@@ -145,7 +143,7 @@ public class CustomerController {
 
     @PostMapping(value = "modifycuststatus")
     @ResponseBody
-    public BaseJsonResponse modify(Integer id, Integer status, String user_id, BigDecimal signprice,String reason) {
+    public BaseJsonResponse modify(Integer id, Integer status, String user_id, BigDecimal signprice, String reason) {
         BaseJsonResponse response = new BaseJsonResponse();
         if (id != null && status != null) {
             Customer customer = customerRepository.findCustomerById(id);
@@ -195,7 +193,7 @@ public class CustomerController {
                                     } else {
                                         response.setCode("4").setMsg("暂无佣金");
                                     }
-                                }else{
+                                } else {
                                     response.setMsg("佣金没有设置").setCode("100");
                                 }
                             }
@@ -217,10 +215,10 @@ public class CustomerController {
                                                 if (ObjectUtils.isNotNull(agent)) {
                                                     if (agent.getType() == 0 || agent.getType() == 1) {
                                                         present1 = commission.getFirstPercentage();
-                                                        money1 = signprice.multiply(new BigDecimal(commission.getFirstPercentage() / 100.00)).setScale(2,BigDecimal.ROUND_HALF_UP);
+                                                        money1 = signprice.multiply(new BigDecimal(commission.getFirstPercentage() / 100.00)).setScale(2, BigDecimal.ROUND_HALF_UP);
                                                     } else {
                                                         present1 = commission.getOfirstPercentage();
-                                                        money1 = signprice.multiply(new BigDecimal(commission.getOfirstPercentage() / 100.00)).setScale(2,BigDecimal.ROUND_HALF_UP);
+                                                        money1 = signprice.multiply(new BigDecimal(commission.getOfirstPercentage() / 100.00)).setScale(2, BigDecimal.ROUND_HALF_UP);
                                                     }
                                                     Earnings earnings = new Earnings();
                                                     earnings.setMoney(money1);
@@ -232,7 +230,7 @@ public class CustomerController {
                                                     earnings.setCusname(customer.getCustomerName());
                                                     earnings.setAngentname(customer.getAgentName());
                                                     earnings.setCusnamePhone(customer.getTelphone());
-                                                    earnings.setCommissionpercentage(""+present1+"%");
+                                                    earnings.setCommissionpercentage("" + present1 + "%");
                                                     earnings.setCommissionlevel("1级佣金");
                                                     agentRepository.updateScore(money1, customer.getAgentId(), customer.getCompanyId());
                                                     earningsRepository.save(earnings);
@@ -240,31 +238,30 @@ public class CustomerController {
                                                         Notice notice = new Notice();
                                                         notice.setAgentName(agent.getAgentName());
                                                         notice.setCompanyId(customer.getCompanyId());
-                                                        notice.setContext(agent.getAgentName()+"的客户已签约,获得佣金"+money1);
+                                                        notice.setContext(agent.getAgentName() + "的客户已签约,获得佣金" + money1);
                                                         notice.setScore(money1);
                                                         notice.setAddTime(new Date());
                                                         noticeRepository.save(notice);
-                                                        agentRepository.updateDealNum(agent.getId(),agent.getCompanyId());
+                                                        agentRepository.updateDealNum(agent.getId(), agent.getCompanyId());
                                                     }
                                                     Agent superAgent = agentRepository.findSuperById(customer.getAgentId(), customer.getCompanyId());
                                                     if (ObjectUtils.isNotNull(superAgent)) {
-                                                        if(superAgent.getType() == 0 || superAgent.getType() == 1)
-                                                        {
+                                                        if (superAgent.getType() == 0 || superAgent.getType() == 1) {
                                                             present2 = commission.getSecondPercentage();
-                                                            money2 = signprice.multiply(new BigDecimal(commission.getSecondPercentage() / 100.00)).setScale(2,BigDecimal.ROUND_HALF_UP);
-                                                        }else{
+                                                            money2 = signprice.multiply(new BigDecimal(commission.getSecondPercentage() / 100.00)).setScale(2, BigDecimal.ROUND_HALF_UP);
+                                                        } else {
                                                             present2 = commission.getOsecondPercentage();
-                                                            money2 = signprice.multiply(new BigDecimal(commission.getOsecondPercentage() / 100.00)).setScale(2,BigDecimal.ROUND_HALF_UP);
+                                                            money2 = signprice.multiply(new BigDecimal(commission.getOsecondPercentage() / 100.00)).setScale(2, BigDecimal.ROUND_HALF_UP);
                                                         }
                                                         Earnings earnings1 = new Earnings();
                                                         earnings1.setUserId(superAgent.getId());
                                                         earnings1.setCusname(customer.getCustomerName());
                                                         earnings1.setAngentname(customer.getAgentName());
                                                         earnings1.setCusnamePhone(customer.getTelphone());
-                                                        earnings1.setCommissionpercentage(""+present2+"%");
+                                                        earnings1.setCommissionpercentage("" + present2 + "%");
                                                         earnings1.setCommissionlevel("2级佣金");
                                                         earnings1.setComId(customer.getCompanyId());
-                                                        earnings1.setDescript(agent.getAgentName()+"的客户已签合同");
+                                                        earnings1.setDescript(agent.getAgentName() + "的客户已签合同");
                                                         earnings1.setAddTime(new Date());
                                                         earnings1.setMoney(money2);
                                                         earnings1.setType(4);
@@ -298,19 +295,19 @@ public class CustomerController {
                             } else {
                                 response.setMsg("请先填写签单价格").setCode("200");
                             }
-                        }else if(status == 9){
-                            if(ObjectUtils.isNotEmpty(reason)){
+                        } else if (status == 9) {
+                            if (ObjectUtils.isNotEmpty(reason)) {
                                 try {
-                                    customerRepository.updateReason(reason,customer.getId());
+                                    customerRepository.updateReason(reason, customer.getId());
                                     customerRepository.updateVerifyStatus(status, id);
                                     response.setMsg("状态修改成功").setCode("9");
-                                }catch (Exception e){
+                                } catch (Exception e) {
                                     response.setCode("9").setMsg("修改失败");
                                 }
-                            }else{
+                            } else {
                                 response.setMsg("拒绝理由不能为空").setCode("9");
                             }
-                        }else {
+                        } else {
                             response.setMsg("状态修改成功").setCode("1");
                             customerRepository.updateVerifyStatus(status, id);
                         }

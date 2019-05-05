@@ -33,10 +33,11 @@ public class PayNotifyController {
     @Autowired
     private WXPayClient wxPayClient;
     private static final Logger logger = LoggerFactory.getLogger(PayNotifyController.class);
+
     @RequestMapping("notify")
     @ResponseBody
     @CrossOrigin
-    public String payNotify(HttpServletRequest request, HttpServletResponse response){
+    public String payNotify(HttpServletRequest request, HttpServletResponse response) {
         logger.error("调用回调接口");
         SortedMap<String, String> map = null;
         try {
@@ -62,15 +63,15 @@ public class PayNotifyController {
                 if (!map.get("result_code").equals("SUCCESS")) {
                     return_data.put("return_code", "FAIL");
                     return_data.put("return_msg", "result_code不正确");
-                    orderRepository.updateStatusByOrderStatusNum(9,out_trade_no);
+                    orderRepository.updateStatusByOrderStatusNum(9, out_trade_no);
                 }
 
                 String time_end = map.get("time_end");
                 BigDecimal total_fee = new BigDecimal(map.get("total_fee"));
-                System.out.println("out_trade_no:"+out_trade_no);
+                System.out.println("out_trade_no:" + out_trade_no);
                 //付款完成后，支付宝系统发送该交易状态通知
                 logger.error("交易成功");
-                orderRepository.updateStatusByOrderStatusNum(1,out_trade_no);
+                orderRepository.updateStatusByOrderStatusNum(1, out_trade_no);
                /* Map order = orderdao.PaymentEndGetOrderInfo(out_trade_no);
                 if (order == null) {
                     System.out.println("订单不存在");

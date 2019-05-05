@@ -276,14 +276,14 @@ public class EnterpriseController {
                         bannerRepository.save(banner);
                     }
 
-                    JSONArray jsonArray=new JSONArray();
-                    Integer[] dials = {10,10,10,10,10,10,10,10};
-                    Integer[] probability = {10,20,30,5,5,10,10,10};
-                    for(int i=0;i<dials.length;i++){
-                        JSONObject jsonObject=new JSONObject();
-                        jsonObject.put("id",i);
-                        jsonObject.put("integral",dials[i]);
-                        jsonObject.put("probability",probability[i]);
+                    JSONArray jsonArray = new JSONArray();
+                    Integer[] dials = {10, 10, 10, 10, 10, 10, 10, 10};
+                    Integer[] probability = {10, 20, 30, 5, 5, 10, 10, 10};
+                    for (int i = 0; i < dials.length; i++) {
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("id", i);
+                        jsonObject.put("integral", dials[i]);
+                        jsonObject.put("probability", probability[i]);
                         jsonArray.add(jsonObject);
                     }
                     Agent agent = new Agent();
@@ -316,7 +316,7 @@ public class EnterpriseController {
                     agent.setAvatar(enterLogo);
                     agentRepository.save(agent);
                     // System.out.println(jsonArray);
-                    IntegralRule integralRule=new IntegralRule();
+                    IntegralRule integralRule = new IntegralRule();
                     integralRule.setCompanyId(enterprise1.getId());
                     integralRule.setMinPrice(10);
                     integralRule.setRmbForPoint(10);

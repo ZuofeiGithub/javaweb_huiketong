@@ -21,39 +21,37 @@ public class IntegralRule {
     Integer companyId;
 
     @Column(columnDefinition = "int(11) default 0 COMMENT '最低兑换金额'")
-    Integer minPrice ;
+    Integer minPrice;
 
     @Column(columnDefinition = "int(11) default 0 COMMENT '1元=多少积分'")
-    Integer  rmbForPoint;
+    Integer rmbForPoint;
 
     @Column(columnDefinition = "int(4) default 1 COMMENT '是否开启积分兑换 1 不开启 2开启'")
-    Integer isPoint ;
+    Integer isPoint;
 
     @Column(columnDefinition = "int(4) default 1 COMMENT '是否开启抽奖功能 1 不开启 2 开启'")
-    Integer isOpenLotto ;
+    Integer isOpenLotto;
 
     @Column(columnDefinition = "varchar(1024) default '' COMMENT '8个奖项'")
-    String dials ;
+    String dials;
 
     @Column(columnDefinition = "int(11) default 0 COMMENT '消费积分 多少积分抽奖一次'")
-    Integer consume ;
+    Integer consume;
 
     @Column(columnDefinition = "int(11) default 0 COMMENT '登录奖励'")
-    Integer loginIntegral ;
+    Integer loginIntegral;
 
     @Column(columnDefinition = "int(11) default 0 COMMENT '签到奖励'")
-    Integer signIntegral ;
+    Integer signIntegral;
 
     @Column(columnDefinition = "int(11) default 0 COMMENT '推荐客户奖励'")
-    Integer recomIntegral ;
+    Integer recomIntegral;
 
     @Column(columnDefinition = "int(11) default 0 COMMENT '认证奖励'")
-    Integer authIntegral ;
+    Integer authIntegral;
 
     @Column(columnDefinition = "int(11) default 0 COMMENT '邀请奖励'")
-    Integer inviteIntegral ;
-
-
+    Integer inviteIntegral;
 
 
 }

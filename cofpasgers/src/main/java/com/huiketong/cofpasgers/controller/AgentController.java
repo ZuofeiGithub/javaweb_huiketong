@@ -214,7 +214,7 @@ public class AgentController {
                     newagent.setAvatar("");
                     String inviteCode = SerialGeneratorUtil.GetRandomString(8);
                     newagent.setInitCode(inviteCode);
-                    service.registerUser("c"+inviteCode,"123456");
+                    service.registerUser("c" + inviteCode, "123456");
                     newagent.setRegDatetime(new Date());
                     agentRepository.save(newagent);
                     CompanyBindUser existCompanyUser = companyUserRepository.findCompanyBindUserByUserTelAndCompanyId(agentTelphone, enterprise.getId());
@@ -270,7 +270,7 @@ public class AgentController {
 
     @PostMapping("authuser")
     @ResponseBody
-    public BaseJsonResponse authUser(Integer id){
+    public BaseJsonResponse authUser(Integer id) {
         BaseJsonResponse response = new BaseJsonResponse();
         Agent agent = agentRepository.findAgentById(id);
         if (ObjectUtils.isNotNull(agent)) {
@@ -288,8 +288,7 @@ public class AgentController {
                     pointDetail.setType(PointType.AUTH.ordinal());
                     pointDetail.setUserId(agent.getId());
                     IntegralRule integralRule = integralRuleRepository.findIntegralRuleByCompanyId(agent.getCompanyId());
-                    if(ObjectUtils.isNotNull(integralRule))
-                    {
+                    if (ObjectUtils.isNotNull(integralRule)) {
                         pointDetail.setPoint(integralRule.getAuthIntegral());
                         pointDetailRepository.save(pointDetail);
                     }
@@ -302,25 +301,23 @@ public class AgentController {
     }
 
     @GetMapping("showCustomer")
-    public Object showCustomer(Integer id,Integer companyId){
-            ModelAndView mv = new ModelAndView(Constant.PREFIX+"recustomer");
-            return mv;
+    public Object showCustomer(Integer id, Integer companyId) {
+        ModelAndView mv = new ModelAndView(Constant.PREFIX + "recustomer");
+        return mv;
     }
 
     @GetMapping("agentcustomer")
     @ResponseBody
-    public JSONData showAgentCustomers(Integer id,Integer page,Integer limit){
+    public JSONData showAgentCustomers(Integer id, Integer page, Integer limit) {
         JSONData data = new JSONData();
-        if(ObjectUtils.isNotEmpty(id)&&ObjectUtils.isNotEmpty(page)&&ObjectUtils.isNotEmpty(limit))
-        {
-            List<Customer> customerList = customerRepository.findAllCustomers(id,(page-1)*limit,limit);
-            if(customerList.size() > 0)
-            {
+        if (ObjectUtils.isNotEmpty(id) && ObjectUtils.isNotEmpty(page) && ObjectUtils.isNotEmpty(limit)) {
+            List<Customer> customerList = customerRepository.findAllCustomers(id, (page - 1) * limit, limit);
+            if (customerList.size() > 0) {
                 data.setCount(customerList.size()).setData(customerList).setCode(0).setMsg("");
-            }else{
+            } else {
                 data.setCount(0).setData(new ArrayList<>()).setCode(0).setMsg("");
             }
-        }else{
+        } else {
             data.setCount(0).setData(new ArrayList<>()).setCode(0).setMsg("");
         }
 

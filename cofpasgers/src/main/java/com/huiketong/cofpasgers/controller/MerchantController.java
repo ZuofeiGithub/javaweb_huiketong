@@ -24,35 +24,36 @@ public class MerchantController {
     MerchantsRepository merchantsRepository;
     @Autowired
     EnterpriseRepository enterpriseRepository;
+
     @GetMapping(value = "merchant")
-    public ModelAndView Merchant(){
+    public ModelAndView Merchant() {
         ModelAndView mv = new ModelAndView("merchant");
         return mv;
     }
 
     @PostMapping(value = "getMerInfo")
     @ResponseBody
-    public Object GetMerInfo(HttpServletRequest request){
+    public Object GetMerInfo(HttpServletRequest request) {
         String login_id = request.getParameter("login_id");
-        Map<String,Object>  map = new HashMap<>();
-        if(ObjectUtils.isNotEmpty(login_id)){
-            Enterprise enterprise=enterpriseRepository.findEnterpriseByEnterLoginName(login_id);
-            if(ObjectUtils.isNotNull(enterprise)){
+        Map<String, Object> map = new HashMap<>();
+        if (ObjectUtils.isNotEmpty(login_id)) {
+            Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(login_id);
+            if (ObjectUtils.isNotNull(enterprise)) {
                 List<Merchants> merchantsList = merchantsRepository.findMerchantsByEnterId(enterprise.getId());
-                if(merchantsList.size() > 0)
-                {
-                    map.put("data",merchantsList);
-                }else{
-                    map.put("data","");
+                if (merchantsList.size() > 0) {
+                    map.put("data", merchantsList);
+                } else {
+                    map.put("data", "");
                 }
             }
 
         }
         return map;
     }
+
     @PostMapping(value = "addMerchant")
     @ResponseBody
-    public Object AddMerchant(HttpServletRequest request){
+    public Object AddMerchant(HttpServletRequest request) {
         String merName = request.getParameter("merName");
         String merAddress = request.getParameter("merAddress");
         String merUrl = request.getParameter("merUrl");
@@ -61,31 +62,30 @@ public class MerchantController {
         String enterId = request.getParameter("enterId");
         BaseJsonResponse response = new BaseJsonResponse();
         Merchants merchants = new Merchants();
-        if(merName!=null){
+        if (merName != null) {
             merchants.setMerName(merName);
         }
-        if(merAddress!=null){
+        if (merAddress != null) {
             merchants.setMerAddress(merAddress);
         }
-        if(merUrl !=null){
+        if (merUrl != null) {
             merchants.setMerUrl(merUrl);
         }
-        if(merOrder!=null&&!merOrder.isEmpty()){
+        if (merOrder != null && !merOrder.isEmpty()) {
             merchants.setMerOrder(Integer.parseInt(merOrder));
         }
-        if(merLogo !=null){
+        if (merLogo != null) {
             merchants.setMerLogo(merLogo);
         }
-        if(enterId != null){
+        if (enterId != null) {
             Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(enterId);
-            if(enterprise != null)
-            {
-               // merchants.setCompanyId(enterprise.getId());
+            if (enterprise != null) {
+                // merchants.setCompanyId(enterprise.getId());
                 merchants.setEnterId(enterprise.getId());
                 merchantsRepository.save(merchants);
                 response.setMsg("添加合作商家信息成功");
                 response.setCode("1");
-            }else{
+            } else {
                 response.setCode("200");
                 response.setMsg("企业不存在");
             }

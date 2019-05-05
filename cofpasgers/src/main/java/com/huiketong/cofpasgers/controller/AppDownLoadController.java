@@ -14,8 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class AppDownLoadController {
 
     @GetMapping(value = "appdownload")
-    public ModelAndView AppDownLoad(){
-        ModelAndView mv = new ModelAndView(Constant.PREFIX+"app_download");
+    public ModelAndView AppDownLoad() {
+        ModelAndView mv = new ModelAndView(Constant.PREFIX + "app_download");
         return mv;
     }
 }

@@ -27,10 +27,10 @@ import java.util.List;
 @RequestMapping(value = "/")
 public class NewFinanceController {
 
-    private  final  static Logger log = LoggerFactory.getLogger(NewFinanceController.class);
+    private final static Logger log = LoggerFactory.getLogger(NewFinanceController.class);
 
-     @Autowired
-     EarningsRepository earningsRepository;
+    @Autowired
+    EarningsRepository earningsRepository;
 
     @Autowired
     EnterpriseRepository enterpriseRepository;
@@ -40,6 +40,7 @@ public class NewFinanceController {
 
     /**
      * 进入奖励明细页面
+     *
      * @return
      */
     @RequestMapping(value = "/jiangliJsp")
@@ -50,6 +51,7 @@ public class NewFinanceController {
 
     /**
      * 进入提现明细页面
+     *
      * @return
      */
     @RequestMapping(value = "/tixianJsp")
@@ -60,6 +62,7 @@ public class NewFinanceController {
 
     /**
      * 进入提现审批页面
+     *
      * @return
      */
     @RequestMapping(value = "/tixianspJsp")
@@ -70,25 +73,26 @@ public class NewFinanceController {
 
     /**
      * 进入奖励明细列表
+     *
      * @param page
      * @param limit
      * @param telphone
-    * @param angentname
+     * @param angentname
      * @param cusname
      * @return
      */
     @RequestMapping(value = "/jiangliList")
     @ResponseBody
-    public JSONData yongjinList(Integer page, Integer limit , String  telphone, String angentname,String cusname) {
-       Enterprise enterprise=enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
-        int comId=enterprise.getId();
+    public JSONData yongjinList(Integer page, Integer limit, String telphone, String angentname, String cusname) {
+        Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
+        int comId = enterprise.getId();
         JSONData response = new JSONData();
-        List<Earnings> shareContextList= earningsRepository.findPagesByLimit(comId,angentname,cusname,(page-1)*limit,limit);
+        List<Earnings> shareContextList = earningsRepository.findPagesByLimit(comId, angentname, cusname, (page - 1) * limit, limit);
 
         if (shareContextList.size() > 0) {
             response.setCode(0);
             response.setData(shareContextList);
-            response.setCount((int) earningsRepository.count(comId,angentname,cusname));
+            response.setCount((int) earningsRepository.count(comId, angentname, cusname));
             response.setMsg("");
         } else {
             response.setCode(0);
@@ -102,6 +106,7 @@ public class NewFinanceController {
 
     /**
      * 提现明细列表
+     *
      * @param page
      * @param limit
      * @param telphone
@@ -111,16 +116,16 @@ public class NewFinanceController {
      */
     @RequestMapping(value = "/tixianList")
     @ResponseBody
-    public JSONData tixianList(Integer page, Integer limit , String  telphone, String angentname,String status,Integer  userid) {
-        Enterprise enterprise=enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
-        int comId=enterprise.getId();
+    public JSONData tixianList(Integer page, Integer limit, String telphone, String angentname, String status, Integer userid) {
+        Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
+        int comId = enterprise.getId();
         JSONData response = new JSONData();
-        List<WithdrawalDetails> shareContextList= withdrawalDetailsRepository.findPagesByLimit(comId,angentname,userid,status,(page-1)*limit,limit);
+        List<WithdrawalDetails> shareContextList = withdrawalDetailsRepository.findPagesByLimit(comId, angentname, userid, status, (page - 1) * limit, limit);
 
         if (shareContextList.size() > 0) {
             response.setCode(0);
             response.setData(shareContextList);
-            response.setCount((int) withdrawalDetailsRepository.count(comId,angentname,userid,status));
+            response.setCount((int) withdrawalDetailsRepository.count(comId, angentname, userid, status));
             response.setMsg("");
         } else {
             response.setCode(0);
@@ -134,6 +139,7 @@ public class NewFinanceController {
 
     /**
      * 提现审批
+     *
      * @param descript
      * @param status
      * @param id
@@ -141,20 +147,20 @@ public class NewFinanceController {
      */
     @RequestMapping(value = "/updateTixian")
     @ResponseBody
-    public String updateTixian(String descript,String status,Integer id ) {
+    public String updateTixian(String descript, String status, Integer id) {
 
-        boolean flag=false;
+        boolean flag = false;
         try {
-            withdrawalDetailsRepository.updateTixian(id,descript,status,new Date());
-            flag=true;
+            withdrawalDetailsRepository.updateTixian(id, descript, status, new Date());
+            flag = true;
         } catch (Exception e) {
             log.info(e.getMessage());
             e.printStackTrace();
         }
 
-        if(flag==true){
+        if (flag == true) {
             return "1";
-        }else{
+        } else {
             return "0";
         }
     }

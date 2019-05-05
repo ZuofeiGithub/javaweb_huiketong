@@ -30,31 +30,31 @@ public class SystemController {
     @GetMapping(value = "/getuser")
     @ResponseBody
     @CrossOrigin
-    public Object GetUsers(){
+    public Object GetUsers() {
         Map<String, Object> map = new HashMap<>();
         List<SystemUser> userList = systemUserRepository.findAll();
-        map.put("data",userList);
+        map.put("data", userList);
         return map;
     }
+
     /**
      * 添加系统用户
      */
     @PostMapping(value = "/adduser")
     @ResponseBody
     @CrossOrigin
-    public String addUser(HttpServletRequest request){
+    public String addUser(HttpServletRequest request) {
         String user_name = request.getParameter("user_name");
         String telphone = request.getParameter("telphone");
         String user_pwd = request.getParameter("user_pwd");
         String login_name = request.getParameter("login_name");
 
-        SystemUser existuser = userRepository.findSystemUserByTelphoneOrLoginName(telphone,user_name);
-        if(existuser != null)
-        {
+        SystemUser existuser = userRepository.findSystemUserByTelphoneOrLoginName(telphone, user_name);
+        if (existuser != null) {
             return "用户已经存在";
         }
         try {
-            String pwd  = MD5Util.getEncryptedPwd(user_pwd);
+            String pwd = MD5Util.getEncryptedPwd(user_pwd);
             SystemUser user = new SystemUser();
             user.setUsername(user_name);
             user.setLoginPassward(pwd);
@@ -81,11 +81,11 @@ public class SystemController {
     @ResponseBody
     public BaseJsonResponse ModifyPwd(String pwd) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         BaseJsonResponse response = new BaseJsonResponse();
-        String md5pwd  = MD5Util.getEncryptedPwd(pwd);
+        String md5pwd = MD5Util.getEncryptedPwd(pwd);
         try {
-            userRepository.updateUserPwd(md5pwd,"12345678901");
+            userRepository.updateUserPwd(md5pwd, "12345678901");
             response.setMsg("修改成功").setCode("2");
-        }catch (Exception e){
+        } catch (Exception e) {
             response.setMsg("修改失败").setCode("2");
         }
 
@@ -94,14 +94,13 @@ public class SystemController {
 
     @PostMapping(value = "menus")
     @ResponseBody
-    public BaseJsonResponse menuList(){
+    public BaseJsonResponse menuList() {
         BaseJsonResponse response = new BaseJsonResponse();
         List<MenuData> dataList = new ArrayList<>();
-        for(int i = 0; i < 4;i++)
-        {
+        for (int i = 0; i < 4; i++) {
             MenuData data = new MenuData();
             data.setId(String.valueOf(i));
-            data.setName("菜单项"+i);
+            data.setName("菜单项" + i);
             data.setUrl("1111");
             data.setPid(String.valueOf(0));
             dataList.add(data);

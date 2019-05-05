@@ -17,7 +17,7 @@ import java.util.List;
  * @Version 1.0
  */
 public class AppPush extends PushBase {
-    public static void pushToSigle(String deviceId,String title,String context) {
+    public static void pushToSigle(String deviceId, String title, String context) {
         //显示每个用户的用户状态，false:不显示，true：显示
         System.setProperty("gexin.rp.sdk.pushlist.needDetails", "true");
 
@@ -45,7 +45,7 @@ public class AppPush extends PushBase {
             template.setTransmissionType(2);                // 收到消息是否立即启动应用，1为立即启动，2则广播等待客户端自启动
 
             JSONObject json = new JSONObject();
-            json.put("type","report_notify");
+            json.put("type", "report_notify");
             template.setTransmissionContent(json.toJSONString());  // 透传内容（点击通知后SDK将透传内容传给你的客户端，需要客户端做相应开发）
 
             message.setData(template);

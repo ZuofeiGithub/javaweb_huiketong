@@ -9,8 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController {
 
     @GetMapping(value = "home")
-    public ModelAndView Agent(){
-        ModelAndView mv = new ModelAndView(Constant.PREFIX+"home");
+    public ModelAndView Agent() {
+        ModelAndView mv = new ModelAndView(Constant.PREFIX + "home");
         return mv;
     }
 }

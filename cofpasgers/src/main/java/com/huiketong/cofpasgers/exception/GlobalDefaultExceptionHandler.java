@@ -18,9 +18,9 @@ import javax.servlet.http.HttpServletRequest;
  */
 //@ControllerAdvice
 public class GlobalDefaultExceptionHandler {
-   //@ExceptionHandler(Exception.class)
+    //@ExceptionHandler(Exception.class)
     @ResponseBody
-    public ModelAndView defaultExceptionHandler(HttpServletRequest request,Exception e){
+    public ModelAndView defaultExceptionHandler(HttpServletRequest request, Exception e) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("404.html");
         return mv;

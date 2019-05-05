@@ -29,14 +29,16 @@ import java.util.List;
 @RequestMapping(value = "/")
 public class NewLunBoImgController {
 
-    private  final  static Logger log = LoggerFactory.getLogger(NewLunBoImgController.class);
+    private final static Logger log = LoggerFactory.getLogger(NewLunBoImgController.class);
 
-     @Autowired
-     BannerRepository bannerRepository;
-     @Autowired
+    @Autowired
+    BannerRepository bannerRepository;
+    @Autowired
     EnterpriseRepository enterpriseRepository;
+
     /**
      * 进入轮播图操作页面
+     *
      * @return
      */
     @RequestMapping(value = "/lunBoJsp")
@@ -48,25 +50,26 @@ public class NewLunBoImgController {
 
     /**
      * 轮播图列表
+     *
      * @param page
      * @param limit
      * @param telphone
-     * @param searchMerName  轮播图名称
-     * @param status 轮播图状态
+     * @param searchMerName 轮播图名称
+     * @param status        轮播图状态
      * @return
      */
     @RequestMapping(value = "/lunBoList")
     @ResponseBody
-    public JSONData yongjinList(Integer page, Integer limit , String  telphone, String searchMerName,String  status ) {
-        Enterprise enterprise=enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
-        int comId=enterprise.getId();
+    public JSONData yongjinList(Integer page, Integer limit, String telphone, String searchMerName, String status) {
+        Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
+        int comId = enterprise.getId();
         JSONData response = new JSONData();
-        List<Banner> shareContextList =bannerRepository.findPagesByLimit(comId,status,searchMerName,(page-1)*limit,limit);
+        List<Banner> shareContextList = bannerRepository.findPagesByLimit(comId, status, searchMerName, (page - 1) * limit, limit);
 
         if (shareContextList.size() > 0) {
             response.setCode(0);
             response.setData(shareContextList);
-            response.setCount((int)bannerRepository.count(comId,status,searchMerName));
+            response.setCount((int) bannerRepository.count(comId, status, searchMerName));
             response.setMsg("");
         } else {
             response.setCode(0);
@@ -79,6 +82,7 @@ public class NewLunBoImgController {
 
     /**
      * 删除轮播图
+     *
      * @param request
      * @param id
      * @return
@@ -86,17 +90,17 @@ public class NewLunBoImgController {
     @RequestMapping(value = "/deleteLunBo")
     @ResponseBody
     public String deleteLunBo(HttpServletRequest request, Integer id) {
-        boolean flag=false;
+        boolean flag = false;
         try {
             bannerRepository.updateLunBo(id);
-            flag=true;
+            flag = true;
         } catch (Exception e) {
             e.printStackTrace();
             log.info(e.getMessage());
         }
-        if(flag==true){
+        if (flag == true) {
             return "1";
-        }else{
+        } else {
             return "0";
         }
 
@@ -108,42 +112,44 @@ public class NewLunBoImgController {
      */
     @RequestMapping(value = "/uploadLunBo")
     @ResponseBody
-    public String uploadLunBo(HttpServletRequest request, String name, String descript, String trankurl, Integer sort,  String telphone,Integer type, @RequestParam("imgurl") MultipartFile file ) {
-        Enterprise  enterprise=enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
-        int comId=enterprise.getId();
-        String fileUrl= null;
+    public String uploadLunBo(HttpServletRequest request, String name, String descript, String trankurl, Integer sort, String telphone, Integer type, @RequestParam("imgurl") MultipartFile file) {
+        Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
+        int comId = enterprise.getId();
+        String fileUrl = null;
         try {
-            fileUrl = FileUploadUtil.upload(request,file);
+            fileUrl = FileUploadUtil.upload(request, file);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        ;Banner banner=new Banner();
-      banner.setDescript(descript);
-      banner.setName(name);
-      banner.setStatus(1);
-      banner.setImgurl(fileUrl);
-      banner.setTrankurl(trankurl);
-      banner.setCompanyId(comId);
-      banner.setType(type);
-      banner.setSort(sort);
-      banner.setCreateDate(new Date());
-        boolean flag=false;
+        ;
+        Banner banner = new Banner();
+        banner.setDescript(descript);
+        banner.setName(name);
+        banner.setStatus(1);
+        banner.setImgurl(fileUrl);
+        banner.setTrankurl(trankurl);
+        banner.setCompanyId(comId);
+        banner.setType(type);
+        banner.setSort(sort);
+        banner.setCreateDate(new Date());
+        boolean flag = false;
         try {
             bannerRepository.save(banner);
-            flag=true;
+            flag = true;
         } catch (Exception e) {
             e.printStackTrace();
             log.info(e.getMessage());
         }
-        if(flag==true){
+        if (flag == true) {
             return "1";
-        }else{
+        } else {
             return "0";
         }
     }
 
     /**
      * 修改轮播图
+     *
      * @param request
      * @param id
      * @param imgSrc
@@ -157,31 +163,31 @@ public class NewLunBoImgController {
      */
     @RequestMapping(value = "/updateLunBo")
     @ResponseBody
-    public String updateYongjin(HttpServletRequest request, Integer id, String imgSrc, String name, String descript, String trankurl, Integer sort,Integer type,  String telphone, @RequestParam("imgurl") MultipartFile file) {
+    public String updateYongjin(HttpServletRequest request, Integer id, String imgSrc, String name, String descript, String trankurl, Integer sort, Integer type, String telphone, @RequestParam("imgurl") MultipartFile file) {
 
-        Enterprise  enterprise=enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
-        int comId=enterprise.getId();
+        Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
+        int comId = enterprise.getId();
 
-        if(file.getSize()>0){
+        if (file.getSize() > 0) {
             try {
-                imgSrc= FileUploadUtil.upload(request,file);
+                imgSrc = FileUploadUtil.upload(request, file);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        boolean flag=false;
+        boolean flag = false;
         try {
-           bannerRepository.updateLunBo(name,descript,trankurl,imgSrc,sort,type,id);
-            flag=true;
+            bannerRepository.updateLunBo(name, descript, trankurl, imgSrc, sort, type, id);
+            flag = true;
         } catch (Exception e) {
             e.printStackTrace();
             log.info(e.getMessage());
         }
 
-        if(flag==true){
+        if (flag == true) {
             return "1";
-        }else{
+        } else {
             return "0";
         }
 

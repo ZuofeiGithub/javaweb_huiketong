@@ -19,5 +19,5 @@ public class CommodityCategory {
     @Column(columnDefinition = "int(11) default 0 COMMENT '公司ID'")
     Integer companyId;
     @Column(columnDefinition = "varchar(100) default '' COMMENT '商品品类名称'")
-    String categoryName ;
+    String categoryName;
 }

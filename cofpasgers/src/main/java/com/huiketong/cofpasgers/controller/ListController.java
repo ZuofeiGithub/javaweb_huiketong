@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ListController {
 
     @GetMapping("list")
-    public String list(){
+    public String list() {
         return "view/list/list";
     }
 
     @GetMapping("listform")
-    public String listForm(){
+    public String listForm() {
         return "view/list/listform";
     }
 }

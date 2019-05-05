@@ -18,6 +18,6 @@ public class CommodityStyle {
     @Column(columnDefinition = "int(11) default 0 COMMENT '公司ID'")
     Integer companyId;
     @Column(columnDefinition = "varchar(100) default '' COMMENT '商品风格名称'")
-    String typeName ;
+    String typeName;
 
 }

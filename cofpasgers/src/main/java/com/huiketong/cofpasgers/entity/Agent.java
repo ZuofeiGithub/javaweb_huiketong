@@ -56,11 +56,11 @@ public class Agent {
     String accessToken;
     @Column(columnDefinition = "int(12) default 0 COMMENT '公司ID'")
     Integer companyId;
-    @Column(name = "real_name",columnDefinition="VARCHAR(10) COMMENT '真实名字'")
+    @Column(name = "real_name", columnDefinition = "VARCHAR(10) COMMENT '真实名字'")
     String realName;
-    @Column(name = "id_card",columnDefinition="VARCHAR(18) COMMENT '身份证号码'")
+    @Column(name = "id_card", columnDefinition = "VARCHAR(18) COMMENT '身份证号码'")
     String idCard;
-    @Column(name = "card_photo",columnDefinition="VARCHAR(30) COMMENT '身份证正面'")
+    @Column(name = "card_photo", columnDefinition = "VARCHAR(30) COMMENT '身份证正面'")
     String cardPhoto;
     @Column(columnDefinition = "int(11) default 0 COMMENT '积分'")
     Integer points;

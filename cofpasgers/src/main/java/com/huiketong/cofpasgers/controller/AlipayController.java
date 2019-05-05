@@ -67,9 +67,9 @@ public class AlipayController {
 
     /**
      * 支付异步通知
-     *
+     * <p>
      * 接收到异步通知并验签通过后，一定要检查通知内容，包括通知中的app_id、out_trade_no、total_amount是否与请求中的一致，并根据trade_status进行后续业务处理。
-     *
+     * <p>
      * https://docs.open.alipay.com/194/103296
      */
     @RequestMapping("/notify")
@@ -77,18 +77,18 @@ public class AlipayController {
         // 一定要验签，防止黑客篡改参数
         Map<String, String[]> parameterMap = request.getParameterMap();
         StringBuilder notifyBuild = new StringBuilder("/****************************** alipay notify ******************************/\n");
-        parameterMap.forEach((key, value) -> notifyBuild.append(key + "=" + value[0] + "\n") );
+        parameterMap.forEach((key, value) -> notifyBuild.append(key + "=" + value[0] + "\n"));
         log.info(notifyBuild.toString());
 
 
         //交易状态
-        String tradeStatus = new String(request.getParameter("trade_status").getBytes("ISO-8859-1"),"UTF-8");
+        String tradeStatus = new String(request.getParameter("trade_status").getBytes("ISO-8859-1"), "UTF-8");
         // 商户订单号
-        String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"),"UTF-8");
+        String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"), "UTF-8");
         //支付宝交易号
-        String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"),"UTF-8");
+        String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"), "UTF-8");
         //付款金额
-        String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"),"UTF-8");
+        String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"), "UTF-8");
         boolean flag = this.rsaCheckV1(request);
         if (flag) {
             /**
@@ -103,10 +103,10 @@ public class AlipayController {
              * 在支付宝的业务通知中，只有交易通知状态为TRADE_SUCCESS或TRADE_FINISHED时，支付宝才会认定为买家付款成功。
              */
 
-            orderRepository.updateStatusByOrderStatusNum(1,out_trade_no);
+            orderRepository.updateStatusByOrderStatusNum(1, out_trade_no);
             // TRADE_FINISHED(表示交易已经成功结束，并不能再对该交易做后续操作);
             // TRADE_SUCCESS(表示交易已经成功结束，可以对该交易做后续操作，如：分润、退款等);
-            if(tradeStatus.equals("TRADE_FINISHED")){
+            if (tradeStatus.equals("TRADE_FINISHED")) {
                 //判断该笔订单是否在商户网站中已经做过处理
                 //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，
                 // 并判断total_amount是否确实为该订单的实际金额（即商户订单创建时的金额），并执行商户的业务程序
@@ -116,7 +116,7 @@ public class AlipayController {
                 //注意：
                 //如果签约的是可退款协议，退款日期超过可退款期限后（如三个月可退款），支付宝系统发送该交易状态通知
                 //如果没有签约可退款协议，那么付款完成后，支付宝系统发送该交易状态通知。
-            } else if (tradeStatus.equals("TRADE_SUCCESS")){
+            } else if (tradeStatus.equals("TRADE_SUCCESS")) {
                 //判断该笔订单是否在商户网站中已经做过处理
                 //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，
                 // 并判断total_amount是否确实为该订单的实际金额（即商户订单创建时的金额），并执行商户的业务程序
@@ -130,17 +130,18 @@ public class AlipayController {
 
             return "success";
         }
-        orderRepository.updateStatusByOrderStatusNum(9,out_trade_no);
+        orderRepository.updateStatusByOrderStatusNum(9, out_trade_no);
         return "fail";
     }
 
     /**
      * 订单查询(最主要用于查询订单的支付状态)
+     *
      * @param orderNo 商户订单号
      * @return
      */
     @GetMapping("/query")
-    public String query(String orderNo){
+    public String query(String orderNo) {
 
         AlipayTradeQueryRequestBuilder builder = new AlipayTradeQueryRequestBuilder()
                 .setOutTradeNo(orderNo);
@@ -171,6 +172,7 @@ public class AlipayController {
 
     /**
      * 退款
+     *
      * @param orderNo 商户订单号
      * @return
      */
@@ -179,7 +181,7 @@ public class AlipayController {
     public String refund(String orderNo) throws AlipayApiException {
         AlipayTradeRefundRequest alipayRequest = new AlipayTradeRefundRequest();
 
-        AlipayTradeRefundModel model=new AlipayTradeRefundModel();
+        AlipayTradeRefundModel model = new AlipayTradeRefundModel();
         // 商户订单号
         model.setOutTradeNo(orderNo);
         // 退款金额
@@ -198,7 +200,8 @@ public class AlipayController {
 
     /**
      * 退款查询
-     * @param orderNo 商户订单号
+     *
+     * @param orderNo       商户订单号
      * @param refundOrderNo 请求退款接口时，传入的退款请求号，如果在退款请求时未传入，则该值为创建交易时的外部订单号
      * @return
      * @throws AlipayApiException
@@ -208,7 +211,7 @@ public class AlipayController {
     public String refundQuery(String orderNo, String refundOrderNo) throws AlipayApiException {
         AlipayTradeFastpayRefundQueryRequest alipayRequest = new AlipayTradeFastpayRefundQueryRequest();
 
-        AlipayTradeFastpayRefundQueryModel model=new AlipayTradeFastpayRefundQueryModel();
+        AlipayTradeFastpayRefundQueryModel model = new AlipayTradeFastpayRefundQueryModel();
         model.setOutTradeNo(orderNo);
         model.setOutRequestNo(refundOrderNo);
         alipayRequest.setBizModel(model);
@@ -221,6 +224,7 @@ public class AlipayController {
 
     /**
      * 关闭交易
+     *
      * @param orderNo
      * @return
      * @throws AlipayApiException
@@ -229,7 +233,7 @@ public class AlipayController {
     @ResponseBody
     public String close(String orderNo) throws AlipayApiException {
         AlipayTradeCloseRequest alipayRequest = new AlipayTradeCloseRequest();
-        AlipayTradeCloseModel model =new AlipayTradeCloseModel();
+        AlipayTradeCloseModel model = new AlipayTradeCloseModel();
         model.setOutTradeNo(orderNo);
         alipayRequest.setBizModel(model);
 
@@ -243,6 +247,7 @@ public class AlipayController {
     /**
      * billDate : 账单时间：日账单格式为yyyy-MM-dd，月账单格式为yyyy-MM。
      * 查询对账单下载地址: https://docs.open.alipay.com/api_15/alipay.data.dataservice.bill.downloadurl.query/
+     *
      * @param billDate
      */
     @GetMapping("/bill")
@@ -282,15 +287,16 @@ public class AlipayController {
 
     /**
      * 校验签名
+     *
      * @param request
      * @return
      */
-    public boolean rsaCheckV1(HttpServletRequest request){
+    public boolean rsaCheckV1(HttpServletRequest request) {
         // https://docs.open.alipay.com/54/106370
         // 获取支付宝POST过来反馈信息
-        Map<String,String> params = new HashMap<>();
+        Map<String, String> params = new HashMap<>();
         Map requestParams = request.getParameterMap();
-        for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext();) {
+        for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext(); ) {
             String name = (String) iter.next();
             String[] values = (String[]) requestParams.get(name);
             String valueStr = "";
@@ -318,8 +324,9 @@ public class AlipayController {
      * 下载下来的是一个【账号_日期.csv.zip】文件（zip压缩文件名，里面有多个.csv文件）
      * 账号_日期_业务明细 ： 支付宝业务明细查询
      * 账号_日期_业务明细(汇总)：支付宝业务汇总查询
-     *
+     * <p>
      * 注意：如果数据量比较大，该方法可能需要更长的执行时间
+     *
      * @param billDownLoadUrl
      * @return
      * @throws IOException
@@ -346,13 +353,13 @@ public class AlipayController {
         }
         ZipInputStream zipInputStream = new ZipInputStream(new ByteArrayInputStream(data), Charset.forName("GBK"));
         ZipEntry zipEntry = null;
-        try{
-            while( (zipEntry = zipInputStream.getNextEntry()) != null){
+        try {
+            while ((zipEntry = zipInputStream.getNextEntry()) != null) {
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                try{
+                try {
                     String name = zipEntry.getName();
                     // 只要明细不要汇总
-                    if(name.contains("汇总")){
+                    if (name.contains("汇总")) {
                         continue;
                     }
                     byte[] byteBuff = new byte[4096];
@@ -361,7 +368,7 @@ public class AlipayController {
                         byteArrayOutputStream.write(byteBuff, 0, bytesRead);
                     }
                     ordersStr = byteArrayOutputStream.toString("GBK");
-                }finally {
+                } finally {
                     byteArrayOutputStream.close();
                     zipInputStream.closeEntry();
                 }

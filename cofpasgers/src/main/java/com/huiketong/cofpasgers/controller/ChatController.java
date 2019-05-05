@@ -40,40 +40,37 @@ public class ChatController {
         InitResp resp = new InitResp();
         InitData data = new InitData();
         Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(user_id);
-        if(ObjectUtils.isNotNull(enterprise))
-        {
+        if (ObjectUtils.isNotNull(enterprise)) {
             MineData mineData = new MineData();
-            mineData.setAvatar(Constant.IMAGE_URL+enterprise.getEnterLogo());
-            Agent cagent =  agentRepository.findIsCusAgents(enterprise.getId());
-            if(ObjectUtils.isNotNull(cagent))
-            {
-                mineData.setId("c"+cagent.getInitCode());
+            mineData.setAvatar(Constant.IMAGE_URL + enterprise.getEnterLogo());
+            Agent cagent = agentRepository.findIsCusAgents(enterprise.getId());
+            if (ObjectUtils.isNotNull(cagent)) {
+                mineData.setId("c" + cagent.getInitCode());
                 mineData.setStatus("online");
                 mineData.setSign("我们公司的主旨共享经济时代");
                 mineData.setUsername(cagent.getAgentName());
-            }else{
-                mineData.setId("company"+enterprise.getId());
+            } else {
+                mineData.setId("company" + enterprise.getId());
                 mineData.setStatus("online");
                 mineData.setSign("我们公司的主旨共享经济时代");
                 mineData.setUsername(enterprise.getEnterName());
             }
             data.setMine(mineData);
             List<Agent> agentList = agentRepository.findNotCusAgents(enterprise.getId());
-            if(agentList.size() > 0){
+            if (agentList.size() > 0) {
                 List<FriendListData> friendListDataList = new ArrayList<>();
                 List<FriendData> friendDataList = new ArrayList<>();
                 FriendData friendData = new FriendData();
                 friendData.setGroupname("我的好友");
                 friendData.setId(1);
-                for(Agent agent:agentList){
+                for (Agent agent : agentList) {
                     FriendListData friendListData = new FriendListData();
-                    if(ObjectUtils.isNotEmpty(agent.getAvatar()))
-                    {
-                        friendListData.setAvatar(Constant.IMAGE_URL+agent.getAvatar());
-                    }else{
+                    if (ObjectUtils.isNotEmpty(agent.getAvatar())) {
+                        friendListData.setAvatar(Constant.IMAGE_URL + agent.getAvatar());
+                    } else {
                         friendListData.setAvatar("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547699014722&di=8d3f165fec3373fd51db448acbc61070&imgtype=0&src=http%3A%2F%2Fwww.qqzhi.com%2Fuploadpic%2F2015-02-11%2F201956189.jpg");
                     }
-                    friendListData.setId("c"+agent.getInitCode());
+                    friendListData.setId("c" + agent.getInitCode());
                     friendListData.setUsername(agent.getAgentName());
                     friendListData.setSign("我是经纪人");
                     friendListData.setStatus("online");
@@ -87,11 +84,11 @@ public class ChatController {
                 resp.setCode(0);
                 resp.setData(data);
 
-            }else{
+            } else {
                 resp.setCode(1);
                 resp.setMsg("");
             }
-        }else{
+        } else {
             resp.setCode(1);
             resp.setMsg("");
         }
@@ -99,32 +96,32 @@ public class ChatController {
     }
 
     @GetMapping("msgbox")
-    public ModelAndView msgBox(){
-        ModelAndView mv = new ModelAndView(Constant.PREFIX+"msgbox");
+    public ModelAndView msgBox() {
+        ModelAndView mv = new ModelAndView(Constant.PREFIX + "msgbox");
         return mv;
     }
 
     @PostMapping("getusername")
     @ResponseBody
-    public BaseJsonResponse getUserId(String user_id){
+    public BaseJsonResponse getUserId(String user_id) {
         BaseJsonResponse response = new BaseJsonResponse();
         MessageData data = new MessageData();
-        if(ObjectUtils.isNotEmpty(user_id)) {
+        if (ObjectUtils.isNotEmpty(user_id)) {
             Agent agent = agentRepository.findAgentByInitCode(user_id);
             if (ObjectUtils.isNotNull(agent)) {
                 if (ObjectUtils.isNotEmpty(agent.getAgentName())) {
                     data.setUsername(agent.getAgentName());
                 }
-                if(ObjectUtils.isNotEmpty(agent.getAvatar())){
-                    data.setAvatar(Constant.IMAGE_URL+agent.getAvatar());
-                }else{
+                if (ObjectUtils.isNotEmpty(agent.getAvatar())) {
+                    data.setAvatar(Constant.IMAGE_URL + agent.getAvatar());
+                } else {
                     data.setAvatar("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547699014722&di=8d3f165fec3373fd51db448acbc61070&imgtype=0&src=http%3A%2F%2Fwww.qqzhi.com%2Fuploadpic%2F2015-02-11%2F201956189.jpg");
                 }
                 response.setMsg("获取发送者信息成功").setCode("1").setData(data);
-            }else{
+            } else {
                 response.setMsg("获取信息失败").setCode("2");
             }
-        }else{
+        } else {
             response.setCode("2").setMsg("ID无效");
         }
         return response;

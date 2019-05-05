@@ -15,7 +15,8 @@ public class PushBase {
     protected static final String AppSecret = "v4338SxWQC6PMF1snD7sz2";
     protected static final String API = "http://sdk.open.api.igexin.com/apiex.htm";     //OpenService接口地址
     protected static final String CLIENTID = "618ab3bb984959e218dadfe82f5da767";
-    protected static String getDate(){
+
+    protected static String getDate() {
         Date date = new Date();
         return date.toString();
     }

@@ -52,19 +52,19 @@ public class LoginController {
     public ModelAndView Login(HttpSession session) {
         ModelAndView mv = new ModelAndView(Constant.PREFIX + "newlogin");
         session.setAttribute("userinfo", null);
-        session.setAttribute("iswitch",null);
+        session.setAttribute("iswitch", null);
         //ModelAndView mv = new ModelAndView("cptsbpm/index");
         return mv;
     }
 
     @GetMapping(value = "/bkabout")
-    public ModelAndView bkabout(){
+    public ModelAndView bkabout() {
         ModelAndView mv = new ModelAndView("cptsbpm/about");
         return mv;
     }
 
     @GetMapping(value = "/info")
-    public ModelAndView info(){
+    public ModelAndView info() {
         ModelAndView mv = new ModelAndView("cptsbpm/info");
         return mv;
     }
@@ -110,19 +110,19 @@ public class LoginController {
         }
         JSONObject json = new JSONObject();
         if (telphone != null) {
-            UserRights userRights3 = userRightsRepository.findUserRightsByUserTelAndUserRightOrLoginNameAndUserRight(telphone, 3,telphone,3);
-            UserRights userRights2 = userRightsRepository.findUserRightsByUserTelAndUserRightOrLoginNameAndUserRight(telphone, 2,telphone,2);
+            UserRights userRights3 = userRightsRepository.findUserRightsByUserTelAndUserRightOrLoginNameAndUserRight(telphone, 3, telphone, 3);
+            UserRights userRights2 = userRightsRepository.findUserRightsByUserTelAndUserRightOrLoginNameAndUserRight(telphone, 2, telphone, 2);
             try {
                 String random = (String) session.getAttribute("RANDOMVALIDATECODEKEY");
                 if (random == null) {
                     json.clear();
                     json.put("islogin", EnumLogin.CODENOUSED.ordinal());
-                }else{
+                } else {
                     if (userRights2 != null && userRights2.getUserRight().equals(UserType.SYSTEM.ordinal())) {
                         SystemUser user = userRepository.findSystemUserByTelphoneOrLoginName(telphone, telphone);
                         if (user != null) {
                             session.setAttribute("userinfo", user);
-                            session.setAttribute("iswitch",1);
+                            session.setAttribute("iswitch", 1);
                             isWhich = 1;
                             if (MD5Util.validPassword(passward, user.getLoginPassward())) {
                                 bPasswordCorrect = true;
@@ -142,7 +142,7 @@ public class LoginController {
                             json.put("islogin", EnumLogin.LOGINSUCCESS.ordinal());
                             json.put("telphone", telphone);
                             json.put("username", user.getUsername());
-                            json.put("rightname",userRights2.getRightName());
+                            json.put("rightname", userRights2.getRightName());
                             json.put("usertype", UserType.SYSTEM.ordinal());
                         } else {
                             json.clear();
@@ -184,12 +184,12 @@ public class LoginController {
                     } else if (userRights3 != null && (userRights3.getUserRight().equals(UserType.COMPANY.ordinal()))) {
                         Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
                         if (enterprise != null) {
-                            if(enterprise.getEnterStatus() == 0){
+                            if (enterprise.getEnterStatus() == 0) {
                                 json.clear();
-                                json.put("islogin",EnumLogin.AUTHFIRST.ordinal());
-                            }else{
+                                json.put("islogin", EnumLogin.AUTHFIRST.ordinal());
+                            } else {
                                 session.setAttribute("userinfo", enterprise);
-                                session.setAttribute("iswitch",3);
+                                session.setAttribute("iswitch", 3);
                                 isWhich = 3;
                                 if (MD5Util.validPassword(passward, enterprise.getEnterLoginPwd())) {
                                     bPasswordCorrect = true;
@@ -204,9 +204,9 @@ public class LoginController {
                                     json.put("islogin", EnumLogin.LOGINSUCCESS.ordinal());
                                     json.put("username", enterprise.getEnterName());
                                     json.put("telphone", enterprise.getEnterLoginName());
-                                    json.put("headphoto",enterprise.getEnterLogo());
+                                    json.put("headphoto", enterprise.getEnterLogo());
                                     json.put("usertype", UserType.COMPANY.ordinal());
-                                    json.put("rightname",userRights3.getRightName());
+                                    json.put("rightname", userRights3.getRightName());
                                 } else {
                                     json.clear();
                                     json.put("islogin", EnumLogin.LOGINFAILED.ordinal());
@@ -252,9 +252,9 @@ public class LoginController {
     @ResponseBody
     public String Jurisdiction(HttpServletRequest request) {
         String telphone = request.getParameter("telphone");
-        UserRights rights1 = userRightsRepository.findUserRightsByUserTelAndUserRightOrLoginNameAndUserRight(telphone,1, telphone,1);
-        UserRights rights2 = userRightsRepository.findUserRightsByUserTelAndUserRightOrLoginNameAndUserRight(telphone,2, telphone,2);
-        UserRights rights3 = userRightsRepository.findUserRightsByUserTelAndUserRightOrLoginNameAndUserRight(telphone,3, telphone,3);
+        UserRights rights1 = userRightsRepository.findUserRightsByUserTelAndUserRightOrLoginNameAndUserRight(telphone, 1, telphone, 1);
+        UserRights rights2 = userRightsRepository.findUserRightsByUserTelAndUserRightOrLoginNameAndUserRight(telphone, 2, telphone, 2);
+        UserRights rights3 = userRightsRepository.findUserRightsByUserTelAndUserRightOrLoginNameAndUserRight(telphone, 3, telphone, 3);
         if (rights2 != null && rights2.getUserRight() == 2) {//系统管理员
             return "system";
         } else if (rights3 != null && rights3.getUserRight() == 3) //公司

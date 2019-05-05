@@ -13,14 +13,14 @@ import org.springframework.web.servlet.ModelAndView;
 public class ExtensionController {
 
     @GetMapping(value = "exten")
-    public ModelAndView Extension(){
-        ModelAndView mv = new ModelAndView(Constant.PREFIX+"extension");
+    public ModelAndView Extension() {
+        ModelAndView mv = new ModelAndView(Constant.PREFIX + "extension");
         return mv;
     }
 
     @GetMapping(value = "addexten")
-    public ModelAndView AddExten(){
-        ModelAndView mv = new ModelAndView(Constant.PREFIX+"addExtension");
+    public ModelAndView AddExten() {
+        ModelAndView mv = new ModelAndView(Constant.PREFIX + "addExtension");
         return mv;
     }
 }

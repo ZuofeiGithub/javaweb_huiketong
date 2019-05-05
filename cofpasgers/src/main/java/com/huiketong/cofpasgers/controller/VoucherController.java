@@ -168,9 +168,9 @@ public class VoucherController {
                 VoucherDetailData data = new VoucherDetailData();
                 data.setTitle(voucherDetail.getTitle());
                 List<VoucherUser> userList = voucherUserRepository.findAllByCompanyId(defaultEnter.getCompayId());
-                if(userList.size() > 0) {
+                if (userList.size() > 0) {
                     data.setUser_count(String.valueOf(userList.size()));
-                }else{
+                } else {
                     data.setUser_count("78");
                 }
                 data.setPrice(voucherDetail.getPrice());

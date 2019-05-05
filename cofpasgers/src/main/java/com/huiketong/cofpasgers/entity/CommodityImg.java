@@ -20,6 +20,6 @@ public class CommodityImg {
     Integer commodityd;
 
     @Column(columnDefinition = "varchar(225) default '' COMMENT '商品图片地址'")
-    String commodityImgUrl ;
+    String commodityImgUrl;
 
 }

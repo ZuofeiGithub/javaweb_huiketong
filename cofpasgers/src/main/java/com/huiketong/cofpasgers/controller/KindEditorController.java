@@ -5,6 +5,7 @@ package com.huiketong.cofpasgers.controller;
  * @Date: 2019/1/25 14:05
  * @Version 1.0
  */
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -51,7 +52,7 @@ public class KindEditorController {
 
     @RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> fileUpload(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException,
+    public Map<String, Object> fileUpload(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException,
             FileUploadException {
         ServletContext application = request.getSession().getServletContext();
         //String savePath = application.getRealPath("/") + "images/";
@@ -136,7 +137,7 @@ public class KindEditorController {
 
             String fileExt = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1).toLowerCase();
 
-            if (!Arrays. asList(extMap.get(dirName).split(",")).contains(fileExt)) {
+            if (!Arrays.asList(extMap.get(dirName).split(",")).contains(fileExt)) {
                 return getError("上传文件扩展名是不允许的扩展名。\n只允许"
                         + extMap.get(dirName) + "格式。");
 
@@ -184,12 +185,12 @@ public class KindEditorController {
         //String rootUrl = request.getContextPath() + "/images/";
         String rootUrl = Constant.IMAGE_URL;
         // 图片扩展名
-        String[] fileTypes = new String[] { "gif", "jpg", "jpeg", "png", "bmp" };
+        String[] fileTypes = new String[]{"gif", "jpg", "jpeg", "png", "bmp"};
 
         String dirName = request.getParameter("dir");
         if (dirName != null) {
-            if (!Arrays.<String> asList(
-                    new String[] { "image", "flash", "media", "file" })
+            if (!Arrays.<String>asList(
+                    new String[]{"image", "flash", "media", "file"})
                     .contains(dirName)) {
                 out.println("Invalid Directory name.");
                 return;
@@ -253,7 +254,7 @@ public class KindEditorController {
                     hash.put("is_dir", false);
                     hash.put("has_file", false);
                     hash.put("filesize", file.length());
-                    hash.put("is_photo", Arrays.<String> asList(fileTypes)
+                    hash.put("is_photo", Arrays.<String>asList(fileTypes)
                             .contains(fileExt));
                     hash.put("filetype", fileExt);
                 }

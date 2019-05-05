@@ -150,7 +150,7 @@ public class InviteAgentController {
         BaseJsonResponse response = new BaseJsonResponse();
         try {
             if (ObjectUtils.isNotEmpty(telphone)) {
-                Agent agent = agentRepository.findAgentByTelphoneAndInitCode(telphone,inviteCode);
+                Agent agent = agentRepository.findAgentByTelphoneAndInitCode(telphone, inviteCode);
                 if (ObjectUtils.isNotNull(agent)) {
                     response.setMsg("该号码已经注册过经纪人");
                     response.setCode("300");
@@ -234,7 +234,7 @@ public class InviteAgentController {
                                         agent.setSuperId(superAgent.getId());
                                         agent.setSuperiorName(superAgent.getAgentName());
 
-                                        CompanyBindUser existCompanyUser = companyUserRepository.findCompanyBindUserByUserTelAndCompanyId(phone,superAgent.getCompanyId());
+                                        CompanyBindUser existCompanyUser = companyUserRepository.findCompanyBindUserByUserTelAndCompanyId(phone, superAgent.getCompanyId());
                                         String inviteCode = SerialGeneratorUtil.GetRandomString(8);
                                         if (existCompanyUser == null) {
                                             CompanyBindUser newcompanyBindUser = new CompanyBindUser();
@@ -251,7 +251,7 @@ public class InviteAgentController {
                                         agent.setAgentName(agentName);
                                         agent.setLoginUsername(agentCode);
                                         agent.setInitCode(inviteCode);
-                                        service.registerUser("c"+inviteCode,"123456");
+                                        service.registerUser("c" + inviteCode, "123456");
                                         agent.setPassword(md5Pwd);
                                         agent.setRealName("");
                                         agent.setInitAgentNam(0);
@@ -279,35 +279,34 @@ public class InviteAgentController {
                                             agentRepository.updateScore(commission.getInvitScore(), superAgent.getId(), superAgent.getCompanyId());
 //                                            if (ObjectUtils.isNotEmpty(commission.getScore())) {
 //                                                if (commission.getScore().compareTo(new BigDecimal(0)) == 1) {
-                                                    Notice notice = new Notice();
-                                                    notice.setAgentName(superAgent.getAgentName());
-                                                    notice.setCompanyId(defaultEnter.getCompayId());
-                                                    notice.setAddTime(new Date());
-                                                    notice.setContext("恭喜" + superAgent.getAgentName() + "邀请成功,获得" + commission.getInvitScore() + "佣金");
-                                                    notice.setScore(commission.getInvitScore());
-                                                    noticeRepository.save(notice);
+                                            Notice notice = new Notice();
+                                            notice.setAgentName(superAgent.getAgentName());
+                                            notice.setCompanyId(defaultEnter.getCompayId());
+                                            notice.setAddTime(new Date());
+                                            notice.setContext("恭喜" + superAgent.getAgentName() + "邀请成功,获得" + commission.getInvitScore() + "佣金");
+                                            notice.setScore(commission.getInvitScore());
+                                            noticeRepository.save(notice);
 
-                                                    Earnings earnings = new Earnings();
-                                                    earnings.setAddTime(new Date());
-                                                    earnings.setDescript("邀请奖励");
-                                                    earnings.setMoney(commission.getInvitScore());
-                                                    earnings.setUserId(superAgent.getId());
-                                                    earnings.setComId(commission.getCompanyId());
-                                                    earnings.setType(2);
-                                                    earningsRepository.save(earnings);
-                                                    PointDetail pointDetail = new PointDetail();
-                                                    pointDetail.setAddTime(new Date());
-                                                    pointDetail.setCompanyId(superAgent.getCompanyId());
-                                                    pointDetail.setDescript("邀请奖励");
-                                                    pointDetail.setStatus(1);
-                                                    pointDetail.setType(PointType.INVITE.ordinal());
-                                                    pointDetail.setUserId(superAgent.getId());
-                                                    IntegralRule integralRule = integralRuleRepository.findIntegralRuleByCompanyId(superAgent.getCompanyId());
-                                                    if(ObjectUtils.isNotNull(integralRule))
-                                                    {
-                                                        pointDetail.setPoint(integralRule.getInviteIntegral());
-                                                        pointDetailRepository.save(pointDetail);
-                                                    }
+                                            Earnings earnings = new Earnings();
+                                            earnings.setAddTime(new Date());
+                                            earnings.setDescript("邀请奖励");
+                                            earnings.setMoney(commission.getInvitScore());
+                                            earnings.setUserId(superAgent.getId());
+                                            earnings.setComId(commission.getCompanyId());
+                                            earnings.setType(2);
+                                            earningsRepository.save(earnings);
+                                            PointDetail pointDetail = new PointDetail();
+                                            pointDetail.setAddTime(new Date());
+                                            pointDetail.setCompanyId(superAgent.getCompanyId());
+                                            pointDetail.setDescript("邀请奖励");
+                                            pointDetail.setStatus(1);
+                                            pointDetail.setType(PointType.INVITE.ordinal());
+                                            pointDetail.setUserId(superAgent.getId());
+                                            IntegralRule integralRule = integralRuleRepository.findIntegralRuleByCompanyId(superAgent.getCompanyId());
+                                            if (ObjectUtils.isNotNull(integralRule)) {
+                                                pointDetail.setPoint(integralRule.getInviteIntegral());
+                                                pointDetailRepository.save(pointDetail);
+                                            }
 //                                                }
 //                                            }
 
@@ -316,8 +315,8 @@ public class InviteAgentController {
 
                                         agentRepository.save(agent);
 
-                                        DefaultEnter existdefault = defaultEnterRepository.findDefaultEnterByUserIdOrUserTelphone(phone,phone);
-                                        if(ObjectUtils.isEmpty(existdefault)) {
+                                        DefaultEnter existdefault = defaultEnterRepository.findDefaultEnterByUserIdOrUserTelphone(phone, phone);
+                                        if (ObjectUtils.isEmpty(existdefault)) {
                                             defaultEnterRepository.save(defaultEnter);
                                         }
 

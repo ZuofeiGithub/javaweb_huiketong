@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestControllerAdvice
 public class AjaxExceptionHandler {
     @ExceptionHandler(value = Exception.class)
-    public JSONResult defaultErrorHandler(HttpServletRequest request, Exception e){
-            return JSONResult.errorException(e.getMessage());
+    public JSONResult defaultErrorHandler(HttpServletRequest request, Exception e) {
+        return JSONResult.errorException(e.getMessage());
     }
 }

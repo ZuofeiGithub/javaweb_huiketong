@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class AboutUsController {
 
     @GetMapping(value = "about")
-    public ModelAndView AboutUs(){
-        return new ModelAndView(Constant.PREFIX+"about");
+    public ModelAndView AboutUs() {
+        return new ModelAndView(Constant.PREFIX + "about");
     }
 }

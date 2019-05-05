@@ -28,15 +28,16 @@ import java.util.List;
 @RequestMapping(value = "/")
 public class NewShangJiaController {
 
-    private  final  static Logger log = LoggerFactory.getLogger(NewShangJiaController.class);
+    private final static Logger log = LoggerFactory.getLogger(NewShangJiaController.class);
 
-     @Autowired
-    MerchantsRepository  merchantsRepository;
-     @Autowired
+    @Autowired
+    MerchantsRepository merchantsRepository;
+    @Autowired
     EnterpriseRepository enterpriseRepository;
 
     /**
      * 进入佣金页面
+     *
      * @return
      */
     @RequestMapping(value = "/shnagjiaJsp")
@@ -48,26 +49,27 @@ public class NewShangJiaController {
 
     /**
      * 商家列表
+     *
      * @return
      */
     @RequestMapping(value = "/shnagjiaList")
     @ResponseBody
-    public JSONData yongjinList(Integer page, Integer limit , String  telphone,String searchMerName) {
-        Enterprise enterprise=enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
-        int comId=enterprise.getId();
+    public JSONData yongjinList(Integer page, Integer limit, String telphone, String searchMerName) {
+        Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
+        int comId = enterprise.getId();
         JSONData response = new JSONData();
         List<Merchants> shareContextList;
-        if(ObjectUtils.isEmpty(searchMerName)){
-            shareContextList =merchantsRepository.findPagesByLimit(comId,(page-1)*limit,limit);
-            searchMerName="";
-        }else{
-            shareContextList =merchantsRepository.findPagesByLikeName(comId,searchMerName,(page-1)*limit,limit);
+        if (ObjectUtils.isEmpty(searchMerName)) {
+            shareContextList = merchantsRepository.findPagesByLimit(comId, (page - 1) * limit, limit);
+            searchMerName = "";
+        } else {
+            shareContextList = merchantsRepository.findPagesByLikeName(comId, searchMerName, (page - 1) * limit, limit);
         }
 
         if (shareContextList.size() > 0) {
             response.setCode(0);
             response.setData(shareContextList);
-            response.setCount((int) merchantsRepository.count(comId,searchMerName));
+            response.setCount((int) merchantsRepository.count(comId, searchMerName));
             response.setMsg("");
         } else {
             response.setCode(0);
@@ -84,16 +86,16 @@ public class NewShangJiaController {
      */
     @RequestMapping(value = "/uploadShangJiaInfo")
     @ResponseBody
-    public String uploadShangJiaInfo(HttpServletRequest request, String merName, String merAddress, String telphone, String merUrl, String descript,Integer merOrder, @RequestParam("merLogo") MultipartFile file ) {
-        Enterprise  enterprise=enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
-        int comId=enterprise.getId();
-        String fileUrl= null;
+    public String uploadShangJiaInfo(HttpServletRequest request, String merName, String merAddress, String telphone, String merUrl, String descript, Integer merOrder, @RequestParam("merLogo") MultipartFile file) {
+        Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
+        int comId = enterprise.getId();
+        String fileUrl = null;
         try {
-            fileUrl = FileUploadUtil.upload(request,file);
+            fileUrl = FileUploadUtil.upload(request, file);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Merchants  merchants=new Merchants();
+        Merchants merchants = new Merchants();
         merchants.setEnterId(comId);
         merchants.setMerAddress(merAddress);
         merchants.setMerLogo(fileUrl);
@@ -101,24 +103,25 @@ public class NewShangJiaController {
         merchants.setMerOrder(merOrder);
         merchants.setMerUrl(merUrl);
         merchants.setDescript(descript);
-        boolean flag=false;
+        boolean flag = false;
         try {
             merchantsRepository.save(merchants);
-            flag=true;
+            flag = true;
         } catch (Exception e) {
             e.printStackTrace();
             log.info(e.getMessage());
         }
 
-        if(flag==true){
+        if (flag == true) {
             return "1";
-        }else{
+        } else {
             return "0";
         }
     }
 
     /**
      * 修改商家
+     *
      * @param request
      * @param id
      * @param imgSrc
@@ -132,32 +135,32 @@ public class NewShangJiaController {
      */
     @RequestMapping(value = "/updateShangJia")
     @ResponseBody
-    public String updateYongjin(HttpServletRequest request, Integer id, String imgSrc,String merName, String merAddress, String telphone, String merUrl, Integer merOrder,String descript, @RequestParam("merLogo") MultipartFile file) {
+    public String updateYongjin(HttpServletRequest request, Integer id, String imgSrc, String merName, String merAddress, String telphone, String merUrl, Integer merOrder, String descript, @RequestParam("merLogo") MultipartFile file) {
 
-        Enterprise  enterprise=enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
-        int comId=enterprise.getId();
+        Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
+        int comId = enterprise.getId();
 
-        if(file.getSize()>0){
+        if (file.getSize() > 0) {
             try {
-                imgSrc= FileUploadUtil.upload(request,file);
+                imgSrc = FileUploadUtil.upload(request, file);
             } catch (Exception e) {
                 e.printStackTrace();
                 log.info(e.getMessage());
             }
         }
 
-        boolean flag=false;
+        boolean flag = false;
         try {
-            merchantsRepository.updateYongjin(merName,merAddress,merUrl,imgSrc,merOrder,descript,id);
-            flag=true;
+            merchantsRepository.updateYongjin(merName, merAddress, merUrl, imgSrc, merOrder, descript, id);
+            flag = true;
         } catch (Exception e) {
             e.printStackTrace();
             log.info(e.getMessage());
         }
 
-        if(flag==true){
+        if (flag == true) {
             return "1";
-        }else{
+        } else {
             return "0";
         }
 
@@ -165,6 +168,7 @@ public class NewShangJiaController {
 
     /**
      * 删除商家
+     *
      * @param request
      * @param id
      * @return
@@ -172,24 +176,23 @@ public class NewShangJiaController {
     @RequestMapping(value = "/deleteShangJia")
     @ResponseBody
     public String deleteShangJia(HttpServletRequest request, Integer id) {
-        boolean flag=false;
+        boolean flag = false;
 
         try {
-           merchantsRepository.deleteYongjin(id);
-            flag=true;
+            merchantsRepository.deleteYongjin(id);
+            flag = true;
         } catch (Exception e) {
             e.printStackTrace();
             log.info(e.getMessage());
         }
 
-        if(flag==true){
+        if (flag == true) {
             return "1";
-        }else{
+        } else {
             return "0";
         }
 
     }
-
 
 
 }

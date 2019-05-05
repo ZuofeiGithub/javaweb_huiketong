@@ -14,8 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserController {
 
     @GetMapping(value = "user_info")
-    public ModelAndView UserInfo(){
-        ModelAndView mv = new ModelAndView(Constant.PREFIX+"user_info");
+    public ModelAndView UserInfo() {
+        ModelAndView mv = new ModelAndView(Constant.PREFIX + "user_info");
         return mv;
     }
 }

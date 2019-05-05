@@ -28,28 +28,28 @@ public class Commodity {
     Integer StyleId;
 
     @Column(columnDefinition = "varchar(225) default '' COMMENT '商品名称'")
-    String commodityName ;
+    String commodityName;
 
     @Column(columnDefinition = "varchar(11) default '' COMMENT '单位'")
-    String danwei ;
+    String danwei;
 
     @Column(columnDefinition = "decimal(10,2) default 0 COMMENT '商品原价'")
-    BigDecimal originalPrice ;
+    BigDecimal originalPrice;
 
     @Column(columnDefinition = "decimal(10,2) default 0 COMMENT '活动特价'")
-    BigDecimal activityPrice ;
+    BigDecimal activityPrice;
 
     @Column(columnDefinition = "decimal(10,2) default 0.0 COMMENT '预付定金'")
     BigDecimal depositMoney;
 
     @Column(columnDefinition = "int(11) default 0 COMMENT '关注人数'")
-    Integer concernedPeople  ;
+    Integer concernedPeople;
 
     @Column(columnDefinition = "text  COMMENT '活动说明'")
-    String  activityDescription ;
+    String activityDescription;
 
     @Column(columnDefinition = "text  COMMENT '产品详情'")
-    String  productDetails ;
+    String productDetails;
     @Column(columnDefinition = "varchar(1024) COMMENT '标签'")
     String label;
     @Column(columnDefinition = "varchar(32) COMMENT '推荐按钮的名字'")

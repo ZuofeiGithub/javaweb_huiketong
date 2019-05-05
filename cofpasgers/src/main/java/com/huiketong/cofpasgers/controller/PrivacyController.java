@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class PrivacyController {
     @GetMapping("yinsi.html")
-    public String privacyView(){
-        return Constant.PREFIX+ "yinsi";
+    public String privacyView() {
+        return Constant.PREFIX + "yinsi";
     }
 }

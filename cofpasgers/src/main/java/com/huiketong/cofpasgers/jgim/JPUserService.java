@@ -53,7 +53,7 @@ public class JPUserService {
         }
     }
 
-    public void sendSingleTextByAdmin(String fromId,String targetId,String context) {
+    public void sendSingleTextByAdmin(String fromId, String targetId, String context) {
         try {
             MessageBody body = MessageBody.text(context);
             SendMessageResult result = client.sendSingleTextByAdmin(targetId, fromId, body);

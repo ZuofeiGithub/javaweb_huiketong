@@ -6,8 +6,9 @@ package com.huiketong.cofpasgers.jni_native;
  * @Version 1.0
  */
 public class HelloJni {
-    static{
+    static {
         System.loadLibrary("Hello");
     }
+
     public static native void displayHelloWorld();
 }

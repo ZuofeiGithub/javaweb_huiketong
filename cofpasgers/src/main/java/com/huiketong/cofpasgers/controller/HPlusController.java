@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HPlusController {
 
     @GetMapping("hplus")
-    public String hplus(){
+    public String hplus() {
         return "hplus/index";
     }
 }

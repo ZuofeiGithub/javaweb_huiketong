@@ -26,33 +26,35 @@ public class PageViewController {
     CommissionRepository commissionRepository;
     @Autowired
     EnterpriseRepository enterpriseRepository;
+
     /**
      * 佣金规则视图
+     *
      * @return
      */
     @GetMapping(value = "/commission_rule")
-    public Object CommissionRule(){
+    public Object CommissionRule() {
         ModelAndView mv = new ModelAndView("commission_rule");
         return mv;
     }
 
     @PostMapping(value = "/getcommission")
     @ResponseBody
-    public Commission GetCommission(HttpServletRequest request){
+    public Commission GetCommission(HttpServletRequest request) {
         String login_id = request.getParameter("login_id");
         Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(login_id);
-        if(enterprise!=null){
+        if (enterprise != null) {
             Commission commission = commissionRepository.findCommissionByCompanyId(enterprise.getId());
-            if(commission != null){
+            if (commission != null) {
                 return commission;
-            }else{
+            } else {
                 Commission newcommission = new Commission();
                 newcommission.setCompanyId(enterprise.getId());
                 newcommission.setScore(new BigDecimal(20.0));
                 newcommission.setUpdateTime(new Date());
                 return newcommission;
             }
-        }else{
+        } else {
             return null;
         }
     }
@@ -93,7 +95,7 @@ public class PageViewController {
 //    }
 
     @GetMapping(value = "changeuser")
-    public ModelAndView ChangeUser(){
+    public ModelAndView ChangeUser() {
         ModelAndView mv = new ModelAndView("changeuser");
         return mv;
     }

@@ -34,12 +34,12 @@ import java.util.*;
 @RequestMapping(value = "/")
 public class NewYongJinController {
 
-    private  final  static Logger log = LoggerFactory.getLogger(NewYongJinController.class);
+    private final static Logger log = LoggerFactory.getLogger(NewYongJinController.class);
 
     @Autowired
     ShareContextRepository shareContextRepository;
-   @Autowired
-   EnterpriseRepository enterpriseRepository;
+    @Autowired
+    EnterpriseRepository enterpriseRepository;
     @Autowired
     CommissionRepository commissionRepository;
 
@@ -47,9 +47,11 @@ public class NewYongJinController {
     ShareGuideRepository shareGuideRepository;
 
     @Autowired
-    IntegralRuleRepository  integralRuleRepository;
+    IntegralRuleRepository integralRuleRepository;
+
     /**
      * 进入佣金页面
+     *
      * @return
      */
     @RequestMapping(value = "/yongjinJsp")
@@ -60,33 +62,33 @@ public class NewYongJinController {
 
     /**
      * 进入积分规则页面
+     *
      * @return
      */
     @RequestMapping(value = "/integralRuleJsp")
-    public ModelAndView integralRule(Map<String,Object> map,String user_id) {
+    public ModelAndView integralRule(Map<String, Object> map, String user_id) {
         ModelAndView mv = new ModelAndView(Constant.PREFIX + "newIntegralRule");
         Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(user_id);
-        if(ObjectUtils.isNotNull(enterprise))
-        {
-            IntegralRule rule =  integralRuleRepository.findIntegralRuleByCompanyId(enterprise.getId());
-            if(ObjectUtils.isNotNull(rule)) {
+        if (ObjectUtils.isNotNull(enterprise)) {
+            IntegralRule rule = integralRuleRepository.findIntegralRuleByCompanyId(enterprise.getId());
+            if (ObjectUtils.isNotNull(rule)) {
                 map.put("rule", rule);
-                map.put("minprice",rule.getMinPrice());
-                map.put("rmbforpoint",rule.getRmbForPoint());
-                map.put("consume",rule.getConsume());
-                map.put("loginIntegral",rule.getLoginIntegral());
-                map.put("signIntegral",rule.getSignIntegral());
-                map.put("recomIntegral",rule.getRecomIntegral());
-                map.put("authIntegral",rule.getAuthIntegral());
-                map.put("inviteIntegral",rule.getInviteIntegral());
+                map.put("minprice", rule.getMinPrice());
+                map.put("rmbforpoint", rule.getRmbForPoint());
+                map.put("consume", rule.getConsume());
+                map.put("loginIntegral", rule.getLoginIntegral());
+                map.put("signIntegral", rule.getSignIntegral());
+                map.put("recomIntegral", rule.getRecomIntegral());
+                map.put("authIntegral", rule.getAuthIntegral());
+                map.put("inviteIntegral", rule.getInviteIntegral());
                 map.put("ispoint", rule.getIsPoint());
                 map.put("islotto", rule.getIsOpenLotto());
                 JSONArray jsonArray = JSON.parseArray(rule.getDials());
-                if(ObjectUtils.isNotNull(jsonArray)){
-                    for(int i = 0; i < jsonArray.size();i++){
+                if (ObjectUtils.isNotNull(jsonArray)) {
+                    for (int i = 0; i < jsonArray.size(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        map.put("point"+i,jsonObject.getIntValue("integral"));
-                        map.put("probability"+i,jsonObject.getIntValue("probability"));
+                        map.put("point" + i, jsonObject.getIntValue("integral"));
+                        map.put("probability" + i, jsonObject.getIntValue("probability"));
                     }
                 }
             }
@@ -97,16 +99,17 @@ public class NewYongJinController {
 
     /**
      * 进入分佣指南页面
+     *
      * @return
      */
     @RequestMapping(value = "/fenyongJsp")
-    public ModelAndView fenyongJsp(String user_id,Map<String,Object> map) {
+    public ModelAndView fenyongJsp(String user_id, Map<String, Object> map) {
         ModelAndView mv = new ModelAndView(Constant.PREFIX + "newFenyong");
         Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(user_id);
-        if(ObjectUtils.isNotNull(enterprise)){
+        if (ObjectUtils.isNotNull(enterprise)) {
             ShareFeeGuide shareFeeGuide = shareGuideRepository.findShareFeeGuideByCompanyId(enterprise.getId());
-            if(ObjectUtils.isNotNull(shareFeeGuide)){
-                map.put("context",shareFeeGuide.getGuideContext());
+            if (ObjectUtils.isNotNull(shareFeeGuide)) {
+                map.put("context", shareFeeGuide.getGuideContext());
             }
         }
         return mv;
@@ -114,30 +117,31 @@ public class NewYongJinController {
 
     /**
      * 进入佣金规则页面
+     *
      * @return
      */
     @GetMapping(value = "/yongjinGuiZeJsp")
-    public ModelAndView yongjinGuiZeJsp(String user_id,Map<String,Object> map) {
+    public ModelAndView yongjinGuiZeJsp(String user_id, Map<String, Object> map) {
         ModelAndView mv = new ModelAndView(Constant.PREFIX + "newyongjinGuiZe");
         Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(user_id);
-        if(ObjectUtils.isNotNull(enterprise)){
+        if (ObjectUtils.isNotNull(enterprise)) {
             Commission commission = commissionRepository.findCommissionByCompanyId(enterprise.getId());
-            if(ObjectUtils.isNotNull(commission)){
-                map.put("score",commission.getScore());
-                map.put("minDral",commission.getMinWithdraw());
-                map.put("sharecount",commission.getShareCount());
-                map.put("dralstatus",commission.getBWithdrawOpen());
-                map.put("invitescore",commission.getInvitScore());
-                map.put("firstpresent",commission.getFirstPercentage());
-                map.put("secondpresent",commission.getSecondPercentage());
-                map.put("ofirstpreset",commission.getOfirstPercentage());
-                map.put("osecondpreset",commission.getOsecondPercentage());
+            if (ObjectUtils.isNotNull(commission)) {
+                map.put("score", commission.getScore());
+                map.put("minDral", commission.getMinWithdraw());
+                map.put("sharecount", commission.getShareCount());
+                map.put("dralstatus", commission.getBWithdrawOpen());
+                map.put("invitescore", commission.getInvitScore());
+                map.put("firstpresent", commission.getFirstPercentage());
+                map.put("secondpresent", commission.getSecondPercentage());
+                map.put("ofirstpreset", commission.getOfirstPercentage());
+                map.put("osecondpreset", commission.getOsecondPercentage());
 
-            }else{
-                map.put("rule","");
+            } else {
+                map.put("rule", "");
             }
-        }else{
-            map.put("rule","");
+        } else {
+            map.put("rule", "");
         }
         return mv;
     }
@@ -145,20 +149,21 @@ public class NewYongJinController {
 
     /**
      * 佣金列表
+     *
      * @return
      */
     @RequestMapping(value = "/yongjinList")
     @ResponseBody
-    public JSONData yongjinList(Integer page, Integer limit ,String  telphone,String searchTitle) {
-        Enterprise  enterprise=enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
-        int comId=enterprise.getId();
+    public JSONData yongjinList(Integer page, Integer limit, String telphone, String searchTitle) {
+        Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
+        int comId = enterprise.getId();
         JSONData response = new JSONData();
         List<ShareContext> shareContextList;
-        if(ObjectUtils.isEmpty(searchTitle)){
-            shareContextList= shareContextRepository.findPagesByLimit(comId,(page-1)*limit,limit);
-            searchTitle="";
-        }else{
-            shareContextList= shareContextRepository.findPagesByLikeName(comId,searchTitle,(page-1)*limit,limit);
+        if (ObjectUtils.isEmpty(searchTitle)) {
+            shareContextList = shareContextRepository.findPagesByLimit(comId, (page - 1) * limit, limit);
+            searchTitle = "";
+        } else {
+            shareContextList = shareContextRepository.findPagesByLikeName(comId, searchTitle, (page - 1) * limit, limit);
         }
 
         if (shareContextList.size() > 0) {
@@ -180,12 +185,12 @@ public class NewYongJinController {
      */
     @RequestMapping(value = "/uploadYongJinImg")
     @ResponseBody
-    public String uploadYongJinImg(HttpServletRequest request, @RequestParam("file") MultipartFile file ) {
+    public String uploadYongJinImg(HttpServletRequest request, @RequestParam("file") MultipartFile file) {
         Map<String, Object> map = new HashMap<String, Object>();
         Map<String, Object> map1 = new HashMap<String, Object>();
-        String fileUrl= null;
+        String fileUrl = null;
         try {
-            fileUrl = FileUploadUtil.upload(request,file);
+            fileUrl = FileUploadUtil.upload(request, file);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -199,22 +204,21 @@ public class NewYongJinController {
     }
 
 
-
     /**
      * 上传佣金详情
      */
     @RequestMapping(value = "/uploadYongJinInfo")
     @ResponseBody
-    public String uploadYongJinInfo(HttpServletRequest request, String title, String telphone, BigDecimal money, String url, String yongjinContent, @RequestParam("filename") MultipartFile file ) {
-        Enterprise  enterprise=enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
-        int comId=enterprise.getId();
-        String fileUrl= null;
+    public String uploadYongJinInfo(HttpServletRequest request, String title, String telphone, BigDecimal money, String url, String yongjinContent, @RequestParam("filename") MultipartFile file) {
+        Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
+        int comId = enterprise.getId();
+        String fileUrl = null;
         try {
-            fileUrl = FileUploadUtil.upload(request,file);
+            fileUrl = FileUploadUtil.upload(request, file);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        ShareContext  shareContext=new ShareContext();
+        ShareContext shareContext = new ShareContext();
         shareContext.setCompanyId(comId);
         shareContext.setContext(yongjinContent);
         shareContext.setImgUrl(fileUrl);
@@ -222,21 +226,21 @@ public class NewYongJinController {
         shareContext.setUrl(url);
         shareContext.setTitle(title);
         try {
-            shareContext.setDatetime(DateUtils.dateFormat(new Date(),"yyyy-MM-dd HH:mm:ss"));
+            shareContext.setDatetime(DateUtils.dateFormat(new Date(), "yyyy-MM-dd HH:mm:ss"));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        boolean flag=false;
+        boolean flag = false;
         try {
             shareContextRepository.save(shareContext);
-            flag=true;
+            flag = true;
         } catch (Exception e) {
             e.printStackTrace();
             log.info(e.getMessage());
         }
-        if(flag==true){
+        if (flag == true) {
             return "1";
-        }else{
+        } else {
             return "0";
         }
     }
@@ -248,19 +252,19 @@ public class NewYongJinController {
     @RequestMapping(value = "/deleteYongjin")
     @ResponseBody
     public String deleteYongjin(HttpServletRequest request, Integer id) {
-        boolean flag=false;
+        boolean flag = false;
 
         try {
             shareContextRepository.deleteYongjin(id);
-            flag=true;
+            flag = true;
         } catch (Exception e) {
             e.printStackTrace();
             log.info(e.getMessage());
         }
 
-        if(flag==true){
+        if (flag == true) {
             return "1";
-        }else{
+        } else {
             return "0";
         }
 
@@ -268,6 +272,7 @@ public class NewYongJinController {
 
     /**
      * 修改商家
+     *
      * @param request
      * @param title
      * @param imgSrc
@@ -281,37 +286,38 @@ public class NewYongJinController {
      */
     @RequestMapping(value = "/updateYongjin")
     @ResponseBody
-    public String updateYongjin(HttpServletRequest request, String title, String imgSrc, Integer id,String telphone, BigDecimal money, String url, String yongjinContent, @RequestParam("filename") MultipartFile file) {
+    public String updateYongjin(HttpServletRequest request, String title, String imgSrc, Integer id, String telphone, BigDecimal money, String url, String yongjinContent, @RequestParam("filename") MultipartFile file) {
 
-        Enterprise  enterprise=enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
-        int comId=enterprise.getId();
+        Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
+        int comId = enterprise.getId();
 
-        if(file.getSize()>0){
+        if (file.getSize() > 0) {
             try {
-                imgSrc= FileUploadUtil.upload(request,file);
+                imgSrc = FileUploadUtil.upload(request, file);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        boolean flag=false;
+        boolean flag = false;
         try {
-            shareContextRepository.updateYongjin(yongjinContent,title,money,url,imgSrc,id);
-            flag=true;
+            shareContextRepository.updateYongjin(yongjinContent, title, money, url, imgSrc, id);
+            flag = true;
         } catch (Exception e) {
             e.printStackTrace();
             log.info(e.getMessage());
         }
 
-        if(flag==true){
+        if (flag == true) {
             return "1";
-        }else{
+        } else {
             return "0";
         }
     }
 
     /**
      * 添加佣金规则
+     *
      * @param score
      * @param minWithdraw
      * @param shareCount
@@ -329,10 +335,10 @@ public class NewYongJinController {
     @RequestMapping(value = "/addYongjinGuiZe")
     @ResponseBody
     public String addYongjinGuiZe(BigDecimal score, BigDecimal minWithdraw, Integer shareCount, Integer bWithdrawOpen, BigDecimal invitScore, Float firstPercentage, Float secondPercentage, String nbRemark,
-                                  Float qtfirstPercentage, Float qtsecondPercentage, String qtRemark,String telphone) {
+                                  Float qtfirstPercentage, Float qtsecondPercentage, String qtRemark, String telphone) {
 
-        Enterprise  enterprise=enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
-        int comId=enterprise.getId();
+        Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
+        int comId = enterprise.getId();
 //        Commission commission=new Commission();
 //        commission.setCompanyId(comId);
 //        commission.setScore(score);
@@ -347,19 +353,19 @@ public class NewYongJinController {
 //        commission.setMinWithdraw(minWithdraw);
 //        commission.setShareCount(shareCount);
 //        commission.setInvitScore(invitScore);
-        boolean flag=false;
+        boolean flag = false;
         try {
-            commissionRepository.updateComByComId(score,bWithdrawOpen,firstPercentage,secondPercentage,qtfirstPercentage,qtsecondPercentage,shareCount,
-                    invitScore,nbRemark,qtRemark,minWithdraw,comId);
-            flag=true;
+            commissionRepository.updateComByComId(score, bWithdrawOpen, firstPercentage, secondPercentage, qtfirstPercentage, qtsecondPercentage, shareCount,
+                    invitScore, nbRemark, qtRemark, minWithdraw, comId);
+            flag = true;
         } catch (Exception e) {
             e.printStackTrace();
             log.info(e.getMessage());
         }
 
-        if(flag==true){
+        if (flag == true) {
             return "1";
-        }else{
+        } else {
             return "0";
         }
 
@@ -367,38 +373,37 @@ public class NewYongJinController {
 
     /**
      * 添加分佣指南
+     *
      * @param guideContext
      * @param telphone
      * @return
      */
     @RequestMapping(value = "/addYongjinGuide")
     @ResponseBody
-    public String addYongjinGuide( String guideContext, String telphone) {
+    public String addYongjinGuide(String guideContext, String telphone) {
 
-        Enterprise  enterprise=enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
-        int comId=enterprise.getId();
-        ShareFeeGuide shareFeeGuide=new ShareFeeGuide();
+        Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
+        int comId = enterprise.getId();
+        ShareFeeGuide shareFeeGuide = new ShareFeeGuide();
         shareFeeGuide.setCompanyId(comId);
         shareFeeGuide.setGuideContext(guideContext);
-        boolean flag=false;
+        boolean flag = false;
         try {
             ShareFeeGuide existshareguide = shareGuideRepository.findShareFeeGuideByCompanyId(comId);
-            if(existshareguide != null)
-            {
-                shareGuideRepository.updateShareGuide(guideContext,comId);
-            }
-            else{
+            if (existshareguide != null) {
+                shareGuideRepository.updateShareGuide(guideContext, comId);
+            } else {
                 shareGuideRepository.save(shareFeeGuide);
             }
-            flag=true;
+            flag = true;
         } catch (Exception e) {
             e.printStackTrace();
             log.info(e.getMessage());
         }
 
-        if(flag==true){
+        if (flag == true) {
             return "1";
-        }else{
+        } else {
             return "0";
         }
 
@@ -407,6 +412,7 @@ public class NewYongJinController {
 
     /**
      * 积分规则
+     *
      * @param minPrice
      * @param rmbForPoint
      * @param isPoint
@@ -424,30 +430,30 @@ public class NewYongJinController {
      */
     @RequestMapping(value = "/addIntegralRule")
     @ResponseBody
-    public String addIntegralRule( Integer minPrice, Integer rmbForPoint, Integer isPoint, Integer isOpenLotto, Integer consume, Integer loginIntegral,
-                                   Integer signIntegral, Integer recomIntegral, Integer authIntegral,Integer inviteIntegral ,@RequestParam("dials") Integer dials [] ,@RequestParam("probability") Integer probability [],String telphone) {
-         int countSum=0;
-         for(int i=0;i<probability.length;i++){
-             countSum+=probability[i];
-         }
-         if(countSum!=100){ //判断概率是否为100%
+    public String addIntegralRule(Integer minPrice, Integer rmbForPoint, Integer isPoint, Integer isOpenLotto, Integer consume, Integer loginIntegral,
+                                  Integer signIntegral, Integer recomIntegral, Integer authIntegral, Integer inviteIntegral, @RequestParam("dials") Integer dials[], @RequestParam("probability") Integer probability[], String telphone) {
+        int countSum = 0;
+        for (int i = 0; i < probability.length; i++) {
+            countSum += probability[i];
+        }
+        if (countSum != 100) { //判断概率是否为100%
             return "2";
-         }
-        Enterprise  enterprise=enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
-        int comId=enterprise.getId();
+        }
+        Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
+        int comId = enterprise.getId();
         IntegralRule exisintegralRule = integralRuleRepository.findIntegralRuleByCompanyId(comId);
 
-        boolean flag=false;
-        JSONArray jsonArray=new JSONArray();
-        for(int i=0;i<dials.length;i++){
-            JSONObject jsonObject=new JSONObject();
-            jsonObject.put("id",i);
-            jsonObject.put("integral",dials[i]);
-            jsonObject.put("probability",probability[i]);
+        boolean flag = false;
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i < dials.length; i++) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("id", i);
+            jsonObject.put("integral", dials[i]);
+            jsonObject.put("probability", probability[i]);
             jsonArray.add(jsonObject);
         }
-       // System.out.println(jsonArray);
-        if(ObjectUtils.isNull(exisintegralRule)) {
+        // System.out.println(jsonArray);
+        if (ObjectUtils.isNull(exisintegralRule)) {
             IntegralRule integralRule = new IntegralRule();
             integralRule.setCompanyId(comId);
             integralRule.setMinPrice(minPrice);
@@ -463,30 +469,30 @@ public class NewYongJinController {
             integralRule.setDials(jsonArray.toString());
             try {
                 integralRuleRepository.save(integralRule);
-                flag=true;
-            }catch (Exception e){
+                flag = true;
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-            if(flag==true){
+            if (flag == true) {
                 return "1";
-            }else{
+            } else {
                 return "0";
             }
 
-        }else{
+        } else {
             try {
 
-                integralRuleRepository.updateRule(authIntegral,consume,jsonArray.toString(),inviteIntegral,isOpenLotto,isPoint,loginIntegral,minPrice,
-                        recomIntegral,rmbForPoint,signIntegral,comId);
-                flag=true;
+                integralRuleRepository.updateRule(authIntegral, consume, jsonArray.toString(), inviteIntegral, isOpenLotto, isPoint, loginIntegral, minPrice,
+                        recomIntegral, rmbForPoint, signIntegral, comId);
+                flag = true;
             } catch (Exception e) {
                 e.printStackTrace();
                 log.info(e.getMessage());
             }
 
-            if(flag==true){
+            if (flag == true) {
                 return "1";
-            }else{
+            } else {
                 return "0";
             }
         }

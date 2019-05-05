@@ -443,20 +443,20 @@ public class AppController {
 
     /**
      * 企业加盟
+     *
      * @return
      * @throws FileNotFoundException
      * @throws ParseException
      */
     @PostMapping("joinus")
     @CrossOrigin
-    public BaseJsonResponse joinUs(String user_id,String token,String enter_name,String enter_contact,String enter_phone,String enter_address) throws ParseException, AlipayApiException {
+    public BaseJsonResponse joinUs(String user_id, String token, String enter_name, String enter_contact, String enter_phone, String enter_address) throws ParseException, AlipayApiException {
         BaseJsonResponse response = new BaseJsonResponse();
         verifyUser(user_id, token, response, o -> {
-            if(!ObjectUtils.isEmpty(enter_name)&&!ObjectUtils.isEmpty(enter_contact)&&!ObjectUtils.isEmpty(enter_phone)&&!ObjectUtils.isEmpty(enter_address))
-            {
-                if(!ObjectUtils.isEmpty(enterpriseRepository.findEnterpriseByEnterLoginName(enter_phone))){
+            if (!ObjectUtils.isEmpty(enter_name) && !ObjectUtils.isEmpty(enter_contact) && !ObjectUtils.isEmpty(enter_phone) && !ObjectUtils.isEmpty(enter_address)) {
+                if (!ObjectUtils.isEmpty(enterpriseRepository.findEnterpriseByEnterLoginName(enter_phone))) {
                     response.setMsg("您已经加入我们公司,请联系官方人员").setCode("0").setData(null);
-                }else{
+                } else {
                     Enterprise enterprise = new Enterprise();
                     enterprise.setEnterLoginName(enter_phone);
                     enterprise.setEnterStatus(0);
@@ -480,19 +480,19 @@ public class AppController {
                     try {
                         enterpriseRepository.save(enterprise);
                         response.setMsg("成功加入").setCode("1").setData(null);
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         response.setMsg("加入失败").setCode("0").setData(null);
                     }
                 }
 
 
-
-            }else{
+            } else {
                 response.setMsg("请将信息填写完整").setCode("0").setData(null);
             }
         });
         return response;
     }
+
     /**
      * 修改头像
      *
@@ -863,7 +863,7 @@ public class AppController {
                     } catch (Exception e) {
                         response.setCode("200").setMsg("签到失败");
                     }
-                }else{
+                } else {
                     response.setCode("200").setMsg("未开启签到功能");
                 }
             }
@@ -2398,20 +2398,20 @@ public class AppController {
                                                 data.setAddress(customer.getDetailAddress());
                                                 data.setName(customer.getCustomerName());
                                                 data.setTel(customer.getTelphone());
-                                                if(!ObjectUtils.isEmpty(customer.getStyle()))
-                                                data.setStyle(DecorationStyle.STYLE(customer.getStyle()));
-                                                if(!ObjectUtils.isEmpty(customer.getRenovRemark()))
-                                                data.setRemark(customer.getRenovRemark());
-                                                if(!ObjectUtils.isEmpty(customer.getRecomDatetime()))
-                                                data.setAdd_time(DateUtils.dateFormat(customer.getRecomDatetime(), DateUtils.DATE_TIME_PATTERN));
-                                                if(!ObjectUtils.isEmpty(customer.getSignPrice()))
-                                                data.setSign_price(customer.getSignPrice().toString());
-                                                if(!ObjectUtils.isEmpty(customer.getRevokeReason()))
-                                                data.setReject(customer.getRevokeReason());
-                                                if(!ObjectUtils.isEmpty(customer.getVerifyStatus()))
-                                                data.setStatus(customer.getVerifyStatus().toString());
-                                                if(!ObjectUtils.isEmpty(customer.getSex()))
-                                                data.setSex(customer.getSex());
+                                                if (!ObjectUtils.isEmpty(customer.getStyle()))
+                                                    data.setStyle(DecorationStyle.STYLE(customer.getStyle()));
+                                                if (!ObjectUtils.isEmpty(customer.getRenovRemark()))
+                                                    data.setRemark(customer.getRenovRemark());
+                                                if (!ObjectUtils.isEmpty(customer.getRecomDatetime()))
+                                                    data.setAdd_time(DateUtils.dateFormat(customer.getRecomDatetime(), DateUtils.DATE_TIME_PATTERN));
+                                                if (!ObjectUtils.isEmpty(customer.getSignPrice()))
+                                                    data.setSign_price(customer.getSignPrice().toString());
+                                                if (!ObjectUtils.isEmpty(customer.getRevokeReason()))
+                                                    data.setReject(customer.getRevokeReason());
+                                                if (!ObjectUtils.isEmpty(customer.getVerifyStatus()))
+                                                    data.setStatus(customer.getVerifyStatus().toString());
+                                                if (!ObjectUtils.isEmpty(customer.getSex()))
+                                                    data.setSex(customer.getSex());
                                                 dataList.add(data);
                                             }
 
@@ -2482,11 +2482,11 @@ public class AppController {
 
                             data.setInvite_num(agent.getInitAgentNam().toString());
                             InviteNotes inviteNotes = inviteNotesRepository.findInviteNotesByCompayId(agent.getCompanyId());
-                            if(!ObjectUtils.isEmpty(inviteNotes)){
+                            if (!ObjectUtils.isEmpty(inviteNotes)) {
                                 data.setRewardDesc(inviteNotes.getRewardDesc());
                                 data.setRuleDesc(inviteNotes.getRuleDesc());
                                 data.setBenefits(inviteNotes.getBenefits());
-                            }else{
+                            } else {
                                 data.setBenefits("邀请成功最低获得100元代金券\t\n活动时间: 2019-05-01至2019-05-07");
                                 data.setRuleDesc("1、会员通过您分享的邀请码注册即视为您邀请成功；\t\n" +
                                         "2、会员邀请关系传递，A成功邀请B，B即为A的一度人脉，B成功邀请C，C即为A的二度人脉；\t\n");
@@ -3204,7 +3204,7 @@ public class AppController {
                                     "楼盘地址:" + address + "\r\n" +
                                     "备注:" + remark);
                         } else {
-                            context.append("经纪人姓名:" + agent.getAgentName() + "\r\n"+
+                            context.append("经纪人姓名:" + agent.getAgentName() + "\r\n" +
                                     "客户姓名:" + name + "\r\n" +
                                     "性别:" + sex + "\r\n" +
                                     "客户电话:" + tel + "\r\n" +
@@ -3555,10 +3555,10 @@ public class AppController {
                 VoucherShareData data = new VoucherShareData();
                 data.setContext(voucherShare.getContext());
                 data.setImage(voucherShare.getImage());
-                if(voucherShare.getGoodsId() == 0) {
+                if (voucherShare.getGoodsId() == 0) {
                     data.setLink_url(voucherShare.getLinkUrl() + "?user_id=" + agent.getId());
-                }else{
-                    data.setLink_url(voucherShare.getLinkUrl() + "?goods_id="+goodsId+"&user_id="+agent.getId());
+                } else {
+                    data.setLink_url(voucherShare.getLinkUrl() + "?goods_id=" + goodsId + "&user_id=" + agent.getId());
                 }
                 data.setContext(voucherShare.getContext());
                 data.setTitle(voucherShare.getTitle());
@@ -3581,12 +3581,12 @@ public class AppController {
         verifyUser(user_id, token, response, o -> {
             Agent agent = (Agent) o;
             PriceData data = new PriceData();
-           VoucherDetail voucherDetail = voucherDetailRepository.findVoucherDetailByCompanyId(agent.getCompanyId());
-           if(!ObjectUtils.isEmpty(voucherDetail)){
-               data.setPrice(voucherDetail.getPrice());
-           }else{
-               data.setPrice("0");
-           }
+            VoucherDetail voucherDetail = voucherDetailRepository.findVoucherDetailByCompanyId(agent.getCompanyId());
+            if (!ObjectUtils.isEmpty(voucherDetail)) {
+                data.setPrice(voucherDetail.getPrice());
+            } else {
+                data.setPrice("0");
+            }
 
             response.setData(data).setMsg("成功").setCode("1");
         });
@@ -3653,9 +3653,9 @@ public class AppController {
                 data.setStart_time(DateUtils.dateFormat(voucherDetail.getStartTime(), DateUtils.DATE_PATIERN_DOT));
                 data.setEnd_time(DateUtils.dateFormat(voucherDetail.getEndTime(), DateUtils.DATE_PATIERN_DOT));
                 List<VoucherUser> userList = voucherUserRepository.findAll();
-                if(userList.size() > 200){
+                if (userList.size() > 200) {
                     data.setUser_count(String.valueOf(userList.size()));
-                }else{
+                } else {
                     data.setUser_count("78");
                 }
                 data.setPrice(voucherDetail.getPrice());
@@ -3675,15 +3675,15 @@ public class AppController {
      * @return
      */
     @PostMapping(value = "get_coupon")
-    public Object getCoupon(String user_id, String telphone,String address) {
+    public Object getCoupon(String user_id, String telphone, String address) {
         BaseJsonResponse response = new BaseJsonResponse();
-        if (!ObjectUtils.isEmpty(user_id) && !ObjectUtils.isEmpty(telphone)&&!ObjectUtils.isEmpty(address)) {
+        if (!ObjectUtils.isEmpty(user_id) && !ObjectUtils.isEmpty(telphone) && !ObjectUtils.isEmpty(address)) {
             DefaultEnter defaultEnter = defaultEnterRepository.findDefaultEnterByUserId(user_id);
             if (!ObjectUtils.isEmpty(defaultEnter)) {
                 CouponUser user = new CouponUser();
                 user.setCouponPhone(telphone);
                 user.setCompanyId(defaultEnter.getCompayId());
-                Agent agent = agentRepository.findAgentByTelphoneAndCompanyId(defaultEnter.getUserId(),defaultEnter.getCompayId());
+                Agent agent = agentRepository.findAgentByTelphoneAndCompanyId(defaultEnter.getUserId(), defaultEnter.getCompayId());
                 if (!ObjectUtils.isEmpty(agent)) {
                     user.setShareUser(agent.getAgentName());
                     user.setSharePhone(agent.getTelphone());
@@ -3710,14 +3710,13 @@ public class AppController {
      * 添加优惠券用户
      */
     @PostMapping("addvoucheruser")
-    public BaseJsonResponse addVoucherUser(Integer user_id,String user_name,String phone,String address){
+    public BaseJsonResponse addVoucherUser(Integer user_id, String user_name, String phone, String address) {
         BaseJsonResponse response = new BaseJsonResponse();
-        if(!ObjectUtils.isEmpty(user_id)&&!ObjectUtils.isEmpty(phone))
-        {
+        if (!ObjectUtils.isEmpty(user_id) && !ObjectUtils.isEmpty(phone)) {
             String code = AlicomDysmsUtil.getCode();
             VoucherUser user = new VoucherUser();
             Agent agent = agentRepository.findAgentById(user_id);
-            if(!ObjectUtils.isEmpty(agent)) {
+            if (!ObjectUtils.isEmpty(agent)) {
                 user.setCompanyId(agent.getCompanyId());
             }
             user.setUserId(user_id);
@@ -3727,18 +3726,18 @@ public class AppController {
             user.setVerifyCode(code);
             user.setAddress(address);
             VoucherUser existuser = voucherUserRepository.findVoucherUserByTelphone(phone);
-            if(!ObjectUtils.isEmpty(existuser)){
-                    response.setCode("1").setMsg("您已经领取优惠券").setData(null);
-            }else{
+            if (!ObjectUtils.isEmpty(existuser)) {
+                response.setCode("1").setMsg("您已经领取优惠券").setData(null);
+            } else {
                 try {
                     voucherUserRepository.save(user);
                     response.setCode("0").setMsg("领取成功").setData(null);
-                    AlicomDysmsUtil.sendSms(phone,code,"SMS_164505370");
-                }catch (Exception e){
+                    AlicomDysmsUtil.sendSms(phone, code, "SMS_164505370");
+                } catch (Exception e) {
                     response.setCode("2").setMsg("领取失败").setData(null);
                 }
             }
-        }else{
+        } else {
             response.setCode("4").setMsg("请将您的信息填写完整").setData(null);
         }
 
