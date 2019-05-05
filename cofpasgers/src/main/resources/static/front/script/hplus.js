@@ -62,6 +62,7 @@ $(document).ready(function () {
         var heightWithoutNavbar = $("body > #wrapper").height() - 61;
         $(".sidebard-panel").css("min-height", heightWithoutNavbar + "px");
     }
+
     fix_height();
 
     $(window).bind("load resize click scroll", function () {
@@ -95,7 +96,7 @@ $(document).ready(function () {
     });
 
     //点击菜单的时候高亮显示菜单
-    $("a[name='tabMenuItem']").click(function(){
+    $("a[name='tabMenuItem']").click(function () {
         clearTabMenuItem();
         $(this).addClass("tab-menu-selected");
     });
@@ -116,13 +117,13 @@ $(window).bind("load resize", function () {
     }
 });
 
-function clearTabMenuItem(){
-    $("a[name='tabMenuItem']").each(function(){
+function clearTabMenuItem() {
+    $("a[name='tabMenuItem']").each(function () {
         $(this).removeClass("tab-menu-selected");
     });
 }
 
-function highLightMenuItem(hrefVal){
+function highLightMenuItem(hrefVal) {
     clearTabMenuItem();
     $("a[href='" + hrefVal + "']").addClass("tab-menu-selected");
 }

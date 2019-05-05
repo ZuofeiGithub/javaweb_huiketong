@@ -32,7 +32,8 @@
     /*box-align:center;
     box-pack:center;*/
 }
-.tabs .tab{
+
+.tabs .tab {
     display: inline-block;
     /*padding: .20rem .02rem .20rem .12rem;*/
     -webkit-box-flex: 1;
@@ -49,35 +50,41 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.tabs .tab-current-bg{
+
+.tabs .tab-current-bg {
     height: .03rem;
     background: #4389FE;
     position: absolute;
     bottom: 0;
-    width:0;
+    width: 0;
 
     transition: all 0.2s;
-    -moz-transition: all 0.2s;  /* Firefox 4 */
-    -webkit-transition: all 0.2s;   /* Safari 和 Chrome */
+    -moz-transition: all 0.2s; /* Firefox 4 */
+    -webkit-transition: all 0.2s; /* Safari 和 Chrome */
     -o-transition: all 0.2s;
 }
-.tabs .tab label{
+
+.tabs .tab label {
     padding: .24rem .05rem .24rem .05rem;
     display: inline-block;
     color: #333;
 }
-.tabs .tab.active,.tabs .tab.active *{
+
+.tabs .tab.active, .tabs .tab.active * {
     color: #4389FE;
 }
-.tabs.tabs-top{
+
+.tabs.tabs-top {
     border-top-width: 0;
     border-bottom-width: 1px;
 }
-.tabs.tabs-bottom{
+
+.tabs.tabs-bottom {
     border-top-width: 1px;
     border-bottom-width: 0;
 }
-.tabs.tabs-bottom .tab-current-bg{
+
+.tabs.tabs-bottom .tab-current-bg {
     bottom: auto;
     top: 0;
 }

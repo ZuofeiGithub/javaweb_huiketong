@@ -1,4 +1,3 @@
-
 var table = $("#cus_table").DataTable({
     "language": {
         "oPaginate": {
@@ -22,13 +21,13 @@ var table = $("#cus_table").DataTable({
         }
     },
     "columns": [
-        {"data": "customer_name","sClass": "myClassCenter"},
-        {"data": "telphone","sClass": "myClassCenter"},
-        {"data": "detail_address","sClass": "myClassCenter"},
-        {"data": "type","sClass": "myClassCenter"},
-        {"data": "scheme","sClass": "myClassCenter"},
-        {"data":"recom_datetime","sClass":"myClassCenter"},
-        {"defaultContent": "<button class='remove_btn am-btn am-btn-primary'>报备</button>","sClass": "myClassCenter"}
+        {"data": "customer_name", "sClass": "myClassCenter"},
+        {"data": "telphone", "sClass": "myClassCenter"},
+        {"data": "detail_address", "sClass": "myClassCenter"},
+        {"data": "type", "sClass": "myClassCenter"},
+        {"data": "scheme", "sClass": "myClassCenter"},
+        {"data": "recom_datetime", "sClass": "myClassCenter"},
+        {"defaultContent": "<button class='remove_btn am-btn am-btn-primary'>报备</button>", "sClass": "myClassCenter"}
     ],
     "initComplete": function (settings, json) {
         $(".remove_btn").click(function () {
@@ -44,14 +43,12 @@ var table = $("#cus_table").DataTable({
                 // } else {
                 //     table.$('tr.selected').removeClass('selected');
                 // }
-                if(isclick)
-                {
+                if (isclick) {
                     var data = table.rows(['.selected']).data()[0];
-                    if(confirm("是否认证"))
-                    {
+                    if (confirm("是否认证")) {
                         $.ajax({
-                            url:'',
-                            type:'post',
+                            url: '',
+                            type: 'post',
 
                         })
                         index.target.innerText = "已认证";

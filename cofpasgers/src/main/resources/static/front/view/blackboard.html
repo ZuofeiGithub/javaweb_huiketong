@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <!-- saved from url=(0027)http://localhost/blackboard -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit"><!-- 让360浏览器默认选择webkit内核 -->
 
@@ -43,33 +45,35 @@
     <script src="/front/script/Feng.js"></script>
 
     <style type="text/css">
-        table{  
-            width:100px;  
-            table-layout:fixed;/* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */  
+        table {
+            width: 100px;
+            table-layout: fixed; /* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
         }
-        td{  
-            width:100%;  
-            word-break:keep-all;/* 不换行 */  
-            white-space:nowrap;/* 不换行 */  
-            overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */  
-            text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用*/  
+
+        td {
+            width: 100%;
+            word-break: keep-all; /* 不换行 */
+            white-space: nowrap; /* 不换行 */
+            overflow: hidden; /* 内容超出宽度时隐藏超出部分的内容 */
+            text-overflow: ellipsis; /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用*/
         }
     </style>
 
     <script type="text/javascript">
         Feng.addCtx("");
         Feng.sessionTimeoutRegistry();
-        var str='欢迎使用集客通后台管理系统';
-        var i=0;
-        function typing(){
-            if(i<=str.length){
-                $('#divTyping').html(str.slice(0,i++)+'');
-                setTimeout('typing()',200);
-            }
-            else{
+        var str = '欢迎使用集客通后台管理系统';
+        var i = 0;
+
+        function typing() {
+            if (i <= str.length) {
+                $('#divTyping').html(str.slice(0, i++) + '');
+                setTimeout('typing()', 200);
+            } else {
                 $('#divTyping').html(str);
             }
         }
+
         typing();
     </script>
 </head>
@@ -77,20 +81,21 @@
 <body class="gray-bg">
 <div class="wrapper wrapper-content">
     <div class="container-fluid" style="padding: 0 !important;">
-	<div class="row">
-		<div class="col-sm-12">
-				<div class="alert alert-success alert-dismissable" id="divTyping">
-					<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-				</div>
-				<!--<div class="alert alert-success alert-dismissable">-->
-					<!--<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>-->
-					<!--欢迎使用Guns管理系统-->
-				<!--</div>-->
-		</div>
-	</div>
-</div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="alert alert-success alert-dismissable" id="divTyping">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                </div>
+                <!--<div class="alert alert-success alert-dismissable">-->
+                <!--<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>-->
+                <!--欢迎使用Guns管理系统-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
 
 </div>
 <script src="/front/script/content.js"></script>
 
-</body></html>
+</body>
+</html>

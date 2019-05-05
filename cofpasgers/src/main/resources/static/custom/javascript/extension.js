@@ -4,7 +4,7 @@
         var m_json = new Array();
         var m_upload_success = false;
 
-        function set_success (isSuccess) {
+        function set_success(isSuccess) {
             m_upload_success = isSuccess;
         }
 
@@ -67,7 +67,7 @@
                                 // if (trim(extension_info.pic_url) == "" || trim(extension_info.pic_desc) == "") {
                                 //     set_success(false)
                                 // } else {
-                                    set_success(true);
+                                set_success(true);
                                 // }
                                 m_json.push(extension_info);
                                 tds.eq(5).html(''); //清空操作
@@ -242,7 +242,7 @@ $(function () {
     var $form = $('#ue-form');
 
     $form.validator({
-        submit: function() {
+        submit: function () {
             // 同步编辑器数据
             editor.sync();
 
@@ -260,7 +260,7 @@ $(function () {
     });
 
     // 编辑器内容变化时同步到 textarea
-    editor.addListener('contentChange', function() {
+    editor.addListener('contentChange', function () {
         editor.sync();
 
         // 触发验证

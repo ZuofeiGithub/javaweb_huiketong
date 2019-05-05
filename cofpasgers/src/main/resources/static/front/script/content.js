@@ -62,12 +62,12 @@ function WinMove() {
     var handle = ".ibox-title";
     var connect = "[class*=col]";
     $(element).sortable({
-            handle: handle,
-            connectWith: connect,
-            tolerance: 'pointer',
-            forcePlaceholderSize: true,
-            opacity: 0.8,
-        })
+        handle: handle,
+        connectWith: connect,
+        tolerance: 'pointer',
+        forcePlaceholderSize: true,
+        opacity: 0.8,
+    })
         .disableSelection();
 };
 

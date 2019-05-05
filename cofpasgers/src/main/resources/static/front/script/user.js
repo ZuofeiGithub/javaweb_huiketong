@@ -6,7 +6,7 @@ var MgrUser = {
     seItem: null,		//选中的条目
     table: null,
     layerIndex: -1,
-    deptid:0
+    deptid: 0
 };
 
 /**
@@ -99,7 +99,7 @@ MgrUser.roleAssign = function () {
 MgrUser.delMgrUser = function () {
     if (this.check()) {
 
-        var operation = function(){
+        var operation = function () {
             var userId = MgrUser.seItem.id;
             var ajax = new $ax(Feng.ctxPath + "/mgr/delete", function () {
                 Feng.success("删除成功!");
@@ -111,7 +111,7 @@ MgrUser.delMgrUser = function () {
             ajax.start();
         };
 
-        Feng.confirm("是否删除用户" + MgrUser.seItem.account + "?",operation);
+        Feng.confirm("是否删除用户" + MgrUser.seItem.account + "?", operation);
     }
 };
 

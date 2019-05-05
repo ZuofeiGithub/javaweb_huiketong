@@ -22,31 +22,30 @@ Debug.reportError = function reportError(sMessage, sUrl, sLine) {
 }
 window.onerror = Debug.reportError;
 
-function initUserInfo(){
+function initUserInfo() {
     $("#username").text(getCookie("username"));
     $('#rightname').text(getCookie("rightname"));
     $('#logname').text(getCookie('rightname'));
 }
+
 var telphone = getCookie("telphone");
 $.ajax({
-    url:'isJurisdiction',
-    type:'post',
-    data:{'telphone':telphone},
-    success:function (data) {
+    url: 'isJurisdiction',
+    type: 'post',
+    data: {'telphone': telphone},
+    success: function (data) {
         initUserInfo();
-        if(data == "system"){
+        if (data == "system") {
 
-        }
-        else if(data == "agent"){
+        } else if (data == "agent") {
 
-        }else if(data == "company"){
+        } else if (data == "company") {
 
-        }else{
+        } else {
 
         }
     }
 })
-
 
 
 function getCookie(name) {
@@ -59,6 +58,7 @@ function getCookie(name) {
     }
     return '';
 }
+
 function trim(str) {
     return str.replace(/(^\s*)|(\s*$)/g, "");
 }

@@ -1,25 +1,25 @@
 jll = this.jll || {};
 jll.domains = {
     //wx : 'http://192.168.0.101:8080/jll-wechat'
-    wx : 'http://weixin.vipjll.com'
+    wx: 'http://weixin.vipjll.com'
 };
 var tapmode = 'tapmode';
 
 function addCls(el, cls) {
-    if('classList' in el){
+    if ('classList' in el) {
         el.classList.add(cls);
-    }else{
+    } else {
         var preCls = el.className;
-        var newCls = preCls +' '+ cls;
+        var newCls = preCls + ' ' + cls;
         el.className = newCls;
     }
     return el;
 }
 
 function removeCls(el, cls) {
-    if('classList' in el){
+    if ('classList' in el) {
         el.classList.remove(cls);
-    }else{
+    } else {
         var preCls = el.className;
         var newCls = preCls.replace(cls, '');
         el.className = newCls;
@@ -39,7 +39,7 @@ function touchEnd() {
     removeCls(n, cls);
 }
 
-function parseTapMode () {
+function parseTapMode() {
     var nodes = document.querySelectorAll('[' + tapmode + ']');
     for (var i = 0; i < nodes.length; i++) {
         var node = nodes[i];
@@ -47,7 +47,8 @@ function parseTapMode () {
         node.removeEventListener('touchend', touchEnd, false);
         node.addEventListener('touchstart', touchStart, false);
         node.addEventListener('touchend', touchEnd, false);
-    };
+    }
+    ;
 }
 
 parseTapMode();

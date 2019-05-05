@@ -1,10 +1,10 @@
-layui.use(['form','jquery','table'], function(){
-    var form = layui.form,$ = layui.jquery,table = layui.table;
+layui.use(['form', 'jquery', 'table'], function () {
+    var form = layui.form, $ = layui.jquery, table = layui.table;
     form.render();
     form.verify({
         pass: [
             /^\d+$/
-            ,'排序字段必须为纯数字'
+            , '排序字段必须为纯数字'
         ]
     });
 
@@ -18,32 +18,34 @@ layui.use(['form','jquery','table'], function(){
         }
         return '';
     }
+
     /**
      * cookie操作
      */
 
     $("input[name='telphone']").val(getCookie("telphone"));
+
     function trim(str) {
         return str.replace(/(^\s*)|(\s*$)/g, "");
     }
 });
 
-$("#form1").submit(function(){
-    var formData= new FormData(document.getElementById("form1"));
+$("#form1").submit(function () {
+    var formData = new FormData(document.getElementById("form1"));
     $.ajax({
         async: false,
         type: "POST",
-        url:"/addYongjinGuiZe",
-        data:formData,
+        url: "/addYongjinGuiZe",
+        data: formData,
         dataType: "json",
         contentType: false, //不设置内容类型
         processData: false, //不处理数据
         success: function (data) {
-            if(data>0){
+            if (data > 0) {
                 alert("添加成功")
                 // $("#myModal").modal('hide');  //手动关闭
                 // table.reload("test");
-            }else{
+            } else {
                 alert("添加失败")
             }
         },

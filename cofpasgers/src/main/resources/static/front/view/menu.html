@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <!-- saved from url=(0021)http://localhost/menu -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit"><!-- 让360浏览器默认选择webkit内核 -->
 
@@ -30,10 +32,12 @@
     <script src="./bootstrap-table-mobile.min.js.下载"></script>
     <script src="./bootstrap-table-zh-CN.min.js.下载"></script>
     <script src="./bootstrap-treetable.js.下载"></script>
-    <script src="./layer.js.下载"></script><link rel="stylesheet" href="./layer.css" id="layuicss-layer">
+    <script src="./layer.js.下载"></script>
+    <link rel="stylesheet" href="./layer.css" id="layuicss-layer">
     <script src="./chosen.jquery.js.下载"></script>
     <script src="./icheck.min.js.下载"></script>
-    <script src="./laydate.js.下载"></script><link rel="stylesheet" href="./laydate.css" id="layuicss-laydate">
+    <script src="./laydate.js.下载"></script>
+    <link rel="stylesheet" href="./laydate.css" id="layuicss-laydate">
     <script src="./webuploader.min.js.下载"></script>
     <script src="./ajax-object.js.下载"></script>
     <script src="./bootstrap-table-object.js.下载"></script>
@@ -43,16 +47,17 @@
     <script src="./Feng.js.下载"></script>
 
     <style type="text/css">
-        table{  
-            width:100px;  
-            table-layout:fixed;/* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */  
+        table {
+            width: 100px;
+            table-layout: fixed; /* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
         }
-        td{  
-            width:100%;  
-            word-break:keep-all;/* 不换行 */  
-            white-space:nowrap;/* 不换行 */  
-            overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */  
-            text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用*/  
+
+        td {
+            width: 100%;
+            word-break: keep-all; /* 不换行 */
+            white-space: nowrap; /* 不换行 */
+            overflow: hidden; /* 内容超出宽度时隐藏超出部分的内容 */
+            text-overflow: ellipsis; /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用*/
         }
     </style>
 
@@ -65,66 +70,1073 @@
 <body class="gray-bg">
 <div class="wrapper wrapper-content">
     <div class="row">
-    <div class="col-sm-12">
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <h5>菜单管理</h5>
-            </div>
-            <div class="ibox-content">
-                <div class="row row-lg">
-                    <div class="col-sm-12">
-                        <div class="row">
-                            <div class="col-sm-3">
-<div class="input-group">
-    <div class="input-group-btn">
-        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">菜单名称
-        </button>
-    </div>
-    <input type="text" class="form-control" id="menuName" placeholder="">
-</div>                            </div>
-                            <div class="col-sm-3">
-<div class="input-group">
-    <div class="input-group-btn">
-        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">层级
-        </button>
-    </div>
-    <input type="text" class="form-control" id="level" placeholder="">
-</div>                            </div>
-                            <div class="col-sm-3">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>菜单管理</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row row-lg">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <button data-toggle="dropdown" class="btn btn-white dropdown-toggle"
+                                                    type="button">菜单名称
+                                            </button>
+                                        </div>
+                                        <input type="text" class="form-control" id="menuName" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <button data-toggle="dropdown" class="btn btn-white dropdown-toggle"
+                                                    type="button">层级
+                                            </button>
+                                        </div>
+                                        <input type="text" class="form-control" id="level" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
 
-<button type="button" class="btn btn-primary " onclick="Menu.search()" id="">
-    <i class="fa fa-search"></i>&nbsp;搜索
-</button>
+                                    <button type="button" class="btn btn-primary " onclick="Menu.search()" id="">
+                                        <i class="fa fa-search"></i>&nbsp;搜索
+                                    </button>
 
+                                </div>
+                            </div>
+
+                            <div class="fixed-table-toolbar">
+                                <div class="bs-bars pull-left">
+                                    <div class="hidden-xs" id="menuTableToolbar" role="group">
+
+                                        <button type="button" class="btn btn-primary " onclick="Menu.openAddMenu()"
+                                                id="">
+                                            <i class="fa fa-plus"></i>&nbsp;添加
+                                        </button>
+
+
+                                        <button type="button" class="btn btn-primary button-margin"
+                                                onclick="Menu.openChangeMenu()" id="">
+                                            <i class="fa fa-edit"></i>&nbsp;修改
+                                        </button>
+
+
+                                        <button type="button" class="btn btn-primary button-margin"
+                                                onclick="Menu.delMenu()" id="">
+                                            <i class="fa fa-remove"></i>&nbsp;删除
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bootstrap-tree-table fixed-table-container">
+                                <table id="menuTable" data-mobile-responsive="true" data-click-to-select="true"
+                                       class="table table-hover treetable-table table-bordered table-striped">
+                                    <thead class="treetable-thead" style="width: 1052px;">
+                                    <tr>
+                                        <th style="width:36px"></th>
+                                        <th style="">id</th>
+                                        <th style="">菜单名称</th>
+                                        <th style="">菜单编号</th>
+                                        <th style="">菜单父编号</th>
+                                        <th style="">请求地址</th>
+                                        <th style="">排序</th>
+                                        <th style="">层级</th>
+                                        <th style="">是否是菜单</th>
+                                        <th style="">状态</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="treetable-tbody" style="height: 665px;">
+                                    <tr class="tg-0" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="105"></td>
+                                        <td title="105" name="id" style="">105</td>
+                                        <td title="系统管理" name="name" style=""><span
+                                                class="treetable-expander glyphicon glyphicon-chevron-down"></span>系统管理
+                                        </td>
+                                        <td title="system" name="code" style="">system</td>
+                                        <td title="0" name="pcode" style="">0</td>
+                                        <td title="#" name="url" style="">#</td>
+                                        <td title="4" name="num" style="">4</td>
+                                        <td title="1" name="levels" style="">1</td>
+                                        <td title="是" name="isMenuName" style="">是</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-system" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="106"></td>
+                                        <td title="106" name="id" style="">106</td>
+                                        <td title="用户管理" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-expander glyphicon glyphicon-chevron-down"></span>用户管理
+                                        </td>
+                                        <td title="mgr" name="code" style="">mgr</td>
+                                        <td title="system" name="pcode" style="">system</td>
+                                        <td title="/mgr" name="url" style="">/mgr</td>
+                                        <td title="1" name="num" style="">1</td>
+                                        <td title="2" name="levels" style="">2</td>
+                                        <td title="是" name="isMenuName" style="">是</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-mgr" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="107"></td>
+                                        <td title="107" name="id" style="">107</td>
+                                        <td title="添加用户" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>添加用户
+                                        </td>
+                                        <td title="mgr_add" name="code" style="">mgr_add</td>
+                                        <td title="mgr" name="pcode" style="">mgr</td>
+                                        <td title="/mgr/add" name="url" style="">/mgr/add</td>
+                                        <td title="1" name="num" style="">1</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-mgr" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="108"></td>
+                                        <td title="108" name="id" style="">108</td>
+                                        <td title="修改用户" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>修改用户
+                                        </td>
+                                        <td title="mgr_edit" name="code" style="">mgr_edit</td>
+                                        <td title="mgr" name="pcode" style="">mgr</td>
+                                        <td title="/mgr/edit" name="url" style="">/mgr/edit</td>
+                                        <td title="2" name="num" style="">2</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-mgr" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="109"></td>
+                                        <td title="109" name="id" style="">109</td>
+                                        <td title="删除用户" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>删除用户
+                                        </td>
+                                        <td title="mgr_delete" name="code" style="">mgr_delete</td>
+                                        <td title="mgr" name="pcode" style="">mgr</td>
+                                        <td title="/mgr/delete" name="url" style="">/mgr/delete</td>
+                                        <td title="3" name="num" style="">3</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-mgr" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="110"></td>
+                                        <td title="110" name="id" style="">110</td>
+                                        <td title="重置密码" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>重置密码
+                                        </td>
+                                        <td title="mgr_reset" name="code" style="">mgr_reset</td>
+                                        <td title="mgr" name="pcode" style="">mgr</td>
+                                        <td title="/mgr/reset" name="url" style="">/mgr/reset</td>
+                                        <td title="4" name="num" style="">4</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-mgr" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="111"></td>
+                                        <td title="111" name="id" style="">111</td>
+                                        <td title="冻结用户" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>冻结用户
+                                        </td>
+                                        <td title="mgr_freeze" name="code" style="">mgr_freeze</td>
+                                        <td title="mgr" name="pcode" style="">mgr</td>
+                                        <td title="/mgr/freeze" name="url" style="">/mgr/freeze</td>
+                                        <td title="5" name="num" style="">5</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-mgr" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="112"></td>
+                                        <td title="112" name="id" style="">112</td>
+                                        <td title="解除冻结用户" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>解除冻结用户
+                                        </td>
+                                        <td title="mgr_unfreeze" name="code" style="">mgr_unfreeze</td>
+                                        <td title="mgr" name="pcode" style="">mgr</td>
+                                        <td title="/mgr/unfreeze" name="url" style="">/mgr/unfreeze</td>
+                                        <td title="6" name="num" style="">6</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-mgr" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="113"></td>
+                                        <td title="113" name="id" style="">113</td>
+                                        <td title="分配角色" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>分配角色
+                                        </td>
+                                        <td title="mgr_setRole" name="code" style="">mgr_setRole</td>
+                                        <td title="mgr" name="pcode" style="">mgr</td>
+                                        <td title="/mgr/setRole" name="url" style="">/mgr/setRole</td>
+                                        <td title="7" name="num" style="">7</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-mgr" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="165"></td>
+                                        <td title="165" name="id" style="">165</td>
+                                        <td title="分配角色跳转" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>分配角色跳转
+                                        </td>
+                                        <td title="to_assign_role" name="code" style="">to_assign_role</td>
+                                        <td title="mgr" name="pcode" style="">mgr</td>
+                                        <td title="/mgr/role_assign" name="url" style="">/mgr/role_assign</td>
+                                        <td title="8" name="num" style="">8</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-mgr" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="166"></td>
+                                        <td title="166" name="id" style="">166</td>
+                                        <td title="编辑用户跳转" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>编辑用户跳转
+                                        </td>
+                                        <td title="to_user_edit" name="code" style="">to_user_edit</td>
+                                        <td title="mgr" name="pcode" style="">mgr</td>
+                                        <td title="/mgr/user_edit" name="url" style="">/mgr/user_edit</td>
+                                        <td title="9" name="num" style="">9</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-mgr" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="167"></td>
+                                        <td title="167" name="id" style="">167</td>
+                                        <td title="用户列表" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>用户列表
+                                        </td>
+                                        <td title="mgr_list" name="code" style="">mgr_list</td>
+                                        <td title="mgr" name="pcode" style="">mgr</td>
+                                        <td title="/mgr/list" name="url" style="">/mgr/list</td>
+                                        <td title="10" name="num" style="">10</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-system" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="114"></td>
+                                        <td title="114" name="id" style="">114</td>
+                                        <td title="角色管理" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-expander glyphicon glyphicon-chevron-down"></span>角色管理
+                                        </td>
+                                        <td title="role" name="code" style="">role</td>
+                                        <td title="system" name="pcode" style="">system</td>
+                                        <td title="/role" name="url" style="">/role</td>
+                                        <td title="2" name="num" style="">2</td>
+                                        <td title="2" name="levels" style="">2</td>
+                                        <td title="是" name="isMenuName" style="">是</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-role" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="115"></td>
+                                        <td title="115" name="id" style="">115</td>
+                                        <td title="添加角色" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>添加角色
+                                        </td>
+                                        <td title="role_add" name="code" style="">role_add</td>
+                                        <td title="role" name="pcode" style="">role</td>
+                                        <td title="/role/add" name="url" style="">/role/add</td>
+                                        <td title="1" name="num" style="">1</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-role" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="116"></td>
+                                        <td title="116" name="id" style="">116</td>
+                                        <td title="修改角色" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>修改角色
+                                        </td>
+                                        <td title="role_edit" name="code" style="">role_edit</td>
+                                        <td title="role" name="pcode" style="">role</td>
+                                        <td title="/role/edit" name="url" style="">/role/edit</td>
+                                        <td title="2" name="num" style="">2</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-role" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="117"></td>
+                                        <td title="117" name="id" style="">117</td>
+                                        <td title="删除角色" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>删除角色
+                                        </td>
+                                        <td title="role_remove" name="code" style="">role_remove</td>
+                                        <td title="role" name="pcode" style="">role</td>
+                                        <td title="/role/remove" name="url" style="">/role/remove</td>
+                                        <td title="3" name="num" style="">3</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-role" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="118"></td>
+                                        <td title="118" name="id" style="">118</td>
+                                        <td title="配置权限" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>配置权限
+                                        </td>
+                                        <td title="role_setAuthority" name="code" style="">role_setAuthority</td>
+                                        <td title="role" name="pcode" style="">role</td>
+                                        <td title="/role/setAuthority" name="url" style="">/role/setAuthority</td>
+                                        <td title="4" name="num" style="">4</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-role" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="162"></td>
+                                        <td title="162" name="id" style="">162</td>
+                                        <td title="修改角色跳转" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>修改角色跳转
+                                        </td>
+                                        <td title="to_role_edit" name="code" style="">to_role_edit</td>
+                                        <td title="role" name="pcode" style="">role</td>
+                                        <td title="/role/role_edit" name="url" style="">/role/role_edit</td>
+                                        <td title="5" name="num" style="">5</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-role" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="163"></td>
+                                        <td title="163" name="id" style="">163</td>
+                                        <td title="角色分配跳转" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>角色分配跳转
+                                        </td>
+                                        <td title="to_role_assign" name="code" style="">to_role_assign</td>
+                                        <td title="role" name="pcode" style="">role</td>
+                                        <td title="/role/role_assign" name="url" style="">/role/role_assign</td>
+                                        <td title="6" name="num" style="">6</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-role" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="164"></td>
+                                        <td title="164" name="id" style="">164</td>
+                                        <td title="角色列表" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>角色列表
+                                        </td>
+                                        <td title="role_list" name="code" style="">role_list</td>
+                                        <td title="role" name="pcode" style="">role</td>
+                                        <td title="/role/list" name="url" style="">/role/list</td>
+                                        <td title="7" name="num" style="">7</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-system" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="119"></td>
+                                        <td title="119" name="id" style="">119</td>
+                                        <td title="菜单管理" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-expander glyphicon glyphicon-chevron-down"></span>菜单管理
+                                        </td>
+                                        <td title="menu" name="code" style="">menu</td>
+                                        <td title="system" name="pcode" style="">system</td>
+                                        <td title="/menu" name="url" style="">/menu</td>
+                                        <td title="4" name="num" style="">4</td>
+                                        <td title="2" name="levels" style="">2</td>
+                                        <td title="是" name="isMenuName" style="">是</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-menu" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="120"></td>
+                                        <td title="120" name="id" style="">120</td>
+                                        <td title="添加菜单" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>添加菜单
+                                        </td>
+                                        <td title="menu_add" name="code" style="">menu_add</td>
+                                        <td title="menu" name="pcode" style="">menu</td>
+                                        <td title="/menu/add" name="url" style="">/menu/add</td>
+                                        <td title="1" name="num" style="">1</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-menu" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="121"></td>
+                                        <td title="121" name="id" style="">121</td>
+                                        <td title="修改菜单" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>修改菜单
+                                        </td>
+                                        <td title="menu_edit" name="code" style="">menu_edit</td>
+                                        <td title="menu" name="pcode" style="">menu</td>
+                                        <td title="/menu/edit" name="url" style="">/menu/edit</td>
+                                        <td title="2" name="num" style="">2</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-menu" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="122"></td>
+                                        <td title="122" name="id" style="">122</td>
+                                        <td title="删除菜单" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>删除菜单
+                                        </td>
+                                        <td title="menu_remove" name="code" style="">menu_remove</td>
+                                        <td title="menu" name="pcode" style="">menu</td>
+                                        <td title="/menu/remove" name="url" style="">/menu/remove</td>
+                                        <td title="3" name="num" style="">3</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-menu" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="150"></td>
+                                        <td title="150" name="id" style="">150</td>
+                                        <td title="菜单编辑跳转" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>菜单编辑跳转
+                                        </td>
+                                        <td title="to_menu_edit" name="code" style="">to_menu_edit</td>
+                                        <td title="menu" name="pcode" style="">menu</td>
+                                        <td title="/menu/menu_edit" name="url" style="">/menu/menu_edit</td>
+                                        <td title="4" name="num" style="">4</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-menu" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="151"></td>
+                                        <td title="151" name="id" style="">151</td>
+                                        <td title="菜单列表" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>菜单列表
+                                        </td>
+                                        <td title="menu_list" name="code" style="">menu_list</td>
+                                        <td title="menu" name="pcode" style="">menu</td>
+                                        <td title="/menu/list" name="url" style="">/menu/list</td>
+                                        <td title="5" name="num" style="">5</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-system" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="128"></td>
+                                        <td title="128" name="id" style="">128</td>
+                                        <td title="业务日志" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-expander glyphicon glyphicon-chevron-down"></span>业务日志
+                                        </td>
+                                        <td title="log" name="code" style="">log</td>
+                                        <td title="system" name="pcode" style="">system</td>
+                                        <td title="/log" name="url" style="">/log</td>
+                                        <td title="6" name="num" style="">6</td>
+                                        <td title="2" name="levels" style="">2</td>
+                                        <td title="是" name="isMenuName" style="">是</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-log" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="134"></td>
+                                        <td title="134" name="id" style="">134</td>
+                                        <td title="清空日志" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>清空日志
+                                        </td>
+                                        <td title="log_clean" name="code" style="">log_clean</td>
+                                        <td title="log" name="pcode" style="">log</td>
+                                        <td title="/log/delLog" name="url" style="">/log/delLog</td>
+                                        <td title="3" name="num" style="">3</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-log" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="158"></td>
+                                        <td title="158" name="id" style="">158</td>
+                                        <td title="日志列表" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>日志列表
+                                        </td>
+                                        <td title="log_list" name="code" style="">log_list</td>
+                                        <td title="log" name="pcode" style="">log</td>
+                                        <td title="/log/list" name="url" style="">/log/list</td>
+                                        <td title="2" name="num" style="">2</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-log" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="159"></td>
+                                        <td title="159" name="id" style="">159</td>
+                                        <td title="日志详情" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>日志详情
+                                        </td>
+                                        <td title="log_detail" name="code" style="">log_detail</td>
+                                        <td title="log" name="pcode" style="">log</td>
+                                        <td title="/log/detail" name="url" style="">/log/detail</td>
+                                        <td title="3" name="num" style="">3</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-system" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="130"></td>
+                                        <td title="130" name="id" style="">130</td>
+                                        <td title="监控管理" name="name" style=""><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>监控管理
+                                        </td>
+                                        <td title="druid" name="code" style="">druid</td>
+                                        <td title="system" name="pcode" style="">system</td>
+                                        <td title="/druid" name="url" style="">/druid</td>
+                                        <td title="7" name="num" style="">7</td>
+                                        <td title="2" name="levels" style="">2</td>
+                                        <td title="是" name="isMenuName" style="">是</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-system" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="131"></td>
+                                        <td title="131" name="id" style="">131</td>
+                                        <td title="部门管理" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-expander glyphicon glyphicon-chevron-down"></span>部门管理
+                                        </td>
+                                        <td title="dept" name="code" style="">dept</td>
+                                        <td title="system" name="pcode" style="">system</td>
+                                        <td title="/dept" name="url" style="">/dept</td>
+                                        <td title="3" name="num" style="">3</td>
+                                        <td title="2" name="levels" style="">2</td>
+                                        <td title="是" name="isMenuName" style="">是</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-dept" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="135"></td>
+                                        <td title="135" name="id" style="">135</td>
+                                        <td title="添加部门" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>添加部门
+                                        </td>
+                                        <td title="dept_add" name="code" style="">dept_add</td>
+                                        <td title="dept" name="pcode" style="">dept</td>
+                                        <td title="/dept/add" name="url" style="">/dept/add</td>
+                                        <td title="1" name="num" style="">1</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-dept" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="136"></td>
+                                        <td title="136" name="id" style="">136</td>
+                                        <td title="修改部门" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>修改部门
+                                        </td>
+                                        <td title="dept_update" name="code" style="">dept_update</td>
+                                        <td title="dept" name="pcode" style="">dept</td>
+                                        <td title="/dept/update" name="url" style="">/dept/update</td>
+                                        <td title="1" name="num" style="">1</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-dept" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="137"></td>
+                                        <td title="137" name="id" style="">137</td>
+                                        <td title="删除部门" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>删除部门
+                                        </td>
+                                        <td title="dept_delete" name="code" style="">dept_delete</td>
+                                        <td title="dept" name="pcode" style="">dept</td>
+                                        <td title="/dept/delete" name="url" style="">/dept/delete</td>
+                                        <td title="1" name="num" style="">1</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-dept" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="152"></td>
+                                        <td title="152" name="id" style="">152</td>
+                                        <td title="修改部门跳转" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>修改部门跳转
+                                        </td>
+                                        <td title="to_dept_update" name="code" style="">to_dept_update</td>
+                                        <td title="dept" name="pcode" style="">dept</td>
+                                        <td title="/dept/dept_update" name="url" style="">/dept/dept_update</td>
+                                        <td title="4" name="num" style="">4</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-dept" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="153"></td>
+                                        <td title="153" name="id" style="">153</td>
+                                        <td title="部门列表" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>部门列表
+                                        </td>
+                                        <td title="dept_list" name="code" style="">dept_list</td>
+                                        <td title="dept" name="pcode" style="">dept</td>
+                                        <td title="/dept/list" name="url" style="">/dept/list</td>
+                                        <td title="5" name="num" style="">5</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-dept" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="154"></td>
+                                        <td title="154" name="id" style="">154</td>
+                                        <td title="部门详情" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>部门详情
+                                        </td>
+                                        <td title="dept_detail" name="code" style="">dept_detail</td>
+                                        <td title="dept" name="pcode" style="">dept</td>
+                                        <td title="/dept/detail" name="url" style="">/dept/detail</td>
+                                        <td title="6" name="num" style="">6</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-system" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="132"></td>
+                                        <td title="132" name="id" style="">132</td>
+                                        <td title="字典管理" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-expander glyphicon glyphicon-chevron-down"></span>字典管理
+                                        </td>
+                                        <td title="dict" name="code" style="">dict</td>
+                                        <td title="system" name="pcode" style="">system</td>
+                                        <td title="/dict" name="url" style="">/dict</td>
+                                        <td title="4" name="num" style="">4</td>
+                                        <td title="2" name="levels" style="">2</td>
+                                        <td title="是" name="isMenuName" style="">是</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-dict" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="138"></td>
+                                        <td title="138" name="id" style="">138</td>
+                                        <td title="添加字典" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>添加字典
+                                        </td>
+                                        <td title="dict_add" name="code" style="">dict_add</td>
+                                        <td title="dict" name="pcode" style="">dict</td>
+                                        <td title="/dict/add" name="url" style="">/dict/add</td>
+                                        <td title="1" name="num" style="">1</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-dict" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="139"></td>
+                                        <td title="139" name="id" style="">139</td>
+                                        <td title="修改字典" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>修改字典
+                                        </td>
+                                        <td title="dict_update" name="code" style="">dict_update</td>
+                                        <td title="dict" name="pcode" style="">dict</td>
+                                        <td title="/dict/update" name="url" style="">/dict/update</td>
+                                        <td title="1" name="num" style="">1</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-dict" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="140"></td>
+                                        <td title="140" name="id" style="">140</td>
+                                        <td title="删除字典" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>删除字典
+                                        </td>
+                                        <td title="dict_delete" name="code" style="">dict_delete</td>
+                                        <td title="dict" name="pcode" style="">dict</td>
+                                        <td title="/dict/delete" name="url" style="">/dict/delete</td>
+                                        <td title="1" name="num" style="">1</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-dict" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="155"></td>
+                                        <td title="155" name="id" style="">155</td>
+                                        <td title="修改菜单跳转" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>修改菜单跳转
+                                        </td>
+                                        <td title="to_dict_edit" name="code" style="">to_dict_edit</td>
+                                        <td title="dict" name="pcode" style="">dict</td>
+                                        <td title="/dict/dict_edit" name="url" style="">/dict/dict_edit</td>
+                                        <td title="4" name="num" style="">4</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-dict" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="156"></td>
+                                        <td title="156" name="id" style="">156</td>
+                                        <td title="字典列表" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>字典列表
+                                        </td>
+                                        <td title="dict_list" name="code" style="">dict_list</td>
+                                        <td title="dict" name="pcode" style="">dict</td>
+                                        <td title="/dict/list" name="url" style="">/dict/list</td>
+                                        <td title="5" name="num" style="">5</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-dict" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="157"></td>
+                                        <td title="157" name="id" style="">157</td>
+                                        <td title="字典详情" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>字典详情
+                                        </td>
+                                        <td title="dict_detail" name="code" style="">dict_detail</td>
+                                        <td title="dict" name="pcode" style="">dict</td>
+                                        <td title="/dict/detail" name="url" style="">/dict/detail</td>
+                                        <td title="6" name="num" style="">6</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-system" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="133"></td>
+                                        <td title="133" name="id" style="">133</td>
+                                        <td title="登录日志" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-expander glyphicon glyphicon-chevron-down"></span>登录日志
+                                        </td>
+                                        <td title="loginLog" name="code" style="">loginLog</td>
+                                        <td title="system" name="pcode" style="">system</td>
+                                        <td title="/loginLog" name="url" style="">/loginLog</td>
+                                        <td title="6" name="num" style="">6</td>
+                                        <td title="2" name="levels" style="">2</td>
+                                        <td title="是" name="isMenuName" style="">是</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-loginLog" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="160"></td>
+                                        <td title="160" name="id" style="">160</td>
+                                        <td title="清空登录日志" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>清空登录日志
+                                        </td>
+                                        <td title="del_login_log" name="code" style="">del_login_log</td>
+                                        <td title="loginLog" name="pcode" style="">loginLog</td>
+                                        <td title="/loginLog/delLoginLog" name="url" style="">/loginLog/delLoginLog</td>
+                                        <td title="1" name="num" style="">1</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-loginLog" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="161"></td>
+                                        <td title="161" name="id" style="">161</td>
+                                        <td title="登录日志列表" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>登录日志列表
+                                        </td>
+                                        <td title="login_log_list" name="code" style="">login_log_list</td>
+                                        <td title="loginLog" name="pcode" style="">loginLog</td>
+                                        <td title="/loginLog/list" name="url" style="">/loginLog/list</td>
+                                        <td title="2" name="num" style="">2</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-system" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="141"></td>
+                                        <td title="141" name="id" style="">141</td>
+                                        <td title="通知管理" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-expander glyphicon glyphicon-chevron-down"></span>通知管理
+                                        </td>
+                                        <td title="notice" name="code" style="">notice</td>
+                                        <td title="system" name="pcode" style="">system</td>
+                                        <td title="/notice" name="url" style="">/notice</td>
+                                        <td title="9" name="num" style="">9</td>
+                                        <td title="2" name="levels" style="">2</td>
+                                        <td title="是" name="isMenuName" style="">是</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-notice" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="142"></td>
+                                        <td title="142" name="id" style="">142</td>
+                                        <td title="添加通知" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>添加通知
+                                        </td>
+                                        <td title="notice_add" name="code" style="">notice_add</td>
+                                        <td title="notice" name="pcode" style="">notice</td>
+                                        <td title="/notice/add" name="url" style="">/notice/add</td>
+                                        <td title="1" name="num" style="">1</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-notice" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="143"></td>
+                                        <td title="143" name="id" style="">143</td>
+                                        <td title="修改通知" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>修改通知
+                                        </td>
+                                        <td title="notice_update" name="code" style="">notice_update</td>
+                                        <td title="notice" name="pcode" style="">notice</td>
+                                        <td title="/notice/update" name="url" style="">/notice/update</td>
+                                        <td title="2" name="num" style="">2</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-notice" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="144"></td>
+                                        <td title="144" name="id" style="">144</td>
+                                        <td title="删除通知" name="name" style=""><span
+                                                class="treetable-indent"></span><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>删除通知
+                                        </td>
+                                        <td title="notice_delete" name="code" style="">notice_delete</td>
+                                        <td title="notice" name="pcode" style="">notice</td>
+                                        <td title="/notice/delete" name="url" style="">/notice/delete</td>
+                                        <td title="3" name="num" style="">3</td>
+                                        <td title="3" name="levels" style="">3</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-0" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="145"></td>
+                                        <td title="145" name="id" style="">145</td>
+                                        <td title="通知" name="name" style=""><span class="treetable-expander"></span>通知
+                                        </td>
+                                        <td title="hello" name="code" style="">hello</td>
+                                        <td title="0" name="pcode" style="">0</td>
+                                        <td title="/notice/hello" name="url" style="">/notice/hello</td>
+                                        <td title="1" name="num" style="">1</td>
+                                        <td title="1" name="levels" style="">1</td>
+                                        <td title="是" name="isMenuName" style="">是</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-0" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="148"></td>
+                                        <td title="148" name="id" style="">148</td>
+                                        <td title="代码生成" name="name" style=""><span class="treetable-expander"></span>代码生成
+                                        </td>
+                                        <td title="code" name="code" style="">code</td>
+                                        <td title="0" name="pcode" style="">0</td>
+                                        <td title="/code" name="url" style="">/code</td>
+                                        <td title="3" name="num" style="">3</td>
+                                        <td title="1" name="levels" style="">1</td>
+                                        <td title="是" name="isMenuName" style="">是</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-0" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="149"></td>
+                                        <td title="149" name="id" style="">149</td>
+                                        <td title="接口文档" name="name" style=""><span class="treetable-expander"></span>接口文档
+                                        </td>
+                                        <td title="api_mgr" name="code" style="">api_mgr</td>
+                                        <td title="0" name="pcode" style="">0</td>
+                                        <td title="/swagger-ui.html" name="url" style="">/swagger-ui.html</td>
+                                        <td title="2" name="num" style="">2</td>
+                                        <td title="1" name="levels" style="">1</td>
+                                        <td title="是" name="isMenuName" style="">是</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-0" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="1075345236080795649">
+                                        </td>
+                                        <td title="1075345236080795649" name="id" style="">1075345236080795649</td>
+                                        <td title=" 企业管理" name="name" style=""><span
+                                                class="treetable-expander glyphicon glyphicon-chevron-down"></span> 企业管理
+                                        </td>
+                                        <td title="tblCompany" name="code" style="">tblCompany</td>
+                                        <td title="0" name="pcode" style="">0</td>
+                                        <td title="/tblCompany" name="url" style="">/tblCompany</td>
+                                        <td title="99" name="num" style="">99</td>
+                                        <td title="1" name="levels" style="">1</td>
+                                        <td title="是" name="isMenuName" style="">是</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-tblCompany" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="1075345236080795650">
+                                        </td>
+                                        <td title="1075345236080795650" name="id" style="">1075345236080795650</td>
+                                        <td title=" 企业管理列表" name="name" style=""><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>
+                                            企业管理列表
+                                        </td>
+                                        <td title="tblCompany_list" name="code" style="">tblCompany_list</td>
+                                        <td title="tblCompany" name="pcode" style="">tblCompany</td>
+                                        <td title="/tblCompany/list" name="url" style="">/tblCompany/list</td>
+                                        <td title="99" name="num" style="">99</td>
+                                        <td title="2" name="levels" style="">2</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-tblCompany" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="1075345236080795651">
+                                        </td>
+                                        <td title="1075345236080795651" name="id" style="">1075345236080795651</td>
+                                        <td title=" 企业管理添加" name="name" style=""><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>
+                                            企业管理添加
+                                        </td>
+                                        <td title="tblCompany_add" name="code" style="">tblCompany_add</td>
+                                        <td title="tblCompany" name="pcode" style="">tblCompany</td>
+                                        <td title="/tblCompany/add" name="url" style="">/tblCompany/add</td>
+                                        <td title="99" name="num" style="">99</td>
+                                        <td title="2" name="levels" style="">2</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-tblCompany" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="1075345236080795652">
+                                        </td>
+                                        <td title="1075345236080795652" name="id" style="">1075345236080795652</td>
+                                        <td title=" 企业管理更新" name="name" style=""><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>
+                                            企业管理更新
+                                        </td>
+                                        <td title="tblCompany_update" name="code" style="">tblCompany_update</td>
+                                        <td title="tblCompany" name="pcode" style="">tblCompany</td>
+                                        <td title="/tblCompany/update" name="url" style="">/tblCompany/update</td>
+                                        <td title="99" name="num" style="">99</td>
+                                        <td title="2" name="levels" style="">2</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-tblCompany" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="1075345236080795653">
+                                        </td>
+                                        <td title="1075345236080795653" name="id" style="">1075345236080795653</td>
+                                        <td title=" 企业管理删除" name="name" style=""><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>
+                                            企业管理删除
+                                        </td>
+                                        <td title="tblCompany_delete" name="code" style="">tblCompany_delete</td>
+                                        <td title="tblCompany" name="pcode" style="">tblCompany</td>
+                                        <td title="/tblCompany/delete" name="url" style="">/tblCompany/delete</td>
+                                        <td title="99" name="num" style="">99</td>
+                                        <td title="2" name="levels" style="">2</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    <tr class="tg-tblCompany" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="1075345236080795654">
+                                        </td>
+                                        <td title="1075345236080795654" name="id" style="">1075345236080795654</td>
+                                        <td title=" 企业管理详情" name="name" style=""><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>
+                                            企业管理详情
+                                        </td>
+                                        <td title="tblCompany_detail" name="code" style="">tblCompany_detail</td>
+                                        <td title="tblCompany" name="pcode" style="">tblCompany</td>
+                                        <td title="/tblCompany/detail" name="url" style="">/tblCompany/detail</td>
+                                        <td title="99" name="num" style="">99</td>
+                                        <td title="2" name="levels" style="">2</td>
+                                        <td title="否" name="isMenuName" style="">否</td>
+                                        <td title="启用" name="statusName" style="">启用</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        
-<div class="fixed-table-toolbar"><div class="bs-bars pull-left"><div class="hidden-xs" id="menuTableToolbar" role="group">
-
-<button type="button" class="btn btn-primary " onclick="Menu.openAddMenu()" id="">
-    <i class="fa fa-plus"></i>&nbsp;添加
-</button>
-
-
-<button type="button" class="btn btn-primary button-margin" onclick="Menu.openChangeMenu()" id="">
-    <i class="fa fa-edit"></i>&nbsp;修改
-</button>
-
-
-<button type="button" class="btn btn-primary button-margin" onclick="Menu.delMenu()" id="">
-    <i class="fa fa-remove"></i>&nbsp;删除
-</button>
-
-                        </div></div></div><div class="bootstrap-tree-table fixed-table-container"><table id="menuTable" data-mobile-responsive="true" data-click-to-select="true" class="table table-hover treetable-table table-bordered table-striped"><thead class="treetable-thead" style="width: 1052px;"><tr><th style="width:36px"></th><th style="">id</th><th style="">菜单名称</th><th style="">菜单编号</th><th style="">菜单父编号</th><th style="">请求地址</th><th style="">排序</th><th style="">层级</th><th style="">是否是菜单</th><th style="">状态</th></tr></thead><tbody class="treetable-tbody" style="height: 665px;"><tr class="tg-0" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="105"></td><td title="105" name="id" style="">105</td><td title="系统管理" name="name" style=""><span class="treetable-expander glyphicon glyphicon-chevron-down"></span>系统管理</td><td title="system" name="code" style="">system</td><td title="0" name="pcode" style="">0</td><td title="#" name="url" style="">#</td><td title="4" name="num" style="">4</td><td title="1" name="levels" style="">1</td><td title="是" name="isMenuName" style="">是</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-system" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="106"></td><td title="106" name="id" style="">106</td><td title="用户管理" name="name" style=""><span class="treetable-indent"></span><span class="treetable-expander glyphicon glyphicon-chevron-down"></span>用户管理</td><td title="mgr" name="code" style="">mgr</td><td title="system" name="pcode" style="">system</td><td title="/mgr" name="url" style="">/mgr</td><td title="1" name="num" style="">1</td><td title="2" name="levels" style="">2</td><td title="是" name="isMenuName" style="">是</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-mgr" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="107"></td><td title="107" name="id" style="">107</td><td title="添加用户" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>添加用户</td><td title="mgr_add" name="code" style="">mgr_add</td><td title="mgr" name="pcode" style="">mgr</td><td title="/mgr/add" name="url" style="">/mgr/add</td><td title="1" name="num" style="">1</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-mgr" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="108"></td><td title="108" name="id" style="">108</td><td title="修改用户" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>修改用户</td><td title="mgr_edit" name="code" style="">mgr_edit</td><td title="mgr" name="pcode" style="">mgr</td><td title="/mgr/edit" name="url" style="">/mgr/edit</td><td title="2" name="num" style="">2</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-mgr" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="109"></td><td title="109" name="id" style="">109</td><td title="删除用户" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>删除用户</td><td title="mgr_delete" name="code" style="">mgr_delete</td><td title="mgr" name="pcode" style="">mgr</td><td title="/mgr/delete" name="url" style="">/mgr/delete</td><td title="3" name="num" style="">3</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-mgr" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="110"></td><td title="110" name="id" style="">110</td><td title="重置密码" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>重置密码</td><td title="mgr_reset" name="code" style="">mgr_reset</td><td title="mgr" name="pcode" style="">mgr</td><td title="/mgr/reset" name="url" style="">/mgr/reset</td><td title="4" name="num" style="">4</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-mgr" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="111"></td><td title="111" name="id" style="">111</td><td title="冻结用户" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>冻结用户</td><td title="mgr_freeze" name="code" style="">mgr_freeze</td><td title="mgr" name="pcode" style="">mgr</td><td title="/mgr/freeze" name="url" style="">/mgr/freeze</td><td title="5" name="num" style="">5</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-mgr" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="112"></td><td title="112" name="id" style="">112</td><td title="解除冻结用户" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>解除冻结用户</td><td title="mgr_unfreeze" name="code" style="">mgr_unfreeze</td><td title="mgr" name="pcode" style="">mgr</td><td title="/mgr/unfreeze" name="url" style="">/mgr/unfreeze</td><td title="6" name="num" style="">6</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-mgr" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="113"></td><td title="113" name="id" style="">113</td><td title="分配角色" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>分配角色</td><td title="mgr_setRole" name="code" style="">mgr_setRole</td><td title="mgr" name="pcode" style="">mgr</td><td title="/mgr/setRole" name="url" style="">/mgr/setRole</td><td title="7" name="num" style="">7</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-mgr" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="165"></td><td title="165" name="id" style="">165</td><td title="分配角色跳转" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>分配角色跳转</td><td title="to_assign_role" name="code" style="">to_assign_role</td><td title="mgr" name="pcode" style="">mgr</td><td title="/mgr/role_assign" name="url" style="">/mgr/role_assign</td><td title="8" name="num" style="">8</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-mgr" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="166"></td><td title="166" name="id" style="">166</td><td title="编辑用户跳转" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>编辑用户跳转</td><td title="to_user_edit" name="code" style="">to_user_edit</td><td title="mgr" name="pcode" style="">mgr</td><td title="/mgr/user_edit" name="url" style="">/mgr/user_edit</td><td title="9" name="num" style="">9</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-mgr" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="167"></td><td title="167" name="id" style="">167</td><td title="用户列表" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>用户列表</td><td title="mgr_list" name="code" style="">mgr_list</td><td title="mgr" name="pcode" style="">mgr</td><td title="/mgr/list" name="url" style="">/mgr/list</td><td title="10" name="num" style="">10</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-system" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="114"></td><td title="114" name="id" style="">114</td><td title="角色管理" name="name" style=""><span class="treetable-indent"></span><span class="treetable-expander glyphicon glyphicon-chevron-down"></span>角色管理</td><td title="role" name="code" style="">role</td><td title="system" name="pcode" style="">system</td><td title="/role" name="url" style="">/role</td><td title="2" name="num" style="">2</td><td title="2" name="levels" style="">2</td><td title="是" name="isMenuName" style="">是</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-role" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="115"></td><td title="115" name="id" style="">115</td><td title="添加角色" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>添加角色</td><td title="role_add" name="code" style="">role_add</td><td title="role" name="pcode" style="">role</td><td title="/role/add" name="url" style="">/role/add</td><td title="1" name="num" style="">1</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-role" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="116"></td><td title="116" name="id" style="">116</td><td title="修改角色" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>修改角色</td><td title="role_edit" name="code" style="">role_edit</td><td title="role" name="pcode" style="">role</td><td title="/role/edit" name="url" style="">/role/edit</td><td title="2" name="num" style="">2</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-role" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="117"></td><td title="117" name="id" style="">117</td><td title="删除角色" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>删除角色</td><td title="role_remove" name="code" style="">role_remove</td><td title="role" name="pcode" style="">role</td><td title="/role/remove" name="url" style="">/role/remove</td><td title="3" name="num" style="">3</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-role" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="118"></td><td title="118" name="id" style="">118</td><td title="配置权限" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>配置权限</td><td title="role_setAuthority" name="code" style="">role_setAuthority</td><td title="role" name="pcode" style="">role</td><td title="/role/setAuthority" name="url" style="">/role/setAuthority</td><td title="4" name="num" style="">4</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-role" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="162"></td><td title="162" name="id" style="">162</td><td title="修改角色跳转" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>修改角色跳转</td><td title="to_role_edit" name="code" style="">to_role_edit</td><td title="role" name="pcode" style="">role</td><td title="/role/role_edit" name="url" style="">/role/role_edit</td><td title="5" name="num" style="">5</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-role" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="163"></td><td title="163" name="id" style="">163</td><td title="角色分配跳转" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>角色分配跳转</td><td title="to_role_assign" name="code" style="">to_role_assign</td><td title="role" name="pcode" style="">role</td><td title="/role/role_assign" name="url" style="">/role/role_assign</td><td title="6" name="num" style="">6</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-role" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="164"></td><td title="164" name="id" style="">164</td><td title="角色列表" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>角色列表</td><td title="role_list" name="code" style="">role_list</td><td title="role" name="pcode" style="">role</td><td title="/role/list" name="url" style="">/role/list</td><td title="7" name="num" style="">7</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-system" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="119"></td><td title="119" name="id" style="">119</td><td title="菜单管理" name="name" style=""><span class="treetable-indent"></span><span class="treetable-expander glyphicon glyphicon-chevron-down"></span>菜单管理</td><td title="menu" name="code" style="">menu</td><td title="system" name="pcode" style="">system</td><td title="/menu" name="url" style="">/menu</td><td title="4" name="num" style="">4</td><td title="2" name="levels" style="">2</td><td title="是" name="isMenuName" style="">是</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-menu" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="120"></td><td title="120" name="id" style="">120</td><td title="添加菜单" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>添加菜单</td><td title="menu_add" name="code" style="">menu_add</td><td title="menu" name="pcode" style="">menu</td><td title="/menu/add" name="url" style="">/menu/add</td><td title="1" name="num" style="">1</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-menu" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="121"></td><td title="121" name="id" style="">121</td><td title="修改菜单" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>修改菜单</td><td title="menu_edit" name="code" style="">menu_edit</td><td title="menu" name="pcode" style="">menu</td><td title="/menu/edit" name="url" style="">/menu/edit</td><td title="2" name="num" style="">2</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-menu" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="122"></td><td title="122" name="id" style="">122</td><td title="删除菜单" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>删除菜单</td><td title="menu_remove" name="code" style="">menu_remove</td><td title="menu" name="pcode" style="">menu</td><td title="/menu/remove" name="url" style="">/menu/remove</td><td title="3" name="num" style="">3</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-menu" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="150"></td><td title="150" name="id" style="">150</td><td title="菜单编辑跳转" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>菜单编辑跳转</td><td title="to_menu_edit" name="code" style="">to_menu_edit</td><td title="menu" name="pcode" style="">menu</td><td title="/menu/menu_edit" name="url" style="">/menu/menu_edit</td><td title="4" name="num" style="">4</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-menu" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="151"></td><td title="151" name="id" style="">151</td><td title="菜单列表" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>菜单列表</td><td title="menu_list" name="code" style="">menu_list</td><td title="menu" name="pcode" style="">menu</td><td title="/menu/list" name="url" style="">/menu/list</td><td title="5" name="num" style="">5</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-system" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="128"></td><td title="128" name="id" style="">128</td><td title="业务日志" name="name" style=""><span class="treetable-indent"></span><span class="treetable-expander glyphicon glyphicon-chevron-down"></span>业务日志</td><td title="log" name="code" style="">log</td><td title="system" name="pcode" style="">system</td><td title="/log" name="url" style="">/log</td><td title="6" name="num" style="">6</td><td title="2" name="levels" style="">2</td><td title="是" name="isMenuName" style="">是</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-log" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="134"></td><td title="134" name="id" style="">134</td><td title="清空日志" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>清空日志</td><td title="log_clean" name="code" style="">log_clean</td><td title="log" name="pcode" style="">log</td><td title="/log/delLog" name="url" style="">/log/delLog</td><td title="3" name="num" style="">3</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-log" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="158"></td><td title="158" name="id" style="">158</td><td title="日志列表" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>日志列表</td><td title="log_list" name="code" style="">log_list</td><td title="log" name="pcode" style="">log</td><td title="/log/list" name="url" style="">/log/list</td><td title="2" name="num" style="">2</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-log" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="159"></td><td title="159" name="id" style="">159</td><td title="日志详情" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>日志详情</td><td title="log_detail" name="code" style="">log_detail</td><td title="log" name="pcode" style="">log</td><td title="/log/detail" name="url" style="">/log/detail</td><td title="3" name="num" style="">3</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-system" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="130"></td><td title="130" name="id" style="">130</td><td title="监控管理" name="name" style=""><span class="treetable-indent"></span><span class="treetable-expander"></span>监控管理</td><td title="druid" name="code" style="">druid</td><td title="system" name="pcode" style="">system</td><td title="/druid" name="url" style="">/druid</td><td title="7" name="num" style="">7</td><td title="2" name="levels" style="">2</td><td title="是" name="isMenuName" style="">是</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-system" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="131"></td><td title="131" name="id" style="">131</td><td title="部门管理" name="name" style=""><span class="treetable-indent"></span><span class="treetable-expander glyphicon glyphicon-chevron-down"></span>部门管理</td><td title="dept" name="code" style="">dept</td><td title="system" name="pcode" style="">system</td><td title="/dept" name="url" style="">/dept</td><td title="3" name="num" style="">3</td><td title="2" name="levels" style="">2</td><td title="是" name="isMenuName" style="">是</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-dept" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="135"></td><td title="135" name="id" style="">135</td><td title="添加部门" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>添加部门</td><td title="dept_add" name="code" style="">dept_add</td><td title="dept" name="pcode" style="">dept</td><td title="/dept/add" name="url" style="">/dept/add</td><td title="1" name="num" style="">1</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-dept" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="136"></td><td title="136" name="id" style="">136</td><td title="修改部门" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>修改部门</td><td title="dept_update" name="code" style="">dept_update</td><td title="dept" name="pcode" style="">dept</td><td title="/dept/update" name="url" style="">/dept/update</td><td title="1" name="num" style="">1</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-dept" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="137"></td><td title="137" name="id" style="">137</td><td title="删除部门" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>删除部门</td><td title="dept_delete" name="code" style="">dept_delete</td><td title="dept" name="pcode" style="">dept</td><td title="/dept/delete" name="url" style="">/dept/delete</td><td title="1" name="num" style="">1</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-dept" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="152"></td><td title="152" name="id" style="">152</td><td title="修改部门跳转" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>修改部门跳转</td><td title="to_dept_update" name="code" style="">to_dept_update</td><td title="dept" name="pcode" style="">dept</td><td title="/dept/dept_update" name="url" style="">/dept/dept_update</td><td title="4" name="num" style="">4</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-dept" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="153"></td><td title="153" name="id" style="">153</td><td title="部门列表" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>部门列表</td><td title="dept_list" name="code" style="">dept_list</td><td title="dept" name="pcode" style="">dept</td><td title="/dept/list" name="url" style="">/dept/list</td><td title="5" name="num" style="">5</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-dept" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="154"></td><td title="154" name="id" style="">154</td><td title="部门详情" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>部门详情</td><td title="dept_detail" name="code" style="">dept_detail</td><td title="dept" name="pcode" style="">dept</td><td title="/dept/detail" name="url" style="">/dept/detail</td><td title="6" name="num" style="">6</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-system" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="132"></td><td title="132" name="id" style="">132</td><td title="字典管理" name="name" style=""><span class="treetable-indent"></span><span class="treetable-expander glyphicon glyphicon-chevron-down"></span>字典管理</td><td title="dict" name="code" style="">dict</td><td title="system" name="pcode" style="">system</td><td title="/dict" name="url" style="">/dict</td><td title="4" name="num" style="">4</td><td title="2" name="levels" style="">2</td><td title="是" name="isMenuName" style="">是</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-dict" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="138"></td><td title="138" name="id" style="">138</td><td title="添加字典" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>添加字典</td><td title="dict_add" name="code" style="">dict_add</td><td title="dict" name="pcode" style="">dict</td><td title="/dict/add" name="url" style="">/dict/add</td><td title="1" name="num" style="">1</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-dict" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="139"></td><td title="139" name="id" style="">139</td><td title="修改字典" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>修改字典</td><td title="dict_update" name="code" style="">dict_update</td><td title="dict" name="pcode" style="">dict</td><td title="/dict/update" name="url" style="">/dict/update</td><td title="1" name="num" style="">1</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-dict" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="140"></td><td title="140" name="id" style="">140</td><td title="删除字典" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>删除字典</td><td title="dict_delete" name="code" style="">dict_delete</td><td title="dict" name="pcode" style="">dict</td><td title="/dict/delete" name="url" style="">/dict/delete</td><td title="1" name="num" style="">1</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-dict" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="155"></td><td title="155" name="id" style="">155</td><td title="修改菜单跳转" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>修改菜单跳转</td><td title="to_dict_edit" name="code" style="">to_dict_edit</td><td title="dict" name="pcode" style="">dict</td><td title="/dict/dict_edit" name="url" style="">/dict/dict_edit</td><td title="4" name="num" style="">4</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-dict" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="156"></td><td title="156" name="id" style="">156</td><td title="字典列表" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>字典列表</td><td title="dict_list" name="code" style="">dict_list</td><td title="dict" name="pcode" style="">dict</td><td title="/dict/list" name="url" style="">/dict/list</td><td title="5" name="num" style="">5</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-dict" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="157"></td><td title="157" name="id" style="">157</td><td title="字典详情" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>字典详情</td><td title="dict_detail" name="code" style="">dict_detail</td><td title="dict" name="pcode" style="">dict</td><td title="/dict/detail" name="url" style="">/dict/detail</td><td title="6" name="num" style="">6</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-system" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="133"></td><td title="133" name="id" style="">133</td><td title="登录日志" name="name" style=""><span class="treetable-indent"></span><span class="treetable-expander glyphicon glyphicon-chevron-down"></span>登录日志</td><td title="loginLog" name="code" style="">loginLog</td><td title="system" name="pcode" style="">system</td><td title="/loginLog" name="url" style="">/loginLog</td><td title="6" name="num" style="">6</td><td title="2" name="levels" style="">2</td><td title="是" name="isMenuName" style="">是</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-loginLog" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="160"></td><td title="160" name="id" style="">160</td><td title="清空登录日志" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>清空登录日志</td><td title="del_login_log" name="code" style="">del_login_log</td><td title="loginLog" name="pcode" style="">loginLog</td><td title="/loginLog/delLoginLog" name="url" style="">/loginLog/delLoginLog</td><td title="1" name="num" style="">1</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-loginLog" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="161"></td><td title="161" name="id" style="">161</td><td title="登录日志列表" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>登录日志列表</td><td title="login_log_list" name="code" style="">login_log_list</td><td title="loginLog" name="pcode" style="">loginLog</td><td title="/loginLog/list" name="url" style="">/loginLog/list</td><td title="2" name="num" style="">2</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-system" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="141"></td><td title="141" name="id" style="">141</td><td title="通知管理" name="name" style=""><span class="treetable-indent"></span><span class="treetable-expander glyphicon glyphicon-chevron-down"></span>通知管理</td><td title="notice" name="code" style="">notice</td><td title="system" name="pcode" style="">system</td><td title="/notice" name="url" style="">/notice</td><td title="9" name="num" style="">9</td><td title="2" name="levels" style="">2</td><td title="是" name="isMenuName" style="">是</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-notice" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="142"></td><td title="142" name="id" style="">142</td><td title="添加通知" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>添加通知</td><td title="notice_add" name="code" style="">notice_add</td><td title="notice" name="pcode" style="">notice</td><td title="/notice/add" name="url" style="">/notice/add</td><td title="1" name="num" style="">1</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-notice" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="143"></td><td title="143" name="id" style="">143</td><td title="修改通知" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>修改通知</td><td title="notice_update" name="code" style="">notice_update</td><td title="notice" name="pcode" style="">notice</td><td title="/notice/update" name="url" style="">/notice/update</td><td title="2" name="num" style="">2</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-notice" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="144"></td><td title="144" name="id" style="">144</td><td title="删除通知" name="name" style=""><span class="treetable-indent"></span><span class="treetable-indent"></span><span class="treetable-expander"></span>删除通知</td><td title="notice_delete" name="code" style="">notice_delete</td><td title="notice" name="pcode" style="">notice</td><td title="/notice/delete" name="url" style="">/notice/delete</td><td title="3" name="num" style="">3</td><td title="3" name="levels" style="">3</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-0" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="145"></td><td title="145" name="id" style="">145</td><td title="通知" name="name" style=""><span class="treetable-expander"></span>通知</td><td title="hello" name="code" style="">hello</td><td title="0" name="pcode" style="">0</td><td title="/notice/hello" name="url" style="">/notice/hello</td><td title="1" name="num" style="">1</td><td title="1" name="levels" style="">1</td><td title="是" name="isMenuName" style="">是</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-0" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="148"></td><td title="148" name="id" style="">148</td><td title="代码生成" name="name" style=""><span class="treetable-expander"></span>代码生成</td><td title="code" name="code" style="">code</td><td title="0" name="pcode" style="">0</td><td title="/code" name="url" style="">/code</td><td title="3" name="num" style="">3</td><td title="1" name="levels" style="">1</td><td title="是" name="isMenuName" style="">是</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-0" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="149"></td><td title="149" name="id" style="">149</td><td title="接口文档" name="name" style=""><span class="treetable-expander"></span>接口文档</td><td title="api_mgr" name="code" style="">api_mgr</td><td title="0" name="pcode" style="">0</td><td title="/swagger-ui.html" name="url" style="">/swagger-ui.html</td><td title="2" name="num" style="">2</td><td title="1" name="levels" style="">1</td><td title="是" name="isMenuName" style="">是</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-0" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="1075345236080795649"></td><td title="1075345236080795649" name="id" style="">1075345236080795649</td><td title=" 企业管理" name="name" style=""><span class="treetable-expander glyphicon glyphicon-chevron-down"></span> 企业管理</td><td title="tblCompany" name="code" style="">tblCompany</td><td title="0" name="pcode" style="">0</td><td title="/tblCompany" name="url" style="">/tblCompany</td><td title="99" name="num" style="">99</td><td title="1" name="levels" style="">1</td><td title="是" name="isMenuName" style="">是</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-tblCompany" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="1075345236080795650"></td><td title="1075345236080795650" name="id" style="">1075345236080795650</td><td title=" 企业管理列表" name="name" style=""><span class="treetable-indent"></span><span class="treetable-expander"></span> 企业管理列表</td><td title="tblCompany_list" name="code" style="">tblCompany_list</td><td title="tblCompany" name="pcode" style="">tblCompany</td><td title="/tblCompany/list" name="url" style="">/tblCompany/list</td><td title="99" name="num" style="">99</td><td title="2" name="levels" style="">2</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-tblCompany" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="1075345236080795651"></td><td title="1075345236080795651" name="id" style="">1075345236080795651</td><td title=" 企业管理添加" name="name" style=""><span class="treetable-indent"></span><span class="treetable-expander"></span> 企业管理添加</td><td title="tblCompany_add" name="code" style="">tblCompany_add</td><td title="tblCompany" name="pcode" style="">tblCompany</td><td title="/tblCompany/add" name="url" style="">/tblCompany/add</td><td title="99" name="num" style="">99</td><td title="2" name="levels" style="">2</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-tblCompany" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="1075345236080795652"></td><td title="1075345236080795652" name="id" style="">1075345236080795652</td><td title=" 企业管理更新" name="name" style=""><span class="treetable-indent"></span><span class="treetable-expander"></span> 企业管理更新</td><td title="tblCompany_update" name="code" style="">tblCompany_update</td><td title="tblCompany" name="pcode" style="">tblCompany</td><td title="/tblCompany/update" name="url" style="">/tblCompany/update</td><td title="99" name="num" style="">99</td><td title="2" name="levels" style="">2</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-tblCompany" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="1075345236080795653"></td><td title="1075345236080795653" name="id" style="">1075345236080795653</td><td title=" 企业管理删除" name="name" style=""><span class="treetable-indent"></span><span class="treetable-expander"></span> 企业管理删除</td><td title="tblCompany_delete" name="code" style="">tblCompany_delete</td><td title="tblCompany" name="pcode" style="">tblCompany</td><td title="/tblCompany/delete" name="url" style="">/tblCompany/delete</td><td title="99" name="num" style="">99</td><td title="2" name="levels" style="">2</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr><tr class="tg-tblCompany" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="1075345236080795654"></td><td title="1075345236080795654" name="id" style="">1075345236080795654</td><td title=" 企业管理详情" name="name" style=""><span class="treetable-indent"></span><span class="treetable-expander"></span> 企业管理详情</td><td title="tblCompany_detail" name="code" style="">tblCompany_detail</td><td title="tblCompany" name="pcode" style="">tblCompany</td><td title="/tblCompany/detail" name="url" style="">/tblCompany/detail</td><td title="99" name="num" style="">99</td><td title="2" name="levels" style="">2</td><td title="否" name="isMenuName" style="">否</td><td title="启用" name="statusName" style="">启用</td></tr></tbody></table></div>                    </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<script src="./menu.js.下载"></script>
+    <script src="./menu.js.下载"></script>
 
 </div>
 <script src="./content.js.下载"></script>
 
 
-</body></html>
+</body>
+</html>

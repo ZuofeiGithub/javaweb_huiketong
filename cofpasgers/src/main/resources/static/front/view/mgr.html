@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <!-- saved from url=(0020)http://localhost/mgr -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit"><!-- 让360浏览器默认选择webkit内核 -->
 
@@ -30,10 +32,12 @@
     <script src="./bootstrap-table-mobile.min.js.下载"></script>
     <script src="./bootstrap-table-zh-CN.min.js.下载"></script>
     <script src="./bootstrap-treetable.js.下载"></script>
-    <script src="./layer.js.下载"></script><link rel="stylesheet" href="./layer.css" id="layuicss-layer">
+    <script src="./layer.js.下载"></script>
+    <link rel="stylesheet" href="./layer.css" id="layuicss-layer">
     <script src="./chosen.jquery.js.下载"></script>
     <script src="./icheck.min.js.下载"></script>
-    <script src="./laydate.js.下载"></script><link rel="stylesheet" href="./laydate.css" id="layuicss-laydate">
+    <script src="./laydate.js.下载"></script>
+    <link rel="stylesheet" href="./laydate.css" id="layuicss-laydate">
     <script src="./webuploader.min.js.下载"></script>
     <script src="./ajax-object.js.下载"></script>
     <script src="./bootstrap-table-object.js.下载"></script>
@@ -43,16 +47,17 @@
     <script src="./Feng.js.下载"></script>
 
     <style type="text/css">
-        table{  
-            width:100px;  
-            table-layout:fixed;/* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */  
+        table {
+            width: 100px;
+            table-layout: fixed; /* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
         }
-        td{  
-            width:100%;  
-            word-break:keep-all;/* 不换行 */  
-            white-space:nowrap;/* 不换行 */  
-            overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */  
-            text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用*/  
+
+        td {
+            width: 100%;
+            word-break: keep-all; /* 不换行 */
+            white-space: nowrap; /* 不换行 */
+            overflow: hidden; /* 内容超出宽度时隐藏超出部分的内容 */
+            text-overflow: ellipsis; /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用*/
         }
     </style>
 
@@ -65,129 +70,525 @@
 <body class="gray-bg">
 <div class="wrapper wrapper-content">
     <div class="row">
-	<div class="col-sm-12">
-		<div class="ibox float-e-margins">
-			<div class="ibox-title">
-				<h5>用户管理</h5>
-			</div>
-			<div class="ibox-content">
-				<div class="row row-lg">
-					<div class="col-sm-12">
-						<div class="row">
-							<div class="col-lg-2 col-sm-3">
-								<div class="panel panel-default">
-									<div class="panel-heading">组织机构</div>
-									<div class="panel-body dept-tree">
-										<ul id="deptTree" class="ztree"><li id="deptTree_1" class="level0" tabindex="0" hidefocus="true" treenode=""><span id="deptTree_1_switch" title="" class="button level0 switch root_open" treenode_switch=""></span><a id="deptTree_1_a" class="level0" treenode_a="" onclick="" target="_blank" style="" title="顶级"><span id="deptTree_1_ico" title="" treenode_ico="" class="button ico_open" style=""></span><span id="deptTree_1_span" class="node_name">顶级</span></a><ul id="deptTree_1_ul" class="level0 " style="display:block"><li id="deptTree_2" class="level1" tabindex="0" hidefocus="true" treenode=""><span id="deptTree_2_switch" title="" class="button level1 switch bottom_open" treenode_switch=""></span><a id="deptTree_2_a" class="level1" treenode_a="" onclick="" target="_blank" style="" title="汇客通"><span id="deptTree_2_ico" title="" treenode_ico="" class="button ico_open" style=""></span><span id="deptTree_2_span" class="node_name">汇客通</span></a><ul id="deptTree_2_ul" class="level1 " style="display:block"><li id="deptTree_3" class="level2" tabindex="0" hidefocus="true" treenode=""><span id="deptTree_3_switch" title="" class="button level2 switch center_docu" treenode_switch=""></span><a id="deptTree_3_a" class="level2" treenode_a="" onclick="" target="_blank" style="" title="开发部"><span id="deptTree_3_ico" title="" treenode_ico="" class="button ico_docu" style=""></span><span id="deptTree_3_span" class="node_name">开发部</span></a></li><li id="deptTree_4" class="level2" tabindex="0" hidefocus="true" treenode=""><span id="deptTree_4_switch" title="" class="button level2 switch center_docu" treenode_switch=""></span><a id="deptTree_4_a" class="level2" treenode_a="" onclick="" target="_blank" style="" title="运营部"><span id="deptTree_4_ico" title="" treenode_ico="" class="button ico_docu" style=""></span><span id="deptTree_4_span" class="node_name">运营部</span></a></li><li id="deptTree_5" class="level2" tabindex="0" hidefocus="true" treenode=""><span id="deptTree_5_switch" title="" class="button level2 switch bottom_docu" treenode_switch=""></span><a id="deptTree_5_a" class="level2" treenode_a="" onclick="" target="_blank" style="" title="战略部"><span id="deptTree_5_ico" title="" treenode_ico="" class="button ico_docu" style=""></span><span id="deptTree_5_span" class="node_name">战略部</span></a></li></ul></li></ul></li></ul>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-10 col-sm-9">
-								<div class="row">
-									<div class="col-lg-10 col-sm-9">
-										<div class="row">
-											<div class="col-lg-4 col-sm-12">
-<div class="input-group">
-    <div class="input-group-btn">
-        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">用户名称
-        </button>
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>用户管理</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row row-lg">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-lg-2 col-sm-3">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">组织机构</div>
+                                        <div class="panel-body dept-tree">
+                                            <ul id="deptTree" class="ztree">
+                                                <li id="deptTree_1" class="level0" tabindex="0" hidefocus="true"
+                                                    treenode=""><span id="deptTree_1_switch" title=""
+                                                                      class="button level0 switch root_open"
+                                                                      treenode_switch=""></span><a id="deptTree_1_a"
+                                                                                                   class="level0"
+                                                                                                   treenode_a=""
+                                                                                                   onclick=""
+                                                                                                   target="_blank"
+                                                                                                   style=""
+                                                                                                   title="顶级"><span
+                                                        id="deptTree_1_ico" title="" treenode_ico=""
+                                                        class="button ico_open" style=""></span><span
+                                                        id="deptTree_1_span" class="node_name">顶级</span></a>
+                                                    <ul id="deptTree_1_ul" class="level0 " style="display:block">
+                                                        <li id="deptTree_2" class="level1" tabindex="0" hidefocus="true"
+                                                            treenode=""><span id="deptTree_2_switch" title=""
+                                                                              class="button level1 switch bottom_open"
+                                                                              treenode_switch=""></span><a
+                                                                id="deptTree_2_a" class="level1" treenode_a=""
+                                                                onclick="" target="_blank" style="" title="汇客通"><span
+                                                                id="deptTree_2_ico" title="" treenode_ico=""
+                                                                class="button ico_open" style=""></span><span
+                                                                id="deptTree_2_span" class="node_name">汇客通</span></a>
+                                                            <ul id="deptTree_2_ul" class="level1 "
+                                                                style="display:block">
+                                                                <li id="deptTree_3" class="level2" tabindex="0"
+                                                                    hidefocus="true" treenode=""><span
+                                                                        id="deptTree_3_switch" title=""
+                                                                        class="button level2 switch center_docu"
+                                                                        treenode_switch=""></span><a id="deptTree_3_a"
+                                                                                                     class="level2"
+                                                                                                     treenode_a=""
+                                                                                                     onclick=""
+                                                                                                     target="_blank"
+                                                                                                     style=""
+                                                                                                     title="开发部"><span
+                                                                        id="deptTree_3_ico" title="" treenode_ico=""
+                                                                        class="button ico_docu" style=""></span><span
+                                                                        id="deptTree_3_span"
+                                                                        class="node_name">开发部</span></a></li>
+                                                                <li id="deptTree_4" class="level2" tabindex="0"
+                                                                    hidefocus="true" treenode=""><span
+                                                                        id="deptTree_4_switch" title=""
+                                                                        class="button level2 switch center_docu"
+                                                                        treenode_switch=""></span><a id="deptTree_4_a"
+                                                                                                     class="level2"
+                                                                                                     treenode_a=""
+                                                                                                     onclick=""
+                                                                                                     target="_blank"
+                                                                                                     style=""
+                                                                                                     title="运营部"><span
+                                                                        id="deptTree_4_ico" title="" treenode_ico=""
+                                                                        class="button ico_docu" style=""></span><span
+                                                                        id="deptTree_4_span"
+                                                                        class="node_name">运营部</span></a></li>
+                                                                <li id="deptTree_5" class="level2" tabindex="0"
+                                                                    hidefocus="true" treenode=""><span
+                                                                        id="deptTree_5_switch" title=""
+                                                                        class="button level2 switch bottom_docu"
+                                                                        treenode_switch=""></span><a id="deptTree_5_a"
+                                                                                                     class="level2"
+                                                                                                     treenode_a=""
+                                                                                                     onclick=""
+                                                                                                     target="_blank"
+                                                                                                     style=""
+                                                                                                     title="战略部"><span
+                                                                        id="deptTree_5_ico" title="" treenode_ico=""
+                                                                        class="button ico_docu" style=""></span><span
+                                                                        id="deptTree_5_span"
+                                                                        class="node_name">战略部</span></a></li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-10 col-sm-9">
+                                    <div class="row">
+                                        <div class="col-lg-10 col-sm-9">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-sm-12">
+                                                    <div class="input-group">
+                                                        <div class="input-group-btn">
+                                                            <button data-toggle="dropdown"
+                                                                    class="btn btn-white dropdown-toggle" type="button">
+                                                                用户名称
+                                                            </button>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="name"
+                                                               placeholder="帐号/姓名/手机号">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-sm-6">
+                                                    <div class="input-group">
+                                                        <div class="input-group-btn">
+                                                            <button data-toggle="dropdown"
+                                                                    class="btn btn-white dropdown-toggle" type="button">
+                                                                注册开始日期
+                                                            </button>
+                                                        </div>
+                                                        <input type="text" class="form-control layer-date"
+                                                               id="beginTime" lay-key="1">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-sm-6">
+                                                    <div class="input-group">
+                                                        <div class="input-group-btn">
+                                                            <button data-toggle="dropdown"
+                                                                    class="btn btn-white dropdown-toggle" type="button">
+                                                                注册结束日期
+                                                            </button>
+                                                        </div>
+                                                        <input type="text" class="form-control layer-date" id="endTime"
+                                                               lay-key="2">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-sm-3">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-sm-12">
+
+                                                    <button type="button" class="btn btn-primary "
+                                                            onclick="MgrUser.search()" id="">
+                                                        <i class="fa fa-search"></i>&nbsp;搜索
+                                                    </button>
+
+
+                                                    <button type="button" class="btn btn-primary button-margin"
+                                                            onclick="MgrUser.resetSearch()" id="">
+                                                        <i class="fa fa-trash"></i>&nbsp;重置
+                                                    </button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="bootstrap-table">
+                                        <div class="fixed-table-toolbar">
+                                            <div class="bs-bars pull-left">
+                                                <div class="hidden-xs" id="managerTableToolbar" role="group">
+
+                                                    <button type="button" class="btn btn-primary "
+                                                            onclick="MgrUser.openAddMgr()" id="">
+                                                        <i class="fa fa-plus"></i>&nbsp;添加
+                                                    </button>
+
+
+                                                    <button type="button" class="btn btn-primary button-margin"
+                                                            onclick="MgrUser.openChangeUser()" id="">
+                                                        <i class="fa fa-edit"></i>&nbsp;修改
+                                                    </button>
+
+
+                                                    <button type="button" class="btn btn-primary button-margin"
+                                                            onclick="MgrUser.delMgrUser()" id="">
+                                                        <i class="fa fa-remove"></i>&nbsp;删除
+                                                    </button>
+
+
+                                                    <button type="button" class="btn btn-primary button-margin"
+                                                            onclick="MgrUser.resetPwd()" id="">
+                                                        <i class="fa fa-refresh"></i>&nbsp;重置密码
+                                                    </button>
+
+
+                                                    <button type="button" class="btn btn-primary button-margin"
+                                                            onclick="MgrUser.freezeAccount()" id="">
+                                                        <i class="fa fa-warning"></i>&nbsp;冻结
+                                                    </button>
+
+
+                                                    <button type="button" class="btn btn-primary button-margin"
+                                                            onclick="MgrUser.unfreeze()" id="">
+                                                        <i class="fa fa-check-circle"></i>&nbsp;解除冻结
+                                                    </button>
+
+
+                                                    <button type="button" class="btn btn-primary button-margin"
+                                                            onclick="MgrUser.roleAssign()" id="">
+                                                        <i class="fa fa-user-secret"></i>&nbsp;角色分配
+                                                    </button>
+
+                                                </div>
+                                            </div>
+                                            <div class="columns columns-right btn-group pull-right">
+                                                <button class="btn btn-default btn-outline" type="button" name="refresh"
+                                                        aria-label="refresh" title="刷新"><i
+                                                        class="glyphicon glyphicon-repeat"></i></button>
+                                                <div class="keep-open btn-group" title="列">
+                                                    <button type="button" aria-label="columns"
+                                                            class="btn btn-default btn-outline dropdown-toggle"
+                                                            data-toggle="dropdown"><i
+                                                            class="glyphicon glyphicon-list"></i> <span
+                                                            class="caret"></span></button>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li role="menuitem"><label><input type="checkbox"
+                                                                                          data-field="id" value="1"> id</label>
+                                                        </li>
+                                                        <li role="menuitem"><label><input type="checkbox"
+                                                                                          data-field="account" value="2"
+                                                                                          checked="checked"> 账号</label>
+                                                        </li>
+                                                        <li role="menuitem"><label><input type="checkbox"
+                                                                                          data-field="name" value="3"
+                                                                                          checked="checked"> 姓名</label>
+                                                        </li>
+                                                        <li role="menuitem"><label><input type="checkbox"
+                                                                                          data-field="sexName" value="4"
+                                                                                          checked="checked"> 性别</label>
+                                                        </li>
+                                                        <li role="menuitem"><label><input type="checkbox"
+                                                                                          data-field="roleName"
+                                                                                          value="5" checked="checked">
+                                                            角色</label></li>
+                                                        <li role="menuitem"><label><input type="checkbox"
+                                                                                          data-field="deptName"
+                                                                                          value="6" checked="checked">
+                                                            部门</label></li>
+                                                        <li role="menuitem"><label><input type="checkbox"
+                                                                                          data-field="email" value="7"
+                                                                                          checked="checked"> 邮箱</label>
+                                                        </li>
+                                                        <li role="menuitem"><label><input type="checkbox"
+                                                                                          data-field="phone" value="8"
+                                                                                          checked="checked"> 电话</label>
+                                                        </li>
+                                                        <li role="menuitem"><label><input type="checkbox"
+                                                                                          data-field="createtime"
+                                                                                          value="9" checked="checked">
+                                                            创建时间</label></li>
+                                                        <li role="menuitem"><label><input type="checkbox"
+                                                                                          data-field="statusName"
+                                                                                          value="10" checked="checked">
+                                                            状态</label></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="fixed-table-container" style="height: 552px; padding-bottom: 40px;">
+                                            <div class="fixed-table-header" style="margin-right: 0px;">
+                                                <table class="table table-hover table-striped" style="width: 785px;">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="bs-checkbox " style="width: 36px; "
+                                                            data-field="selectItem">
+                                                            <div class="th-inner "></div>
+                                                            <div class="fht-cell" style="width: 36px;"></div>
+                                                        </th>
+                                                        <th style="text-align: center; vertical-align: middle; "
+                                                            data-field="account">
+                                                            <div class="th-inner sortable both">账号</div>
+                                                            <div class="fht-cell" style="width: 82px;"></div>
+                                                        </th>
+                                                        <th style="text-align: center; vertical-align: middle; "
+                                                            data-field="name">
+                                                            <div class="th-inner sortable both">姓名</div>
+                                                            <div class="fht-cell" style="width: 82px;"></div>
+                                                        </th>
+                                                        <th style="text-align: center; vertical-align: middle; "
+                                                            data-field="sexName">
+                                                            <div class="th-inner sortable both">性别</div>
+                                                            <div class="fht-cell" style="width: 82px;"></div>
+                                                        </th>
+                                                        <th style="text-align: center; vertical-align: middle; "
+                                                            data-field="roleName">
+                                                            <div class="th-inner sortable both">角色</div>
+                                                            <div class="fht-cell" style="width: 82px;"></div>
+                                                        </th>
+                                                        <th style="text-align: center; vertical-align: middle; "
+                                                            data-field="deptName">
+                                                            <div class="th-inner sortable both">部门</div>
+                                                            <div class="fht-cell" style="width: 82px;"></div>
+                                                        </th>
+                                                        <th style="text-align: center; vertical-align: middle; "
+                                                            data-field="email">
+                                                            <div class="th-inner sortable both">邮箱</div>
+                                                            <div class="fht-cell" style="width: 82px;"></div>
+                                                        </th>
+                                                        <th style="text-align: center; vertical-align: middle; "
+                                                            data-field="phone">
+                                                            <div class="th-inner sortable both">电话</div>
+                                                            <div class="fht-cell" style="width: 82px;"></div>
+                                                        </th>
+                                                        <th style="text-align: center; vertical-align: middle; "
+                                                            data-field="createtime">
+                                                            <div class="th-inner sortable both">创建时间</div>
+                                                            <div class="fht-cell" style="width: 83px;"></div>
+                                                        </th>
+                                                        <th style="text-align: center; vertical-align: middle; "
+                                                            data-field="statusName">
+                                                            <div class="th-inner sortable both">状态</div>
+                                                            <div class="fht-cell" style="width: 83px;"></div>
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                            <div class="fixed-table-body">
+                                                <div class="fixed-table-loading" style="top: 41px; display: none;">
+                                                    正在努力地加载数据中，请稍候……
+                                                </div>
+                                                <table id="managerTable" data-mobile-responsive="true"
+                                                       data-click-to-select="true"
+                                                       class="table table-hover table-striped"
+                                                       style="margin-top: -40px;">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="bs-checkbox " style="width: 36px; "
+                                                            data-field="selectItem">
+                                                            <div class="th-inner "></div>
+                                                            <div class="fht-cell"></div>
+                                                        </th>
+                                                        <th style="text-align: center; vertical-align: middle; "
+                                                            data-field="account">
+                                                            <div class="th-inner sortable both">账号</div>
+                                                            <div class="fht-cell"></div>
+                                                        </th>
+                                                        <th style="text-align: center; vertical-align: middle; "
+                                                            data-field="name">
+                                                            <div class="th-inner sortable both">姓名</div>
+                                                            <div class="fht-cell"></div>
+                                                        </th>
+                                                        <th style="text-align: center; vertical-align: middle; "
+                                                            data-field="sexName">
+                                                            <div class="th-inner sortable both">性别</div>
+                                                            <div class="fht-cell"></div>
+                                                        </th>
+                                                        <th style="text-align: center; vertical-align: middle; "
+                                                            data-field="roleName">
+                                                            <div class="th-inner sortable both">角色</div>
+                                                            <div class="fht-cell"></div>
+                                                        </th>
+                                                        <th style="text-align: center; vertical-align: middle; "
+                                                            data-field="deptName">
+                                                            <div class="th-inner sortable both">部门</div>
+                                                            <div class="fht-cell"></div>
+                                                        </th>
+                                                        <th style="text-align: center; vertical-align: middle; "
+                                                            data-field="email">
+                                                            <div class="th-inner sortable both">邮箱</div>
+                                                            <div class="fht-cell"></div>
+                                                        </th>
+                                                        <th style="text-align: center; vertical-align: middle; "
+                                                            data-field="phone">
+                                                            <div class="th-inner sortable both">电话</div>
+                                                            <div class="fht-cell"></div>
+                                                        </th>
+                                                        <th style="text-align: center; vertical-align: middle; "
+                                                            data-field="createtime">
+                                                            <div class="th-inner sortable both">创建时间</div>
+                                                            <div class="fht-cell"></div>
+                                                        </th>
+                                                        <th style="text-align: center; vertical-align: middle; "
+                                                            data-field="statusName">
+                                                            <div class="th-inner sortable both">状态</div>
+                                                            <div class="fht-cell"></div>
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr data-index="0">
+                                                        <td class="bs-checkbox "><input data-index="0"
+                                                                                        name="btSelectItem"
+                                                                                        type="radio"></td>
+                                                        <td style="text-align: center; vertical-align: middle; ">admin
+                                                        </td>
+                                                        <td style="text-align: center; vertical-align: middle; ">张三</td>
+                                                        <td style="text-align: center; vertical-align: middle; ">男</td>
+                                                        <td style="text-align: center; vertical-align: middle; ">超级管理员
+                                                        </td>
+                                                        <td style="text-align: center; vertical-align: middle; ">战略部
+                                                        </td>
+                                                        <td style="text-align: center; vertical-align: middle; ">
+                                                            sn93@qq.com
+                                                        </td>
+                                                        <td style="text-align: center; vertical-align: middle; ">
+                                                            18200000000
+                                                        </td>
+                                                        <td style="text-align: center; vertical-align: middle; ">
+                                                            2016-01-29 08:49:53
+                                                        </td>
+                                                        <td style="text-align: center; vertical-align: middle; ">启用</td>
+                                                    </tr>
+                                                    <tr data-index="1">
+                                                        <td class="bs-checkbox "><input data-index="1"
+                                                                                        name="btSelectItem"
+                                                                                        type="radio"></td>
+                                                        <td style="text-align: center; vertical-align: middle; ">boss
+                                                        </td>
+                                                        <td style="text-align: center; vertical-align: middle; ">老板</td>
+                                                        <td style="text-align: center; vertical-align: middle; ">男</td>
+                                                        <td style="text-align: center; vertical-align: middle; ">超级管理员
+                                                        </td>
+                                                        <td style="text-align: center; vertical-align: middle; ">
+                                                            汇客通网络科技有限公司
+                                                        </td>
+                                                        <td style="text-align: center; vertical-align: middle; "></td>
+                                                        <td style="text-align: center; vertical-align: middle; "></td>
+                                                        <td style="text-align: center; vertical-align: middle; ">
+                                                            2017-12-04 22:24:02
+                                                        </td>
+                                                        <td style="text-align: center; vertical-align: middle; ">启用</td>
+                                                    </tr>
+                                                    <tr data-index="2">
+                                                        <td class="bs-checkbox "><input data-index="2"
+                                                                                        name="btSelectItem"
+                                                                                        type="radio"></td>
+                                                        <td style="text-align: center; vertical-align: middle; ">
+                                                            manager
+                                                        </td>
+                                                        <td style="text-align: center; vertical-align: middle; ">经理</td>
+                                                        <td style="text-align: center; vertical-align: middle; ">男</td>
+                                                        <td style="text-align: center; vertical-align: middle; ">临时</td>
+                                                        <td style="text-align: center; vertical-align: middle; ">
+                                                            汇客通网络科技有限公司
+                                                        </td>
+                                                        <td style="text-align: center; vertical-align: middle; "></td>
+                                                        <td style="text-align: center; vertical-align: middle; "></td>
+                                                        <td style="text-align: center; vertical-align: middle; ">
+                                                            2017-12-04 22:24:24
+                                                        </td>
+                                                        <td style="text-align: center; vertical-align: middle; ">启用</td>
+                                                    </tr>
+                                                    <tr data-index="3">
+                                                        <td class="bs-checkbox "><input data-index="3"
+                                                                                        name="btSelectItem"
+                                                                                        type="radio"></td>
+                                                        <td style="text-align: center; vertical-align: middle; ">
+                                                            zuofei
+                                                        </td>
+                                                        <td style="text-align: center; vertical-align: middle; ">左飞</td>
+                                                        <td style="text-align: center; vertical-align: middle; ">男</td>
+                                                        <td style="text-align: center; vertical-align: middle; ">超级用户
+                                                        </td>
+                                                        <td style="text-align: center; vertical-align: middle; ">开发部
+                                                        </td>
+                                                        <td style="text-align: center; vertical-align: middle; ">
+                                                            348068347@qq.com
+                                                        </td>
+                                                        <td style="text-align: center; vertical-align: middle; ">
+                                                            15962847050
+                                                        </td>
+                                                        <td style="text-align: center; vertical-align: middle; ">
+                                                            2018-12-19 19:09:11
+                                                        </td>
+                                                        <td style="text-align: center; vertical-align: middle; ">启用</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="fixed-table-footer" style="display: none;">
+                                                <table>
+                                                    <tbody>
+                                                    <tr></tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="fixed-table-pagination" style="display: block;">
+                                                <div class="pull-left pagination-detail"><span class="pagination-info">显示第 1 到第 4 条记录，总共 4 条记录</span><span
+                                                        class="page-list" style="display: none;">每页显示 <span
+                                                        class="btn-group dropup"><button type="button"
+                                                                                         class="btn btn-default btn-outline dropdown-toggle"
+                                                                                         data-toggle="dropdown"><span
+                                                        class="page-size">14</span> <span class="caret"></span></button><ul
+                                                        class="dropdown-menu" role="menu"><li role="menuitem"
+                                                                                              class="active"><a
+                                                        href="http://localhost/mgr#">14</a></li></ul></span> 条记录</span>
+                                                </div>
+                                                <div class="pull-right pagination" style="display: none;">
+                                                    <ul class="pagination pagination-outline">
+                                                        <li class="page-pre"><a href="http://localhost/mgr#">‹</a></li>
+                                                        <li class="page-number active"><a
+                                                                href="http://localhost/mgr#">1</a></li>
+                                                        <li class="page-next"><a href="http://localhost/mgr#">›</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <input type="text" class="form-control" id="name" placeholder="帐号/姓名/手机号">
-</div>											</div>
-											<div class="col-lg-4 col-sm-6">
-<div class="input-group">
-    <div class="input-group-btn">
-        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">注册开始日期
-        </button>
-    </div>
-    <input type="text" class="form-control layer-date" id="beginTime" lay-key="1">
-</div>											</div>
-											<div class="col-lg-4 col-sm-6">
-<div class="input-group">
-    <div class="input-group-btn">
-        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">注册结束日期
-        </button>
-    </div>
-    <input type="text" class="form-control layer-date" id="endTime" lay-key="2">
-</div>											</div>
-										</div>
-									</div>
-									<div class="col-lg-2 col-sm-3">
-										<div class="row">
-											<div class="col-lg-12 col-sm-12">
-
-<button type="button" class="btn btn-primary " onclick="MgrUser.search()" id="">
-    <i class="fa fa-search"></i>&nbsp;搜索
-</button>
-
-
-<button type="button" class="btn btn-primary button-margin" onclick="MgrUser.resetSearch()" id="">
-    <i class="fa fa-trash"></i>&nbsp;重置
-</button>
-
-											</div>
-										</div>
-									</div>
-								</div>
-								
-<div class="bootstrap-table"><div class="fixed-table-toolbar"><div class="bs-bars pull-left"><div class="hidden-xs" id="managerTableToolbar" role="group">
-
-<button type="button" class="btn btn-primary " onclick="MgrUser.openAddMgr()" id="">
-    <i class="fa fa-plus"></i>&nbsp;添加
-</button>
-
-
-<button type="button" class="btn btn-primary button-margin" onclick="MgrUser.openChangeUser()" id="">
-    <i class="fa fa-edit"></i>&nbsp;修改
-</button>
-
-
-<button type="button" class="btn btn-primary button-margin" onclick="MgrUser.delMgrUser()" id="">
-    <i class="fa fa-remove"></i>&nbsp;删除
-</button>
-
-
-<button type="button" class="btn btn-primary button-margin" onclick="MgrUser.resetPwd()" id="">
-    <i class="fa fa-refresh"></i>&nbsp;重置密码
-</button>
-
-
-<button type="button" class="btn btn-primary button-margin" onclick="MgrUser.freezeAccount()" id="">
-    <i class="fa fa-warning"></i>&nbsp;冻结
-</button>
-
-
-<button type="button" class="btn btn-primary button-margin" onclick="MgrUser.unfreeze()" id="">
-    <i class="fa fa-check-circle"></i>&nbsp;解除冻结
-</button>
-
-
-<button type="button" class="btn btn-primary button-margin" onclick="MgrUser.roleAssign()" id="">
-    <i class="fa fa-user-secret"></i>&nbsp;角色分配
-</button>
-
-								</div></div><div class="columns columns-right btn-group pull-right"><button class="btn btn-default btn-outline" type="button" name="refresh" aria-label="refresh" title="刷新"><i class="glyphicon glyphicon-repeat"></i></button><div class="keep-open btn-group" title="列"><button type="button" aria-label="columns" class="btn btn-default btn-outline dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-list"></i> <span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li role="menuitem"><label><input type="checkbox" data-field="id" value="1"> id</label></li><li role="menuitem"><label><input type="checkbox" data-field="account" value="2" checked="checked"> 账号</label></li><li role="menuitem"><label><input type="checkbox" data-field="name" value="3" checked="checked"> 姓名</label></li><li role="menuitem"><label><input type="checkbox" data-field="sexName" value="4" checked="checked"> 性别</label></li><li role="menuitem"><label><input type="checkbox" data-field="roleName" value="5" checked="checked"> 角色</label></li><li role="menuitem"><label><input type="checkbox" data-field="deptName" value="6" checked="checked"> 部门</label></li><li role="menuitem"><label><input type="checkbox" data-field="email" value="7" checked="checked"> 邮箱</label></li><li role="menuitem"><label><input type="checkbox" data-field="phone" value="8" checked="checked"> 电话</label></li><li role="menuitem"><label><input type="checkbox" data-field="createtime" value="9" checked="checked"> 创建时间</label></li><li role="menuitem"><label><input type="checkbox" data-field="statusName" value="10" checked="checked"> 状态</label></li></ul></div></div></div><div class="fixed-table-container" style="height: 552px; padding-bottom: 40px;"><div class="fixed-table-header" style="margin-right: 0px;"><table class="table table-hover table-striped" style="width: 785px;"><thead><tr><th class="bs-checkbox " style="width: 36px; " data-field="selectItem"><div class="th-inner "></div><div class="fht-cell" style="width: 36px;"></div></th><th style="text-align: center; vertical-align: middle; " data-field="account"><div class="th-inner sortable both">账号</div><div class="fht-cell" style="width: 82px;"></div></th><th style="text-align: center; vertical-align: middle; " data-field="name"><div class="th-inner sortable both">姓名</div><div class="fht-cell" style="width: 82px;"></div></th><th style="text-align: center; vertical-align: middle; " data-field="sexName"><div class="th-inner sortable both">性别</div><div class="fht-cell" style="width: 82px;"></div></th><th style="text-align: center; vertical-align: middle; " data-field="roleName"><div class="th-inner sortable both">角色</div><div class="fht-cell" style="width: 82px;"></div></th><th style="text-align: center; vertical-align: middle; " data-field="deptName"><div class="th-inner sortable both">部门</div><div class="fht-cell" style="width: 82px;"></div></th><th style="text-align: center; vertical-align: middle; " data-field="email"><div class="th-inner sortable both">邮箱</div><div class="fht-cell" style="width: 82px;"></div></th><th style="text-align: center; vertical-align: middle; " data-field="phone"><div class="th-inner sortable both">电话</div><div class="fht-cell" style="width: 82px;"></div></th><th style="text-align: center; vertical-align: middle; " data-field="createtime"><div class="th-inner sortable both">创建时间</div><div class="fht-cell" style="width: 83px;"></div></th><th style="text-align: center; vertical-align: middle; " data-field="statusName"><div class="th-inner sortable both">状态</div><div class="fht-cell" style="width: 83px;"></div></th></tr></thead></table></div><div class="fixed-table-body"><div class="fixed-table-loading" style="top: 41px; display: none;">正在努力地加载数据中，请稍候……</div><table id="managerTable" data-mobile-responsive="true" data-click-to-select="true" class="table table-hover table-striped" style="margin-top: -40px;">
-    <thead><tr><th class="bs-checkbox " style="width: 36px; " data-field="selectItem"><div class="th-inner "></div><div class="fht-cell"></div></th><th style="text-align: center; vertical-align: middle; " data-field="account"><div class="th-inner sortable both">账号</div><div class="fht-cell"></div></th><th style="text-align: center; vertical-align: middle; " data-field="name"><div class="th-inner sortable both">姓名</div><div class="fht-cell"></div></th><th style="text-align: center; vertical-align: middle; " data-field="sexName"><div class="th-inner sortable both">性别</div><div class="fht-cell"></div></th><th style="text-align: center; vertical-align: middle; " data-field="roleName"><div class="th-inner sortable both">角色</div><div class="fht-cell"></div></th><th style="text-align: center; vertical-align: middle; " data-field="deptName"><div class="th-inner sortable both">部门</div><div class="fht-cell"></div></th><th style="text-align: center; vertical-align: middle; " data-field="email"><div class="th-inner sortable both">邮箱</div><div class="fht-cell"></div></th><th style="text-align: center; vertical-align: middle; " data-field="phone"><div class="th-inner sortable both">电话</div><div class="fht-cell"></div></th><th style="text-align: center; vertical-align: middle; " data-field="createtime"><div class="th-inner sortable both">创建时间</div><div class="fht-cell"></div></th><th style="text-align: center; vertical-align: middle; " data-field="statusName"><div class="th-inner sortable both">状态</div><div class="fht-cell"></div></th></tr></thead>
-<tbody><tr data-index="0"> <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="radio"></td> <td style="text-align: center; vertical-align: middle; ">admin</td> <td style="text-align: center; vertical-align: middle; ">张三</td> <td style="text-align: center; vertical-align: middle; ">男</td> <td style="text-align: center; vertical-align: middle; ">超级管理员</td> <td style="text-align: center; vertical-align: middle; ">战略部</td> <td style="text-align: center; vertical-align: middle; ">sn93@qq.com</td> <td style="text-align: center; vertical-align: middle; ">18200000000</td> <td style="text-align: center; vertical-align: middle; ">2016-01-29 08:49:53</td> <td style="text-align: center; vertical-align: middle; ">启用</td> </tr><tr data-index="1"> <td class="bs-checkbox "><input data-index="1" name="btSelectItem" type="radio"></td> <td style="text-align: center; vertical-align: middle; ">boss</td> <td style="text-align: center; vertical-align: middle; ">老板</td> <td style="text-align: center; vertical-align: middle; ">男</td> <td style="text-align: center; vertical-align: middle; ">超级管理员</td> <td style="text-align: center; vertical-align: middle; ">汇客通网络科技有限公司</td> <td style="text-align: center; vertical-align: middle; "></td> <td style="text-align: center; vertical-align: middle; "></td> <td style="text-align: center; vertical-align: middle; ">2017-12-04 22:24:02</td> <td style="text-align: center; vertical-align: middle; ">启用</td> </tr><tr data-index="2"> <td class="bs-checkbox "><input data-index="2" name="btSelectItem" type="radio"></td> <td style="text-align: center; vertical-align: middle; ">manager</td> <td style="text-align: center; vertical-align: middle; ">经理</td> <td style="text-align: center; vertical-align: middle; ">男</td> <td style="text-align: center; vertical-align: middle; ">临时</td> <td style="text-align: center; vertical-align: middle; ">汇客通网络科技有限公司</td> <td style="text-align: center; vertical-align: middle; "></td> <td style="text-align: center; vertical-align: middle; "></td> <td style="text-align: center; vertical-align: middle; ">2017-12-04 22:24:24</td> <td style="text-align: center; vertical-align: middle; ">启用</td> </tr><tr data-index="3"> <td class="bs-checkbox "><input data-index="3" name="btSelectItem" type="radio"></td> <td style="text-align: center; vertical-align: middle; ">zuofei</td> <td style="text-align: center; vertical-align: middle; ">左飞</td> <td style="text-align: center; vertical-align: middle; ">男</td> <td style="text-align: center; vertical-align: middle; ">超级用户</td> <td style="text-align: center; vertical-align: middle; ">开发部</td> <td style="text-align: center; vertical-align: middle; ">348068347@qq.com</td> <td style="text-align: center; vertical-align: middle; ">15962847050</td> <td style="text-align: center; vertical-align: middle; ">2018-12-19 19:09:11</td> <td style="text-align: center; vertical-align: middle; ">启用</td> </tr></tbody></table></div><div class="fixed-table-footer" style="display: none;"><table><tbody><tr></tr></tbody></table></div><div class="fixed-table-pagination" style="display: block;"><div class="pull-left pagination-detail"><span class="pagination-info">显示第 1 到第 4 条记录，总共 4 条记录</span><span class="page-list" style="display: none;">每页显示 <span class="btn-group dropup"><button type="button" class="btn btn-default btn-outline dropdown-toggle" data-toggle="dropdown"><span class="page-size">14</span> <span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li role="menuitem" class="active"><a href="http://localhost/mgr#">14</a></li></ul></span> 条记录</span></div><div class="pull-right pagination" style="display: none;"><ul class="pagination pagination-outline"><li class="page-pre"><a href="http://localhost/mgr#">‹</a></li><li class="page-number active"><a href="http://localhost/mgr#">1</a></li><li class="page-next"><a href="http://localhost/mgr#">›</a></li></ul></div></div></div></div><div class="clearfix"></div>							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<script src="./user.js.下载"></script>
-<script>
-    laydate.render({
-        elem: '#beginTime'
-    });
-    laydate.render({
-        elem: '#endTime'
-    });
-</script>
+    <script src="./user.js.下载"></script>
+    <script>
+        laydate.render({
+            elem: '#beginTime'
+        });
+        laydate.render({
+            elem: '#endTime'
+        });
+    </script>
 
 </div>
 <script src="./content.js.下载"></script>
 
 
-</body></html>
+</body>
+</html>

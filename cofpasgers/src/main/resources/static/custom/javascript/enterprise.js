@@ -1,6 +1,6 @@
 layui.use('upload', function () {
     var $ = layui.jquery, upload = layui.upload;
-    var logo_name = null,uploaderror = false;
+    var logo_name = null, uploaderror = false;
 
     function getMyDate(time) {
         var oDate = new Date(time),
@@ -27,12 +27,12 @@ layui.use('upload', function () {
         elem: '#upload_logo'
         , url: '/upload/'
         , auto: false//选择完成之后不自动上传
-        ,choose: function(obj){
+        , choose: function (obj) {
             //将每次选择的文件追加到文件队列
             var files = obj.pushFile();
 
             //预读本地文件，如果是多文件，则会遍历。(不支持ie8/9)
-            obj.preview(function(index, file, result){
+            obj.preview(function (index, file, result) {
                 $('#logo_img').attr('src', result); //图片链接（base64）
                 //obj.resetFile(index, file, '123.jpg'); //重命名文件名，layui 2.3.0 开始新增
 
@@ -161,7 +161,7 @@ layui.use('upload', function () {
         minView: "month",//设置只显示到月份
         format: 'yyyy-mm-dd',
         language: 'zh-CN',
-        autoclose:true
+        autoclose: true
     });
 
     $("#save_commpany_info_btn").click(function () {

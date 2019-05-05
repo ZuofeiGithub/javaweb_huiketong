@@ -2,6 +2,7 @@
  * cookie操作
  */
 "use strict";
+
 function trim(str) {
     return str.toString().replace(/(^\s*)|(\s*$)/g, "");
 }
@@ -22,6 +23,7 @@ function getCookie(name) {
     }
     return '';
 }
+
 if (getCookie("usertype") == "1") {
     var user_id = getCookie("telphone");
     $.ajax({

@@ -58,9 +58,11 @@ $(function () {
             {"data": "imposer", "sClass": "myClassCenter"},
             {"data": "telphone", "sClass": "myClassCenter"},
             {"data": "initCode", "sClass": "myClassCenter"},
-            {"data":function (obj) {
+            {
+                "data": function (obj) {
                     return getMyDate(obj.regDatetime);//通过调用函数来格式化所获取的时间戳
-                }, "sClass": "myClassCenter"},
+                }, "sClass": "myClassCenter"
+            },
             {"data": "superiorName", "sClass": "myClassCenter"},
             {"data": "topName", "sClass": "myClassCenter"},
             {"data": "reconCustomNam", "sClass": "myClassCenter"},

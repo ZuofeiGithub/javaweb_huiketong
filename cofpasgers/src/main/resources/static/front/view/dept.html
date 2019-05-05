@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <!-- saved from url=(0021)http://localhost/dept -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit"><!-- 让360浏览器默认选择webkit内核 -->
 
@@ -30,10 +32,12 @@
     <script src="../script/bootstrap-table-mobile.min.js"></script>
     <script src="../script/bootstrap-table-zh-CN.min.js"></script>
     <script src="../script/bootstrap-treetable.js"></script>
-    <script src="../script/layer.js"></script><link rel="stylesheet" href="./layer.css" id="layuicss-layer">
+    <script src="../script/layer.js"></script>
+    <link rel="stylesheet" href="./layer.css" id="layuicss-layer">
     <script src="../script/chosen.jquery.js"></script>
     <script src="../script/icheck.min.js"></script>
-    <script src="../script/laydate.js"></script><link rel="stylesheet" href="./laydate.css" id="layuicss-laydate">
+    <script src="../script/laydate.js"></script>
+    <link rel="stylesheet" href="./laydate.css" id="layuicss-laydate">
     <script src="../script/webuploader.min.js"></script>
     <script src="../script/ajax-object.js"></script>
     <script src="../script/bootstrap-table-object.js"></script>
@@ -43,16 +47,17 @@
     <script src="../script/Feng.js"></script>
 
     <style type="text/css">
-        table{  
-            width:100px;  
-            table-layout:fixed;/* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */  
+        table {
+            width: 100px;
+            table-layout: fixed; /* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
         }
-        td{  
-            width:100%;  
-            word-break:keep-all;/* 不换行 */  
-            white-space:nowrap;/* 不换行 */  
-            overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */  
-            text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用*/  
+
+        td {
+            width: 100%;
+            word-break: keep-all; /* 不换行 */
+            white-space: nowrap; /* 不换行 */
+            overflow: hidden; /* 内容超出宽度时隐藏超出部分的内容 */
+            text-overflow: ellipsis; /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用*/
         }
     </style>
 
@@ -65,58 +70,130 @@
 <body class="gray-bg">
 <div class="wrapper wrapper-content">
     <div class="row">
-    <div class="col-sm-12">
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <h5>部门管理</h5>
-            </div>
-            <div class="ibox-content">
-                <div class="row row-lg">
-                    <div class="col-sm-12">
-                        <div class="row">
-                            <div class="col-sm-3">
-<div class="input-group">
-    <div class="input-group-btn">
-        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">名称
-        </button>
-    </div>
-    <input type="text" class="form-control" id="condition" placeholder="">
-</div>                            </div>
-                            <div class="col-sm-3">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>部门管理</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row row-lg">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <button data-toggle="dropdown" class="btn btn-white dropdown-toggle"
+                                                    type="button">名称
+                                            </button>
+                                        </div>
+                                        <input type="text" class="form-control" id="condition" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
 
-<button type="button" class="btn btn-primary " onclick="Dept.search()" id="">
-    <i class="fa fa-search"></i>&nbsp;搜索
-</button>
+                                    <button type="button" class="btn btn-primary " onclick="Dept.search()" id="">
+                                        <i class="fa fa-search"></i>&nbsp;搜索
+                                    </button>
 
+                                </div>
+                            </div>
+
+                            <div class="fixed-table-toolbar">
+                                <div class="bs-bars pull-left">
+                                    <div class="hidden-xs" id="DeptTableToolbar" role="group">
+
+                                        <button type="button" class="btn btn-primary " onclick="Dept.openAddDept()"
+                                                id="">
+                                            <i class="fa fa-plus"></i>&nbsp;添加
+                                        </button>
+
+
+                                        <button type="button" class="btn btn-primary button-margin"
+                                                onclick="Dept.openDeptDetail()" id="">
+                                            <i class="fa fa-plus"></i>&nbsp;修改
+                                        </button>
+
+
+                                        <button type="button" class="btn btn-primary button-margin"
+                                                onclick="Dept.delete()" id="">
+                                            <i class="fa fa-plus"></i>&nbsp;删除
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bootstrap-tree-table fixed-table-container">
+                                <table id="DeptTable" data-mobile-responsive="true" data-click-to-select="true"
+                                       class="table table-hover treetable-table table-bordered table-striped">
+                                    <thead class="treetable-thead" style="width: 1058px;">
+                                    <tr>
+                                        <th style="width:36px"></th>
+                                        <th style="width:50px">id</th>
+                                        <th style="">部门简称</th>
+                                        <th style="">部门全称</th>
+                                        <th style="">排序</th>
+                                        <th style="">备注</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="treetable-tbody" style="height: 665px;">
+                                    <tr class="tg-0" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="24"></td>
+                                        <td title="24" name="id" style="width:50px">24</td>
+                                        <td title="汇客通" name="simplename" style=""><span
+                                                class="treetable-expander glyphicon glyphicon-chevron-down"></span>汇客通
+                                        </td>
+                                        <td title="汇客通网络科技有限公司" name="fullname" style="">汇客通网络科技有限公司</td>
+                                        <td title="1" name="num" style="">1</td>
+                                        <td title="" name="tips" style=""></td>
+                                    </tr>
+                                    <tr class="tg-24" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="25"></td>
+                                        <td title="25" name="id" style="width:50px">25</td>
+                                        <td title="开发部" name="simplename" style=""><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>开发部
+                                        </td>
+                                        <td title="开发部" name="fullname" style="">开发部</td>
+                                        <td title="2" name="num" style="">2</td>
+                                        <td title="" name="tips" style=""></td>
+                                    </tr>
+                                    <tr class="tg-24" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="26"></td>
+                                        <td title="26" name="id" style="width:50px">26</td>
+                                        <td title="运营部" name="simplename" style=""><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>运营部
+                                        </td>
+                                        <td title="运营部" name="fullname" style="">运营部</td>
+                                        <td title="3" name="num" style="">3</td>
+                                        <td title="" name="tips" style=""></td>
+                                    </tr>
+                                    <tr class="tg-24" style="display: table;">
+                                        <td style="text-align:center;width:36px"><input name="select_item" type="radio"
+                                                                                        value="27"></td>
+                                        <td title="27" name="id" style="width:50px">27</td>
+                                        <td title="战略部" name="simplename" style=""><span
+                                                class="treetable-indent"></span><span class="treetable-expander"></span>战略部
+                                        </td>
+                                        <td title="战略部" name="fullname" style="">战略部</td>
+                                        <td title="4" name="num" style="">4</td>
+                                        <td title="" name="tips" style=""></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        
-<div class="fixed-table-toolbar"><div class="bs-bars pull-left"><div class="hidden-xs" id="DeptTableToolbar" role="group">
-
-<button type="button" class="btn btn-primary " onclick="Dept.openAddDept()" id="">
-    <i class="fa fa-plus"></i>&nbsp;添加
-</button>
-
-
-<button type="button" class="btn btn-primary button-margin" onclick="Dept.openDeptDetail()" id="">
-    <i class="fa fa-plus"></i>&nbsp;修改
-</button>
-
-
-<button type="button" class="btn btn-primary button-margin" onclick="Dept.delete()" id="">
-    <i class="fa fa-plus"></i>&nbsp;删除
-</button>
-
-                        </div></div></div><div class="bootstrap-tree-table fixed-table-container"><table id="DeptTable" data-mobile-responsive="true" data-click-to-select="true" class="table table-hover treetable-table table-bordered table-striped"><thead class="treetable-thead" style="width: 1058px;"><tr><th style="width:36px"></th><th style="width:50px">id</th><th style="">部门简称</th><th style="">部门全称</th><th style="">排序</th><th style="">备注</th></tr></thead><tbody class="treetable-tbody" style="height: 665px;"><tr class="tg-0" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="24"></td><td title="24" name="id" style="width:50px">24</td><td title="汇客通" name="simplename" style=""><span class="treetable-expander glyphicon glyphicon-chevron-down"></span>汇客通</td><td title="汇客通网络科技有限公司" name="fullname" style="">汇客通网络科技有限公司</td><td title="1" name="num" style="">1</td><td title="" name="tips" style=""></td></tr><tr class="tg-24" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="25"></td><td title="25" name="id" style="width:50px">25</td><td title="开发部" name="simplename" style=""><span class="treetable-indent"></span><span class="treetable-expander"></span>开发部</td><td title="开发部" name="fullname" style="">开发部</td><td title="2" name="num" style="">2</td><td title="" name="tips" style=""></td></tr><tr class="tg-24" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="26"></td><td title="26" name="id" style="width:50px">26</td><td title="运营部" name="simplename" style=""><span class="treetable-indent"></span><span class="treetable-expander"></span>运营部</td><td title="运营部" name="fullname" style="">运营部</td><td title="3" name="num" style="">3</td><td title="" name="tips" style=""></td></tr><tr class="tg-24" style="display: table;"><td style="text-align:center;width:36px"><input name="select_item" type="radio" value="27"></td><td title="27" name="id" style="width:50px">27</td><td title="战略部" name="simplename" style=""><span class="treetable-indent"></span><span class="treetable-expander"></span>战略部</td><td title="战略部" name="fullname" style="">战略部</td><td title="4" name="num" style="">4</td><td title="" name="tips" style=""></td></tr></tbody></table></div>                    </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<script src="../script/dept.js"></script>
+    <script src="../script/dept.js"></script>
 
 </div>
 <script src="../script/content.js"></script>
 
 
-</body></html>
+</body>
+</html>

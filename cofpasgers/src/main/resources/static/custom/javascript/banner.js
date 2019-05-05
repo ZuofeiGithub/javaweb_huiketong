@@ -31,8 +31,10 @@ $(function () {
     var $modal = $('#my-popup');
     $('#addBanner').click(function () {
 
-        $modal.modal({width: '650px;',show: true,
-            backdrop: 'static'})
+        $modal.modal({
+            width: '650px;', show: true,
+            backdrop: 'static'
+        })
     })
 
     layui.use('upload', function () {
@@ -109,7 +111,7 @@ $(function () {
                 return layer.msg("轮播图标题不能为空");
             }
 
-            if(trim(desc) == ""){
+            if (trim(desc) == "") {
                 return layer.msg("内容描述不能为空");
             }
 
@@ -118,7 +120,7 @@ $(function () {
                 var dataJson = json;
                 // json.length = 0;
                 $modal.modal("close");
-            },3000);
+            }, 3000);
 
             // if (trim(banner_desc) == "") {
             //     return alert("输入Banner描述")

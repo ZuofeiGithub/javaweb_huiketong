@@ -5,7 +5,7 @@
     i.render({
         elem: "#LAY-app-content-list",
         //url: layui.setter.base + "json/content/list.js",
-        url: "/voucherlist?user_id="+user.user_id,
+        url: "/voucherlist?user_id=" + user.user_id,
         cols: [[{type: "checkbox", fixed: "left"}, {field: "id", width: 100, title: "分享ID", sort: !0}, {
             field: "title",
             title: "分享标题",
@@ -13,20 +13,26 @@
         }, {field: "context", title: "分享内容"}, {
             field: "image",
             title: "分享图片",
-            templet:function (d) {
-                return "<img src='http://image.jkt365.com/"+d.image+"' width='30' height='30'>"
+            templet: function (d) {
+                return "<img src='" + d.image + "' width='30' height='30'>"
             }
-        }, {field: "link_url", title: "分享链接"},{field:'sharetype',title:'分享类型',templet:function (d) {
-                if(d.sharetype == 1){
+        }, {field: "link_url", title: "分享链接"}, {
+            field: 'sharetype', title: '分享类型', templet: function (d) {
+                if (d.sharetype == 1) {
                     return "优惠券分享"
-                }else if(d.sharetype == 2){
+                } else if (d.sharetype == 2) {
                     return "商品分享"
                 }
-            }},{field:'goods_id',title:'商品ID',templet:function (d) {
-                if(d.goods_id == 0){
+            }
+        }, {
+            field: 'goods_id', title: '商品ID', templet: function (d) {
+                if (d.goods_id == 0) {
                     return "优惠券分享,无商品ID";
+                }else{
+                    return d.goods_id;
                 }
-            }},{
+            }
+        }, {
             title: "操作",
             minWidth: 150,
             align: "center",
@@ -40,11 +46,11 @@
     }), i.on("tool(LAY-app-content-list)", function (t) {
         var field = t.data;
         "del" === t.event ? layer.confirm("确定删除此分享？", function (e) {
-            $.post('delvoucher',{shareid:field.id},function (resp) {
-                if(resp.code == "0"){
+            $.post('delvoucher', {shareid: field.id}, function (resp) {
+                if (resp.code == "0") {
                     layer.msg("删除成功");
                     t.del(), layer.close(e)
-                }else if(resp.code == "1"){
+                } else if (resp.code == "1") {
                     return layer.msg("删除失败");
                 }
             });

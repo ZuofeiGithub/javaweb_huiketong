@@ -5,10 +5,10 @@ $(function () {
      */
     var company_login_id = getCookie("telphone");
     $.ajax({
-        url:"get_current_com_info",
-        type:'post',
-        data:{'user_id':company_login_id},
-        success:function (resp) {
+        url: "get_current_com_info",
+        type: 'post',
+        data: {'user_id': company_login_id},
+        success: function (resp) {
             $("#com_name").text(resp.enterName)
             $("#com_per").text(resp.enterLegalperson);
             $('#com_add').text(resp.enterAddress);

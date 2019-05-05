@@ -1,4 +1,4 @@
-(function(){
+(function () {
     var viewport = document.querySelector("meta[name=viewport]");
 
     var doc = window.document,
@@ -6,7 +6,7 @@
         n = window.navigator.appVersion.match(/iphone/gi),
         v = window.devicePixelRatio;
 
-    if(viewport) {
+    if (viewport) {
         var o = viewport.getAttribute("content").match(/initial\-scale=(["']?)([\d\.]+)\1?/);
         o && (window.viewScale = parseFloat(o[2]), v = parseInt(1 / window.viewScale));
     } else {
@@ -29,8 +29,6 @@
     }
 
     w();
-
-
 
 
     /*window.viewScale = 1;

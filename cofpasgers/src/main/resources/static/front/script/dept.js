@@ -14,7 +14,7 @@ var Dept = {
 Dept.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
-        {title: 'id', field: 'id', align: 'center', valign: 'middle',width:'50px'},
+        {title: 'id', field: 'id', align: 'center', valign: 'middle', width: '50px'},
         {title: '部门简称', field: 'simplename', align: 'center', valign: 'middle', sortable: true},
         {title: '部门全称', field: 'fullname', align: 'center', valign: 'middle', sortable: true},
         {title: '排序', field: 'num', align: 'center', valign: 'middle', sortable: true},
@@ -26,10 +26,10 @@ Dept.initColumn = function () {
  */
 Dept.check = function () {
     var selected = $('#' + this.id).bootstrapTreeTable('getSelections');
-    if(selected.length == 0){
+    if (selected.length == 0) {
         Feng.info("请先选中表格中的某一记录！");
         return false;
-    }else{
+    } else {
         Dept.seItem = selected[0];
         return true;
     }
@@ -73,14 +73,14 @@ Dept.openDeptDetail = function () {
 Dept.delete = function () {
     if (this.check()) {
 
-        var operation = function(){
+        var operation = function () {
             var ajax = new $ax(Feng.ctxPath + "/dept/delete", function () {
                 Feng.success("删除成功!");
                 Dept.table.refresh();
             }, function (data) {
                 Feng.error("删除失败!" + data.responseJSON.message + "!");
             });
-            ajax.set("deptId",Dept.seItem.id);
+            ajax.set("deptId", Dept.seItem.id);
             ajax.start();
         };
 

@@ -57,7 +57,7 @@ $(function () {
                             break;
                         case 2:
                             layer.msg("登录成功");
-                            loginSuccess(json.telphone, json.username, json.usertype,json.rightname,json.headphoto);
+                            loginSuccess(json.telphone, json.username, json.usertype, json.rightname, json.headphoto);
                             break;
                         case 3:
                             layer.msg("验证码错误");
@@ -78,16 +78,16 @@ $(function () {
     });
 
     //登录成功
-    function loginSuccess(telphone, username, usertype,rightname,headphoto) {
+    function loginSuccess(telphone, username, usertype, rightname, headphoto) {
         location.href = "admin";
         setCookie("telphone", telphone);
         setCookie("username", username);
         setCookie("usertype", usertype);
-        setCookie("rightname",rightname);
-        setCookie("headphoto",headphoto);
-        layui.data('user',{
-            key:'user_id',
-            value:telphone
+        setCookie("rightname", rightname);
+        setCookie("headphoto", headphoto);
+        layui.data('user', {
+            key: 'user_id',
+            value: telphone
         })
     }
 
@@ -128,15 +128,14 @@ $(function () {
         }
     }
 
-    $('#login_form_id').keydown(function(e){
+    $('#login_form_id').keydown(function (e) {
         var e = e || window.event;
-        if(e.keyCode==32)  //按键 ASCII 码值
+        if (e.keyCode == 32)  //按键 ASCII 码值
         {
-            if($("#remeberme").get(0).checked)
-            {
+            if ($("#remeberme").get(0).checked) {
                 $("#remeberme").removeAttr("checked");
                 return false;
-            }else{
+            } else {
                 $("#remeberme").attr("checked", 'true');//全选
                 return false;
             }

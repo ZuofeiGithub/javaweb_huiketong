@@ -2,85 +2,104 @@
 .btn-white, .btn-grey, .btn-bar-white > .btn, .list, .list .item, .tabs {
     border-color: #EEE;
 }
-.list:last-child{
-	border-bottom-color: #EEE;
+
+.list:last-child {
+    border-bottom-color: #EEE;
 }
+
 .comment-all-wrap > .list > .item:last-child {
-	border-bottom: 1px solid #EEE;
+    border-bottom: 1px solid #EEE;
 }
+
 #header {
     border-bottom: 1px solid #EEE;
 }
+
 #footer, .footer {
     border-top: 1px solid #EEE;
 }
-.footer .reply-input{
+
+.footer .reply-input {
     border-color: #EEE;
 }
 
-.ncard, .ncard:before, .ncard .item{
+.ncard, .ncard:before, .ncard .item {
     border-bottom: 1px solid #EEE;
 }
-.menu-select .menu-select-item{
+
+.menu-select .menu-select-item {
     border-left: 1px solid #EEE;
     border-right: 1px solid #EEE;
     border-bottom: 1px solid #EEE;
 }
-.menu-sub li > a{
-    border:1px solid #EEE;
-}
-.inner-form .input-wrap{
+
+.menu-sub li > a {
     border: 1px solid #EEE;
 }
+
+.inner-form .input-wrap {
+    border: 1px solid #EEE;
+}
+
 /** common end **/
 
-.case-item-wrap{
-    border:1px solid #EEE;
+.case-item-wrap {
+    border: 1px solid #EEE;
 }
 
-.zx-comment-txt{
-    border:1px solid #EEE;
+.zx-comment-txt {
+    border: 1px solid #EEE;
 }
 
-.article-pub .add-btn{
-    border:1px solid #EEE;
+.article-pub .add-btn {
+    border: 1px solid #EEE;
 }
 
-.dinfo-nums{
+.dinfo-nums {
     border-right: 1px solid #EEE;
 }
-.my-nums .fitem{
+
+.my-nums .fitem {
     border-right: 1px solid #EEE;
 }
-.score-detail{
-    border-right:1px solid #EEE;
+
+.score-detail {
+    border-right: 1px solid #EEE;
 }
+
 /** index **/
-.svc-list{
-    border-bottom:1px solid #EEE;
+.svc-list {
+    border-bottom: 1px solid #EEE;
 }
-.solu-list{
+
+.solu-list {
     border-top: 1px solid #EEE;
 }
 
-.solu-dt-list{
-    border-bottom:1px solid #EEE;
+.solu-dt-list {
+    border-bottom: 1px solid #EEE;
 }
-.third-login{
+
+.third-login {
     border-top: 1px solid #EEE;
 }
+
 .solu-dlist-item {
-	border-color: #EEE;
+    border-color: #EEE;
 }
-.login .input-wrap{
-	border: 1px solid #EEE;
+
+.login .input-wrap {
+    border: 1px solid #EEE;
 }
+
 .dashed-line:before {
-	border-left : 1px dashed #ddd;
+    border-left: 1px dashed #ddd;
 }
-.first-level{
-	border-bottom: 1px solid #EEE;
+
+.first-level {
+    border-bottom: 1px solid #EEE;
 }
+
 .sencond-level-show {
-	border-bottom: 1px solid #EEE;
+    border-bottom: 1px solid #EEE;
 }
