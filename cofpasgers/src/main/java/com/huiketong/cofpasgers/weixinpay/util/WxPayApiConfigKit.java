@@ -4,24 +4,25 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class WxPayApiConfigKit {
-private static final ThreadLocal<String> TL = new ThreadLocal<String>();
-	
-	private static final Map<String, WxPayApiConfig> CFG_MAP = new ConcurrentHashMap<String, WxPayApiConfig>();
-	private static final String DEFAULT_CFG_KEY = "_default_ijpay_key_";
-	
-	/**
-	 * 添加微信支付配置，每个appId只需添加一次，相同appId将被覆盖
-	 * @param wxPayApiConfig 微信支付配置
-	 * @return {WxPayApiConfig} 微信支付配置
-	 */
-	public static WxPayApiConfig putApiConfig(WxPayApiConfig wxPayApiConfig) {
+    private static final ThreadLocal<String> TL = new ThreadLocal<String>();
+
+    private static final Map<String, WxPayApiConfig> CFG_MAP = new ConcurrentHashMap<String, WxPayApiConfig>();
+    private static final String DEFAULT_CFG_KEY = "_default_ijpay_key_";
+
+    /**
+     * 添加微信支付配置，每个appId只需添加一次，相同appId将被覆盖
+     *
+     * @param wxPayApiConfig 微信支付配置
+     * @return {WxPayApiConfig} 微信支付配置
+     */
+    public static WxPayApiConfig putApiConfig(WxPayApiConfig wxPayApiConfig) {
         if (CFG_MAP.size() == 0) {
-        	CFG_MAP.put(DEFAULT_CFG_KEY, wxPayApiConfig);
+            CFG_MAP.put(DEFAULT_CFG_KEY, wxPayApiConfig);
         }
         return CFG_MAP.put(wxPayApiConfig.getAppId(), wxPayApiConfig);
     }
-	
-	public static WxPayApiConfig setThreadLocalWxPayApiConfig(WxPayApiConfig wxPayApiConfig) {
+
+    public static WxPayApiConfig setThreadLocalWxPayApiConfig(WxPayApiConfig wxPayApiConfig) {
         return putApiConfig(wxPayApiConfig);
     }
 
@@ -43,7 +44,7 @@ private static final ThreadLocal<String> TL = new ThreadLocal<String>();
     public static void removeThreadLocalAppId() {
         TL.remove();
     }
-	
+
     public static String getAppId() {
         String appId = TL.get();
         if (StrKit.isBlank(appId)) {
@@ -58,7 +59,7 @@ private static final ThreadLocal<String> TL = new ThreadLocal<String>();
     }
 
     public static WxPayApiConfig getApiConfig(String appId) {
-    	WxPayApiConfig cfg = CFG_MAP.get(appId);
+        WxPayApiConfig cfg = CFG_MAP.get(appId);
         if (cfg == null)
             throw new IllegalStateException("需事先调用 WxPayApiConfigKit.putApiConfig(wxPayApiConfig) 将 appId对应的 WxPayApiConfig 对象存入，" +
                     "才可以使用 WxPayApiConfigKit.getWxPayApiConfig() 的系列方法");

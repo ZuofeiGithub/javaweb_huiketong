@@ -39,7 +39,7 @@ public class InterceptorConfig extends WebMvcConfigurationSupport {
 
     //2.2：解决No converter found for return value of type: xxxx
     public MappingJackson2HttpMessageConverter messageConverter() {
-        MappingJackson2HttpMessageConverter converter=new MappingJackson2HttpMessageConverter();
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
         converter.setObjectMapper(getObjectMapper());
         return converter;
     }

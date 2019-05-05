@@ -13,9 +13,8 @@ public class DecorationPlan {
 
     static String plan;
 
-    public static String PLAN(int id){
-        switch (id)
-        {
+    public static String PLAN(int id) {
+        switch (id) {
             case 0:
                 plan = ALL_PLAN;
                 break;

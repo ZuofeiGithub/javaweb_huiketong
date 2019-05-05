@@ -34,12 +34,16 @@ public class ResponseHandler {
         this.uriEncoding = "";
     }
 
-    /**    */
+    /**
+     *
+     */
     public String getKey() {
         return key;
     }
 
-    /**    *	*/
+    /**
+     *
+     */
     public void setKey(String key) {
         this.key = key;
     }
@@ -79,11 +83,9 @@ public class ResponseHandler {
      */
     public boolean isTenpaySign() {
         StringBuffer sb = new StringBuffer();
-        if(ObjectUtils.isNotNull(this.parameters))
-        {
+        if (ObjectUtils.isNotNull(this.parameters)) {
             Set es = this.parameters.entrySet();
-            if(ObjectUtils.isNotNull(es))
-            {
+            if (ObjectUtils.isNotNull(es)) {
                 Iterator it = es.iterator();
                 while (it.hasNext()) {
                     Map.Entry entry = (Map.Entry) it.next();
@@ -140,12 +142,16 @@ public class ResponseHandler {
         }
     }
 
-    /**        */
+    /**
+     *
+     */
     public String getDebugInfo() {
         return debugInfo;
     }
 
-    /**    *	*/
+    /**
+     *
+     */
     protected void setDebugInfo(String debugInfo) {
         this.debugInfo = debugInfo;
     }

@@ -23,22 +23,34 @@ import java.util.Set;
 @ConfigurationProperties(prefix = "pay.wxpay")
 public class MyWXPayConfig implements WXPayConfig {
 
-    /** 公众账号ID */
+    /**
+     * 公众账号ID
+     */
     private String appID;
 
-    /** 商户号 */
+    /**
+     * 商户号
+     */
     private String mchID;
 
-    /** API 密钥 */
+    /**
+     * API 密钥
+     */
     private String key;
 
-    /** API 沙箱环境密钥 */
+    /**
+     * API 沙箱环境密钥
+     */
     private String sandboxKey;
 
-    /** API证书绝对路径 */
+    /**
+     * API证书绝对路径
+     */
     private String certPath;
 
-    /** 退款异步通知地址 */
+    /**
+     * 退款异步通知地址
+     */
     private String notifyUrl;
 
     private Boolean useSandbox;
@@ -99,10 +111,14 @@ public class MyWXPayConfig implements WXPayConfig {
         return log;
     }
 
-    /** HTTP(S) 连接超时时间，单位毫秒 */
+    /**
+     * HTTP(S) 连接超时时间，单位毫秒
+     */
     private int httpConnectTimeoutMs = 8000;
 
-    /** HTTP(S) 读数据超时时间，单位毫秒 */
+    /**
+     * HTTP(S) 读数据超时时间，单位毫秒
+     */
     private int httpReadTimeoutMs = 10000;
 
 //    private String subAppId;
@@ -145,7 +161,7 @@ public class MyWXPayConfig implements WXPayConfig {
     /**
      * 构建请求参数
      *
-     * @return Map<String, String>
+     * @return Map<String ,   String>
      */
 //    public Map<String, String> build() {
 //        Map<String, String> map = new HashMap<String, String>();
@@ -261,7 +277,7 @@ public class MyWXPayConfig implements WXPayConfig {
 //    }
 //
 //
-    public  String getSign(Map<String, String> data) throws Exception {
+    public String getSign(Map<String, String> data) throws Exception {
         Set<String> keySet = data.keySet();
         String[] keyArray = keySet.toArray(new String[keySet.size()]);
         Arrays.sort(keyArray);
@@ -371,9 +387,6 @@ public class MyWXPayConfig implements WXPayConfig {
 //        map.put("sign", PaymentKit.createSign(map, getPaternerKey()));
 //        return map;
 //    }
-
-
-
 
 
 //    public String getSubAppId() {
@@ -525,7 +538,6 @@ public class MyWXPayConfig implements WXPayConfig {
 //        this.subOpenId = subOpenId;
 //        return this;
 //    }
-
     public String getPaternerKey() {
         if (StrKit.isBlank(key))
             throw new IllegalArgumentException("paternerKey 未被赋值");
@@ -695,7 +707,7 @@ public class MyWXPayConfig implements WXPayConfig {
 //        return this;
 //    }
 
-//    public String getContractId() {
+    //    public String getContractId() {
 //        if (StrKit.isBlank(contractId))
 //            throw new IllegalArgumentException("contractId 未被赋值");
 //        return contractId;
@@ -718,7 +730,7 @@ public class MyWXPayConfig implements WXPayConfig {
 
     @Override
     public String getKey() {
-        if(useSandbox){
+        if (useSandbox) {
             return sandboxKey;
         }
         return this.key;
@@ -726,6 +738,7 @@ public class MyWXPayConfig implements WXPayConfig {
 
     /**
      * 获取商户证书内容
+     *
      * @return
      */
     @Override
@@ -734,8 +747,8 @@ public class MyWXPayConfig implements WXPayConfig {
         InputStream inputStream = null;
         try {
             inputStream = new FileInputStream(cerFile);
-        }catch (FileNotFoundException e){
-            log.error("cert file not found,path={},exception is :{}",certPath,e);
+        } catch (FileNotFoundException e) {
+            log.error("cert file not found,path={},exception is :{}", certPath, e);
         }
         return inputStream;
     }

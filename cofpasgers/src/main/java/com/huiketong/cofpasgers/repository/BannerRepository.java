@@ -26,25 +26,24 @@ public interface BannerRepository extends JpaRepository<Banner, Integer> {
     @Transactional
     void deleteById(Integer integer);
 
-    @Query(value = "select count(1) from banner t where t.company_id = ?1 and (CASE when  ?2!='' and ?2 is not null then t.`status`=?2 else 1=1  end) and (case when ?3!='' and ?3 is not null then t.`name` like CONCAT('%',?3,'%') else 1=1 end)  ",nativeQuery = true)
-    long count (Integer comId,String status ,String searchMerName);
+    @Query(value = "select count(1) from banner t where t.company_id = ?1 and (CASE when  ?2!='' and ?2 is not null then t.`status`=?2 else 1=1  end) and (case when ?3!='' and ?3 is not null then t.`name` like CONCAT('%',?3,'%') else 1=1 end)  ", nativeQuery = true)
+    long count(Integer comId, String status, String searchMerName);
 
 
-    @Query(value = "select * from banner t where t.company_id = ?1 and (CASE when  ?2!='' and ?2 is not null then t.`status`=?2 else 1=1 end) and (case when ?3!='' and ?3 is not null then t.`name` like CONCAT('%',?3,'%') else 1=1 end) order by create_date desc limit ?4,?5",nativeQuery = true)
-    List<Banner> findPagesByLimit(Integer comId,String status ,String searchMerName, int page , int limit);
+    @Query(value = "select * from banner t where t.company_id = ?1 and (CASE when  ?2!='' and ?2 is not null then t.`status`=?2 else 1=1 end) and (case when ?3!='' and ?3 is not null then t.`name` like CONCAT('%',?3,'%') else 1=1 end) order by create_date desc limit ?4,?5", nativeQuery = true)
+    List<Banner> findPagesByLimit(Integer comId, String status, String searchMerName, int page, int limit);
 
 
-
-    @Query(value = "update banner  set status=0  where banner_id=?1 ",nativeQuery = true)
+    @Query(value = "update banner  set status=0  where banner_id=?1 ", nativeQuery = true)
     @Modifying
     @Transactional
-    void updateLunBo( Integer id);
+    void updateLunBo(Integer id);
 
 
-    @Query(value = "update banner  set name=?1 ,descript=?2,trankurl=?3,imgurl=?4,sort=?5,type=?6 where banner_id=?7 ",nativeQuery = true)
+    @Query(value = "update banner  set name=?1 ,descript=?2,trankurl=?3,imgurl=?4,sort=?5,type=?6 where banner_id=?7 ", nativeQuery = true)
     @Modifying
     @Transactional
-    void updateLunBo(String name, String descript, String trankurl, String imgSrc, Integer sort,Integer type, Integer id);
+    void updateLunBo(String name, String descript, String trankurl, String imgSrc, Integer sort, Integer type, Integer id);
 
 
 }

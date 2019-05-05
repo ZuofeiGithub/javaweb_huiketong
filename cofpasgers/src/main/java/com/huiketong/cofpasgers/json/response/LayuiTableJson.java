@@ -8,7 +8,7 @@ import lombok.Data;
  * @Version 1.0
  */
 @Data
-public class LayuiTableJson{
+public class LayuiTableJson {
     String code;
     String msg;
     String count;

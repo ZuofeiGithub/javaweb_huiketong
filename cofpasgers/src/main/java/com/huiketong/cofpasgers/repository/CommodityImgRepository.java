@@ -11,22 +11,22 @@ import org.springframework.data.jpa.repository.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 
-public interface CommodityImgRepository extends JpaRepository<CommodityImg,Integer>, JpaSpecificationExecutor<CommodityImg> {
+public interface CommodityImgRepository extends JpaRepository<CommodityImg, Integer>, JpaSpecificationExecutor<CommodityImg> {
 
     @Override
     <S extends CommodityImg> S save(S s);
 
 
-    @Query(value = "select * from commodity_img t where t.commodityd = ?1  limit ?2,?3",nativeQuery = true)
-    List<CommodityImg> findPagesByLimit(Integer commodityd, int page , int limit);
+    @Query(value = "select * from commodity_img t where t.commodityd = ?1  limit ?2,?3", nativeQuery = true)
+    List<CommodityImg> findPagesByLimit(Integer commodityd, int page, int limit);
 
-    @Query(value = "select count(1) from commodity_img t where t.commodityd = ?1 ",nativeQuery = true)
-    long count (Integer commodityd);
+    @Query(value = "select count(1) from commodity_img t where t.commodityd = ?1 ", nativeQuery = true)
+    long count(Integer commodityd);
 
-    @Query(value = "delete  from  commodity_img  where id=?1 ",nativeQuery = true)
+    @Query(value = "delete  from  commodity_img  where id=?1 ", nativeQuery = true)
     @Modifying
     @Transactional
-    void delCommodityImg (Integer id );
+    void delCommodityImg(Integer id);
 
     CommodityImg findFirstByCommodityd(Integer id);
 

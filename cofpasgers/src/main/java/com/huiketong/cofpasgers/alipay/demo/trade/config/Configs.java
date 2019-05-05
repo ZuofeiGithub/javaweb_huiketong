@@ -30,8 +30,8 @@ public class Configs {
     private static int maxCancelRetry;  // 最大撤销次数
     private static long cancelDuration; // 撤销间隔（毫秒）
 
-    private static long heartbeatDelay ; // 交易保障线程第一次调度延迟（秒）
-    private static long heartbeatDuration ; // 交易保障线程调度间隔（秒）
+    private static long heartbeatDelay; // 交易保障线程第一次调度延迟（秒）
+    private static long heartbeatDuration; // 交易保障线程调度间隔（秒）
 
     private Configs() {
         // No Constructor
@@ -206,7 +206,7 @@ public class Configs {
     public static void setSignType(String signType) {
         Configs.signType = signType;
     }
-    
+
     public static void setMaxQueryRetry(int maxQueryRetry) {
         Configs.maxQueryRetry = maxQueryRetry;
     }

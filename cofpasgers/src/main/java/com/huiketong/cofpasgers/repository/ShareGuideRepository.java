@@ -13,7 +13,7 @@ import java.util.List;
  * @Date: 2019/1/8 11:27
  * @Version 1.0
  */
-public interface ShareGuideRepository extends JpaRepository<ShareFeeGuide,Integer> {
+public interface ShareGuideRepository extends JpaRepository<ShareFeeGuide, Integer> {
     @Override
     <S extends ShareFeeGuide> S save(S entity);
 
@@ -22,8 +22,8 @@ public interface ShareGuideRepository extends JpaRepository<ShareFeeGuide,Intege
 
     ShareFeeGuide findShareFeeGuideByCompanyId(Integer comId);
 
-    @Query(value = "update share_free_guide set guide_context = ?1  where company_id = ?2",nativeQuery = true)
+    @Query(value = "update share_free_guide set guide_context = ?1  where company_id = ?2", nativeQuery = true)
     @Modifying
     @Transactional
-    void updateShareGuide(String context,Integer company_id);
+    void updateShareGuide(String context, Integer company_id);
 }

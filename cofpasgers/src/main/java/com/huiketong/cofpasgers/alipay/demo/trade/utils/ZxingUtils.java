@@ -20,7 +20,7 @@ import java.util.Map;
  * 使用了google zxing作为二维码生成工具
  */
 public class ZxingUtils {
-	private static Log log = LogFactory.getLog(ZxingUtils.class);
+    private static Log log = LogFactory.getLog(ZxingUtils.class);
 
     private static final int BLACK = 0xFF000000;
     private static final int WHITE = 0xFFFFFFFF;
@@ -44,30 +44,32 @@ public class ZxingUtils {
         }
     }
 
-    /** 将内容contents生成长宽均为width的图片，图片路径由imgPath指定
+    /**
+     * 将内容contents生成长宽均为width的图片，图片路径由imgPath指定
      */
     public static File getQRCodeImge(String contents, int width, String imgPath) {
         return getQRCodeImge(contents, width, width, imgPath);
     }
 
-    /** 将内容contents生成长为width，宽为width的图片，图片路径由imgPath指定
+    /**
+     * 将内容contents生成长为width，宽为width的图片，图片路径由imgPath指定
      */
-	public static File getQRCodeImge(String contents, int width, int height, String imgPath) {
-		try {
+    public static File getQRCodeImge(String contents, int width, int height, String imgPath) {
+        try {
             Map<EncodeHintType, Object> hints = new Hashtable<EncodeHintType, Object>();
             hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.M);
             hints.put(EncodeHintType.CHARACTER_SET, "UTF8");
 
-			BitMatrix bitMatrix = new MultiFormatWriter().encode(contents, BarcodeFormat.QR_CODE, width, height, hints);
+            BitMatrix bitMatrix = new MultiFormatWriter().encode(contents, BarcodeFormat.QR_CODE, width, height, hints);
 
             File imageFile = new File(imgPath);
-			writeToFile(bitMatrix, "png", imageFile);
+            writeToFile(bitMatrix, "png", imageFile);
 
             return imageFile;
 
-		} catch (Exception e) {
-			log.error("create QR code error!", e);
+        } catch (Exception e) {
+            log.error("create QR code error!", e);
             return null;
-		}
-	}
+        }
+    }
 }

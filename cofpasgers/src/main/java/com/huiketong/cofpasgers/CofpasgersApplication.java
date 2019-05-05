@@ -25,7 +25,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //    }
 //}
 public class CofpasgersApplication {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         SpringApplication.run(CofpasgersApplication.class, args);
     }
 }

@@ -7,14 +7,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SmscodeRepository extends JpaRepository<Smscode,Integer> {
+public interface SmscodeRepository extends JpaRepository<Smscode, Integer> {
     Smscode save(Smscode s);
 
     Smscode findSmscodeByUserId(Integer id);
 
-    Smscode findSmscodeByTelphoneAndType(String telphone,String type);
+    Smscode findSmscodeByTelphoneAndType(String telphone, String type);
 
     @Modifying
-    @Query(value = "update huiketong.smscode set huiketong.smscode.code = ?1 where huiketong.smscode.telphone = ?2 and huiketong.smscode.type = ?3",nativeQuery = true)
-    void updateCodebyTelphone(String code,String telphone,String type);
+    @Query(value = "update huiketong.smscode set huiketong.smscode.code = ?1 where huiketong.smscode.telphone = ?2 and huiketong.smscode.type = ?3", nativeQuery = true)
+    void updateCodebyTelphone(String code, String telphone, String type);
 }

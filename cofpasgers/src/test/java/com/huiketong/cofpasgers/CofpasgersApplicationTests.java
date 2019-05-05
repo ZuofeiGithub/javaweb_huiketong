@@ -36,11 +36,11 @@ public class CofpasgersApplicationTests {
         //执行SQL，输出查到的数据
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         List<?> resultList = jdbcTemplate.queryForList("select * from default_enter");
-        System.out.println("===>>>>>>>>>>"+ JSON.toJSONString(resultList));
+        System.out.println("===>>>>>>>>>>" + JSON.toJSONString(resultList));
     }
 
     @Test
-    public void TestMyDataSource(){
+    public void TestMyDataSource() {
 //        JdbcTemplate jdbcTemplate = new JdbcTemplate(myDataSource);
 //        List<?> resultList = jdbcTemplate.queryForList("select * from app_banner");
 //        System.out.println("=====>>>>>>>"+JSON.toJSONString(resultList));

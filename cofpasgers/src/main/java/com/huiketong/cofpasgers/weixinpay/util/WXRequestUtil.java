@@ -140,61 +140,61 @@ public class WXRequestUtil {
     }*/
 
     //退款的请求方法
-   /**
-    *
-    public static String httpsRequest2(String requestMethod, String outputStr) throws Exception {
-    KeyStore keyStore = KeyStore.getInstance("PKCS12");
-    StringBuilder res = new StringBuilder("");
-    FileInputStream instream = new FileInputStream(new File("/home/apiclient_cert.p12"));
-    try {
-    keyStore.load(instream, "".toCharArray());
-    } finally {
-    instream.close();
-    }
-    // Trust own CA and all self-signed certs
-    SSLContext sslcontext = SSLContexts.custom().loadKeyMaterial(keyStore, "1313329201".toCharArray()).build();
-    SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext,
-    new String[]{"TLSv1"},
-    null,
-    SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER
-    );
-    CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
-    try {
-    HttpPost httpost = new HttpPost("https://api.mch.weixin.qq.com/secapi/pay/refund");
-    httpost.addHeader("Connection", "keep-alive");
-    httpost.addHeader("Accept", "*\/*");
-            httpost.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-            httpost.addHeader("Host", "api.mch.weixin.qq.com");
-            httpost.addHeader("X-Requested-With", "XMLHttpRequest");
-            httpost.addHeader("Cache-Control", "max-age=0");
-            httpost.addHeader("User-Agent", "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0) ");
-    StringEntity entity2 = new StringEntity(outputStr, Consts.UTF_8);
-            httpost.setEntity(entity2);
-            System.out.println("executing request" + httpost.getRequestLine());
-    CloseableHttpResponse response = httpclient.execute(httpost);
-            try {
-        HttpEntity entity = response.getEntity();
-        System.out.println("----------------------------------------");
-        System.out.println(response.getStatusLine());
-        if (entity != null) {
-            System.out.println("Response content length: " + entity.getContentLength());
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(entity.getContent()));
-            String text = "";
-            res.append(text);
-            while ((text = bufferedReader.readLine()) != null) {
-                res.append(text);
-                System.out.println(text);
-            }
-        }
-        EntityUtils.consume(entity);
-    } finally {
-        response.close();
-    }
-} finally {
-        httpclient.close();
-        }
-        return res.toString();
-        }
+
+    /**
+     * public static String httpsRequest2(String requestMethod, String outputStr) throws Exception {
+     * KeyStore keyStore = KeyStore.getInstance("PKCS12");
+     * StringBuilder res = new StringBuilder("");
+     * FileInputStream instream = new FileInputStream(new File("/home/apiclient_cert.p12"));
+     * try {
+     * keyStore.load(instream, "".toCharArray());
+     * } finally {
+     * instream.close();
+     * }
+     * // Trust own CA and all self-signed certs
+     * SSLContext sslcontext = SSLContexts.custom().loadKeyMaterial(keyStore, "1313329201".toCharArray()).build();
+     * SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext,
+     * new String[]{"TLSv1"},
+     * null,
+     * SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER
+     * );
+     * CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
+     * try {
+     * HttpPost httpost = new HttpPost("https://api.mch.weixin.qq.com/secapi/pay/refund");
+     * httpost.addHeader("Connection", "keep-alive");
+     * httpost.addHeader("Accept", "*\/*");
+     * httpost.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+     * httpost.addHeader("Host", "api.mch.weixin.qq.com");
+     * httpost.addHeader("X-Requested-With", "XMLHttpRequest");
+     * httpost.addHeader("Cache-Control", "max-age=0");
+     * httpost.addHeader("User-Agent", "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0) ");
+     * StringEntity entity2 = new StringEntity(outputStr, Consts.UTF_8);
+     * httpost.setEntity(entity2);
+     * System.out.println("executing request" + httpost.getRequestLine());
+     * CloseableHttpResponse response = httpclient.execute(httpost);
+     * try {
+     * HttpEntity entity = response.getEntity();
+     * System.out.println("----------------------------------------");
+     * System.out.println(response.getStatusLine());
+     * if (entity != null) {
+     * System.out.println("Response content length: " + entity.getContentLength());
+     * BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(entity.getContent()));
+     * String text = "";
+     * res.append(text);
+     * while ((text = bufferedReader.readLine()) != null) {
+     * res.append(text);
+     * System.out.println(text);
+     * }
+     * }
+     * EntityUtils.consume(entity);
+     * } finally {
+     * response.close();
+     * }
+     * } finally {
+     * httpclient.close();
+     * }
+     * return res.toString();
+     * }
      */
 
     //xml解析

@@ -1,6 +1,7 @@
 package com.huiketong.cofpasgers.constant;
 
 import com.huiketong.cofpasgers.entity.Enterprise;
+
 import java.util.List;
 
 public class JSONData {

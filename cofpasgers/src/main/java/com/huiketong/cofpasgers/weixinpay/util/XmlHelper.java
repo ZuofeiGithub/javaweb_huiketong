@@ -74,6 +74,7 @@ public class XmlHelper {
 
     /**
      * 获取String
+     *
      * @param expression 路径
      * @return String
      */
@@ -83,6 +84,7 @@ public class XmlHelper {
 
     /**
      * 获取Boolean
+     *
      * @param expression 路径
      * @return String
      */
@@ -92,6 +94,7 @@ public class XmlHelper {
 
     /**
      * 获取Number
+     *
      * @param expression 路径
      * @return {Number}
      */
@@ -101,6 +104,7 @@ public class XmlHelper {
 
     /**
      * 获取某个节点
+     *
      * @param expression 路径
      * @return {Node}
      */
@@ -110,6 +114,7 @@ public class XmlHelper {
 
     /**
      * 获取子节点
+     *
      * @param expression 路径
      * @return NodeList
      */
@@ -120,7 +125,8 @@ public class XmlHelper {
 
     /**
      * 获取String
-     * @param node 节点
+     *
+     * @param node       节点
      * @param expression 相对于node的路径
      * @return String
      */
@@ -130,7 +136,8 @@ public class XmlHelper {
 
     /**
      * 获取
-     * @param node 节点
+     *
+     * @param node       节点
      * @param expression 相对于node的路径
      * @return String
      */
@@ -140,7 +147,8 @@ public class XmlHelper {
 
     /**
      * 获取
-     * @param node 节点
+     *
+     * @param node       节点
      * @param expression 相对于node的路径
      * @return {Number}
      */
@@ -150,7 +158,8 @@ public class XmlHelper {
 
     /**
      * 获取某个节点
-     * @param node 节点
+     *
+     * @param node       节点
      * @param expression 路径
      * @return {Node}
      */
@@ -160,7 +169,8 @@ public class XmlHelper {
 
     /**
      * 获取子节点
-     * @param node 节点
+     *
+     * @param node       节点
      * @param expression 相对于node的路径
      * @return NodeList
      */
@@ -170,6 +180,7 @@ public class XmlHelper {
 
     /**
      * 针对没有嵌套节点的简单处理
+     *
      * @return map集合
      */
     public Map<String, String> toMap() {
@@ -187,12 +198,12 @@ public class XmlHelper {
         return params;
     }
 
-    private static DocumentBuilderFactory getDocumentBuilderFactory(){
+    private static DocumentBuilderFactory getDocumentBuilderFactory() {
         return XmlHelperHolder.documentBuilderFactory;
     }
 
     private static XPathFactory getXPathFactory() {
-        return  XmlHelperHolder.xPathFactory;
+        return XmlHelperHolder.xPathFactory;
     }
 
     /**

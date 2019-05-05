@@ -7,11 +7,11 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 
 @Repository
-public interface CompanyUserRepository extends JpaRepository<CompanyBindUser,Integer> {
+public interface CompanyUserRepository extends JpaRepository<CompanyBindUser, Integer> {
     @Override
     CompanyBindUser save(CompanyBindUser s);
 
-    CompanyBindUser findCompanyBindUserByUserTelAndCompanyId(String user_id,Integer companyid);
+    CompanyBindUser findCompanyBindUserByUserTelAndCompanyId(String user_id, Integer companyid);
 
     CompanyBindUser findCompanyBindUserByCompanyId(Integer id);
 

@@ -19,31 +19,41 @@ import java.util.SortedMap;
 
 @Slf4j
 public class WXPayClient extends WXPay {
-    /** 密钥算法 */
+    /**
+     * 密钥算法
+     */
     private static final String ALGORITHM = "AES";
-    /** 加解密算法/工作模式/填充方式 */
+    /**
+     * 加解密算法/工作模式/填充方式
+     */
     private static final String ALGORITHM_MODE_PADDING = "AES/ECB/PKCS5Padding";
-    /** 用户支付中，需要输入密码 */
+    /**
+     * 用户支付中，需要输入密码
+     */
     private static final String ERR_CODE_USERPAYING = "USERPAYING";
     private static final String ERR_CODE_AUTHCODEEXPIRE = "AUTHCODEEXPIRE";
-    /** 交易状态: 未支付 */
+    /**
+     * 交易状态: 未支付
+     */
     private static final String TRADE_STATE_NOTPAY = "NOTPAY";
 
-    /** 用户输入密码，尝试30秒内去查询支付结果 */
+    /**
+     * 用户输入密码，尝试30秒内去查询支付结果
+     */
     private static Integer remainingTimeMs = 10000;
 
     private WXPayConfig config;
+
     public WXPayClient(WXPayConfig config, WXPayConstants.SignType signType, boolean useSandbox) {
         super(config, signType, useSandbox);
         this.config = config;
     }
 
     /**
-     *
      * 刷卡支付
-     *
+     * <p>
      * 对WXPay#microPay(Map)增加了当支付结果为USERPAYING时去轮询查询支付结果的逻辑处理
-     *
+     * <p>
      * 注意：该方法没有处理return_code=FAIL的情况，暂时不考虑网络问题，这种情况直接返回错误
      *
      * @param reqData
@@ -105,6 +115,7 @@ public class WXPayClient extends WXPay {
 
     /**
      * 从request的inputStream中获取参数
+     *
      * @param request
      * @return
      * @throws Exception
@@ -114,11 +125,11 @@ public class WXPayClient extends WXPay {
         StringBuffer sb = new StringBuffer();
         int len = -1;
         byte[] buffer = new byte[1024];
-        while ((len = instream.read(buffer)) != -1){
-            sb.append(new String(buffer,0,len));
+        while ((len = instream.read(buffer)) != -1) {
+            sb.append(new String(buffer, 0, len));
         }
         instream.close();
-        SortedMap<String,String> map = WXRequestUtil.doXMLParseWithSorted(sb.toString());
+        SortedMap<String, String> map = WXRequestUtil.doXMLParseWithSorted(sb.toString());
         return map;
     }
 
@@ -126,12 +137,13 @@ public class WXPayClient extends WXPay {
      * 解密退款通知
      *
      * <a href="https://pay.weixin.qq.com/wiki/doc/api/micropay.php?chapter=9_16&index=11>退款结果通知文档</a>
+     *
      * @return
      * @throws Exception
      */
     public Map<String, String> decodeRefundNotify(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // 从request的流中获取参数
-        Map<String, String> notifyMap = this.getNotifyParameter(request,response);
+        Map<String, String> notifyMap = this.getNotifyParameter(request, response);
         log.info(notifyMap.toString());
 
         String reqInfo = notifyMap.get("req_info");
@@ -146,7 +158,7 @@ public class WXPayClient extends WXPay {
         //（3）用key*对加密串B做AES-256-ECB解密（PKCS7Padding）
         // java.security.InvalidKeyException: Illegal key size or default parameters
         // https://www.cnblogs.com/yaks/p/5608358.html
-        String responseXml = new String(cipher.doFinal(bytes),"UTF-8");
+        String responseXml = new String(cipher.doFinal(bytes), "UTF-8");
         Map<String, String> responseMap = WXPayUtil.xmlToMap(responseXml);
         return responseMap;
     }
@@ -154,6 +166,7 @@ public class WXPayClient extends WXPay {
     /**
      * 获取沙箱环境验签秘钥API
      * <a href="https://pay.weixin.qq.com/wiki/doc/api/micropay.php?chapter=23_1">获取验签秘钥API文档</a>
+     *
      * @return
      * @throws Exception
      */

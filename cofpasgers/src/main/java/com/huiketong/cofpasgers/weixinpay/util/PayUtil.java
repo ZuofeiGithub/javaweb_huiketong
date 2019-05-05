@@ -26,8 +26,8 @@ public class PayUtil {
         int width = 256;
         BitMatrix bitMatrix = (new MultiFormatWriter()).encode(codeUrl, BarcodeFormat.QR_CODE, width, width, hints);
         BufferedImage image = new BufferedImage(width, width, 1);
-        for(int x = 0; x < width; ++x) {
-            for(int y = 0; y < width; ++y) {
+        for (int x = 0; x < width; ++x) {
+            for (int y = 0; y < width; ++y) {
                 image.setRGB(x, y, bitMatrix.get(x, y) ? -16777216 : -1);
             }
         }

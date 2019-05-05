@@ -27,22 +27,23 @@ import java.util.List;
 public class CustomerServiceImpl implements IPageQueryService<Customer> {
     @Autowired
     CustomerRepository customerRepository;
+
     @Override
     public Page<Customer> findPageNoCriteria(Integer page, Integer size) {
-        Pageable pageable = PageRequest.of(page,size, Sort.Direction.ASC,"id");
+        Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, "id");
         return customerRepository.findAll(pageable);
     }
 
     @Override
     public Page<Customer> findPageCriteria(Integer page, Integer size, Object obj) {
         System.out.println(obj.toString());
-        Pageable pageable = PageRequest.of(page,size,Sort.Direction.ASC);
+        Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC);
         Page<Customer> ustomerPage = customerRepository.findAll((Specification<Customer>) (root, criteriaQuery, criteriaBuilder) -> {
             List<Predicate> list = new ArrayList<>();
-            list.add(criteriaBuilder.equal(root.get("verify_status").as(String.class),obj));
+            list.add(criteriaBuilder.equal(root.get("verify_status").as(String.class), obj));
             Predicate[] p = new Predicate[list.size()];
             return criteriaBuilder.and(list.toArray(p));
-        },pageable);
+        }, pageable);
         return ustomerPage;
     }
 }

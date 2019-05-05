@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 public class AgentInfoData {
     List<BannerData> banner;
-//    String my_report_client;
+    //    String my_report_client;
 //    String line_report_client;
 //    String my_invite_broker;
 //    String line_invite_broker;

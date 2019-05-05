@@ -26,7 +26,7 @@ abstract class AbsAlipayService {
     }
 
     // 调用AlipayClient的execute方法，进行远程调用
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     protected AlipayResponse getResponse(AlipayClient client, AlipayRequest request) {
         try {
             AlipayResponse response = client.execute(request);

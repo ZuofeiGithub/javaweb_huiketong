@@ -5,6 +5,7 @@ package com.huiketong.cofpasgers.util;
  * @Date: 2018/12/29 20:11
  * @Version 1.0
  */
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.ParseException;
@@ -28,17 +29,18 @@ public class DateUtils {
 
     /**
      * 日期相加减天数
-     * @param date 如果为Null，则为当前时间
-     * @param days 加减天数
+     *
+     * @param date        如果为Null，则为当前时间
+     * @param days        加减天数
      * @param includeTime 是否包括时分秒,true表示包含
      * @return
      * @throws ParseException
      */
-    public static Date dateAdd(Date date, int days, boolean includeTime) throws ParseException{
-        if(date == null){
+    public static Date dateAdd(Date date, int days, boolean includeTime) throws ParseException {
+        if (date == null) {
             date = new Date();
         }
-        if(!includeTime){
+        if (!includeTime) {
             SimpleDateFormat sdf = new SimpleDateFormat(DateUtils.DATE_PATTERN);
             date = sdf.parse(sdf.format(date));
         }
@@ -50,13 +52,14 @@ public class DateUtils {
 
     /**
      * 时间格式化成字符串
-     * @param date Date
+     *
+     * @param date    Date
      * @param pattern StrUtils.DATE_TIME_PATTERN || StrUtils.DATE_PATTERN， 如果为空，则为yyyy-MM-dd
      * @return
      * @throws ParseException
      */
-    public static String dateFormat(Date date, String pattern) throws ParseException{
-        if(StringUtils.isBlank(pattern)){
+    public static String dateFormat(Date date, String pattern) throws ParseException {
+        if (StringUtils.isBlank(pattern)) {
             pattern = DateUtils.DATE_PATTERN;
         }
         SimpleDateFormat sdf = new SimpleDateFormat(pattern);
@@ -65,13 +68,14 @@ public class DateUtils {
 
     /**
      * 字符串解析成时间对象
+     *
      * @param dateTimeString String
-     * @param pattern StrUtils.DATE_TIME_PATTERN || StrUtils.DATE_PATTERN，如果为空，则为yyyy-MM-dd
+     * @param pattern        StrUtils.DATE_TIME_PATTERN || StrUtils.DATE_PATTERN，如果为空，则为yyyy-MM-dd
      * @return
      * @throws ParseException
      */
-    public static Date dateParse(String dateTimeString, String pattern) throws ParseException{
-        if(StringUtils.isBlank(pattern)){
+    public static Date dateParse(String dateTimeString, String pattern) throws ParseException {
+        if (StringUtils.isBlank(pattern)) {
             pattern = DateUtils.DATE_PATTERN;
         }
         SimpleDateFormat sdf = new SimpleDateFormat(pattern);
@@ -80,11 +84,12 @@ public class DateUtils {
 
     /**
      * 将日期时间格式成只有日期的字符串（可以直接使用dateFormat，Pattern为Null进行格式化）
+     *
      * @param dateTime Date
      * @return
      * @throws ParseException
      */
-    public static String dateTimeToDateString(Date dateTime) throws ParseException{
+    public static String dateTimeToDateString(Date dateTime) throws ParseException {
         String dateTimeString = DateUtils.dateFormat(dateTime, DateUtils.DATE_TIME_PATTERN);
         return dateTimeString.substring(0, 10);
     }
@@ -92,26 +97,28 @@ public class DateUtils {
     /**
      * 当时、分、秒为00:00:00时，将日期时间格式成只有日期的字符串，
      * 当时、分、秒不为00:00:00时，直接返回
+     *
      * @param dateTime Date
      * @return
      * @throws ParseException
      */
-    public static String dateTimeToDateStringIfTimeEndZero(Date dateTime) throws ParseException{
+    public static String dateTimeToDateStringIfTimeEndZero(Date dateTime) throws ParseException {
         String dateTimeString = DateUtils.dateFormat(dateTime, DateUtils.DATE_TIME_PATTERN);
-        if(dateTimeString.endsWith("00:00:00")){
+        if (dateTimeString.endsWith("00:00:00")) {
             return dateTimeString.substring(0, 10);
-        }else{
+        } else {
             return dateTimeString;
         }
     }
 
     /**
      * 将日期时间格式成日期对象，和dateParse互用
+     *
      * @param dateTime Date
      * @return Date
      * @throws ParseException
      */
-    public static Date dateTimeToDate(Date dateTime) throws ParseException{
+    public static Date dateTimeToDate(Date dateTime) throws ParseException {
         Calendar cal = Calendar.getInstance();
         cal.setTime(dateTime);
         cal.set(Calendar.HOUR_OF_DAY, 0);
@@ -123,8 +130,9 @@ public class DateUtils {
 
     /**
      * 时间加减小时
+     *
      * @param startDate 要处理的时间，Null则为当前时间
-     * @param hours 加减的小时
+     * @param hours     加减的小时
      * @return Date
      */
     public static Date dateAddHours(Date startDate, int hours) {
@@ -139,8 +147,9 @@ public class DateUtils {
 
     /**
      * 时间加减分钟
+     *
      * @param startDate 要处理的时间，Null则为当前时间
-     * @param minutes 加减的分钟
+     * @param minutes   加减的分钟
      * @return
      */
     public static Date dateAddMinutes(Date startDate, int minutes) {
@@ -155,8 +164,9 @@ public class DateUtils {
 
     /**
      * 时间加减秒数
+     *
      * @param startDate 要处理的时间，Null则为当前时间
-     * @param seconds 加减的秒数
+     * @param seconds   加减的秒数
      * @return
      */
     public static Date dateAddSeconds(Date startDate, int seconds) {
@@ -171,8 +181,9 @@ public class DateUtils {
 
     /**
      * 时间加减天数
+     *
      * @param startDate 要处理的时间，Null则为当前时间
-     * @param days 加减的天数
+     * @param days      加减的天数
      * @return Date
      */
     public static Date dateAddDays(Date startDate, int days) {
@@ -187,8 +198,9 @@ public class DateUtils {
 
     /**
      * 时间加减月数
+     *
      * @param startDate 要处理的时间，Null则为当前时间
-     * @param months 加减的月数
+     * @param months    加减的月数
      * @return Date
      */
     public static Date dateAddMonths(Date startDate, int months) {
@@ -203,8 +215,9 @@ public class DateUtils {
 
     /**
      * 时间加减年数
+     *
      * @param startDate 要处理的时间，Null则为当前时间
-     * @param years 加减的年数
+     * @param years     加减的年数
      * @return Date
      */
     public static Date dateAddYears(Date startDate, int years) {
@@ -219,7 +232,8 @@ public class DateUtils {
 
     /**
      * 时间比较（如果myDate>compareDate返回1，<返回-1，相等返回0）
-     * @param myDate 时间
+     *
+     * @param myDate      时间
      * @param compareDate 要比较的时间
      * @return int
      */
@@ -233,20 +247,21 @@ public class DateUtils {
 
     /**
      * 获取两个时间中最小的一个时间
+     *
      * @param date
      * @param compareDate
      * @return
      */
     public static Date dateMin(Date date, Date compareDate) {
-        if(date == null){
+        if (date == null) {
             return compareDate;
         }
-        if(compareDate == null){
+        if (compareDate == null) {
             return date;
         }
-        if(1 == dateCompare(date, compareDate)){
+        if (1 == dateCompare(date, compareDate)) {
             return compareDate;
-        }else if(-1 == dateCompare(date, compareDate)){
+        } else if (-1 == dateCompare(date, compareDate)) {
             return date;
         }
         return date;
@@ -254,20 +269,21 @@ public class DateUtils {
 
     /**
      * 获取两个时间中最大的一个时间
+     *
      * @param date
      * @param compareDate
      * @return
      */
     public static Date dateMax(Date date, Date compareDate) {
-        if(date == null){
+        if (date == null) {
             return compareDate;
         }
-        if(compareDate == null){
+        if (compareDate == null) {
             return date;
         }
-        if(1 == dateCompare(date, compareDate)){
+        if (1 == dateCompare(date, compareDate)) {
             return date;
-        }else if(-1 == dateCompare(date, compareDate)){
+        } else if (-1 == dateCompare(date, compareDate)) {
             return compareDate;
         }
         return date;
@@ -275,6 +291,7 @@ public class DateUtils {
 
     /**
      * 获取两个日期（不含时分秒）相差的天数，不包含今天
+     *
      * @param startDate
      * @param endDate
      * @return
@@ -283,11 +300,12 @@ public class DateUtils {
     public static int dateBetween(Date startDate, Date endDate) throws ParseException {
         Date dateStart = dateParse(dateFormat(startDate, DATE_PATTERN), DATE_PATTERN);
         Date dateEnd = dateParse(dateFormat(endDate, DATE_PATTERN), DATE_PATTERN);
-        return (int) ((dateEnd.getTime() - dateStart.getTime())/1000/60/60/24);
+        return (int) ((dateEnd.getTime() - dateStart.getTime()) / 1000 / 60 / 60 / 24);
     }
 
     /**
      * 获取两个日期（不含时分秒）相差的天数，包含今天
+     *
      * @param startDate
      * @param endDate
      * @return
@@ -299,6 +317,7 @@ public class DateUtils {
 
     /**
      * 获取日期时间的年份，如2017-02-13，返回2017
+     *
      * @param date
      * @return
      */
@@ -310,6 +329,7 @@ public class DateUtils {
 
     /**
      * 获取日期时间的月份，如2017年2月13日，返回2
+     *
      * @param date
      * @return
      */
@@ -321,6 +341,7 @@ public class DateUtils {
 
     /**
      * 获取日期时间的第几天（即返回日期的dd），如2017-02-13，返回13
+     *
      * @param date
      * @return
      */
@@ -332,6 +353,7 @@ public class DateUtils {
 
     /**
      * 获取日期时间当月的总天数，如2017-02-13，返回28
+     *
      * @param date
      * @return
      */
@@ -343,6 +365,7 @@ public class DateUtils {
 
     /**
      * 获取日期时间当年的总天数，如2017-02-13，返回2017年的总天数
+     *
      * @param date
      * @return
      */
@@ -357,6 +380,7 @@ public class DateUtils {
      * <li>2017-02-13，返回2017-02-28</li>
      * <li>2016-02-13，返回2016-02-29</li>
      * <li>2016-01-11，返回2016-01-31</li>
+     *
      * @param date Date
      * @return
      * @throws Exception
@@ -370,6 +394,7 @@ public class DateUtils {
 
     /**
      * 根据时间获取当月最小的日期，也就是返回当月的1号日期对象
+     *
      * @param date Date
      * @return
      * @throws Exception

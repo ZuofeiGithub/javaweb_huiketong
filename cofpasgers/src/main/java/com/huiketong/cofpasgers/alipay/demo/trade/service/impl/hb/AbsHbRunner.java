@@ -42,13 +42,13 @@ public abstract class AbsHbRunner implements Runnable {
         MonitorHeartbeatSynResponse response = monitorService.heartbeatSyn(builder);
 
         StringBuilder sb = new StringBuilder(response.getCode())
-                                .append(":")
-                                .append(response.getMsg());
+                .append(":")
+                .append(response.getMsg());
         if (StringUtils.isNotEmpty(response.getSubCode())) {
             sb.append(", ")
-            .append(response.getSubCode())
-            .append(":")
-            .append(response.getSubMsg());
+                    .append(response.getSubCode())
+                    .append(":")
+                    .append(response.getSubMsg());
         }
         log.info(sb.toString());
     }

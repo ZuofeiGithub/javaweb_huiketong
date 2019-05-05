@@ -8,9 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+
 @Repository
-public interface BannerContextRepository extends JpaRepository<BannerContext,Integer> {
-    @Query(value = "delete from banner_context where banner_id = ?1",nativeQuery = true)
+public interface BannerContextRepository extends JpaRepository<BannerContext, Integer> {
+    @Query(value = "delete from banner_context where banner_id = ?1", nativeQuery = true)
     @Modifying
     @Transactional
     void deleteByBannerId(Integer bannerid);

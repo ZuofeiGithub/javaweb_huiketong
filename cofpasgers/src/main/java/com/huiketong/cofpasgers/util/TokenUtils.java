@@ -81,6 +81,6 @@ public class TokenUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(TokenUtils.createJwtToken("1").substring(0,32));
+        System.out.println(TokenUtils.createJwtToken("1").substring(0, 32));
     }
 }

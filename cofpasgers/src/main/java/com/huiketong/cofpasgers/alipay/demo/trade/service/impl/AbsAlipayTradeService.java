@@ -23,6 +23,7 @@ import com.huiketong.cofpasgers.alipay.demo.trade.utils.Utils;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
 /**
  * Created by liuyangkly on 15/10/28.
  */
@@ -212,7 +213,7 @@ abstract class AbsAlipayTradeService extends AbsAlipayService implements AlipayT
                     if (cancelSuccess(response) ||
                             !needRetry(response)) {
                         // 如果撤销成功或者应答告知不需要重试撤销，则返回撤销结果（无论撤销是成功失败，失败人工处理）
-                        return ;
+                        return;
                     }
                 }
             }

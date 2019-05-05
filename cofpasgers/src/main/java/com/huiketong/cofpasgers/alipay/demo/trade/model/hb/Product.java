@@ -6,5 +6,5 @@ package com.huiketong.cofpasgers.alipay.demo.trade.model.hb;
 public enum Product {
     FP // 当面付产品
 
-    ,MP  // 医疗产品
+    , MP  // 医疗产品
 }

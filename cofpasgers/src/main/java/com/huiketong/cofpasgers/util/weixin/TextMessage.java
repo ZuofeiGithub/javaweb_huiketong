@@ -3,6 +3,7 @@ package com.huiketong.cofpasgers.util.weixin;
 public class TextMessage extends BaseMessage {
     private String Content;
     private String MsgId;
+
     public String getContent() {
         return Content;
     }

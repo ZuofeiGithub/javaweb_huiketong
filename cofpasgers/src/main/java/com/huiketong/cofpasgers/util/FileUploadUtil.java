@@ -16,21 +16,21 @@ import java.util.UUID;
 /**
  * 文件上传工具类
  */
-public  class FileUploadUtil {
+public class FileUploadUtil {
 
-    private  final  static Logger log= LoggerFactory.getLogger(FileUploadUtil.class);
+    private final static Logger log = LoggerFactory.getLogger(FileUploadUtil.class);
 
 
-    public  static  String upload(HttpServletRequest request, MultipartFile multipartFile) throws Exception {
-    /*    long time = System.currentTimeMillis();*/
+    public static String upload(HttpServletRequest request, MultipartFile multipartFile) throws Exception {
+        /*    long time = System.currentTimeMillis();*/
         //项目服务器地址路径
         String projectServerPath = Constant.IMAGE_URL;
-        BaseJsonResponse baseJsonResponse=new BaseJsonResponse();
-        String saveDirectory=FileUtil.getUploadDir();
-        BaseJsonResponse baseJsonResponse1=FileUtil.upLoad(multipartFile,baseJsonResponse,saveDirectory);
-        UpLoadFileData upLoadFileData= (UpLoadFileData) baseJsonResponse1.getData();
-        String  newFileName= upLoadFileData.getFilename();
-        log.info(newFileName+"----newFileName");
+        BaseJsonResponse baseJsonResponse = new BaseJsonResponse();
+        String saveDirectory = FileUtil.getUploadDir();
+        BaseJsonResponse baseJsonResponse1 = FileUtil.upLoad(multipartFile, baseJsonResponse, saveDirectory);
+        UpLoadFileData upLoadFileData = (UpLoadFileData) baseJsonResponse1.getData();
+        String newFileName = upLoadFileData.getFilename();
+        log.info(newFileName + "----newFileName");
         return projectServerPath + newFileName;
     }
 }

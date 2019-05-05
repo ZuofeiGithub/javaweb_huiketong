@@ -14,7 +14,7 @@ import java.util.List;
  * 银行表
  */
 @Repository
-public interface BankRepository  extends JpaRepository<Bank,Integer> {
+public interface BankRepository extends JpaRepository<Bank, Integer> {
     @Override
     <S extends Bank> S save(S s);
 

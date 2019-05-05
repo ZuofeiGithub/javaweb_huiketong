@@ -4,17 +4,17 @@ package com.huiketong.cofpasgers.alipay.demo.trade.model.hb;
  * Created by liuyangkly on 15/8/27.
  */
 public enum Type {
-     CR       // 收银机
+    CR       // 收银机
 
-    ,STORE    // 门店
+    , STORE    // 门店
 
-    ,VM       // 售卖机
+    , VM       // 售卖机
 
-    ,MD       // 医疗设备
+    , MD       // 医疗设备
 
-    ,SOFT_POS // 软POS
+    , SOFT_POS // 软POS
 
-    ,POS      // POS终端
+    , POS      // POS终端
 
-    ,ALI_POS  // 支付宝POS
+    , ALI_POS  // 支付宝POS
 }

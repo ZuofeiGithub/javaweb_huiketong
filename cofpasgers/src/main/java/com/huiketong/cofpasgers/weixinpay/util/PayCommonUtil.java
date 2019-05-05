@@ -10,7 +10,9 @@ import java.net.ConnectException;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+
 import net.sf.json.JSONObject;
+
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -22,17 +24,18 @@ public class PayCommonUtil {
 
     /**
      * 是否签名正确,规则是:按参数名称a-z排序,遇到空值的参数不参加签名。
+     *
      * @return boolean
      */
     public static boolean isTenpaySign(String characterEncoding, SortedMap<Object, Object> packageParams, String API_KEY) {
         StringBuffer sb = new StringBuffer();
         Set es = packageParams.entrySet();
         Iterator it = es.iterator();
-        while(it.hasNext()) {
-            Map.Entry entry = (Map.Entry)it.next();
-            String k = (String)entry.getKey();
-            String v = (String)entry.getValue();
-            if(!"sign".equals(k) && null != v && !"".equals(v)) {
+        while (it.hasNext()) {
+            Map.Entry entry = (Map.Entry) it.next();
+            String k = (String) entry.getKey();
+            String v = (String) entry.getValue();
+            if (!"sign".equals(k) && null != v && !"".equals(v)) {
                 sb.append(k + "=" + v + "&");
             }
         }
@@ -41,21 +44,19 @@ public class PayCommonUtil {
 
         //算出摘要
         String mysign = MD5Util.MD5Encode(sb.toString(), characterEncoding).toLowerCase();
-        String tenpaySign = ((String)packageParams.get("sign")).toLowerCase();
+        String tenpaySign = ((String) packageParams.get("sign")).toLowerCase();
 
         //System.out.println(tenpaySign + "    " + mysign);
         return tenpaySign.equals(mysign);
     }
 
     /**
+     * @param characterEncoding 编码格式
+     * @param
+     * @return
      * @author
      * @date 2016-4-22
      * @Description：sign签名
-     * @param characterEncoding
-     *            编码格式
-     * @param
-     *
-     * @return
      */
     public static String createSign(String characterEncoding, SortedMap<Object, Object> packageParams, String API_KEY) {
         StringBuffer sb = new StringBuffer();
@@ -82,12 +83,11 @@ public class PayCommonUtil {
     }
 
     /**
+     * @param parameters 请求参数
+     * @return
      * @author
      * @date 2016-4-22
      * @Description：将请求参数转换为xml格式的string
-     * @param parameters
-     *            请求参数
-     * @return
      */
     public static String getRequestXml(SortedMap<Object, Object> parameters) {
         StringBuffer sb = new StringBuffer();
@@ -118,8 +118,7 @@ public class PayCommonUtil {
     /**
      * 取出一个指定长度大小的随机正整数.
      *
-     * @param length
-     *            int 设定所取出随机数的长度。length小于11
+     * @param length int 设定所取出随机数的长度。length小于11
      * @return int 返回生成的随机数。
      */
     public static int buildRandom(int length) {

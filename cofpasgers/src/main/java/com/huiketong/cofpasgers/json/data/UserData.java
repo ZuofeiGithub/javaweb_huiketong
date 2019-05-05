@@ -3,7 +3,7 @@ package com.huiketong.cofpasgers.json.data;
 import lombok.Data;
 
 @Data
-public class UserData{
+public class UserData {
     String user_id;
     String nickname;
     String company;

@@ -5,7 +5,7 @@ package com.huiketong.cofpasgers.constant;
  * @Date: 2019/1/17 16:45
  * @Version 1.0
  */
-public enum  PointType {
+public enum PointType {
     NONE,
     //登陆
     LOGIN,

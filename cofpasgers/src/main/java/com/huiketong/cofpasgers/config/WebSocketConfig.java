@@ -7,6 +7,7 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 /**
  * 注入ServerEndpointExporter之后
  * 这个bean会自动注册使用@ServerEndpoit注解声明的websocket
+ *
  * @Author: ￣左飞￣
  * @Date: 2018/12/23 14:12
  * @Version 1.0
@@ -14,7 +15,7 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 //@Configuration
 public class WebSocketConfig {
     @Bean
-    public ServerEndpointExporter serverEndpointExporter(){
+    public ServerEndpointExporter serverEndpointExporter() {
         return new ServerEndpointExporter();
     }
 }

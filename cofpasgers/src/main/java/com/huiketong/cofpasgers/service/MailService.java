@@ -22,17 +22,19 @@ public class MailService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private JavaMailSender mailSender;
-    public void sayHello(){
+
+    public void sayHello() {
         System.out.println("HelloWorld");
     }
 
     /**
      * 发送简单文本邮件
+     *
      * @param touser
      * @param subject
      * @param content
      */
-    public void sendSimpleMail(String touser,String subject,String content){
+    public void sendSimpleMail(String touser, String subject, String content) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(touser);
         message.setSubject(subject);
@@ -43,66 +45,69 @@ public class MailService {
 
     /**
      * 发送html形式的邮件
+     *
      * @param touser
      * @param subject
      * @param content
      * @throws MessagingException
      */
-    public void sendHtmlMail(String touser,String subject,String content) throws MessagingException {
+    public void sendHtmlMail(String touser, String subject, String content) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message,true);
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setFrom(fromuser);
         helper.setTo(touser);
         helper.setSubject(subject);
-        helper.setText(content,true);
+        helper.setText(content, true);
         mailSender.send(message);
     }
 
     /**
      * 发送带附件的邮件,可以发送多个附件
+     *
      * @param touser
      * @param subjet
      * @param content
      * @param filePath
      * @throws MessagingException
      */
-    public void sendAttachmentsMail(String touser,String subjet,String content,String filePath) throws MessagingException {
+    public void sendAttachmentsMail(String touser, String subjet, String content, String filePath) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message,true);
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setFrom(fromuser);
         helper.setTo(touser);
         helper.setSubject(subjet);
-        helper.setText(content,true);
+        helper.setText(content, true);
         FileSystemResource file = new FileSystemResource(new File(filePath));
         String fileName = file.getFilename();
-        helper.addAttachment(fileName,file);
+        helper.addAttachment(fileName, file);
         mailSender.send(message);
     }
 
     /**
      * 发送邮件内容带图片格式的邮件
+     *
      * @param touser
      * @param subjet
      * @param content
      * @param rscPath
      * @param rscId
      */
-    public void sendInlinResourceMail(String touser,String subjet,String content,String rscPath,String rscId){
+    public void sendInlinResourceMail(String touser, String subjet, String content, String rscPath, String rscId) {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = null;
-        logger.info("发送邮件开始:{},{},{},{},{}",touser,subjet,content,rscPath,rscId);
+        logger.info("发送邮件开始:{},{},{},{},{}", touser, subjet, content, rscPath, rscId);
         try {
-            helper = new MimeMessageHelper(message,true);
+            helper = new MimeMessageHelper(message, true);
             helper.setFrom(fromuser);
             helper.setTo(touser);
             helper.setSubject(subjet);
-            helper.setText(content,true);
+            helper.setText(content, true);
             FileSystemResource resource = new FileSystemResource(new File(rscPath));
-            helper.addInline(rscId,resource);
+            helper.addInline(rscId, resource);
             mailSender.send(message);
             logger.info("发送静态邮件成功");
         } catch (MessagingException e) {
-            logger.error("发送静态邮件失败:{}",e);
+            logger.error("发送静态邮件失败:{}", e);
         }
     }
 }

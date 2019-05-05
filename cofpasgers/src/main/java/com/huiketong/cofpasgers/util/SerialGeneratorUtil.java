@@ -1,6 +1,7 @@
 package com.huiketong.cofpasgers.util;
 
 import java.util.Random;
+
 public class SerialGeneratorUtil {
     public static String GetRandomString(int Len) {
         String[] baseString = {"0", "1", "2", "3",

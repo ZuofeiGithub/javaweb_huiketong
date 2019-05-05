@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface VoucherUserRepository extends JpaRepository<VoucherUser,Integer> {
+public interface VoucherUserRepository extends JpaRepository<VoucherUser, Integer> {
     VoucherUser findVoucherUserByTelphone(String telphone);
 
     List<VoucherUser> findAllByCompanyId(Integer companyId);

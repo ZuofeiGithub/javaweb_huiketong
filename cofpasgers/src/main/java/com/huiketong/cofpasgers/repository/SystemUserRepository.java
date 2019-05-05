@@ -8,13 +8,15 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+
 @Repository
-public interface SystemUserRepository extends JpaRepository<SystemUser,Integer>{
-    SystemUser findSystemUserByTelphoneOrLoginName(String telphone,String loginName);
+public interface SystemUserRepository extends JpaRepository<SystemUser, Integer> {
+    SystemUser findSystemUserByTelphoneOrLoginName(String telphone, String loginName);
+
     SystemUser save(SystemUser s);
 
-    @Query(value = "update system_user set login_passward = ?1 where telphone = ?2",nativeQuery = true)
+    @Query(value = "update system_user set login_passward = ?1 where telphone = ?2", nativeQuery = true)
     @Modifying
     @Transactional
-    void updateUserPwd(String pwd,String telphone);
+    void updateUserPwd(String pwd, String telphone);
 }

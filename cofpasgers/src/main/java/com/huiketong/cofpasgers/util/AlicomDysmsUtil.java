@@ -2,6 +2,7 @@ package com.huiketong.cofpasgers.util;
 
 import java.util.Random;
 import javax.servlet.http.HttpSession;
+
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
@@ -17,13 +18,13 @@ import com.aliyuncs.profile.IClientProfile;
  * 工程依赖了2个jar包(存放在工程的libs目录下)
  * 1:aliyun-java-sdk-core.jar
  * 2:aliyun-java-sdk-dysmsapi.jar
- *
+ * <p>
  * 备注:Demo工程编码采用UTF-8
  * 国际短信发送请勿参照此DEMO
  */
 public class AlicomDysmsUtil {
-	
-	//产品名称:云通信短信API产品,开发者无需替换
+
+    //产品名称:云通信短信API产品,开发者无需替换
     static final String product = "Dysmsapi";
     //产品域名,开发者无需替换
     static final String domain = "dysmsapi.aliyuncs.com";
@@ -32,7 +33,7 @@ public class AlicomDysmsUtil {
     static final String accessKeyId = "LTAID7owPVleFPC5";
     static final String accessKeySecret = "ubCTSt5xjZXmUEm77ywAj6s8xFgJG3";
 
-    public static SendSmsResponse sendSms(String phone, HttpSession session,String TemplateCode) throws ClientException {
+    public static SendSmsResponse sendSms(String phone, HttpSession session, String TemplateCode) throws ClientException {
 
         //可自助调整超时时间
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
@@ -53,17 +54,17 @@ public class AlicomDysmsUtil {
         request.setTemplateCode(TemplateCode);
         //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
         String code = getCode();
-        request.setTemplateParam("{\"code\":\""+code+"\"}");
+        request.setTemplateParam("{\"code\":\"" + code + "\"}");
 
         //hint 此处可能会抛出异常，注意catch
         SendSmsResponse sendSmsResponse = acsClient.getAcsResponse(request);
 
         session.setAttribute("smscode", code);
-		session.setMaxInactiveInterval(300);
+        session.setMaxInactiveInterval(300);
         return sendSmsResponse;
     }
 
-    public static SendSmsResponse sendSms(String phone, String code,String TemplateCode) throws ClientException {
+    public static SendSmsResponse sendSms(String phone, String code, String TemplateCode) throws ClientException {
 
         //可自助调整超时时间
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
@@ -83,22 +84,22 @@ public class AlicomDysmsUtil {
         //必填:短信模板-可在短信控制台中找到
         request.setTemplateCode(TemplateCode);
 
-        request.setTemplateParam("{\"code\":\""+code+"\"}");
+        request.setTemplateParam("{\"code\":\"" + code + "\"}");
 
         //hint 此处可能会抛出异常，注意catch
         SendSmsResponse sendSmsResponse = acsClient.getAcsResponse(request);
         return sendSmsResponse;
     }
-    
+
     //生成6位随机数
-  	public static String getCode(){
-  		Random r = new Random();
-  		StringBuffer vc = new StringBuffer();
-  		for (int i = 0; i < 6; i++) {
-  			String ch = String.valueOf(r.nextInt(10));
-  			vc.append(ch);
-  		}
-  		return vc.toString();
-  	}
+    public static String getCode() {
+        Random r = new Random();
+        StringBuffer vc = new StringBuffer();
+        for (int i = 0; i < 6; i++) {
+            String ch = String.valueOf(r.nextInt(10));
+            vc.append(ch);
+        }
+        return vc.toString();
+    }
 
 }

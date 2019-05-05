@@ -15,9 +15,8 @@ import org.apache.commons.lang.StringUtils;
 
 /**
  * Created by liuyangkly on 15/7/29.
- *
- *  一定要在创建AlipayTradeService之前调用Configs.init("xxxxxx");设置参数
- *
+ * <p>
+ * 一定要在创建AlipayTradeService之前调用Configs.init("xxxxxx");设置参数
  */
 public class AlipayTradeServiceImpl extends AbsAlipayTradeService {
 
@@ -85,16 +84,16 @@ public class AlipayTradeServiceImpl extends AbsAlipayTradeService {
             this.privateKey = privateKey;
             return this;
         }
-        
+
         public ClientBuilder setSignType(String signType) {
             this.signType = signType;
             return this;
         }
-        
+
         public String getAlipayPublicKey() {
             return alipayPublicKey;
         }
-        
+
         public String getSignType() {
             return signType;
         }
@@ -142,7 +141,7 @@ public class AlipayTradeServiceImpl extends AbsAlipayTradeService {
 //        if (StringUtils.isEmpty(builder.getSignType())) {
 //            throw new NullPointerException("signType should not be NULL!");
 //        }
-        
+
         client = new DefaultAlipayClient(builder.getGatewayUrl(), builder.getAppid(), builder.getPrivateKey(),
                 builder.getFormat(), builder.getCharset(), builder.getAlipayPublicKey(), builder.getSignType());
     }
@@ -177,16 +176,16 @@ public class AlipayTradeServiceImpl extends AbsAlipayTradeService {
         } else if (response != null && Constants.PAYING.equals(response.getCode())) {
             // 返回用户处理中，则轮询查询交易是否成功，如果查询超时，则调用撤销
             AlipayTradeQueryRequestBuilder queryBuiler = new AlipayTradeQueryRequestBuilder()
-                                                            .setAppAuthToken(appAuthToken)
-                                                            .setOutTradeNo(outTradeNo);
+                    .setAppAuthToken(appAuthToken)
+                    .setOutTradeNo(outTradeNo);
             AlipayTradeQueryResponse loopQueryResponse = loopQueryResult(queryBuiler);
             return checkQueryAndCancel(outTradeNo, appAuthToken, result, loopQueryResponse);
 
         } else if (tradeError(response)) {
             // 系统错误，则查询一次交易，如果交易没有支付成功，则调用撤销
             AlipayTradeQueryRequestBuilder queryBuiler = new AlipayTradeQueryRequestBuilder()
-                                                            .setAppAuthToken(appAuthToken)
-                                                            .setOutTradeNo(outTradeNo);
+                    .setAppAuthToken(appAuthToken)
+                    .setOutTradeNo(outTradeNo);
             AlipayTradeQueryResponse queryResponse = tradeQuery(queryBuiler);
             return checkQueryAndCancel(outTradeNo, appAuthToken, result, queryResponse);
 

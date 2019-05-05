@@ -12,11 +12,11 @@ import java.util.List;
  * @Version 1.0
  */
 public class DrawLotteryUtil {
-    public static int drawGift(List<Gift> giftList){
+    public static int drawGift(List<Gift> giftList) {
 
-        if(null != giftList && giftList.size()>0){
+        if (null != giftList && giftList.size() > 0) {
             List<Double> orgProbList = new ArrayList<Double>(giftList.size());
-            for(Gift gift:giftList){
+            for (Gift gift : giftList) {
                 //按顺序将概率添加到集合中
                 orgProbList.add(gift.getProb());
             }
@@ -27,19 +27,19 @@ public class DrawLotteryUtil {
         return -1;
     }
 
-    public static int draw(List<Double> giftProbList){
+    public static int draw(List<Double> giftProbList) {
 
         List<Double> sortRateList = new ArrayList<Double>();
 
         // 计算概率总和
         Double sumRate = 0D;
-        for(Double prob : giftProbList){
+        for (Double prob : giftProbList) {
             sumRate += prob;
         }
 
-        if(sumRate != 0){
+        if (sumRate != 0) {
             double rate = 0D;   //概率所占比例
-            for(Double prob : giftProbList){
+            for (Double prob : giftProbList) {
                 rate += prob;
                 // 构建一个比例区段组成的集合(避免概率和不为1)
                 sortRateList.add(rate / sumRate);
@@ -79,7 +79,7 @@ public class DrawLotteryUtil {
         list.add(thanks);
         list.add(iphone);
 
-        for(int i=0;i<100;i++){
+        for (int i = 0; i < 100; i++) {
             int index = drawGift(list);
             System.out.println(list.get(index).getPoint());
         }

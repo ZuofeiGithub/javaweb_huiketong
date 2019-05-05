@@ -25,13 +25,15 @@ public class MessageUtil {
     public static final String MESSAGE_UNSUBSCRIBE = "unsubscribe";
     public static final String MESSAGE_CLICK = "CLICK";
     public static final String MESSAGE_VIEW = "VIEW";
+
     /**
      * xml 转集合
+     *
      * @param request
      * @return
      */
-    public static Map<String,String> xmlToMap(HttpServletRequest request) throws DocumentException {
-        Map<String,String> map = new HashMap<>();
+    public static Map<String, String> xmlToMap(HttpServletRequest request) throws DocumentException {
+        Map<String, String> map = new HashMap<>();
         SAXReader reader = new SAXReader();
         InputStream ins = null;
         try {
@@ -39,8 +41,8 @@ public class MessageUtil {
             Document doc = reader.read(ins);
             Element root = doc.getRootElement();
             List<Element> list = root.elements();
-            for (Element e:list){
-                map.put(e.getName(),e.getText());
+            for (Element e : list) {
+                map.put(e.getName(), e.getText());
             }
             ins.close();
         } catch (IOException e) {
@@ -50,17 +52,18 @@ public class MessageUtil {
     }
 
     /**
-     *将文本消息对象转为xml
+     * 将文本消息对象转为xml
+     *
      * @param textMessage
      * @return
      */
-    public static String textMessageToXml(TextMessage textMessage){
+    public static String textMessageToXml(TextMessage textMessage) {
         XStream xStream = new XStream();
-        xStream.alias("xml",textMessage.getClass());
+        xStream.alias("xml", textMessage.getClass());
         return xStream.toXML(textMessage);
     }
 
-    public static String initText(String toUserName,String fromUserName,String content){
+    public static String initText(String toUserName, String fromUserName, String content) {
         TextMessage text = new TextMessage();
         text.setFromUserName(toUserName);
         text.setToUserName(fromUserName);
@@ -72,9 +75,10 @@ public class MessageUtil {
 
     /**
      * 菜单消息
+     *
      * @return
      */
-    public static String menuText(){
+    public static String menuText() {
         StringBuffer sb = new StringBuffer();
         sb.append("欢迎您的关注，请按照菜单提示进行操作:\n\n");
         sb.append("1,课程介绍\n");
@@ -83,7 +87,7 @@ public class MessageUtil {
         return sb.toString();
     }
 
-    public static String firstMenu(){
+    public static String firstMenu() {
         StringBuffer sb = new StringBuffer();
         sb.append("经过7个多小时讨论，欧洲联盟除英国以外的27国领导人21日同意，无论退出欧盟协议下周能否在英国议会下院获通过，欧盟都不会在原先商定的29日与英国“分手”。\n" +
                 "\n" +
@@ -99,7 +103,7 @@ public class MessageUtil {
         return sb.toString();
     }
 
-    public static String secondMenu(){
+    public static String secondMenu() {
         StringBuffer sb = new StringBuffer();
         sb.append("6月30日是特雷莎·梅先前致信图斯克时为英国申请延期“脱欧”的期限。图斯克20日回复说，可能同意英国短暂延期“脱欧”，前提是“脱欧”协议必须获英国议会下院通过。欧盟方面同时希望，尽力避免“脱欧”事宜与欧洲议会竞选相互干扰。\n" +
                 "\n" +
@@ -115,23 +119,25 @@ public class MessageUtil {
 
     /**
      * 图文消息转换成xml
+     *
      * @param imageTextMsg
      * @return
      */
-    public static String imageTextMessageToXml(ImageTextMsg imageTextMsg){
+    public static String imageTextMessageToXml(ImageTextMsg imageTextMsg) {
         XStream xStream = new XStream();
-        xStream.alias("xml",imageTextMsg.getClass());
-        xStream.alias("item",new ImageTextBean().getClass());
+        xStream.alias("xml", imageTextMsg.getClass());
+        xStream.alias("item", new ImageTextBean().getClass());
         return xStream.toXML(imageTextMsg);
     }
 
     /**
      * 发送图文消息
+     *
      * @param toUserName
      * @param fromUserName
      * @return
      */
-    public static String initImageTextMessage(String toUserName,String fromUserName){
+    public static String initImageTextMessage(String toUserName, String fromUserName) {
         String message = null;
         List<ImageTextBean> imageTextBeans = new ArrayList<>();
         ImageTextMsg imageTextMsg = new ImageTextMsg();

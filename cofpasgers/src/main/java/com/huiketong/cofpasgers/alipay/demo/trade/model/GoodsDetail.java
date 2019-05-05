@@ -1,7 +1,6 @@
 package com.huiketong.cofpasgers.alipay.demo.trade.model;
 
 
-
 import com.google.gson.annotations.SerializedName;
 import com.huiketong.cofpasgers.alipay.demo.trade.utils.Utils;
 

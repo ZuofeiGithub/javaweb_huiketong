@@ -69,12 +69,12 @@ public class AlipayMonitorServiceImpl extends AbsAlipayService implements Alipay
             this.privateKey = privateKey;
             return this;
         }
-        
+
         public ClientBuilder setSignType(String signType) {
             this.signType = signType;
             return this;
         }
-        
+
         public String getAppid() {
             return appid;
         }

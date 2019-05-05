@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 首页响应数据
  */
-public class HomeData{
+public class HomeData {
     List<NoticeData> notice;
     List<StoreData> store;
     List<BannerData> banner;

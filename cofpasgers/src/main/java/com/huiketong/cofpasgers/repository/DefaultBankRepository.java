@@ -14,14 +14,14 @@ import javax.transaction.Transactional;
  * @Version 1.0
  */
 @Repository
-public interface DefaultBankRepository extends JpaRepository<DefaultBank,Integer> {
+public interface DefaultBankRepository extends JpaRepository<DefaultBank, Integer> {
     @Override
     <S extends DefaultBank> S save(S s);
 
-    @Query(value = "update default_bank set bank_num = ?1 where user_id = ?2",nativeQuery = true)
+    @Query(value = "update default_bank set bank_num = ?1 where user_id = ?2", nativeQuery = true)
     @Modifying
     @Transactional
-    void updateDefaultBank(String bankNum,Integer userId);
+    void updateDefaultBank(String bankNum, Integer userId);
 
     DefaultBank findDefaultBankByBankNum(String bankNum);
 

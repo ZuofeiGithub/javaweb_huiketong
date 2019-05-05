@@ -19,8 +19,9 @@ public class CustomerStatus {
     static String PAY_CUSTOMER = "已交定金";
     static String SIGN_CUSTOMER = "已签合同";
     static String NO_CUSTOMER = "无效客户";
-    public static String STATUS(int id){
-        switch (id){
+
+    public static String STATUS(int id) {
+        switch (id) {
             case 1:
                 status = "1";
                 break;

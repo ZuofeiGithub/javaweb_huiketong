@@ -1,6 +1,6 @@
 package com.huiketong.cofpasgers.constant;
 
-public enum  AgentType {
+public enum AgentType {
     OLDCUSTOMER,//老客户
     PROPERTY,//小区物业
     SALES,//销售

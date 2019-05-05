@@ -3,6 +3,7 @@ package com.huiketong.cofpasgers.util;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.parser.Feature;
 import org.springframework.core.io.ClassPathResource;
+
 import java.lang.reflect.Type;
 
 import java.io.IOException;

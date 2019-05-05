@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
  * 客户装修风格
  */
 public class DecorationStyle {
-    static String  STYLE_NOW = "现代";
+    static String STYLE_NOW = "现代";
     static String STYLE_EUROPEAN = "欧式";
     static String STYLE_AMERICAN = "美式";
     static String STYLE_CHINA = "中式";
@@ -25,23 +25,23 @@ public class DecorationStyle {
                 style = STYLE_NOW;
                 break;
             case 1:
-               style =  STYLE_EUROPEAN;
-            break;
+                style = STYLE_EUROPEAN;
+                break;
             case 2:
-                style =  STYLE_AMERICAN;
-            break;
+                style = STYLE_AMERICAN;
+                break;
             case 3:
-                style =  STYLE_CHINA;
-            break;
+                style = STYLE_CHINA;
+                break;
             case 4:
                 style = STYLE_JAPAN;
-            break;
+                break;
             case 5:
                 style = STYLE_NORDIC;
-            break;
+                break;
             case 6:
                 style = STYLE_OTHER;
-            break;
+                break;
         }
         return style;
     }
