@@ -6,33 +6,36 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="/layui/css/layui.css"  media="all">
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css"  media="all">
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" media="all">
     <script src="/front/script/jquery.min.js" charset="utf-8"></script>
     <script src="/bootstrap/js/bootstrap.js" charset="utf-8"></script>
     <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
     <style>
-        .layui-form-label{
-            width:150px;
+        .layui-form-label {
+            width: 150px;
         }
+
         .layui-input {
-            width:400px;
+            width: 400px;
         }
     </style>
 </head>
 <body>
 <div style="margin-bottom:20px;margin-left: 20px;"><h1>积分规则设置</h1></div>
-<form class="layui-form"  id="form1" action="" onsubmit="return false" >
+<form class="layui-form" id="form1" action="" onsubmit="return false">
     <div class="layui-form-item">
         <label class="layui-form-label">最低兑换金额</label>
         <div class="layui-input-block">
-            <input type="text" name="minPrice" lay-verify="pass" autocomplete="off" th:value="${minprice}" placeholder="" class="layui-input">
+            <input type="text" name="minPrice" lay-verify="pass" autocomplete="off" th:value="${minprice}"
+                   placeholder="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">1元等于多少积分</label>
         <div class="layui-input-block">
-            <input type="text" name="rmbForPoint" lay-verify="pass" placeholder="" autocomplete="off" th:value="${rmbforpoint}" class="layui-input">
+            <input type="text" name="rmbForPoint" lay-verify="pass" placeholder="" autocomplete="off"
+                   th:value="${rmbforpoint}" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -59,50 +62,58 @@
     <div class="layui-form-item">
         <label class="layui-form-label">多少积分抽奖一次</label>
         <div class="layui-input-block">
-            <input type="text" name="consume" lay-verify="pass" placeholder="" autocomplete="off" th:value="${consume}" class="layui-input">
+            <input type="text" name="consume" lay-verify="pass" placeholder="" autocomplete="off" th:value="${consume}"
+                   class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">登录奖励</label>
         <div class="layui-input-block">
-            <input type="text" name="loginIntegral" lay-verify="pass" placeholder="" autocomplete="off" th:value="${loginIntegral}" class="layui-input">
+            <input type="text" name="loginIntegral" lay-verify="pass" placeholder="" autocomplete="off"
+                   th:value="${loginIntegral}" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">签到奖励</label>
         <div class="layui-input-block">
-            <input type="text" name="signIntegral" lay-verify="pass" placeholder="" autocomplete="off" th:value="${signIntegral}" class="layui-input">
+            <input type="text" name="signIntegral" lay-verify="pass" placeholder="" autocomplete="off"
+                   th:value="${signIntegral}" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">推荐客户奖励</label>
         <div class="layui-input-block">
-            <input type="text" name="recomIntegral" lay-verify="pass" placeholder="" autocomplete="off" th:value="${recomIntegral}" class="layui-input">
+            <input type="text" name="recomIntegral" lay-verify="pass" placeholder="" autocomplete="off"
+                   th:value="${recomIntegral}" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">认证奖励</label>
         <div class="layui-input-block">
-            <input type="text" name="authIntegral" lay-verify="pass" placeholder="" autocomplete="off" th:value="${authIntegral}" class="layui-input">
+            <input type="text" name="authIntegral" lay-verify="pass" placeholder="" autocomplete="off"
+                   th:value="${authIntegral}" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">邀请奖励</label>
         <div class="layui-input-block">
-            <input type="text" name="inviteIntegral" lay-verify="pass" placeholder="" autocomplete="off" th:value="${inviteIntegral}" class="layui-input">
+            <input type="text" name="inviteIntegral" lay-verify="pass" placeholder="" autocomplete="off"
+                   th:value="${inviteIntegral}" class="layui-input">
         </div>
     </div>
     <div style="margin-bottom:20px;margin-left: 20px;"><h3>第一个比例设置</h3></div>
     <div class="layui-form-item">
         <label class="layui-form-label">奖励积分</label>
         <div class="layui-input-block">
-            <input type="text" name="dials" lay-verify="pass" placeholder="" th:value="${point0}" autocomplete="off"  class="layui-input">
+            <input type="text" name="dials" lay-verify="pass" placeholder="" th:value="${point0}" autocomplete="off"
+                   class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">中奖概率(%)</label>
         <div class="layui-input-block">
-            <input type="text" name="probability" lay-verify="pass" placeholder="" th:value="${probability0}" autocomplete="off"  class="layui-input">
+            <input type="text" name="probability" lay-verify="pass" placeholder="" th:value="${probability0}"
+                   autocomplete="off" class="layui-input">
         </div>
     </div>
 
@@ -110,13 +121,15 @@
     <div class="layui-form-item">
         <label class="layui-form-label">奖励积分</label>
         <div class="layui-input-block">
-            <input type="text" name="dials" lay-verify="pass" placeholder="" th:value="${point1}" autocomplete="off"  class="layui-input">
+            <input type="text" name="dials" lay-verify="pass" placeholder="" th:value="${point1}" autocomplete="off"
+                   class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">中奖概率(%)</label>
         <div class="layui-input-block">
-            <input type="text" name="probability" lay-verify="pass" placeholder="" th:value="${probability1}" autocomplete="off"  class="layui-input">
+            <input type="text" name="probability" lay-verify="pass" placeholder="" th:value="${probability1}"
+                   autocomplete="off" class="layui-input">
         </div>
     </div>
 
@@ -124,13 +137,15 @@
     <div class="layui-form-item">
         <label class="layui-form-label">奖励积分</label>
         <div class="layui-input-block">
-            <input type="text" name="dials" placeholder="" lay-verify="pass" th:value="${point2}" autocomplete="off"  class="layui-input">
+            <input type="text" name="dials" placeholder="" lay-verify="pass" th:value="${point2}" autocomplete="off"
+                   class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">中奖概率(%)</label>
         <div class="layui-input-block">
-            <input type="text" name="probability" placeholder="" lay-verify="pass" th:value="${probability2}" autocomplete="off"  class="layui-input">
+            <input type="text" name="probability" placeholder="" lay-verify="pass" th:value="${probability2}"
+                   autocomplete="off" class="layui-input">
         </div>
     </div>
 
@@ -138,13 +153,15 @@
     <div class="layui-form-item">
         <label class="layui-form-label">奖励积分</label>
         <div class="layui-input-block">
-            <input type="text" name="dials" placeholder="" lay-verify="pass" th:value="${point3}" autocomplete="off"  class="layui-input">
+            <input type="text" name="dials" placeholder="" lay-verify="pass" th:value="${point3}" autocomplete="off"
+                   class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">中奖概率(%)</label>
         <div class="layui-input-block">
-            <input type="text" name="probability" placeholder="" lay-verify="pass" th:value="${probability3}" autocomplete="off"  class="layui-input">
+            <input type="text" name="probability" placeholder="" lay-verify="pass" th:value="${probability3}"
+                   autocomplete="off" class="layui-input">
         </div>
     </div>
 
@@ -152,13 +169,15 @@
     <div class="layui-form-item">
         <label class="layui-form-label">奖励积分</label>
         <div class="layui-input-block">
-            <input type="text" name="dials" placeholder="" lay-verify="pass" th:value="${point4}" autocomplete="off"  class="layui-input">
+            <input type="text" name="dials" placeholder="" lay-verify="pass" th:value="${point4}" autocomplete="off"
+                   class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">中奖概率(%)</label>
         <div class="layui-input-block">
-            <input type="text" name="probability" placeholder="" lay-verify="pass" th:value="${probability4}" autocomplete="off"  class="layui-input">
+            <input type="text" name="probability" placeholder="" lay-verify="pass" th:value="${probability4}"
+                   autocomplete="off" class="layui-input">
         </div>
     </div>
 
@@ -166,13 +185,15 @@
     <div class="layui-form-item">
         <label class="layui-form-label">奖励积分</label>
         <div class="layui-input-block">
-            <input type="text" name="dials" placeholder="" lay-verify="pass" th:value="${point5}" autocomplete="off"  class="layui-input">
+            <input type="text" name="dials" placeholder="" lay-verify="pass" th:value="${point5}" autocomplete="off"
+                   class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">中奖概率(%)</label>
         <div class="layui-input-block">
-            <input type="text" name="probability" placeholder="" lay-verify="pass" th:value="${probability5}" autocomplete="off"  class="layui-input">
+            <input type="text" name="probability" placeholder="" lay-verify="pass" th:value="${probability5}"
+                   autocomplete="off" class="layui-input">
         </div>
     </div>
 
@@ -180,13 +201,15 @@
     <div class="layui-form-item">
         <label class="layui-form-label">奖励积分</label>
         <div class="layui-input-block">
-            <input type="text" name="dials" placeholder="" lay-verify="pass" th:value="${point6}" autocomplete="off"  class="layui-input">
+            <input type="text" name="dials" placeholder="" lay-verify="pass" th:value="${point6}" autocomplete="off"
+                   class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">中奖概率(%)</label>
         <div class="layui-input-block">
-            <input type="text" name="probability" placeholder="" lay-verify="pass" th:value="${probability6}" autocomplete="off"  class="layui-input">
+            <input type="text" name="probability" placeholder="" lay-verify="pass" th:value="${probability6}"
+                   autocomplete="off" class="layui-input">
         </div>
     </div>
 
@@ -194,13 +217,15 @@
     <div class="layui-form-item">
         <label class="layui-form-label">奖励积分</label>
         <div class="layui-input-block">
-            <input type="text" name="dials" placeholder="" lay-verify="pass" th:value="${point7}" autocomplete="off"  class="layui-input">
+            <input type="text" name="dials" placeholder="" lay-verify="pass" th:value="${point7}" autocomplete="off"
+                   class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">中奖概率(%)</label>
         <div class="layui-input-block">
-            <input type="text" name="probability" placeholder="" lay-verify="pass" th:value="${probability7}" autocomplete="off"  class="layui-input">
+            <input type="text" name="probability" placeholder="" lay-verify="pass" th:value="${probability7}"
+                   autocomplete="off" class="layui-input">
         </div>
     </div>
 
@@ -214,13 +239,13 @@
 <script src="/layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
-    layui.use(['form','jquery','table'], function(){
-        var form = layui.form,$ = layui.jquery,table = layui.table;
+    layui.use(['form', 'jquery', 'table'], function () {
+        var form = layui.form, $ = layui.jquery, table = layui.table;
         form.render();
         form.verify({
             pass: [
                 /^\d+$/
-                ,'必须为纯数字'
+                , '必须为纯数字'
             ]
         });
 
@@ -234,32 +259,34 @@
             }
             return '';
         }
+
         /**
          * cookie操作
          */
 
         $("input[name='telphone']").val(getCookie("telphone"));
+
         function trim(str) {
             return str.replace(/(^\s*)|(\s*$)/g, "");
         }
     });
 
-    $("#form1").submit(function(){
-        var formData= new FormData(document.getElementById("form1"));
+    $("#form1").submit(function () {
+        var formData = new FormData(document.getElementById("form1"));
         $.ajax({
             async: false,
             type: "POST",
-            url:"/addIntegralRule",
-            data:formData,
+            url: "/addIntegralRule",
+            data: formData,
             dataType: "json",
             contentType: false, //不设置内容类型
             processData: false, //不处理数据
             success: function (data) {
-                if(data==1){
+                if (data == 1) {
                     alert("修改成功")
-                }else if(data==2){
+                } else if (data == 2) {
                     alert("中奖概率之和应为100%")
-                }else{
+                } else {
                     alert("修改失败")
                 }
             },

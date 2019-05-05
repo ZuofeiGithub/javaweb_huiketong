@@ -56,9 +56,9 @@
                     <input type="text" id="agentName" placeholder="请输入姓名">
                 </div>
                 <!--<div class="item item-input valign-center">-->
-                    <!--<label class="txt-666">登录账号</label>-->
-                    <!--<input type="text" id="agentCode" placeholder="登录名只包含字母、数字"-->
-                           <!--onkeyup="value=value.replace(/[^\w\.\/]/ig,&#39;&#39;)">-->
+                <!--<label class="txt-666">登录账号</label>-->
+                <!--<input type="text" id="agentCode" placeholder="登录名只包含字母、数字"-->
+                <!--onkeyup="value=value.replace(/[^\w\.\/]/ig,&#39;&#39;)">-->
                 <!--</div>-->
                 <div class="item item-input valign-center">
                     <label class="txt-666">手机号</label>
@@ -137,11 +137,11 @@
 
     }
 
-    function GetQueryString(name)
-    {
-        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
         var r = window.location.search.substr(1).match(reg);
-        if(r!=null)return  unescape(r[2]); return null;
+        if (r != null) return unescape(r[2]);
+        return null;
     }
 
     // 发送短信验证码
@@ -158,7 +158,7 @@
             method: 'post',
             data: {
                 recevier: mobilePhone,
-                inviteCode:GetQueryString("inviteCode")
+                inviteCode: GetQueryString("inviteCode")
             }
         }, function (ret) {
             hideLoading();
@@ -171,7 +171,7 @@
                 $("#verifyButton").unbind("click");
                 delayTime = 120;
                 setTimeout(countDown, 1000);
-            }else if(ret.code == 300){
+            } else if (ret.code == 300) {
                 return alert("该号码已经注册过");
             }
         }, function (responseText) {

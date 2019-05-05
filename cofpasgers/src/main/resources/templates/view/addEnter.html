@@ -192,11 +192,11 @@
                 if (value == "") {
                     return '请输入企业评价';
                 }
-            },enter_status:function (value) {
+            }, enter_status: function (value) {
                 if (value == "") {
                     return '请选择企业状态';
                 }
-            },person_num:function (value) {
+            }, person_num: function (value) {
                 if (value == "") {
                     return '设置企业人数上限';
                 }
@@ -219,14 +219,14 @@
             jsondata.comment_id = data.field.comment_id;
             jsondata.enter_loginame = data.field.enter_loginame;
             $.post('addeter', jsondata, function (resp) {
-                if(resp.code == "1"){
+                if (resp.code == "1") {
                     layer.msg(resp.msg);
                     setTimeout(function () {
                         var index = parent.layer.getFrameIndex(window.name);
                         parent.layer.close(index);//关闭
-                    },1500);
+                    }, 1500);
 
-                }else if(resp.code == "3"){
+                } else if (resp.code == "3") {
                     layer.msg(resp.msg);
                 }
             })

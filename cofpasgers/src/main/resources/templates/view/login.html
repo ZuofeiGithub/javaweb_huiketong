@@ -37,33 +37,33 @@
     <div class="am-u-md-6 am-u-lg-4 am-u-md-centered am-u-sm-centered am-u-lg-centered" style="margin-top: 15%">
         <p class="am-text-xl am-text-center am-text-danger am-margin-bottom-xl">曹俊的个人主页</p>
         <form id="login_form_id">
-                <div class="am-input-group am-margin-top-sm">
-                    <span class="am-input-group-label"><i class="am-icon-user am-icon-fw"></i></span>
-                    <input type="text"  id="user_telphone" class="am-form-field" placeholder="输入手机号"
-                           minlength="11" data-validation-message="请输入正确的手机号">
-                </div>
-                <div class="am-input-group am-margin-vertical-sm">
-                    <span class="am-input-group-label"><i class="am-icon-lock am-icon-fw"></i></span>
-                    <input type="password"  id="user_passward" class="am-form-field"   placeholder="输入密码"
-                           minlength="6" data-validation-message="请输入6位密码"/>
-                </div>
-                <div class="am-input-group am-margin-bottom-sm">
-                    <input type="text" id="verif_code" class="am-form-field"  >
-                    <span class="am-input-group-btn">
+            <div class="am-input-group am-margin-top-sm">
+                <span class="am-input-group-label"><i class="am-icon-user am-icon-fw"></i></span>
+                <input type="text" id="user_telphone" class="am-form-field" placeholder="输入手机号"
+                       minlength="11" data-validation-message="请输入正确的手机号">
+            </div>
+            <div class="am-input-group am-margin-vertical-sm">
+                <span class="am-input-group-label"><i class="am-icon-lock am-icon-fw"></i></span>
+                <input type="password" id="user_passward" class="am-form-field" placeholder="输入密码"
+                       minlength="6" data-validation-message="请输入6位密码"/>
+            </div>
+            <div class="am-input-group am-margin-bottom-sm">
+                <input type="text" id="verif_code" class="am-form-field">
+                <span class="am-input-group-btn">
                         <a href="javascript:void(0);" title="点击更换验证码">
                             <img id="imgVerify" src="" alt="更换验证码">
                         </a>
                     </span>
+            </div>
+            <div class="am-cf">
+                <div class="am-fl am-checkbox" style="padding-top: 5px;">
+                    <input id="remeberme" type="checkbox">
+                    记住我
                 </div>
-                <div class="am-cf">
-                    <div class="am-fl am-checkbox" style="padding-top: 5px;">
-                        <input id="remeberme"  type="checkbox">
-                        记住我
-                    </div>
-                    <div class="am-fr am-padding-vertical-sm">
-                        <a class="am-btn-link" id="forgetPassword" href="javascript:;">忘记密码？</a>
-                    </div>
+                <div class="am-fr am-padding-vertical-sm">
+                    <a class="am-btn-link" id="forgetPassword" href="javascript:;">忘记密码？</a>
                 </div>
+            </div>
         </form>
         <button id="login" class="am-btn-block am-btn-lg am-btn-secondary">用户登陆</button>
     </div>

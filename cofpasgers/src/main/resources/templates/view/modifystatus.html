@@ -13,7 +13,8 @@
             <input type="radio" name="status" lay-filter="radioitem" value="1" th:checked="${status == 1}" title="待审核">
             <input type="radio" name="status" lay-filter="radioitem" value="2" th:checked="${status == 2}" title="期房">
             <input type="radio" name="status" lay-filter="radioitem" value="3" th:checked="${status == 3}" title="暂时不装">
-            <input type="radio" name="status" id="liangfang" lay-filter="radioitem" value="4" th:checked="${status == 4}" title="已量房">
+            <input type="radio" name="status" id="liangfang" lay-filter="radioitem" value="4"
+                   th:checked="${status == 4}" title="已量房">
             <input type="radio" name="status" lay-filter="radioitem" value="5" th:checked="${status == 5}" title="已进店">
             <input type="radio" name="status" lay-filter="radioitem" value="6" th:checked="${status == 6}" title="跟踪中">
             <input type="radio" name="status" lay-filter="radioitem" value="7" th:checked="${status == 7}" title="已交定金">
@@ -120,7 +121,7 @@
                 setTimeout(function () {
                     var index = parent.layer.getFrameIndex(window.name);
                     parent.layer.close(index);//关闭
-                },1500);
+                }, 1500);
             })
             return false;
         });

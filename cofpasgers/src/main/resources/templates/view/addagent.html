@@ -17,12 +17,12 @@
         </div>
         <!--<hr class="layui-col-lg-offset1">-->
         <!--<div>-->
-            <!--<label class="layui-form-label">登录账号</label>-->
-            <!--<div class="layui-input-block">-->
-                <!--<input type="text" name="loginName" lay-verify="loginName" autocomplete="off"-->
-                       <!--placeholder="输入登录账号"-->
-                       <!--class="layui-input">-->
-            <!--</div>-->
+        <!--<label class="layui-form-label">登录账号</label>-->
+        <!--<div class="layui-input-block">-->
+        <!--<input type="text" name="loginName" lay-verify="loginName" autocomplete="off"-->
+        <!--placeholder="输入登录账号"-->
+        <!--class="layui-input">-->
+        <!--</div>-->
         <!--</div>-->
         <hr class="layui-col-lg-offset1">
         <div>
@@ -46,7 +46,7 @@
         <div>
             <label class="layui-form-label">确认密码</label>
             <div class="layui-input-block">
-                <input type="password" name="loginrePass"  lay-verify="loginrePass" placeholder="再次输入密码"
+                <input type="password" name="loginrePass" lay-verify="loginrePass" placeholder="再次输入密码"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
@@ -92,8 +92,8 @@
                     return '请输入企业名字';
                 }
             },
-            comment_id:function(value) {
-                if(value == ""){
+            comment_id: function (value) {
+                if (value == "") {
                     return '请输入企业评价';
                 }
             }
@@ -106,28 +106,28 @@
             //     title: '最终的提交信息'
             // })
             var jsondata = {};
-           jsondata.agent_type = data.field.agentType;
-           jsondata.agent_name = data.field.agentName;
-           jsondata.login_name = data.field.loginName;
-           jsondata.agent_telphone = data.field.telphone;
-           jsondata.login_pass = data.field.loginPass;
-           jsondata.login_repass = data.field.loginrePass;
-           jsondata.company = data.field.selectComm;
+            jsondata.agent_type = data.field.agentType;
+            jsondata.agent_name = data.field.agentName;
+            jsondata.login_name = data.field.loginName;
+            jsondata.agent_telphone = data.field.telphone;
+            jsondata.login_pass = data.field.loginPass;
+            jsondata.login_repass = data.field.loginrePass;
+            jsondata.company = data.field.selectComm;
 
-            $.post('addagent',jsondata,function (resp) {
-                if(resp.code == "1"){
+            $.post('addagent', jsondata, function (resp) {
+                if (resp.code == "1") {
                     layer.msg(resp.msg);
                     setTimeout(function () {
                         var index = parent.layer.getFrameIndex(window.name);
                         parent.layer.close(index);//关闭
-                    },1500);
-                }else if(resp.code == "100"){
-                   return layer.msg(resp.msg);
-                }else if(resp.code == "301"){
-                    return layer.msg(resp.msg)
-                }else if(resp.code == "321"){
+                    }, 1500);
+                } else if (resp.code == "100") {
                     return layer.msg(resp.msg);
-                }else if(resp.code == "101"){
+                } else if (resp.code == "301") {
+                    return layer.msg(resp.msg)
+                } else if (resp.code == "321") {
+                    return layer.msg(resp.msg);
+                } else if (resp.code == "101") {
                     return layer.msg(resp.msg);
                 }
             })

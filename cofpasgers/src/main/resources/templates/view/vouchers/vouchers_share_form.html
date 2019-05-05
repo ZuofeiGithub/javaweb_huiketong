@@ -15,7 +15,7 @@
      style="padding: 20px 30px 0 0;">
     <div class="layui-form-item layui-hide">
         <div class="layui-input-inline">
-            <input type="text" name="user_id" id="user_id"  lay-verify="required" autocomplete="off"
+            <input type="text" name="user_id" id="user_id" lay-verify="required" autocomplete="off"
                    class="layui-input">
         </div>
     </div>
@@ -55,7 +55,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">分享的类型</label>
         <div class="layui-input-inline">
-            <select name="sharetype" lay-verify="required"  lay-filter="share_select" >
+            <select name="sharetype" lay-verify="required" lay-filter="share_select">
                 <option value=""></option>
                 <option value="1">优惠券分享</option>
                 <option value="2">商品分享</option>
@@ -93,7 +93,7 @@
         index: 'lib/index' //主入口模块
     }).use(['index', 'form', 'upload'], function () {
         var $ = layui.$,
-        upload = layui.upload
+            upload = layui.upload
             , form = layui.form;
         var user = layui.data('user');
         $('#user_id').val(user.user_id)
@@ -127,14 +127,14 @@
         /**
          * 监听选项卡切换
          */
-        form.on('select(share_select)',function (data) {
-            if(data.value == "1"){
+        form.on('select(share_select)', function (data) {
+            if (data.value == "1") {
                 $('#goods').addClass("layui-hide");
-                $('#goods_select').attr("lay-verify","");
+                $('#goods_select').attr("lay-verify", "");
                 $('#price').removeClass("layui-hide");
-            }else if(data.value == "2"){
+            } else if (data.value == "2") {
                 $('#goods').removeClass("layui-hide");
-                $('#goods_select').attr("lay-verify","required");
+                $('#goods_select').attr("lay-verify", "required");
                 $('#price').addClass("layui-hide");
             }
         })
@@ -143,12 +143,12 @@
             var field = data.field; //获取提交的字段
             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
             //提交 Ajax 成功后，关闭当前弹层并重载表格
-            $.post('addvoucher',field,function (resp) {
-                if(resp.code == "0"){
+            $.post('addvoucher', field, function (resp) {
+                if (resp.code == "0") {
                     layer.msg("添加成功");
                     parent.layui.table.reload('LAY-app-content-list'); //重载表格
                     parent.layer.close(index); //再执行关闭
-                }else{
+                } else {
                     layer.msg("添加失败");
                 }
             })

@@ -87,59 +87,59 @@
                         }, align: 'center'
                     },
                     {field: 'agentName', title: '经纪人姓名', width: 80, sort: true, align: 'center'},
-                    {field:'sex',title:'性别',width:80,align:'center'},
+                    {field: 'sex', title: '性别', width: 80, align: 'center'},
                     {field: 'customerName', title: '客户姓名', width: 80, sort: true, align: 'center'}
                     , {field: 'telphone', title: '电话', align: 'center'}
                     , {field: 'detailAddress', title: '详细地址', align: 'center'}
-                //     , {
-                //     field: 'style', title: '装修类型', templet: function (d) {
-                //         switch (d.style) {
-                //             case 1:
-                //                 return "现代";
-                //                 break;
-                //             case 2:
-                //                 return "欧式";
-                //                 break;
-                //             case 3:
-                //                 return "美式";
-                //                 break;
-                //             case 4:
-                //                 return "中式";
-                //                 break;
-                //             case 5:
-                //                 return "日式";
-                //                 break;
-                //             case 6:
-                //                 return "北欧";
-                //                 break;
-                //             case 7:
-                //                 return "其他";
-                //                 break;
-                //             default:
-                //                 return "暂无"
-                //                 break;
-                //
-                //         }
-                //     }, sort: true, align: 'center'
-                // }
-                //     , {
-                //     field: 'scheme', title: '装修方案', templet: function (d) {
-                //         switch (d.scheme) {
-                //             case 1:
-                //                 return "全包";
-                //                 break;
-                //             case 2:
-                //                 return "半包";
-                //                 break;
-                //             case 3:
-                //                 return "其他";
-                //                 break;
-                //             default:
-                //                 return "暂无"
-                //                 break;
-                //         }
-                //     }, sort: true, align: 'center'
-                // }
+                    //     , {
+                    //     field: 'style', title: '装修类型', templet: function (d) {
+                    //         switch (d.style) {
+                    //             case 1:
+                    //                 return "现代";
+                    //                 break;
+                    //             case 2:
+                    //                 return "欧式";
+                    //                 break;
+                    //             case 3:
+                    //                 return "美式";
+                    //                 break;
+                    //             case 4:
+                    //                 return "中式";
+                    //                 break;
+                    //             case 5:
+                    //                 return "日式";
+                    //                 break;
+                    //             case 6:
+                    //                 return "北欧";
+                    //                 break;
+                    //             case 7:
+                    //                 return "其他";
+                    //                 break;
+                    //             default:
+                    //                 return "暂无"
+                    //                 break;
+                    //
+                    //         }
+                    //     }, sort: true, align: 'center'
+                    // }
+                    //     , {
+                    //     field: 'scheme', title: '装修方案', templet: function (d) {
+                    //         switch (d.scheme) {
+                    //             case 1:
+                    //                 return "全包";
+                    //                 break;
+                    //             case 2:
+                    //                 return "半包";
+                    //                 break;
+                    //             case 3:
+                    //                 return "其他";
+                    //                 break;
+                    //             default:
+                    //                 return "暂无"
+                    //                 break;
+                    //         }
+                    //     }, sort: true, align: 'center'
+                    // }
                     , {
                     field: 'recomDatetime', title: '推荐时间', templet: function (d) {
                         return new Date(new Date(d.recomDatetime).toString()).Format("yyyy-MM-dd");
@@ -220,9 +220,9 @@
                 layer.open({
                     type: 2,
                     title: "修改客户状态",
-                    name:'modifycustomer',
+                    name: 'modifycustomer',
                     anim: 1,
-                    resize:false,
+                    resize: false,
                     offset: 'auto',
                     content: 'modifycuststatus?id=' + data.id,
                     area: screen() < 2 ? ['90%', '80%'] : ['500px', '300px'],

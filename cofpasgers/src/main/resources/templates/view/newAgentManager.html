@@ -19,7 +19,8 @@
 
 <script type="text/html" id="bar">
     <div class="layui-btn-group">
-        <button class="layui-btn layui-btn-xs layui-btn-normal" title="认证用户" lay-event="certification" th:text="认证"></button>
+        <button class="layui-btn layui-btn-xs layui-btn-normal" title="认证用户" lay-event="certification"
+                th:text="认证"></button>
         <button class="layui-btn layui-btn-xs layui-btn-normal" title="推荐的客户" lay-event="electCustomers">
             <i class="layui-icon">&#xe6c6;</i>
         </button>
@@ -206,12 +207,12 @@
             console.log(obj);
             layer.open({
                 type: 2,
-                title: obj.agentName+"邀请的客户",
+                title: obj.agentName + "邀请的客户",
                 anim: 1,
                 maxmin: true,
                 offset: 'auto',
-                content: 'showCustomer?id=' + obj.id+'&companyId='+obj.companyId,
-                area: screen() < 2 ? ['90%', '80%'] : ['1000px', '680px'],
+                content: 'showCustomer?id=' + obj.id + '&companyId=' + obj.companyId,
+                area: screen() < 2 ? ['90%', '60%'] : ['1000px', '580px'],
             });
         }
 
@@ -272,7 +273,7 @@
                         }
                     });
                 });
-            }else if(obj.event === 'electCustomers'){
+            } else if (obj.event === 'electCustomers') {
                 showAgentCustomers(data);
             }
         });

@@ -11,9 +11,10 @@
 </div>
 <script src="/layui/layui.js"></script>
 <script>
-    layui.use(['table','util'], function () {
-        let table = layui.table,util = layui.util;
-        function getParam(paramName){
+    layui.use(['table', 'util'], function () {
+        let table = layui.table, util = layui.util;
+
+        function getParam(paramName) {
             paramValue = "", isFound = !1;
             if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
                 arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0;
@@ -21,11 +22,12 @@
             }
             return paramValue == "" && (paramValue = null), paramValue
         }
+
         let agentid = getParam("id");
-        let companyId= getParam("companyId");
+        let companyId = getParam("companyId");
         table.render({
             elem: '#customer_table',
-            url: 'agentcustomer?id='+agentid,
+            url: 'agentcustomer?id=' + agentid,
             cellMinWidth: 80, //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             cols: [
                 [
@@ -37,10 +39,10 @@
                     {field: 'customerName', title: '客户姓名', align: 'center'},
                     {field: 'telphone', title: '客户手机', align: 'center'},
                     {field: 'detailAddress', title: '客户地址', sort: true, align: 'center'},
-                    { field: 'agentName', title: '邀请的经纪人',align: 'center'},
+                    {field: 'agentName', title: '邀请的经纪人', align: 'center'},
                     {
                         field: 'style', title: '客户装修类型', align: 'center', templet: function (d) {
-                                return d.style;
+                            return d.style;
                         }
                     },
                     {field: 'scheme', title: '装修方案', sort: true, align: 'center'},
@@ -52,14 +54,14 @@
 
                     {
                         field: 'verifyStatus', title: '客户状态', align: 'center', templet: function (d) {
-                           return d.verifyStatus;
+                            return d.verifyStatus;
                         }
                     }
                 ]
             ]
             , page: true
             , done: function (res, curr, count) {
-                console.log("%c"+res,'color:red');
+                console.log("%c" + res, 'color:red');
             }
         });
     });

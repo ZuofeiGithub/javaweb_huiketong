@@ -35,14 +35,14 @@
         <label class="layui-form-label">登陆密码</label>
         <div class="layui-input-block">
             <input type="password" name="loginpwd" autocomplete="off"
-                   placeholder=""  class="layui-input">
+                   placeholder="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">重复密码</label>
         <div class="layui-input-block">
             <input type="password" name="loginrpwd" autocomplete="off"
-                   placeholder=""  class="layui-input">
+                   placeholder="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -104,11 +104,11 @@
         form.render();
         form.on('submit(submit)', function (data) {
             $.post('modifyenterinfo', data.field, function (resp) {
-                if(resp.code === '1'){
+                if (resp.code === '1') {
                     layer.msg(resp.msg);
-                }else if(resp.code === "3"){
+                } else if (resp.code === "3") {
                     layer.msg(resp.msg);
-                }else{
+                } else {
                     layer.msg(resp.msg);
                 }
             })

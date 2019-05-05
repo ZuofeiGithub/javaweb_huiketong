@@ -6,15 +6,15 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="/layui/css/layui.css"  media="all">
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css"  media="all">
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" media="all">
     <script src="/front/script/jquery.min.js" charset="utf-8"></script>
     <script src="/bootstrap/js/bootstrap.js" charset="utf-8"></script>
     <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
     <style>
 
-        .layui-form-label{
-            width:150px;
+        .layui-form-label {
+            width: 150px;
         }
     </style>
 </head>
@@ -30,79 +30,88 @@
             </div>
             <div class="modal-body">
 
-                <form class="layui-form"  id="form1" action="" onsubmit="return false"  enctype="multipart/form-data">
+                <form class="layui-form" id="form1" action="" onsubmit="return false" enctype="multipart/form-data">
 
                     <div class="layui-form-item">
                         <label class="layui-form-label">商品名称</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="commodityName" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                            <input type="text" name="commodityName" lay-verify="required" placeholder="请输入"
+                                   autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">商品原价</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="originalPrice" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                            <input type="text" name="originalPrice"  placeholder="请输入"
+                                   autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">活动特价</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="activityPrice" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                            <input type="text" name="activityPrice"  placeholder="请输入"
+                                   autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">预付定金</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="depositMoney" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                            <input type="text" name="depositMoney"  placeholder="请输入"
+                                   autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">单位</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="danwei" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                            <input type="text" name="danwei" placeholder="请输入" autocomplete="off"
+                                   class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">商品标签</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="label" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                            <input type="text" name="label" lay-verify="required" placeholder="请输入" autocomplete="off"
+                                   class="layui-input">
                         </div>
                         <label class="layui-form-label">(请使用|分隔)</label>
                     </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">商品风格</label>
+                    <div class="layui-form-item layui-hide">
+                        <label class="layui-form-label ">商品风格</label>
                         <div class="layui-input-inline">
-                            <select name="commodityStyleId" lay-filter="commodityStyleId" id="commodityStyleId" lay-verify="required">
+                            <select name="commodityStyleId" lay-filter="commodityStyleId" id="commodityStyleId"
+                                    >
                                 <option value=""></option>
-                       <!--         <option value="1">审核中</option>
-                                <option value="2">已发放</option>
-                                <option value="3">已撤销</option>-->
+                                <!--         <option value="1">审核中</option>
+                                         <option value="2">已发放</option>
+                                         <option value="3">已撤销</option>-->
                             </select>
                         </div>
                     </div>
 
-                    <div class="layui-form-item">
+                    <div class="layui-form-item layui-hide">
                         <label class="layui-form-label">商品种类</label>
                         <div class="layui-input-inline">
-                            <select name="commodityCategoryId" lay-filter="commodityCategoryId" id="commodityCategoryId" lay-verify="required">
+                            <select name="commodityCategoryId" lay-filter="commodityCategoryId" id="commodityCategoryId"
+                                    >
                                 <option value=""></option>
-                             <!--   <option value="1">审核中</option>
-                                <option value="2">已发放</option>
-                                <option value="3">已撤销</option>-->
+                                <!--   <option value="1">审核中</option>
+                                   <option value="2">已发放</option>
+                                   <option value="3">已撤销</option>-->
                             </select>
                         </div>
                     </div>
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">活动说明</label>
                         <div class="layui-input-inline">
-                            <textarea placeholder="请输入内容" class="layui-textarea" lay-verify="required" name="activityDescription" style="width:500px"></textarea>
+                            <textarea placeholder="请输入内容" class="layui-textarea" lay-verify="required"
+                                      name="activityDescription" style="width:500px"></textarea>
                         </div>
                     </div>
 
                     <div class="layui-form-item">
                         <label class="layui-form-label">产品详情</label>
                         <div class="layui-input-inline" style="width:600px;">
-                            <textarea id="productDetails" name="productDetails"  style="display: none;" ></textarea>
+                            <textarea id="productDetails" name="productDetails" style="display: none;"></textarea>
                         </div>
                     </div>
                     <input type="hidden" name="telphone">
@@ -111,7 +120,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button  class="layui-btn" lay-submit="" lay-filter="demo1">提交更改</button>
+                        <button class="layui-btn" lay-submit="" lay-filter="demo1">提交更改</button>
                     </div>
 
                 </form>
@@ -138,11 +147,13 @@
                     <div class="layui-upload-list">
                         <table class="layui-table">
                             <thead>
-                            <tr><th>文件名</th>
+                            <tr>
+                                <th>文件名</th>
                                 <th>大小</th>
                                 <th>状态</th>
                                 <th>操作</th>
-                            </tr></thead>
+                            </tr>
+                            </thead>
                             <tbody id="demoList"></tbody>
                         </table>
                     </div>
@@ -184,7 +195,7 @@
 </script>
 
 <script src="/layui/layui.js" charset="utf-8"></script>
-<script  src="/custom/javascript/newCommodity.js" charset="utf-8" ></script>
+<script src="/custom/javascript/newCommodity.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 </body>
 </html>

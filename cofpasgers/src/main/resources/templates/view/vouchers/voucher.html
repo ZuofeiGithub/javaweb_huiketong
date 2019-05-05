@@ -14,10 +14,10 @@
 
         .red_package {
             background: -webkit-linear-gradient(left, #e62168, #f87f30); /* Safari 5.1 - 6.0 */
-            background: -o-linear-gradient(left,  #e62168, #f87f30); /* Opera 11.1 - 12.0 */
-            background: -moz-linear-gradient(left,  #e62168, #f87f30); /* Firefox 3.6 - 15 */
-            background: linear-gradient(left,  #e62168, #f87f30); /* 标准的语法 */
-            height:200px;
+            background: -o-linear-gradient(left, #e62168, #f87f30); /* Opera 11.1 - 12.0 */
+            background: -moz-linear-gradient(left, #e62168, #f87f30); /* Firefox 3.6 - 15 */
+            background: linear-gradient(left, #e62168, #f87f30); /* 标准的语法 */
+            height: 200px;
             margin-top: 30px;
             border-radius: 10px;
             overflow: hidden;
@@ -83,8 +83,8 @@
             color: #ffef22;
         }
 
-        .touch{
-           width: 90%;
+        .touch {
+            width: 90%;
             margin: 80px 50px 0 50px;
             height: 100px;
             border: 1px #ccc solid;
@@ -93,11 +93,11 @@
             border-radius: 5px;
         }
 
-        .promptly_get{
+        .promptly_get {
             background: -webkit-linear-gradient(left, #fa4716, #fc9622); /* Safari 5.1 - 6.0 */
-            background: -o-linear-gradient(left,  #fa4716, #fc9622); /* Opera 11.1 - 12.0 */
-            background: -moz-linear-gradient(left,  #fa4716, #fc9622); /* Firefox 3.6 - 15 */
-            background: linear-gradient(left,  #fa4716, #fc9622); /* 标准的语法 */
+            background: -o-linear-gradient(left, #fa4716, #fc9622); /* Opera 11.1 - 12.0 */
+            background: -moz-linear-gradient(left, #fa4716, #fc9622); /* Firefox 3.6 - 15 */
+            background: linear-gradient(left, #fa4716, #fc9622); /* 标准的语法 */
             font-size: 30px;
             color: #fff;
             height: 100px;
@@ -106,29 +106,33 @@
             margin-left: 50px;
             margin-right: 50px;
         }
-        .descript_title{
+
+        .descript_title {
             display: flex;
             justify-content: center;
             align-items: center;
             margin-top: 20px;
         }
 
-        .descript_title div{
+        .descript_title div {
             width: 100px;
             height: 5px;
             background-color: #0d0d0d;
             margin: 0 10px 0 10px;
         }
-        .descript_title p{
+
+        .descript_title p {
             font-size: 30px;
             font-weight: bold;
 
         }
-        .descript{
+
+        .descript {
             width: 90%;
-            margin:  30px 50px 0 50px;
+            margin: 30px 50px 0 50px;
         }
-        .descript p{
+
+        .descript p {
             font-size: 30px;
             margin-top: 10px;
         }
@@ -175,7 +179,9 @@
 
 <div class="weui-flex">
     <div class="weui-flex__item descript_title">
-        <div></div><p>优惠券使用说明</p><div></div>
+        <div></div>
+        <p>优惠券使用说明</p>
+        <div></div>
     </div>
 </div>
 <div class="weui-flex">
@@ -196,15 +202,15 @@
         var pattern = /^1[34578]\d{9}$/;
         return pattern.test(phone);
     }
-    
-    
 
-    function GetQueryString(name)
-    {
-        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
         var r = window.location.search.substr(1).match(reg);
-        if(r!=null)return  unescape(r[2]); return null;
+        if (r != null) return unescape(r[2]);
+        return null;
     }
+
     var mySwiper = new Swiper('.swiper-container', {
         speed: 2000,
         spaceBetween: 0,
@@ -212,12 +218,12 @@
             delay: 5000,
         },
     });
-    
-    $.get('voucherdetail',{'user_id':GetQueryString('user_id')},function (resp) {
-        if(resp.code == "0"){
+
+    $.get('voucherdetail', {'user_id': GetQueryString('user_id')}, function (resp) {
+        if (resp.code == "0") {
             $('.money p').text(resp.data.price);
             $('.people i').text(resp.data.user_count)
-        }else{
+        } else {
             $('.money p').text('1000');
             $('.people i').text('78')
         }
@@ -226,14 +232,17 @@
     $('.promptly_get').click(function () {
         var address = $('#address').val();
         var phone = $('#telphone').val();
-        if(!isPhoneNo(phone)){
-           return alert("请输入正确的手机号")
+        if (!isPhoneNo(phone)) {
+            return alert("请输入正确的手机号")
         }
-        $.post('api/addvoucheruser',{'user_id':GetQueryString('user_id'),'address':address,'phone':phone},function (resp) {
-            if(resp.code == "0"){
+        $.post('api/addvoucheruser', {
+            'user_id': GetQueryString('user_id'),
+            'address': address,
+            'phone': phone
+        }, function (resp) {
+            if (resp.code == "0") {
                 alert(resp.msg)
-            }
-            else{
+            } else {
                 alert(resp.msg);
             }
         });

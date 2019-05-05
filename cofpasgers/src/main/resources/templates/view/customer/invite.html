@@ -58,7 +58,8 @@
     <div class="list article-detail box-follow">
         <div class="item bd" id="nr">
             <h3 id="title"></h3>
-            <p style="margin-top:0.1rem;color: #999;" th:text="${#dates.format(new java.util.Date().getTime(), 'yyyy-MM-dd hh:mm:ss')}"></p>
+            <p style="margin-top:0.1rem;color: #999;"
+               th:text="${#dates.format(new java.util.Date().getTime(), 'yyyy-MM-dd hh:mm:ss')}"></p>
             <br>
             <div id="content">
 
@@ -81,7 +82,7 @@
 <script type="text/javascript" src="/custom/invite/inviteagent/res/script/hmac-sha256.js"></script>
 <script type="text/javascript" src="layui/layui.js"></script>
 <script type="text/javascript">
-    function getParam(paramName){
+    function getParam(paramName) {
         paramValue = "", isFound = !1;
         if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
             arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0;
@@ -89,12 +90,13 @@
         }
         return paramValue == "" && (paramValue = null), paramValue
     }
+
     var inviteCode = getParam("parentInvitationCode");
-    $.post("getInviteContent",{"inviteCode":inviteCode},function (res) {
+    $.post("getInviteContent", {"inviteCode": inviteCode}, function (res) {
         $("#title").text(res.data.title);
         $("#top_title").text(res.data.title);
         $("#content").append(res.data.content);
-        $("#mineorder").attr('href','/invite/order?inviteCode='+inviteCode);
+        $("#mineorder").attr('href', '/invite/order?inviteCode=' + inviteCode);
     })
 
 </script>

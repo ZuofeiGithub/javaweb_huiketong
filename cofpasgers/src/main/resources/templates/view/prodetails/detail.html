@@ -448,6 +448,7 @@
                             font-family: 苹方;
                             src: url(front/fonts/苹方字体.ttf);
                         }
+
                         .report_user {
                             width: 80%;
                             height: 250px;
@@ -473,7 +474,7 @@
                             background-color: #fff;
                             height: 38px;
                             width: 90%;
-                            margin:auto;
+                            margin: auto;
                         }
 
                         .name label {
@@ -504,7 +505,8 @@
                             height: 38px;
                             margin: auto;
                         }
-                        .title{
+
+                        .title {
                             margin-top: 30px;
                             text-align: center;
                             font-family: "苹方 粗体";
@@ -517,18 +519,23 @@
                             font-weight: bold;
                             font-family: 苹方;
                         }
-                        input::-webkit-input-placeholder{
-                            color:#ccc;
+
+                        input::-webkit-input-placeholder {
+                            color: #ccc;
                         }
-                        input::-moz-placeholder{   /* Mozilla Firefox 19+ */
-                            color:#ccc;
+
+                        input::-moz-placeholder { /* Mozilla Firefox 19+ */
+                            color: #ccc;
                         }
-                        input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
-                            color:#ccc;
+
+                        input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                            color: #ccc;
                         }
-                        input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
-                            color:#ccc;
+
+                        input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+                            color: #ccc;
                         }
+
                         .phone input {
                             border: none;
                             font-size: 0.15em;
@@ -538,10 +545,10 @@
                             border-bottom: 1px #ccc solid;
                         }
 
-                        .context{
+                        .context {
                             background-color: #fff;
                             width: 90%;
-                            margin:30px auto 0;
+                            margin: 30px auto 0;
                         }
 
                         .sumit_btn {
@@ -567,6 +574,7 @@
                         .sumit_btn:active {
                             background-color: #ff5220;
                         }
+
                         .close {
                             color: red;
 
@@ -582,6 +590,7 @@
                             right: 0px;
                             position: absolute;
                         }
+
                         /* use cross as close button */
                         .close::before {
                             content: "\2716";
@@ -591,8 +600,10 @@
                         <span class="close"></span>
                         <div class="title"><p>请填写您的资料</p></div>
                         <div class="context">
-                            <div class="name"><label>客户姓名:</label><input id="name" type="text" placeholder="请输入姓名"></div>
-                            <div class="phone"><label>客户电话:</label><input id="phone" type="tel" placeholder="请输入联系方式"></div>
+                            <div class="name"><label>客户姓名:</label><input id="name" type="text" placeholder="请输入姓名">
+                            </div>
+                            <div class="phone"><label>客户电话:</label><input id="phone" type="tel" placeholder="请输入联系方式">
+                            </div>
                         </div>
 
                         <button class="sumit_btn">提交</button>
@@ -630,11 +641,11 @@
 
         })
 
-        $('body').click(function(e) {
+        $('body').click(function (e) {
             var target = $(e.target);
             console.log(target);
-            if(target.is('.close')) {
-                if ( $('.report_user').is(':visible') ) {
+            if (target.is('.close')) {
+                if ($('.report_user').is(':visible')) {
                     $('.report_user').hide();
                 }
             }
@@ -643,14 +654,18 @@
             $('.report_user').show();
         })
 
-        $('.sumit_btn').click(function(){
+        $('.sumit_btn').click(function () {
             var name = $('#name').val();
             var phone = $('#phone').val();
-            
-            $.post('api/addvoucheruser',{user_id:GetQueryString('user_id'),user_name:name,phone:phone},function (resp) {
-                if(resp.code == "0"){
+
+            $.post('api/addvoucheruser', {
+                user_id: GetQueryString('user_id'),
+                user_name: name,
+                phone: phone
+            }, function (resp) {
+                if (resp.code == "0") {
                     alert(resp.msg);
-                }else{
+                } else {
                     alert(resp.msg);
                 }
             })

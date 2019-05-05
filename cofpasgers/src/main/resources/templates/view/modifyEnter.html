@@ -11,7 +11,8 @@
         <div>
             <label class="layui-form-label">企业名字</label>
             <div class="layui-input-block">
-                <input type="text" name="enter_name" lay-verify="enter_name" th:attr="value=${enterName}"  autocomplete="off" placeholder="输入企业名字"
+                <input type="text" name="enter_name" lay-verify="enter_name" th:attr="value=${enterName}"
+                       autocomplete="off" placeholder="输入企业名字"
                        class="layui-input">
             </div>
         </div>
@@ -19,7 +20,8 @@
         <div>
             <label class="layui-form-label">企业地址</label>
             <div class="layui-input-block">
-                <input type="text" name="enter_address" lay-verify="enter_address" th:attr="value=${enterAddress}" autocomplete="off"
+                <input type="text" name="enter_address" lay-verify="enter_address" th:attr="value=${enterAddress}"
+                       autocomplete="off"
                        placeholder="输入企业地址"
                        class="layui-input">
             </div>
@@ -28,7 +30,8 @@
         <div>
             <label class="layui-form-label">企业法人</label>
             <div class="layui-input-block">
-                <input type="text" name="enter_legal" lay-verify="enter_legal" th:attr="value=${enterLegal}" autocomplete="off"
+                <input type="text" name="enter_legal" lay-verify="enter_legal" th:attr="value=${enterLegal}"
+                       autocomplete="off"
                        placeholder="输入企业法人"
                        class="layui-input">
             </div>
@@ -37,7 +40,8 @@
         <div>
             <label class="layui-form-label">企业联系方式</label>
             <div class="layui-input-block">
-                <input type="text" name="enter_telphone" lay-verify="enter_telphone" th:attr="value=${enterTelphone}" autocomplete="off"
+                <input type="text" name="enter_telphone" lay-verify="enter_telphone" th:attr="value=${enterTelphone}"
+                       autocomplete="off"
                        placeholder="输入企业联系方式"
                        class="layui-input">
             </div>
@@ -46,7 +50,8 @@
         <div>
             <label class="layui-form-label">企业成立日期</label>
             <div class="layui-input-block">
-                <input type="text" name="establish_date" id="establish_date" th:attr="value=${enterEstablelish}" lay-verify="date" placeholder="输入企业成立日期"
+                <input type="text" name="establish_date" id="establish_date" th:attr="value=${enterEstablelish}"
+                       lay-verify="date" placeholder="输入企业成立日期"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
@@ -56,7 +61,8 @@
             <label class="layui-form-label">企业LOGO</label>
             <div class="layui-upload">
                 <div class="layui-upload-list">
-                    <img class="layui-upload-img" name="logo" th:attr="src=${enterLogo}" id="demo1" style="width: 150px;height: 150px;">
+                    <img class="layui-upload-img" name="logo" th:attr="src=${enterLogo}" id="demo1"
+                         style="width: 150px;height: 150px;">
                     <p id="demoText"></p>
                 </div>
             </div>
@@ -67,7 +73,8 @@
         <div>
             <label class="layui-form-label">企业排序</label>
             <div class="layui-input-block">
-                <input type="text" name="enter_order" lay-verify="enter_order" th:attr="value=${enterSort}" autocomplete="off"
+                <input type="text" name="enter_order" lay-verify="enter_order" th:attr="value=${enterSort}"
+                       autocomplete="off"
                        placeholder="输入企业排序"
                        class="layui-input">
             </div>
@@ -76,9 +83,9 @@
         <div>
             <label class="layui-form-label">企业状态</label>
             <div class="layui-input-block">
-                <select  name="enter_status" lay-verify="enter_status">
+                <select name="enter_status" lay-verify="enter_status">
                     <option value=""></option>
-                    <option value="0"  th:selected="${enterStatus == 0}">不启用</option>
+                    <option value="0" th:selected="${enterStatus == 0}">不启用</option>
                     <option value="1" th:selected="${enterStatus == 1}">启用</option>
                 </select>
             </div>
@@ -87,7 +94,8 @@
         <div>
             <label class="layui-form-label">企业人员上限</label>
             <div class="layui-input-block">
-                <input type="number" name="person_num" lay-verify="person_num" th:attr="value=${enterPerson}" autocomplete="off"
+                <input type="number" name="person_num" lay-verify="person_num" th:attr="value=${enterPerson}"
+                       autocomplete="off"
                        placeholder="输入企业人数上限"
                        class="layui-input">
             </div>
@@ -96,7 +104,8 @@
         <div class=" layui-form-text">
             <label class="layui-form-label">企业评价</label>
             <div class="layui-input-block">
-                <textarea placeholder="请输入内容" name="comment_id" lay-verify="comment_id" th:attr="value=${enterComment}" class="layui-textarea"></textarea>
+                <textarea placeholder="请输入内容" name="comment_id" lay-verify="comment_id" th:attr="value=${enterComment}"
+                          class="layui-textarea"></textarea>
             </div>
         </div>
     </div>
@@ -110,10 +119,10 @@
 <script>
     layui.use(['form', 'laydate', 'upload'], function () {
         var $ = layui.jquery, form = layui.form
-                , layer = layui.layer
-                , laydate = layui.laydate,
-                upload = layui.upload;
-                form.render();
+            , layer = layui.layer
+            , laydate = layui.laydate,
+            upload = layui.upload;
+        form.render();
         //上传图片
         var uploadInst = upload.render({
             elem: '#demo1'
@@ -147,8 +156,8 @@
                     return '请输入企业名字';
                 }
             },
-            comment_id:function(value) {
-                if(value == ""){
+            comment_id: function (value) {
+                if (value == "") {
                     return '请输入企业评价';
                 }
             }

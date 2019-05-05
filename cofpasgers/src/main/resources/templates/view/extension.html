@@ -28,14 +28,14 @@
 </body>
 <script>
     //使用指定的模块
-    layui.use(['layer','table'], function () {
+    layui.use(['layer', 'table'], function () {
         var layer = layui.layer;
         var table = layui.table;
         table.render({
             elem: '#activity_table'
             , url: ''
             , toolbar: '#toolbar',
-            area:'900px'
+            area: '900px'
             , cellMinWidth: 80     //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             , cols: [
                 [
@@ -56,10 +56,10 @@
                 case 'add_activity':
                     layer.open({
                         type: 2,
-                        title:'添加活动',
-                        area:['1000px','600px'],
+                        title: '添加活动',
+                        area: ['1000px', '600px'],
                         content: 'addexten', //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
-                        success: function(layero, index) {
+                        success: function (layero, index) {
                             layer.iframeAuto(index);
                         }
                     });

@@ -75,9 +75,9 @@
                 }
                     , {
                     field: 'enterStatus', title: '企业状态', templet: function (d) {
-                        if(d.enterStatus == 0){
+                        if (d.enterStatus == 0) {
                             return "未启用";
-                        }else if(d.enterStatus == 1){
+                        } else if (d.enterStatus == 1) {
                             return "启用";
                         }
                     }, sort: true, align: 'center'
@@ -110,11 +110,11 @@
         function modifyEnter(obj) {
             layer.open({
                 type: 2,
-                title:"修改企业信息",
+                title: "修改企业信息",
                 anim: 1,
                 maxmin: true,
                 offset: 'auto',
-                content: 'modifyenter?id='+obj[0].id,
+                content: 'modifyenter?id=' + obj[0].id,
                 area: screen() < 2 ? ['90%', '80%'] : ['1000px', '680px'],
             });
         }
@@ -122,16 +122,16 @@
         /**
          * 添加公司
          */
-        function addEnter(){
+        function addEnter() {
             layer.open({
                 type: 2,
-                title:"添加企业信息",
+                title: "添加企业信息",
                 anim: 1,
                 maxmin: true,
                 offset: 'auto',
                 content: 'addenter',
                 area: screen() < 2 ? ['90%', '80%'] : ['1000px', '680px'],
-                end:function () {
+                end: function () {
                     location.reload();
                 }
             });
