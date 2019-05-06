@@ -22,80 +22,90 @@
     </style>
 </head>
 <body>
-<form class="layui-form" id="form1" action="" onsubmit="return false">
-    <br>
-    <div class="layui-form-item">
-        <label class="layui-form-label">企业账号</label>
-        <div class="layui-input-block">
-            <input type="text" name="loginname" lay-verify="title" autocomplete="off" th:value="${loginname}"
-                   placeholder="" readonly class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">登陆密码</label>
-        <div class="layui-input-block">
-            <input type="password" name="loginpwd" autocomplete="off"
-                   placeholder="" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">重复密码</label>
-        <div class="layui-input-block">
-            <input type="password" name="loginrpwd" autocomplete="off"
-                   placeholder="" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">企业名字</label>
-        <div class="layui-input-block">
-            <input type="text" name="entername" lay-verify="title" autocomplete="off" th:value="${entername}"
-                   placeholder="" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">企业地址</label>
-        <div class="layui-input-block">
-            <input type="text" name="enteradress" placeholder="" autocomplete="off" th:value="${enteradress}"
-                   class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">企业法人</label>
-        <div class="layui-input-block">
-            <input type="text" name="enterleader" lay-verify="title" autocomplete="off" placeholder=""
-                   th:value="${enterleader}" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">企业电话</label>
-        <div class="layui-input-block">
-            <input type="tel" name="entertel" placeholder="" autocomplete="off" th:value="${entertel}"
-                   class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">企业成立日期</label>
-        <div class="layui-input-block">
-            <input type="text" name="enterdate" lay-verify="title" autocomplete="off" placeholder=""
-                   th:value="${enterdate}" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">当前可赚佣金</label>
-        <div class="layui-input-inline">
-            <input type="text" name="brokerage" lay-verify="title" autocomplete="off" placeholder=""
-                   th:value="${brokerage}" class="layui-input">
-        </div>
-        <div class="layui-form-mid layui-word-aux">元</div>
-    </div>
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-body">
+            <form class="layui-form" id="form1" action="" onsubmit="return false">
+                <br>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">企业账号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="loginname" lay-verify="title" autocomplete="off"
+                               th:value="${loginname}"
+                               placeholder="" readonly class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">登陆密码</label>
+                    <div class="layui-input-block">
+                        <input type="password" name="loginpwd" autocomplete="off"
+                               placeholder="" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">重复密码</label>
+                    <div class="layui-input-block">
+                        <input type="password" name="loginrpwd" autocomplete="off"
+                               placeholder="" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">企业名字</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="entername" lay-verify="title" autocomplete="off"
+                               th:value="${entername}"
+                               placeholder="" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">企业地址</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="enteradress" placeholder="" autocomplete="off"
+                               th:value="${enteradress}"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">企业法人</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="enterleader" lay-verify="title" autocomplete="off" placeholder=""
+                               th:value="${enterleader}" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">企业电话</label>
+                    <div class="layui-input-block">
+                        <input type="tel" name="entertel" placeholder="" autocomplete="off" th:value="${entertel}"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">企业成立日期</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="enterdate" lay-verify="title" autocomplete="off" placeholder=""
+                               th:value="${enterdate}" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">当前可赚佣金</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="brokerage" lay-verify="title" autocomplete="off" placeholder=""
+                               th:value="${brokerage}" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">元</div>
+                </div>
 
-    <div class="layui-form-item">
-        <div class="layui-input-block">
-            <button class="layui-btn" lay-submit lay-filter="submit">立即提交</button>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="submit">立即提交</button>
+                    </div>
+                </div>
+                <input type="hidden" name="telphone">
+            </form>
         </div>
     </div>
-    <input type="hidden" name="telphone">
-</form>
+</div>
+
 <script src="/layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>

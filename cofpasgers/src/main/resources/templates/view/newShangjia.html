@@ -20,7 +20,23 @@
     </style>
 </head>
 <body>
-
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-header layuiadmin-card-header-auto">
+            <div style="margin-top:20px;margin-left:-60px">
+                <label class="layui-form-label">商家名称:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="searchMerName" lay-verify="required" placeholder="" autocomplete="off"
+                           class="layui-input">
+                </div>
+                <button class="layui-btn" lay-submit="" lay-filter="demo1" id="search">查询</button>
+            </div>
+            <div class="layui-card-body">
+                <table class="layui-hide" id="test" lay-filter="test"></table>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -94,16 +110,6 @@
 </div>
 
 
-<div style="margin-top:20px;margin-left:-60px">
-    <label class="layui-form-label">商家名称:</label>
-    <div class="layui-input-inline">
-        <input type="text" name="searchMerName" lay-verify="required" placeholder="" autocomplete="off"
-               class="layui-input">
-    </div>
-    <button class="layui-btn" lay-submit="" lay-filter="demo1" id="search">查询</button>
-</div>
-
-<table class="layui-hide" id="test" lay-filter="test"></table>
 
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">

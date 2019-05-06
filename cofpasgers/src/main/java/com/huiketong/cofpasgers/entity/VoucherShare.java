@@ -22,4 +22,5 @@ public class VoucherShare {
     Integer sharetype;
     Integer goodsId;
     Date createTime;
+    String price;
 }

@@ -7,7 +7,6 @@ layui.use(['form', 'table', 'layedit', 'upload'], function () {
     form = layui.form;
     table = layui.table;
     layedit = layui.layedit;
-    console.log("这里已经执行");
 
     layedit.set({
         uploadImage: {
@@ -218,10 +217,6 @@ layui.use(['form', 'table', 'layedit', 'upload'], function () {
                     ]
                 ]
                 , page: true
-                /*   ,done: function(res, curr,count){
-                       debugger
-                       console.log(res)
-                   }*/
             });
             table.on('tool(commodityImg)', function (obj) {
                 var data = obj.data;

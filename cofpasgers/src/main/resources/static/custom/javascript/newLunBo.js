@@ -34,7 +34,6 @@ layui.use(['form', 'table'], function () {
     table.render({
         elem: '#test'
         , url: '/lunBoList?telphone=' + getCookie("telphone")
-        , toolbar: '#toolbarDemo'
         , title: '用户数据表'
         , cols: [
             [
@@ -47,7 +46,7 @@ layui.use(['form', 'table'], function () {
                 templet: "<div>{{ layui.util.toDateString(d.create_date)}}</div>"
             }
                 , {field: 'status', title: '状态', width: '15%', templet: '#sexTpl'}
-                , {fixed: 'right', title: '操作', templet: '#barDemo', width: '20%'}
+                , {fixed: 'right', title: '操作', templet: '#barDemo'}
             ]
         ]
         , page: true
@@ -56,6 +55,19 @@ layui.use(['form', 'table'], function () {
                 console.log(res)
             }*/
     });
+
+    $('#add_banner_id').click(function (e) {
+        $("#myModal").modal('show');  //手动开启
+        $("#myModalLabel").text("添加轮播图")  //手动开启
+        $("input[name='name']").val("");
+        $("input[name='descript']").val("");
+        $("input[name='trankurl']").val("");
+        $("input[name='sort']").val("");
+        $("input[name='flag']").val("1");
+        $("#myfile").val("");
+        $("#previewImg").attr('src', "http://www");
+        $("#previewImg").css("display", 'none');
+    })
     //头工具栏事件
     table.on('toolbar(test)', function (obj) {
         var checkStatus = table.checkStatus(obj.config.id);

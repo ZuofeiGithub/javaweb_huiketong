@@ -7,8 +7,15 @@
     <link rel="stylesheet" href="/layui/css/layui.css">
 </head>
 <body>
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-body">
+            <div class="layui-btn-group"><button class="layui-btn layui-btn-sm" id="add_agent_id">添加经纪人</button></div></div>
+            <table class="layui-hide" id="agent_table" lay-filter="agent_table"></table>
+        </div>
+    </div>
+</div>
 
-<table class="layui-hide" id="agent_table" lay-filter="agent_table"></table>
 
 <script type="text/html" id="toolbar">
     <div class="layui-btn-container">
@@ -87,10 +94,13 @@
                 if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
             return fmt;
         };
+
+        $('#add_agent_id').click(function (e) {
+            addAgent();
+        })
         table.render({
             elem: '#agent_table'
             , url: 'agentinfo/' + getCookie("telphone")
-            , toolbar: '#toolbar'
             , cellMinWidth: 80     //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             , cols: [
                 [
@@ -193,8 +203,8 @@
                 offset: 'auto',
                 content: 'addagent?user_id=' + getCookie("telphone"),
                 area: screen() < 2 ? ['90%', '80%'] : ['1000px', '680px'],
-                end: function () {
-                    location.reload();
+                end: function (layero,index) {
+                    table.reload('agent_table');
                 }
             });
         }

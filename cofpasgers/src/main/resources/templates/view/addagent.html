@@ -6,80 +6,87 @@
     <link rel="stylesheet" href="/layui/css/layui.css">
 </head>
 <body>
-<form class="layui-form layui-container" action="#" lay-filter="example">
-    <div class="layui-row layui-col-xs6">
-        <div>
-            <label class="layui-form-label">经纪人姓名</label>
-            <div class="layui-input-block">
-                <input type="text" name="agentName" lay-verify="agentName" autocomplete="off" placeholder="输入经纪人姓名"
-                       class="layui-input">
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-body">
+            <form class="layui-form layui-container" action="#" lay-filter="example">
+                <div class="layui-row layui-col-xs6">
+                    <div>
+                        <label class="layui-form-label">经纪人姓名</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="agentName" lay-verify="agentName" autocomplete="off" placeholder="输入经纪人姓名"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <!--<hr class="layui-col-lg-offset1">-->
+                    <!--<div>-->
+                    <!--<label class="layui-form-label">登录账号</label>-->
+                    <!--<div class="layui-input-block">-->
+                    <!--<input type="text" name="loginName" lay-verify="loginName" autocomplete="off"-->
+                    <!--placeholder="输入登录账号"-->
+                    <!--class="layui-input">-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <hr class="layui-col-lg-offset1">
+                    <div>
+                        <label class="layui-form-label">手机号码</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="telphone" lay-verify="telphone" autocomplete="off"
+                                   placeholder="输入手机号码"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <hr class="layui-col-lg-offset1">
+                    <div>
+                        <label class="layui-form-label">登录密码</label>
+                        <div class="layui-input-block">
+                            <input type="password" name="loginPass" lay-verify="loginPass" autocomplete="off"
+                                   placeholder="输入登录密码"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <hr class="layui-col-lg-offset1">
+                    <div>
+                        <label class="layui-form-label">确认密码</label>
+                        <div class="layui-input-block">
+                            <input type="password" name="loginrePass" lay-verify="loginrePass" placeholder="再次输入密码"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div class="layui-row layui-col-xs6">
+            <div>
+                <label class="layui-form-label">绑定公司</label>
+                <div class="layui-input-block">
+                    <select name="selectComm" lay-verify="selectComm" id="selectComm">
+                        <option value=""></option>
+                        <option th:value="${enter_id}" th:text="${enter_name}"></option>
+                    </select>
+                </div>
+            </div>
+            <hr class="layui-col-lg-offset1">
+            <div>
+                <label class="layui-form-label">经纪人类型</label>
+                <div class="layui-input-block">
+                    <select name="agentType" lay-verify="agentType">
+                        <option value=""></option>
+                        <option value="0">公司员工</option>
+                        <option value="1">公司市场部</option>
+                    </select>
+                </div>
             </div>
         </div>
-        <!--<hr class="layui-col-lg-offset1">-->
-        <!--<div>-->
-        <!--<label class="layui-form-label">登录账号</label>-->
-        <!--<div class="layui-input-block">-->
-        <!--<input type="text" name="loginName" lay-verify="loginName" autocomplete="off"-->
-        <!--placeholder="输入登录账号"-->
-        <!--class="layui-input">-->
-        <!--</div>-->
-        <!--</div>-->
-        <hr class="layui-col-lg-offset1">
-        <div>
-            <label class="layui-form-label">手机号码</label>
+        <div class="layui-form-item">
             <div class="layui-input-block">
-                <input type="text" name="telphone" lay-verify="telphone" autocomplete="off"
-                       placeholder="输入手机号码"
-                       class="layui-input">
+                <button class="layui-btn" lay-submit="" lay-filter="sumitid">提交</button>
             </div>
         </div>
-        <hr class="layui-col-lg-offset1">
-        <div>
-            <label class="layui-form-label">登录密码</label>
-            <div class="layui-input-block">
-                <input type="password" name="loginPass" lay-verify="loginPass" autocomplete="off"
-                       placeholder="输入登录密码"
-                       class="layui-input">
-            </div>
-        </div>
-        <hr class="layui-col-lg-offset1">
-        <div>
-            <label class="layui-form-label">确认密码</label>
-            <div class="layui-input-block">
-                <input type="password" name="loginrePass" lay-verify="loginrePass" placeholder="再次输入密码"
-                       autocomplete="off" class="layui-input">
-            </div>
+        </form>
         </div>
     </div>
-    </div>
-    <div class="layui-row layui-col-xs6">
-        <div>
-            <label class="layui-form-label">绑定公司</label>
-            <div class="layui-input-block">
-                <select name="selectComm" lay-verify="selectComm" id="selectComm">
-                    <option value=""></option>
-                    <option th:value="${enter_id}" th:text="${enter_name}"></option>
-                </select>
-            </div>
-        </div>
-        <hr class="layui-col-lg-offset1">
-        <div>
-            <label class="layui-form-label">经纪人类型</label>
-            <div class="layui-input-block">
-                <select name="agentType" lay-verify="agentType">
-                    <option value=""></option>
-                    <option value="0">公司员工</option>
-                    <option value="1">公司市场部</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <div class="layui-input-block">
-            <button class="layui-btn" lay-submit="" lay-filter="sumitid">提交</button>
-        </div>
-    </div>
-</form>
+</div>
+
 <script src="/layui/layui.js"></script>
 <script>
     layui.use(['form', 'layer', 'upload'], function () {

@@ -21,6 +21,35 @@
 </head>
 <body>
 
+<div class="layui-fluid">
+    <div class="layui-card">
+        <form class="layui-form layui-card-header layuiadmin-card-header-auto" action="" onsubmit="return false" style="margin-top:20px;margin-left:-60px">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">轮播名称:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="searchMerName" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">状态:</label>
+                    <div class="layui-input-inline">
+                        <select name="status" lay-filter="aihao">
+                            <option value=""></option>
+                            <option value="0">无效</option>
+                            <option value="1">有效</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="layui-btn" lay-submit="" lay-filter="demo1" id="search" style="margin-top:-10px">查询</button>
+            </div>
+        </form>
+        <div class="layui-card-body">
+            <div class="layui-btn-group"><button class="layui-btn layui-btn-sm" id="add_banner_id">添加</button></div>
+            <table class="layui-hide" id="test" lay-filter="test"></table>
+        </div>
+    </div>
+</div>
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -47,17 +76,17 @@
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
-                    <div class="layui-form-item">
+                    <div class="layui-form-item layui-hide">
                         <label class="layui-form-label">轮播图类型</label>
                         <div class="layui-input-inline">
                             <select name="type" lay-verify="required" lay-filter="share_select">
                                 <option value=""></option>
-                                <option value="1" selected>外部url</option>
-                                <option value="2">招商加盟</option>
+                                <option value="1">外部url</option>
+                                <option value="2" selected>招商加盟</option>
                             </select>
                         </div>
                     </div>
-                    <div class="layui-form-item" id="banner_link_url">
+                    <div class="layui-form-item layui-hide" id="banner_link_url">
                         <label class="layui-form-label">轮播图跳转地址</label>
                         <div class="layui-input-inline">
                             <input type="text" name="trankurl" placeholder="请输入" autocomplete="off" class="layui-input">
@@ -95,30 +124,10 @@
 </div>
 
 
-<form class="layui-form" action="" onsubmit="return false" style="margin-top:20px;margin-left:-60px">
-    <div class="layui-form-item">
-        <div class="layui-inline">
-            <label class="layui-form-label">轮播名称:</label>
-            <div class="layui-input-inline">
-                <input type="text" name="searchMerName" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">状态:</label>
-            <div class="layui-input-inline">
-                <select name="status" lay-filter="aihao">
-                    <option value=""></option>
-                    <option value="0">无效</option>
-                    <option value="1">有效</option>
-                </select>
-            </div>
-        </div>
-        <button class="layui-btn" lay-submit="" lay-filter="demo1" id="search" style="margin-top:-10px">查询</button>
-    </div>
-</form>
 
 
-<table class="layui-hide" id="test" lay-filter="test"></table>
+
+
 
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">

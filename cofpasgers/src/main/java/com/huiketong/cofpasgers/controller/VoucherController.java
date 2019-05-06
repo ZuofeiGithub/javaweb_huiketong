@@ -70,6 +70,7 @@ public class VoucherController {
             voucherShare.setLinkUrl(link_url);
             voucherShare.setSharetype(sharetype);
             voucherShare.setCreateTime(new Date());
+            voucherShare.setPrice(price);
             if (!ObjectUtils.isEmpty(price)) {
                 VoucherDetail voucherDetail = new VoucherDetail();
                 voucherDetail.setCompanyId(enterprise.getId());
@@ -107,18 +108,18 @@ public class VoucherController {
         List<VoucherShareResp.DataBean> dataBeanList = new ArrayList<>();
         Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(user_id);
         if (!ObjectUtils.isEmpty(enterprise)) {
-            List<VoucherShare> voucherShareList = voucherShareRepository.findVoucherSharesByCompanyId(enterprise.getId());
+            List<VoucherShare> voucherShareList = voucherShareRepository.findVoucherSharesByCompanyIdAndSharetype(enterprise.getId(),1);
             if (voucherShareList.size() > 0) {
                 for (VoucherShare voucherShare : voucherShareList) {
                     VoucherShareResp.DataBean bean = new VoucherShareResp.DataBean();
-                    bean.setTitle(voucherShare.getTitle());
-                    bean.setContext(voucherShare.getContext());
-                    bean.setSharetype(voucherShare.getSharetype());
-                    bean.setGoods_id(voucherShare.getGoodsId());
-                    bean.setImage(voucherShare.getImage());
-                    bean.setLink_url(voucherShare.getLinkUrl());
-                    bean.setId(voucherShare.getId());
-                    dataBeanList.add(bean);
+                        bean.setTitle(voucherShare.getTitle());
+                        bean.setContext(voucherShare.getContext());
+                        bean.setSharetype(voucherShare.getSharetype());
+                        bean.setGoods_id(voucherShare.getGoodsId());
+                        bean.setImage(voucherShare.getImage());
+                        bean.setLink_url(voucherShare.getLinkUrl());
+                        bean.setId(voucherShare.getId());
+                        dataBeanList.add(bean);
                 }
                 resp.setCode(0);
                 resp.setCount(String.valueOf(voucherShareList.size()));

@@ -1,5 +1,7 @@
 package com.huiketong.cofpasgers.controller;
 
+import com.huiketong.cofpasgers.constant.Constant;
+import com.huiketong.cofpasgers.constant.URL;
 import com.huiketong.cofpasgers.constant.UserType;
 import com.huiketong.cofpasgers.entity.Banner;
 import com.huiketong.cofpasgers.entity.BannerContext;
@@ -137,7 +139,6 @@ public class BannerController {
         response.setCode("1");
         return response;
     }
-
     @DeleteMapping(value = "removebanner")
     @ResponseBody
     public BaseJsonResponse RemoveBanner(HttpServletRequest request) {
@@ -156,7 +157,6 @@ public class BannerController {
         }
         return response;
     }
-
     @DeleteMapping(value = "removebannerbyid")
     @ResponseBody
     public BaseJsonResponse RemoveBannerById(HttpServletRequest request) {
@@ -172,5 +172,9 @@ public class BannerController {
             response.setMsg("删除失败");
         }
         return response;
+    }
+    @GetMapping(value = "/banner_url_context_edit")
+    public String bannerUrlContextEdit(){
+        return URL.BANNERCONTEXTURL;
     }
 }

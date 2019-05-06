@@ -34,11 +34,21 @@ layui.use(['form', 'table', 'layedit'], function () {
     function trim(str) {
         return str.replace(/(^\s*)|(\s*$)/g, "");
     }
-
+    $('#add_commission_id').click(function (e) {
+        $("#myModal").modal('show');  //手动开启
+        $("#myModalLabel").text("添加佣金")  //手动开启
+        $("input[name='title']").val("");
+        $("input[name='flag']").val("1");
+        $("input[name='url']").val("");
+        layedit.setContent(index, "");
+        $("input[name='money']").val("");
+        $("#myfile").val("");
+        $("#previewImg").attr('src', "http://www");
+        $("#previewImg").css("display", 'none');
+    })
     table.render({
         elem: '#test'
         , url: '/yongjinList?telphone=' + getCookie("telphone")
-        , toolbar: '#toolbarDemo'
         , title: '用户数据表'
         , cols: [
             [

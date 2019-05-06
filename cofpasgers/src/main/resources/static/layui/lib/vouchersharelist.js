@@ -62,10 +62,18 @@
             maxmin: !0,
             area: ["550px", "550px"],
             btn: ["确定", "取消"],
+            success:function(layero,index){
+                let body = layer.getChildFrame('body',index);
+                body.find('#title').val(field.title);
+                body.find('#context').val(field.context);
+                body.find('#shareimage').attr('src',field.image);
+                body.find('#link_url').val(field.link_url);
+                body.find('#price').val(field.price);
+                console.log(field);
+            },
             yes: function (e, i) {
                 var l = window["layui-layer-iframe" + e],
                     a = i.find("iframe").contents().find("#layuiadmin-app-form-edit");
-                $()
                 l.layui.form.on("submit(layuiadmin-app-form-edit)", function (i) {
                     var l = i.field;
                     console.log(l);
@@ -78,7 +86,6 @@
                 }), a.trigger("click")
             }
         })
-        console.log(title)
     }), i.render({
         elem: "#LAY-app-content-tags",
         url: layui.setter.base + "json/content/tags.js",

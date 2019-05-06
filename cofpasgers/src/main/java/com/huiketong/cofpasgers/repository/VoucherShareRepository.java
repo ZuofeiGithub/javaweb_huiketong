@@ -15,7 +15,7 @@ public interface VoucherShareRepository extends JpaRepository<VoucherShare, Inte
 
     VoucherShare findVoucherShareByCompanyIdAndGoodsIdAndSharetype(Integer companyId, Integer goodsId, Integer type);
 
-    List<VoucherShare> findVoucherSharesByCompanyId(Integer companyId);
+    List<VoucherShare> findVoucherSharesByCompanyIdAndSharetype(Integer companyId,Integer type);
 
 
     @Transactional
