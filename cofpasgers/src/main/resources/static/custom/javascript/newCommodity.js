@@ -102,7 +102,6 @@ layui.use(['form', 'table', 'layedit', 'upload'], function () {
     table.render({
         elem: '#test'
         , url: '/commodityList?telphone=' + getCookie("telphone")
-        , toolbar: '#toolbarDemo'
         , title: '用户数据表'
         , cols: [
             [
@@ -119,6 +118,43 @@ layui.use(['form', 'table', 'layedit', 'upload'], function () {
         /*  ,done: function(res, curr,count){
              }*/
     });
+
+    $('#add_commodity_id').click(function (e) {
+        $("#myModal").modal('show');  //手动开启
+        $("#myModalLabel").text("添加商品")  //手动开启
+        $("input[name='flag']").val("1");
+        layedit.setContent(index, "");
+        $("input[name='commodityName']").val("");
+        $("input[name='danwei']").val("");
+        $("input[name='originalPrice']").val("");
+        $("input[name='activityPrice']").val("");
+        $("input[name='depositMoney']").val("");
+        $("textarea[name='activityDescription']").val("");
+        $("#commodityCategoryId").find("option[value='']").prop("selected", true);
+        $("#commodityStyleId").find("option[value='']").prop("selected", true);
+        form.render();
+    });
+    $('#search_by_name').click(function (e) {
+        table.render({
+            elem: '#test'
+            , url: '/commodityList?telphone=' + getCookie("telphone") + '&name=' + $('#commodity-name').val()
+            , title: '用户数据表'
+            , cols: [
+                [
+                    {field: 'commodityName', title: '商品名称', width: '20%'}
+                    , {field: 'originalPrice', title: '商品原价', width: '20%'}
+                    , {field: 'activityPrice', title: '活动特价', width: '10%'}
+                    , {field: 'depositMoney', title: '预付定金', width: '10%'}
+                    , {field: 'danwei', title: '单位', width: '10%'}
+                    , {field: 'concernedPeople', title: '关注人数', width: '10%'}
+                    , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: '20%'}
+                ]
+            ]
+            , page: true
+            /*  ,done: function(res, curr,count){
+                 }*/
+        });
+    })
     //头工具栏事件
     table.on('toolbar(test)', function (obj) {
         var checkStatus = table.checkStatus(obj.config.id);

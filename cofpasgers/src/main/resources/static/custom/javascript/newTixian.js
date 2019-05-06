@@ -24,7 +24,6 @@ layui.use(['form', 'table'], function () {
     table.render({
         elem: '#test'
         , url: '/tixianList?telphone=' + getCookie("telphone")
-        , toolbar: '#toolbarDemo'
         , title: '用户数据表'
         , cols: [
             [

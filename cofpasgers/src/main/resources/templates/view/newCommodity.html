@@ -11,15 +11,24 @@
     <script src="/front/script/jquery.min.js" charset="utf-8"></script>
     <script src="/bootstrap/js/bootstrap.js" charset="utf-8"></script>
     <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
-    <style>
-
-        .layui-form-label {
-            width: 150px;
-        }
-    </style>
 </head>
 <body>
-
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+            <div class="layui-form-item">
+                <button class="layui-btn" id="add_commodity_id">添加商品</button>
+                <div class="layui-inline">
+                    <input class="layui-input layui-input-search" id="commodity-name" placeholder="输入要搜索的商品名字">
+                </div>
+                <button class="layui-btn " id="search_by_name">搜索</button>
+            </div>
+        </div>
+        <div class="layui-card-body">
+            <table class="layui-hide" id="test" lay-filter="test"></table>
+        </div>
+    </div>
+</div>
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -42,21 +51,21 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">商品原价</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="originalPrice"  placeholder="请输入"
+                            <input type="text" name="originalPrice" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">活动特价</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="activityPrice"  placeholder="请输入"
+                            <input type="text" name="activityPrice" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">预付定金</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="depositMoney"  placeholder="请输入"
+                            <input type="text" name="depositMoney" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -79,7 +88,7 @@
                         <label class="layui-form-label ">商品风格</label>
                         <div class="layui-input-inline">
                             <select name="commodityStyleId" lay-filter="commodityStyleId" id="commodityStyleId"
-                                    >
+                            >
                                 <option value=""></option>
                                 <!--         <option value="1">审核中</option>
                                          <option value="2">已发放</option>
@@ -92,7 +101,7 @@
                         <label class="layui-form-label">商品种类</label>
                         <div class="layui-input-inline">
                             <select name="commodityCategoryId" lay-filter="commodityCategoryId" id="commodityCategoryId"
-                                    >
+                            >
                                 <option value=""></option>
                                 <!--   <option value="1">审核中</option>
                                    <option value="2">已发放</option>
@@ -167,7 +176,6 @@
 </div>
 <!--模态框结束-->
 
-<table class="layui-hide" id="test" lay-filter="test"></table>
 
 <script type="text/html" id="toolbarDemo">
     <div class="layui-input-inline">

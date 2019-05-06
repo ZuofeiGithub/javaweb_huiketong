@@ -24,7 +24,6 @@ layui.use(['form', 'table'], function () {
     table.render({
         elem: '#test'
         , url: '/tixianList?telphone=' + getCookie("telphone")
-        , toolbar: '#toolbarDemo'
         , title: '用户数据表'
         , cols: [
             [
@@ -44,10 +43,6 @@ layui.use(['form', 'table'], function () {
             ]
         ]
         , page: true
-        /* ,done: function(res, curr,count){
-                debugger
-                console.log(res)
-            }*/
     });
 
     //监听行工具事件

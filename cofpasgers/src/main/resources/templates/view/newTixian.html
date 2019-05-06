@@ -19,32 +19,39 @@
     </style>
 </head>
 <body>
-
-<form class="layui-form" action="" onsubmit="return false" style="margin-top:20px;margin-left:-60px">
-    <div class="layui-form-item">
-        <div class="layui-inline">
-            <label class="layui-form-label">经纪人姓名:</label>
-            <div class="layui-input-inline">
-                <input type="text" name="angentname" autocomplete="off" class="layui-input">
+<div class="layui-fluid">
+    <div class="layui-card">
+        <form class="layui-form layui-card-header layuiadmin-card-header-auto" action="" onsubmit="return false" style="margin-top:20px;margin-left:-60px">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">经纪人姓名:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="angentname" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">状态:</label>
+                    <div class="layui-input-inline">
+                        <select name="status" lay-filter="aihao">
+                            <option value=""></option>
+                            <option value="1">审核中</option>
+                            <option value="2">已发放</option>
+                            <option value="3">已撤销</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="layui-btn" lay-submit="" lay-filter="demo1" id="search" style="margin-top:-10px">查询</button>
             </div>
+        </form>
+        <div class="layui-card-body">
+            <table class="layui-hide" id="test" lay-filter="test"></table>
         </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">状态:</label>
-            <div class="layui-input-inline">
-                <select name="status" lay-filter="aihao">
-                    <option value=""></option>
-                    <option value="1">审核中</option>
-                    <option value="2">已发放</option>
-                    <option value="3">已撤销</option>
-                </select>
-            </div>
-        </div>
-        <button class="layui-btn" lay-submit="" lay-filter="demo1" id="search" style="margin-top:-10px">查询</button>
     </div>
-</form>
+</div>
 
 
-<table class="layui-hide" id="test" lay-filter="test"></table>
+
+
 
 <script type="text/html" id="statusTpl">
     {{# if (d.status=== 1) { }}
