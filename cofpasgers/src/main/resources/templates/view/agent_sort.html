@@ -30,6 +30,9 @@
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
 
+    $.post('',{user_id:user.user_id},function (resp) {
+        
+    });
     // 指定图表的配置项和数据
     var option = {
         color: ['#3398DB'],
@@ -68,7 +71,7 @@
             }
             ,
             {
-                name:'',
+                name:'已签合同客户数量',
                 type:'line',
                 barWidth: '60%',
                 data:[10, 52, 200, 334, 390, 330, 220]
