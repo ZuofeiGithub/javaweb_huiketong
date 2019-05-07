@@ -1,9 +1,6 @@
 package com.huiketong.cofpasgers.controller;
 
-import com.huiketong.cofpasgers.constant.Constant;
-import com.huiketong.cofpasgers.constant.JSONData;
-import com.huiketong.cofpasgers.constant.PointType;
-import com.huiketong.cofpasgers.constant.UserType;
+import com.huiketong.cofpasgers.constant.*;
 import com.huiketong.cofpasgers.entity.*;
 import com.huiketong.cofpasgers.jgim.JPUserService;
 import com.huiketong.cofpasgers.json.response.BaseJsonResponse;
@@ -126,7 +123,7 @@ public class AgentController {
      */
     @GetMapping(value = "agent")
     public ModelAndView PageAgent() {
-        ModelAndView mv = new ModelAndView(Constant.PREFIX + "newAgentManager");
+        ModelAndView mv = new ModelAndView(URL.AGENTMANAGER);
         return mv;
     }
 
@@ -322,6 +319,12 @@ public class AgentController {
         }
 
         return data;
+    }
+
+
+    @GetMapping("agentsort")
+    public String agentSort(){
+        return URL.AGENTSORT;
     }
 
 }

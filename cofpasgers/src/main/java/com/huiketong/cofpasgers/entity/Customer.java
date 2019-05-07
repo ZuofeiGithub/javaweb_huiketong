@@ -28,8 +28,14 @@ public class Customer {
     String sex;
     @Column(columnDefinition = "varchar(255) default '' COMMENT '客户地址'")
     String detailAddress;
-    @Column(columnDefinition = "int default 0 COMMENT '客户装修类型'")
+    @Column(columnDefinition = "int default 0 COMMENT '客户装修风格'")
     Integer style;
+    @Column(columnDefinition = "varchar(255) default '' COMMENT '装修风格字符串类型'")
+    String decorateStyle;
+    @Column(columnDefinition = "varchar(255) default '' COMMENT '装修档次'" )
+    String decorateGrade;
+    @Column(columnDefinition = "varchar(255) default '' COMMENT '装修阶段'")
+    String phase;
     @Column(columnDefinition = "VARCHAR(10) default 0 not null COMMENT '装修方案'")
     Integer scheme;
     @Column(columnDefinition = "int(10) default 0 COMMENT '客户状态'")

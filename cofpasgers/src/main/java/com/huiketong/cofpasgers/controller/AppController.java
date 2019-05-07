@@ -3156,6 +3156,39 @@ public class AppController {
         return response;
     }
 
+    @PostMapping("record_customer")
+    @CrossOrigin
+    public BaseJsonResponse recordCustomer(String user_id,String token,String name,String tel,String address,Integer area,String remark,String phase,String style,String grade) throws ParseException, AlipayApiException {
+        BaseJsonResponse response = new BaseJsonResponse();
+        verifyUser(user_id, token, response, o -> {
+            Agent agent = (Agent) o;
+            Customer customer = customerRepository.findCustomerByCustomerNameAndTelphone(name,tel);
+            if(ObjectUtils.isNotEmpty(customer)){
+                response.setMsg("该客户已经报备过了!").setCode("0").setData(null);
+            }else{
+                Customer newCustomer = new Customer();
+                newCustomer.setAgentId(agent.getId());
+                newCustomer.setAgentName(agent.getAgentName());
+                newCustomer.setCustomerName(name);
+                newCustomer.setTelphone(tel);
+                newCustomer.setDetailAddress(address);
+                newCustomer.setHouseArea(area);
+                newCustomer.setRenovRemark(remark);
+                newCustomer.setPhase(phase);
+                newCustomer.setDecorateStyle(style);
+                newCustomer.setDecorateGrade(grade);
+                try {
+                    customerRepository.save(newCustomer);
+                    response.setMsg("报备成功").setCode("1").setData(null);
+                }catch (Exception e){
+                    response.setMsg("报备失败").setCode("0").setData(null);
+                }
+
+            }
+        });
+        return response;
+    }
+
     /**
      * 报备客户
      *

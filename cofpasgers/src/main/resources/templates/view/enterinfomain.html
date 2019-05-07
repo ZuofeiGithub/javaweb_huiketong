@@ -24,16 +24,20 @@
 <body>
 <div class="layui-fluid">
     <div class="layui-card">
+        <div class="layui-card-header">
+            <h1>可修改企业信息，重置登陆密码</h1>
+        </div>
         <div class="layui-card-body">
             <form class="layui-form" id="form1" action="" onsubmit="return false">
                 <br>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">企业账号</label>
-                    <div class="layui-input-block">
+                    <label class="layui-form-label">企业登陆账号</label>
+                    <div class="layui-input-inline">
                         <input type="text" name="loginname" lay-verify="title" autocomplete="off"
                                th:value="${loginname}"
                                placeholder="" readonly class="layui-input">
                     </div>
+
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">登陆密码</label>

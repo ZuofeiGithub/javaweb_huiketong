@@ -19,9 +19,9 @@ import java.util.Map;
 public class WxController {
     private static Logger logger = LoggerFactory.getLogger(WxController.class);
 
-    @GetMapping("/weinxin")
+    @GetMapping("/WeChat")
     public String Wx(String signature, String timestamp, String nonce, String echostr) {
-        logger.info("weixin请求");
+        logger.info("微信请求\n");
         if (CheckUtil.checkSignature(signature, timestamp, nonce)) {
             return echostr;
         }
@@ -36,7 +36,7 @@ public class WxController {
      * @param response
      * @throws IOException
      */
-    @PostMapping("/weinxin")
+    @PostMapping("/WeChat")
     public void Wx(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");

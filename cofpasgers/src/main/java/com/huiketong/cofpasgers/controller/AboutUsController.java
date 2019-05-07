@@ -1,6 +1,6 @@
 package com.huiketong.cofpasgers.controller;
 
-import com.huiketong.cofpasgers.constant.Constant;
+import com.huiketong.cofpasgers.constant.URL;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,6 +15,6 @@ public class AboutUsController {
 
     @GetMapping(value = "about")
     public ModelAndView AboutUs() {
-        return new ModelAndView(Constant.PREFIX + "about");
+        return new ModelAndView(URL.ABOUTUS);
     }
 }

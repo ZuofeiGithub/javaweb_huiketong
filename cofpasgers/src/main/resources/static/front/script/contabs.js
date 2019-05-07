@@ -118,12 +118,13 @@ $(function () {
             $("#fenyong").attr("href", "fenyongJsp?user_id=" + user_id);
 
             $("#side-menu").append('<li id="broker"></li>')
-            $('#broker').append('<a><i class="fa fa-money fa-fw" style="margin-right: 5px"></i><span class="nav-label">经纪人管理</span><span class="fa fa-angle-left" id="arrowId1" style="float: right"></span></a>')
+            $('#broker').append('<a><i class="fa fa-user-secret fa-fw" style="margin-right: 5px"></i><span class="nav-label">经纪人管理</span><span class="fa fa-angle-left" id="arrowId1" style="float: right"></span></a>')
             $("#broker").append('<ul class="nav nav-second-level collapse" aria-expanded="true" id="menu4" style=""></ul>');
             $('#menu4').append('<li><a class="J_menuItem" href="agent" name="tabMenuItem" data-index="6">经纪人</a></li>');
+            $('#menu4').append('<li><a class="J_menuItem" href="agentsort" name="tabMenuItem" data-index="6">经纪人排行</a></li>');
 
             $("#side-menu").append('<li id="customer"></li>')
-            $('#customer').append('<a><i class="fa fa-money fa-fw" style="margin-right: 5px"></i><span class="nav-label">客户管理</span><span class="fa fa-angle-left" id="arrowId1" style="float: right"></span></a>')
+            $('#customer').append('<a><i class="fa fa-user fa-fw" style="margin-right: 5px"></i><span class="nav-label">客户管理</span><span class="fa fa-angle-left" id="arrowId1" style="float: right"></span></a>')
             $("#customer").append('<ul class="nav nav-second-level collapse" aria-expanded="true" id="menu5" style=""></ul>');
             $('#menu5').append('<li><a class="J_menuItem" href="customer" name="tabMenuItem" data-index="6">客户</a></li>');
 

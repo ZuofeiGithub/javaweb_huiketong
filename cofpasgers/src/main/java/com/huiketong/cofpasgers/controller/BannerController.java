@@ -1,6 +1,5 @@
 package com.huiketong.cofpasgers.controller;
 
-import com.huiketong.cofpasgers.constant.Constant;
 import com.huiketong.cofpasgers.constant.URL;
 import com.huiketong.cofpasgers.constant.UserType;
 import com.huiketong.cofpasgers.entity.Banner;
@@ -175,6 +174,6 @@ public class BannerController {
     }
     @GetMapping(value = "/banner_url_context_edit")
     public String bannerUrlContextEdit(){
-        return URL.BANNERCONTEXTURL;
+        return URL.BANNERCONTEXT;
     }
 }
