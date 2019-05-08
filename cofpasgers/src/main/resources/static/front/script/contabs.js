@@ -128,6 +128,7 @@ $(function () {
             $('#customer').append('<a><i class="fa fa-user fa-fw" style="margin-right: 5px"></i><span class="nav-label">客户管理</span><span class="fa fa-angle-left" id="arrowId1" style="float: right"></span></a>')
             $("#customer").append('<ul class="nav nav-second-level collapse" aria-expanded="true" id="menu5" style=""></ul>');
             $('#menu5').append('<li><a class="J_menuItem" href="customer" name="tabMenuItem" data-index="6">客户</a></li>');
+            $('#menu5').append('<li><a class="J_menuItem" href="dealcustomer" name="tabMenuItem" data-index="6">已签约客户</a></li>');
 
             $("#side-menu").append('<li id="caiwu"></li>');
             $("#caiwu").append('<a><i class="fa fa-money fa-fw" style="margin-right: 5px"></i><span class="nav-label">财务管理</span><span class="fa fa-angle-left" id="arrowId1" style="float: right"></span></a>');

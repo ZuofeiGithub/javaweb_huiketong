@@ -8,10 +8,14 @@
       <w>bannercontexturl</w>
       <w>bussiness</w>
       <w>cofpasgers</w>
+      <w>dealcustomer</w>
+      <w>getcustomerinfo</w>
+      <w>getdealcustomerinfo</w>
       <w>layui</w>
       <w>layuiadmin</w>
       <w>loginname</w>
       <w>removebannerbyid</w>
+      <w>telphone</w>
     </words>
   </dictionary>
 </component>

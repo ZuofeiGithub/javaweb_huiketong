@@ -42,8 +42,8 @@ public class Customer {
     Integer verifyStatus;
     @Column(columnDefinition = "varchar(255) default '' COMMENT '装修备注'")
     String renovRemark;
-    @Column(columnDefinition = "int default 0 COMMENT '装修面积'")
-    Integer houseArea;
+    @Column(columnDefinition = "varchar(255) default '' COMMENT '装修面积'")
+    String houseArea;
     @Column(columnDefinition = "int default 0 COMMENT '装修预算'")
     Integer renovBudget;
     @Column(columnDefinition = "varchar(255) default '' COMMENT '撤销原因'")

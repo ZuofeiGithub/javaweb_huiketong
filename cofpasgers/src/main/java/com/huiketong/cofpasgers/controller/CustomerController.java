@@ -46,6 +46,12 @@ public class CustomerController {
         return mv;
     }
 
+    @GetMapping(value = "dealcustomer")
+    public ModelAndView dealCustomer(Map<String, Object> map) {
+        ModelAndView mv = new ModelAndView(Constant.PREFIX + "deal_customer_info");
+        return mv;
+    }
+
     @GetMapping(value = "getcustomerinfo/{userId}")
     @ResponseBody
     public JSONData GetCusInfo(@PathVariable("userId") String userId, Integer page, Integer limit) {
@@ -53,6 +59,36 @@ public class CustomerController {
         Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(userId);
         if (enterprise != null) {
             List<Customer> customerList = customerRepository.findCustomerPages(enterprise.getId(), (page - 1) * limit, limit);
+            if (customerList.size() > 0) {
+                response.setCode(0);
+                response.setData(customerList);
+                long count = customerRepository.counts(enterprise.getId());
+                response.setCount((int) count);
+                response.setMsg("");
+            } else {
+                response.setCode(0);
+                response.setData(new ArrayList<>());
+                response.setCount(0);
+                response.setMsg("");
+            }
+        } else {
+            response.setCode(0);
+            response.setData(new ArrayList<>());
+            response.setCount(0);
+            response.setMsg("");
+        }
+
+        return response;
+    }
+
+
+    @GetMapping(value = "getdealcustomerinfo/{userId}")
+    @ResponseBody
+    public JSONData GetDealCusInfo(@PathVariable("userId") String userId, Integer page, Integer limit) {
+        JSONData response = new JSONData();
+        Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(userId);
+        if (enterprise != null) {
+            List<Customer> customerList = customerRepository.findCustomerByDealPages(enterprise.getId(), (page - 1) * limit, limit);
             if (customerList.size() > 0) {
                 response.setCode(0);
                 response.setData(customerList);

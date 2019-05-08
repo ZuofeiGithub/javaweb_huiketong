@@ -316,6 +316,13 @@
             <version>1.7.7</version>
         </dependency>
 
+        <!--添加导入/出表格依赖-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.9</version>
+        </dependency>
+
         <!-- For log4j -->
         <!--<dependency>-->
         <!--<groupId>org.slf4j</groupId>-->
@@ -383,15 +390,15 @@
     </dependencies>
 
     <build>
-        <finalName>cofpasgers_update</finalName>
+        <finalName>cofpasgers</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <!--指定包含本地库-->
-                <!--<configuration>-->
-                    <!--<includeSystemScope>true</includeSystemScope>-->
-                <!--</configuration>-->
+                <configuration>
+                    <includeSystemScope>true</includeSystemScope>
+                </configuration>
                 <dependencies>
                     <!-- spring热部署 -->
                     <dependency>
@@ -403,18 +410,18 @@
             </plugin>
         </plugins>
         <!--加载本地库文件-->
-        <!--<resources>-->
-            <!--<resource>-->
-                <!--<directory>lib</directory>-->
-                <!--<targetPath>BOOT-INF/lib/</targetPath>-->
-                <!--<includes>-->
-                    <!--<include>**/*.jar</include>-->
-                <!--</includes>-->
-            <!--</resource>-->
-            <!--<resource>-->
-                <!--<directory>src/main/resources</directory>-->
-                <!--<targetPath>BOOT-INF/classes/</targetPath>-->
-            <!--</resource>-->
-        <!--</resources>-->
+        <resources>
+            <resource>
+                <directory>lib</directory>
+                <targetPath>BOOT-INF/lib/</targetPath>
+                <includes>
+                    <include>**/*.jar</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <targetPath>BOOT-INF/classes/</targetPath>
+            </resource>
+        </resources>
     </build>
 </project>

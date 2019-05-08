@@ -22,6 +22,7 @@ import com.huiketong.cofpasgers.weixinpay.config.MyWXPayConfig;
 import com.huiketong.cofpasgers.weixinpay.util.WxPayApiConfig;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.omg.CORBA.OBJ_ADAPTER;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -1773,7 +1774,7 @@ public class AppController {
                         customer.setDetailAddress(address);
                         customer.setStyle(Integer.parseInt(style));
                         customer.setScheme(Integer.parseInt(scheme));
-                        customer.setHouseArea(Integer.parseInt(area));
+                        customer.setHouseArea(area);
                         customer.setRenovBudget(Integer.parseInt(budget));
                         customer.setRenovRemark(remark);
                         customer.setCompanyId(defaultEnter.getCompayId());
@@ -2308,11 +2309,23 @@ public class AppController {
                             if (customerList.size() > 0) {
                                 for (Customer customer : customerList) {
                                     MCustomerData customerData = new MCustomerData();
+                                    if(ObjectUtils.isNotEmpty(customer.getCustomerName()))
                                     customerData.setName(customer.getCustomerName());
+                                    if(ObjectUtils.isNotEmpty(customer.getDetailAddress()))
                                     customerData.setAddress(customer.getDetailAddress());
+                                    if(ObjectUtils.isNotEmpty(customer.getDetailAddress()))
                                     customerData.setTel(customer.getTelphone());
+                                    if(ObjectUtils.isNotEmpty(customer.getRenovRemark()))
                                     customerData.setRemark(customer.getRenovRemark());
-                                    customerData.setSex(customer.getSex());
+                                    if(ObjectUtils.isNotEmpty(customer.getPhase()))
+                                    customerData.setPhase(customer.getPhase());
+                                    if(ObjectUtils.isNotEmpty(customer.getDecorateStyle()))
+                                    customerData.setStyle(customer.getDecorateStyle());
+                                    if(ObjectUtils.isNotEmpty(customer.getHouseArea()))
+                                    customerData.setArea(customer.getHouseArea());
+                                    if(ObjectUtils.isNotEmpty(customer.getDecorateGrade()))
+                                    customerData.setGrade(customer.getDecorateGrade());
+                                    if(ObjectUtils.isNotEmpty(customer.getRecomDatetime()))
                                     customerData.setAdd_time(DateUtils.dateFormat(customer.getRecomDatetime(), DateUtils.DATE_TIME_PATTERN));
                                     if (customer.getSignPrice() != null) {
                                         customerData.setSign_price(customer.getSignPrice().toString());
@@ -2398,8 +2411,6 @@ public class AppController {
                                                 data.setAddress(customer.getDetailAddress());
                                                 data.setName(customer.getCustomerName());
                                                 data.setTel(customer.getTelphone());
-                                                if (!ObjectUtils.isEmpty(customer.getStyle()))
-                                                    data.setStyle(DecorationStyle.STYLE(customer.getStyle()));
                                                 if (!ObjectUtils.isEmpty(customer.getRenovRemark()))
                                                     data.setRemark(customer.getRenovRemark());
                                                 if (!ObjectUtils.isEmpty(customer.getRecomDatetime()))
@@ -2410,8 +2421,18 @@ public class AppController {
                                                     data.setReject(customer.getRevokeReason());
                                                 if (!ObjectUtils.isEmpty(customer.getVerifyStatus()))
                                                     data.setStatus(customer.getVerifyStatus().toString());
-                                                if (!ObjectUtils.isEmpty(customer.getSex()))
-                                                    data.setSex(customer.getSex());
+                                                if(ObjectUtils.isNotEmpty(customer.getDecorateStyle())){
+                                                    data.setStyle(customer.getDecorateStyle());
+                                                }
+                                                if(ObjectUtils.isNotEmpty(customer.getPhase())){
+                                                    data.setPhase(customer.getPhase());
+                                                }
+                                                if(ObjectUtils.isNotEmpty(customer.getDecorateGrade())){
+                                                    data.setGrade(customer.getDecorateGrade());
+                                                }
+                                                if(ObjectUtils.isNotEmpty(customer.getHouseArea())){
+                                                    data.setArea(customer.getHouseArea());
+                                                }
                                                 dataList.add(data);
                                             }
 
@@ -3158,7 +3179,7 @@ public class AppController {
 
     @PostMapping("record_customer")
     @CrossOrigin
-    public BaseJsonResponse recordCustomer(String user_id,String token,String name,String tel,String address,Integer area,String remark,String phase,String style,String grade) throws ParseException, AlipayApiException {
+    public BaseJsonResponse recordCustomer(String user_id,String token,String name,String tel,String address,String area,String remark,String phase,String style,String grade) throws ParseException, AlipayApiException {
         BaseJsonResponse response = new BaseJsonResponse();
         verifyUser(user_id, token, response, o -> {
             Agent agent = (Agent) o;
@@ -3169,6 +3190,8 @@ public class AppController {
                 Customer newCustomer = new Customer();
                 newCustomer.setAgentId(agent.getId());
                 newCustomer.setAgentName(agent.getAgentName());
+                newCustomer.setRecomDatetime(new Date());
+                newCustomer.setVerifyStatus(1);
                 newCustomer.setCustomerName(name);
                 newCustomer.setTelphone(tel);
                 newCustomer.setDetailAddress(address);
@@ -3179,8 +3202,36 @@ public class AppController {
                 newCustomer.setDecorateGrade(grade);
                 try {
                     customerRepository.save(newCustomer);
+                    Agent cagent = agentRepository.findIsCusAgents(agent.getCompanyId());
+                    if (ObjectUtils.isNotNull(cagent)) {
+                        JPUserService service = new JPUserService();
+                        StringBuffer context = new StringBuffer();
+                        if (ObjectUtils.isNotEmpty(remark)) {
+                            context.append("经纪人姓名:" + agent.getAgentName() + "\r\n" +
+                                    "客户姓名:" + name + "\r\n" +
+                                    "客户电话:" + tel + "\r\n" +
+                                    "小区地址:" + address + "\r\n" +
+                                    "装修面积:" + area + "\r\n"+
+                                    "装修阶段:" + phase + "\r\n"+
+                                    "装修风格:" + style + "\r\n"+
+                                    "装修档次:" + grade + "\r\n"+
+                                    "备注:" + remark);
+                        } else {
+                            context.append("经纪人姓名:" + agent.getAgentName() + "\r\n" +
+                                    "客户姓名:" + name + "\r\n" +
+                                    "客户电话:" + tel + "\r\n" +
+                                    "装修面积:" + area + "\r\n"+
+                                    "装修阶段:" + phase + "\r\n"+
+                                    "装修风格:" + style + "\r\n"+
+                                    "装修档次:" + grade + "\r\n"+
+                                    "楼盘地址:" + address);
+                        }
+                        service.sendSingleTextByAdmin("admin", "c" + cagent.getInitCode(), context.toString());
+                        AppPush.pushToSigle(cagent.getDeviceId(), "客户报备", agent.getAgentName() + "报备了新客户");
+                    }
                     response.setMsg("报备成功").setCode("1").setData(null);
                 }catch (Exception e){
+                    System.out.println(e.getMessage());
                     response.setMsg("报备失败").setCode("0").setData(null);
                 }
 

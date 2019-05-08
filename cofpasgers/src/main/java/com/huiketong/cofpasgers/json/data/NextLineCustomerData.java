@@ -13,6 +13,9 @@ public class NextLineCustomerData {
     String sign_price;
     String reject;
     String status;
-    String sex;
     String eco;//经纪人
+    String phase;
+    String grade;
+    String area;
+
 }

@@ -12,5 +12,8 @@ public class MCustomerData {
     String sign_price;
     String reject;
     String status;
-    String sex;
+    String phase;
+    String style;
+    String grade;
+    String area;
 }

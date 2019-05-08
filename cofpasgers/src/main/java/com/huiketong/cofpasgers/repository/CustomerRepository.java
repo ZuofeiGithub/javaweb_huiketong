@@ -43,6 +43,9 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer>, Jp
     @Query(value = "select * from customer where company_id = ?1 order by recom_datetime desc limit ?2,?3", nativeQuery = true)
     List<Customer> findCustomerPages(Integer company_id, Integer page, Integer limit);
 
+    @Query(value = "select * from customer where company_id = ?1 and verify_status = 8 order by recom_datetime desc limit ?2,?3", nativeQuery = true)
+    List<Customer> findCustomerByDealPages(Integer company_id, Integer page, Integer limit);
+
     @Query(value = "select count(1) from customer where company_id = ?1", nativeQuery = true)
     long counts(Integer companyId);
 
