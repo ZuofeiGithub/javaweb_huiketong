@@ -383,7 +383,7 @@
     </dependencies>
 
     <build>
-        <finalName>cofpasgers</finalName>
+        <finalName>cofpasgers_update</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

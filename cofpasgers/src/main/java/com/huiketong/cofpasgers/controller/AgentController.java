@@ -3,6 +3,7 @@ package com.huiketong.cofpasgers.controller;
 import com.huiketong.cofpasgers.constant.*;
 import com.huiketong.cofpasgers.entity.*;
 import com.huiketong.cofpasgers.jgim.JPUserService;
+import com.huiketong.cofpasgers.json.data.AgentSortData;
 import com.huiketong.cofpasgers.json.response.BaseJsonResponse;
 import com.huiketong.cofpasgers.repository.*;
 import com.huiketong.cofpasgers.service.IPageQueryService;
@@ -93,27 +94,38 @@ public class AgentController {
 
     @PostMapping(value = "get_company_agent")
     @ResponseBody
-    public Object getAgent(HttpServletRequest request) {
-        List<Agent> agentList = new ArrayList<>();
-        Map<String, Object> map = new HashMap<>();
-        String user_id = request.getParameter("user_id");
-        UserRights rights = userRightsRepository.findUserRightsByUserTelAndUserRightOrLoginNameAndUserRight(user_id, 1, user_id, 1);
-        if (rights != null && rights.getUserRight() == 1)//代理
-        {
-            Agent agent = agentRepository.findAgentByTelphoneOrLoginUsername(user_id, user_id);
-            if (agent != null) {
-                agentList = agentRepository.findAgentsBySuperIdOrTopId(agent.getSuperId(), agent.getTopId());
+    public BaseJsonResponse getAgent(String user_id) {
+        AgentSortData data = new AgentSortData();
+        List<Integer> agentNumList = new ArrayList<>();
+        List<Integer> customerNumList = new ArrayList<>();
+        List<Integer> dealCustomerNumList = new ArrayList<>();
+        BaseJsonResponse response = new BaseJsonResponse();
+        Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(user_id);
+        if(ObjectUtils.isNotEmpty(enterprise)){
+            List<Agent> agentList = agentRepository.findAgentList(enterprise.getId());
+            if(agentList.size() > 0){
+                data.setAgentName(agentList);
+                for(int i = 0; i < agentList.size();i++){
+                    customerNumList.add(agentList.get(i).getReconCustomNam());
+                    dealCustomerNumList.add(agentList.get(i).getDealCustomNum());
+                    List<Agent> inviteAgentList = agentRepository.findAgentsBySuperIdOrTopId(agentList.get(i).getId(),agentList.get(i).getId());
+                    if(inviteAgentList.size() > 0){
+                        agentNumList.add(inviteAgentList.size());
+                    }else{
+                        agentNumList.add(0);
+                    }
+                }
+                data.setAgentNum(agentNumList);
+                data.setCustomerNum(customerNumList);
+                data.setDealCustomerNum(dealCustomerNumList);
+                response.setCode("0").setMsg("获取"+enterprise.getEnterName()+"经纪人成功").setData(data);
+            }else{
+                response.setCode("0").setMsg(enterprise.getEnterName()+"没有经纪人").setData(data);
             }
-        } else if (rights != null && rights.getUserRight() == 2) {//系统超级管理员
-            agentList = agentRepository.findAll();
-        } else if (rights != null && rights.getUserRight() == 3) {//公司
-            Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(user_id);
-            agentList = agentRepository.findAgentList(enterprise.getId());
-        } else {
-            agentList = null;
+        }else{
+            response.setCode("1").setMsg("该账号不是企业账号").setData(null);
         }
-        map.put("data", agentList);
-        return map;
+        return response;
     }
 
     /**

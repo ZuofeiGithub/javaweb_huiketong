@@ -2,10 +2,12 @@
   <dictionary name="Administrator">
     <words>
       <w>aboutus</w>
+      <w>addagent</w>
       <w>agentsort</w>
       <w>bannercontext</w>
       <w>bannercontexturl</w>
       <w>bussiness</w>
+      <w>cofpasgers</w>
       <w>layui</w>
       <w>layuiadmin</w>
       <w>loginname</w>

@@ -66,7 +66,7 @@ public interface AgentRepository extends JpaRepository<Agent, Integer>, JpaSpeci
     List<Agent> findAgentsByCompanyId(Integer companyid);
 
 
-    @Query(value = "select * from agent where company_id = ?1 ", nativeQuery = true)
+    @Query(value = "select * from agent where company_id = ?1 and forbid = 0 ", nativeQuery = true)
     List<Agent> findAgentList(Integer companyid);
 
 

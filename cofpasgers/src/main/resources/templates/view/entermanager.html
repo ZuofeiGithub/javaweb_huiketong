@@ -18,7 +18,12 @@
 </script>
 
 <script type="text/html" id="bar">
+    {{# if(d.enterStatus === 0){}}
+    <a class="layui-btn layui-btn-xs" lay-event="edit" th:text="启用"></a>
+    {{# }}}
+    {{# if(d.enterStatus === 1){}}
     <a class="layui-btn layui-btn-xs" lay-event="edit" th:text="禁用"></a>
+    {{# }}}
 </script>
 <script src="/layui/layui.js"></script>
 <script>
@@ -170,13 +175,28 @@
                     layer.close(index);
                 });
             } else if (obj.event === 'edit') {
-                layer.prompt({
-                    formType: 2
-                    , value: data.enterName
-                }, function (value, index) {
-                    obj.update({
-                        enterName: value,
-                    });
+                var _this = $(this),
+                    usableText = "是否确定禁用此用户？",
+                    btnText = "禁用";
+                if(_this.text()=="启用"){
+                    usableText = "是否确定启用此用户？",
+                        btnText = "启用";
+                }
+                layer.confirm(usableText,{
+                    icon: 3,
+                    title:'系统提示',
+                    cancel : function(index){
+                        layer.close(index);
+                    }
+                },function(index){
+                    _this.text(btnText);
+                    $.post('update_enter_status',{enter_login_name:data.enterLoginName,status:data.enterStatus === 0 ?1:0},function (resp) {
+                        if(resp.code == '0'){
+                            table.reload('enter_table');
+                        }
+                    })
+                    layer.close(index);
+                },function(index){
                     layer.close(index);
                 });
             }

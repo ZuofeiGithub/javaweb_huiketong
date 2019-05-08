@@ -45,4 +45,10 @@ public interface EnterpriseRepository extends JpaRepository<Enterprise, Integer>
     @Modifying
     @Transactional
     void updateBrokerage();
+
+
+    @Query(value = "update enterprise set enter_status = ?2 where enter_login_name = ?1",nativeQuery = true)
+    @Modifying
+    @Transactional
+    void updateEnterStatus(String enterLoginName,Integer status);
 }

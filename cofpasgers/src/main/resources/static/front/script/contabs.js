@@ -90,9 +90,10 @@ $(function () {
         var usertype = getCookie("usertype");
         var user_id = getCookie("telphone");
         var headphoto = getCookie('headphoto');
+        console.log(user_id)
         if (usertype == "2") {
             $('#top_item').text("系統管理")
-            $('#menu').append('<li><a class="J_menuItem" href="enterprise" name="tabMenuItem" data-index="6">企业管理</a></li>')
+            $('#menu').append('<li><a class="J_menuItem" href="enterprise?user_id='+user_id+'" name="tabMenuItem" data-index="6">企业管理</a></li>')
         } else if (usertype == "3") {
             $('#top_item').text("企业管理")
             $('#menuicon').removeClass("fa-user").addClass("fa-sitemap")

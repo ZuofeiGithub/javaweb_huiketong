@@ -48,7 +48,7 @@ public class EnterpriseController {
     AgentRepository agentRepository;
 
     @GetMapping(value = "enterprise")
-    public ModelAndView Enter(Map<String, Object> map) {
+    public ModelAndView Enter(Map<String, Object> map,String user_id) {
         ModelAndView mv = new ModelAndView(Constant.PREFIX + "entermanager");
         return mv;
     }
@@ -380,5 +380,19 @@ public class EnterpriseController {
             response.setCode("2").setMsg("修改的公司信息不完善");
         }
         return response;
+    }
+
+    @PostMapping(value = "update_enter_status")
+    @ResponseBody
+    public BaseJsonResponse updateEnterStatus(String enter_login_name,Integer status){
+        BaseJsonResponse response = new BaseJsonResponse();
+        try {
+            enterpriseRepository.updateEnterStatus(enter_login_name,status);
+            response.setCode("0").setMsg("修改状态成功");
+        }catch (Exception e){
+            response.setCode("1").setMsg("修改状态失败");
+        }
+
+        return  response;
     }
 }
