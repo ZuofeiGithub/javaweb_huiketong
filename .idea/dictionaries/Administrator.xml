@@ -4,17 +4,23 @@
       <w>aboutus</w>
       <w>addagent</w>
       <w>agentsort</w>
+      <w>appdownload</w>
       <w>bannercontext</w>
       <w>bannercontexturl</w>
       <w>bussiness</w>
       <w>cofpasgers</w>
+      <w>createtime</w>
       <w>dealcustomer</w>
       <w>getcustomerinfo</w>
       <w>getdealcustomerinfo</w>
       <w>layui</w>
       <w>layuiadmin</w>
       <w>loginname</w>
+      <w>onlinecollege</w>
+      <w>onlineform</w>
+      <w>onlineshare</w>
       <w>removebannerbyid</w>
+      <w>sharetype</w>
       <w>telphone</w>
     </words>
   </dictionary>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="阿里云mysql" uuid="55a466d2-975f-4ca9-9db9-e5ca6c0e901b">
+    <data-source source="LOCAL" name="huiketong@localhost" uuid="17c18058-d113-4cd3-b818-04cd68dd7cff">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://120.27.229.54:3306/huiketong</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/huiketong</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="convertToNull" />

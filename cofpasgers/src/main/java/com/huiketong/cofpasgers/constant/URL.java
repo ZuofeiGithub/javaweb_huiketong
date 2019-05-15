@@ -6,4 +6,8 @@ public class URL {
     public static String AGENTMANAGER = Constant.PREFIX + "newAgentManager"; //经济人管理
 
     public static String AGENTSORT = Constant.PREFIX+"agent_sort";//经纪人排行
+
+    public static String ONLINECOLLEGE = Constant.PREFIX+"college/onlineshare.html";
+
+    public static String ONLINEFORM = Constant.PREFIX+"college/onlineform.html";
 }

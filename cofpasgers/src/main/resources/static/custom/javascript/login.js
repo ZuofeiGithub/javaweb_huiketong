@@ -58,6 +58,7 @@ $(function () {
                         case 2:
                             layer.msg("登录成功");
                             loginSuccess(json.telphone, json.username, json.usertype, json.rightname, json.headphoto);
+                            remoberMe();
                             break;
                         case 3:
                             layer.msg("验证码错误");
@@ -73,8 +74,7 @@ $(function () {
                     }
                 }
             })
-        })
-        remoberMe();
+        });
     });
 
     //登录成功

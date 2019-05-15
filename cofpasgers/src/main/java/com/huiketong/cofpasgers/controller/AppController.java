@@ -636,7 +636,7 @@ public class AppController {
                                         sendVerifyCode(type, code, agent);
                                         response.setCode("1").setMsg("发送验证码成功");
                                     } else if (type.equals(VerifyCodeType.LOGINEDPWORD)) {
-                                        AlicomDysmsUtil.sendSms(agent.getTelphone(), code, "SMS_15242995");
+                                        AlicomDysmsUtil.sendSms(agent.getTelphone(), code, "SMS_152542995");
                                         sendVerifyCode(type, code, agent);
                                         response.setCode("1").setMsg("发送验证码成功");
                                     } else {

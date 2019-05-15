@@ -26,12 +26,10 @@
 
     //获取所有经纪人邀请客户数量
     let user = layui.data('user');
-    console.log(user.user_id);
     // 基于准备好的dom，初始化echarts实例
     let myChart = echarts.init(document.getElementById('main'));
 
     $.post('get_company_agent', {user_id: user.user_id}, function (resp) {
-        console.log(resp);
         let agentNameList = new Array();
         let agentNumList = new Array();
         let customerNumList = new Array();
