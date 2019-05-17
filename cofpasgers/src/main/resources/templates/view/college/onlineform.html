@@ -16,25 +16,25 @@
     <div class="layui-form-item">
         <label class="layui-form-label">文章标题</label>
         <div class="layui-input-inline">
-            <input type="text" name="title" lay-verify="required" id="title" placeholder="请输入用户名" autocomplete="off"
+            <input type="text" name="title" lay-verify="required" id="title" placeholder="输入文章标题" autocomplete="off"
                    class="layui-input">
         </div>
     </div>
-    <div class="layui-form-item layui-hide">
+    <div class="layui-form-item layui-hide" id="video">
         <label class="layui-form-label">视频播放链接url</label>
         <div class="layui-input-inline">
-            <input type="text" name="particulars"  id="particulars">
+            <input type="text" name="videoUrl"  id="videoUrl">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">文章详情</label>
         <div class="layui-input-inline">
-            <textarea name="content" lay-verify="required" style="width: 400px; height: 150px;" autocomplete="off"
+            <textarea name="particulars" lay-verify="required" id="particulars" style="width: 400px; height: 150px;" autocomplete="off"
                       class="layui-textarea"></textarea>
         </div>
     </div>
 
-    <div class="layui-form-item layui-hide">
+    <div class="layui-form-item layui-hide" id="videointro">
         <label class="layui-form-label">视频简介</label>
         <div class="layui-input-inline">
             <textarea name="content" style="width: 400px; height: 50px;" autocomplete="off"
@@ -56,8 +56,7 @@
     }).extend({
         index: 'lib/index' //主入口模块
     }).use(['index', 'form'], function () {
-        var $ = layui.$
-            , form = layui.form;
+        let $ = layui.$, form = layui.form;
 
         //监听提交
         form.on('submit(layuiadmin-app-form-submit)', function (data) {

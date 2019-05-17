@@ -2,7 +2,9 @@
   <dictionary name="Administrator">
     <words>
       <w>aboutus</w>
+      <w>activitylist</w>
       <w>addagent</w>
+      <w>addexten</w>
       <w>agentsort</w>
       <w>appdownload</w>
       <w>bannercontext</w>
@@ -11,17 +13,22 @@
       <w>cofpasgers</w>
       <w>createtime</w>
       <w>dealcustomer</w>
+      <w>exten</w>
       <w>getcustomerinfo</w>
       <w>getdealcustomerinfo</w>
+      <w>kindeditor</w>
+      <w>laydate</w>
       <w>layui</w>
       <w>layuiadmin</w>
       <w>loginname</w>
       <w>onlinecollege</w>
       <w>onlineform</w>
       <w>onlineshare</w>
+      <w>promot</w>
       <w>removebannerbyid</w>
       <w>sharetype</w>
       <w>telphone</w>
+      <w>videointro</w>
     </words>
   </dictionary>
 </component>

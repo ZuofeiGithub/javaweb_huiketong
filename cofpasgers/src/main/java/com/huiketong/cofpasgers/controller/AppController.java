@@ -280,7 +280,7 @@ public class AppController {
                             homeInfoData.setCompany(defaultEnter.getCompayName());
                             List<Agent> agentList = agentRepository.findAgentsByCompanyId(defaultEnter.getCompayId());
                             if (defaultEnter.getCompayId() == 28) {
-                                homeInfoData.setNum("156");
+                                homeInfoData.setNum("697");
                             } else if (agentList.size() > 0) {
                                 homeInfoData.setNum(String.valueOf(agentList.size()));
                             } else {

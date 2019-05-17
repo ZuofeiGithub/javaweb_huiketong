@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>活动</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <style>
+        .createtime {
+            font-size: 20px;
+            color: #666666;
+        }
+
+        .layui-body {
+            bottom: 0;
+        }
+        #wantorder{
+            position: absolute;
+            bottom: 0;
+            display: block;
+            width: 100%;
+            height: 50px;
+            background-color: red;
+            font-size: 25px;
+            color: #fff;
+            border: red solid 1px;
+        }
+    </style>
+</head>
+<body class="layui-layout-admin layui-body">
+
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-header">
+            <h2 class="title" th:text="${title}"></h2>
+            <p class="createtime" th:text="${createtime}"></p>
+        </div>
+        <div class="layui-card-body">
+            <div class="content" id="context">
+            </div>
+        </div>
+    </div>
+    <div class="layui-footer">
+        <div class="layui-input-block">
+            <button class="layui-btn" id="wantorder">我要预约</button>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+<script src="/jquery/jquery.min.js"></script>
+<script th:inline="javascript">
+    let context = [[${context}]]
+    $('#context').append(context);
+</script>
+</html>

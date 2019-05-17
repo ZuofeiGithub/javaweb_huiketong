@@ -7,23 +7,18 @@
     <link rel="stylesheet" href="layui/css/layui.css">
     <script src="layui/layui.js"></script>
     <script src="kindeditor/kindeditor-all.js"></script>
+    <script src="kindeditor/plugins/code/prettify.js"></script>
     <script src="kindeditor/lang/zh-CN.js"></script>
-    <style>
-        .layui-body {
-            left: 0;
-            height: 100%;
-        }
-    </style>
 </head>
 <body>
 <div class="layui-row">
     <div class="layui-col-lg10">
-        <form class="layui-form" style="margin-top: 50px">
+        <form class="layui-form" style="margin-top: 50px" name="activity_form">
             <div class="layui-form-item">
                 <label class="layui-form-label"><i
                         style="color: #f00; margin-right: 5px">*</i>活动标题</label>
                 <div class="layui-input-block">
-                    <input type="text" name="title" lay-verify="title" autocomplete="off"
+                    <input type="text" name="activitytitle" id="activitytitle" lay-verify="title" autocomplete="off"
                            placeholder="请输入标题"
                            class="layui-input">
                 </div>
@@ -33,11 +28,11 @@
                 <label class="layui-form-label"><i
                         style="color: #f00; margin-right: 5px">*</i>活动类型</label>
                 <div class="layui-input-block">
-                    <select name="city" lay-verify="required">
+                    <select name="activitytype" lay-verify="required">
                         <option value=""></option>
-                        <option value="0">邀请经纪人活动</option>
-                        <option value="1">推荐客户活动</option>
-                        <option value="2">红包活动</option>
+                        <option value="1">邀请经纪人活动</option>
+                        <option value="2">推荐客户活动</option>
+                        <option value="3">红包活动</option>
                     </select>
                 </div>
             </div>
@@ -46,14 +41,14 @@
                 <div class="layui-inline">
                     <label class="layui-form-label"><i style="color: #f00; margin-right: 5px">*</i>开始时间</label>
                     <div class="layui-input-block">
-                        <input type="text" name="date" id="date1" autocomplete="off"
+                        <input type="text" name="begintime" id="date1" autocomplete="off"
                                class="layui-input">
                     </div>
                 </div>
                 <div class="layui-inline">
                     <label class="layui-form-label"><i style="color: #f00; margin-right: 5px">*</i>结束时间</label>
                     <div class="layui-input-block">
-                        <input type="text" name="date" id="date2" autocomplete="off"
+                        <input type="text" name="endtime" id="date2" autocomplete="off"
                                class="layui-input">
                     </div>
                 </div>
@@ -62,7 +57,7 @@
                 <label class="layui-form-label"><i
                         style="color: #f00; margin-right: 5px">*</i>上传封面图</label>
                 <div class="layui-input-block">
-                    <div class="layui-upload-drag" id="test10">
+                    <div class="layui-upload-drag" id="coverImg">
                         <i class="layui-icon layui-icon-upload-drag"></i>
                         <p>点击上传，或将文件拖拽到此处</p>
                     </div>
@@ -72,7 +67,13 @@
                 <label class="layui-form-label"><i
                         style="color: #f00; margin-right: 5px">*</i>活动详情</label>
                 <div class="layui-input-block">
-                    <textarea id="activity_context" class="layui-textarea"></textarea>
+                    <textarea id="activity_context" class="layui-textarea" name="activity_context"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item layui-hide">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="" lay-filter="addActivitySubmit" id="addActivitySubmit">立即提交
+                    </button>
                 </div>
             </div>
         </form>
@@ -95,52 +96,95 @@
             uploadJson: "/kindeditor/fileUpload",
             fileManagerJson: "/kindeditor/fileManager",//指定浏览远程图片的服务器端程序
             minHeight: 500,
+            afterCreate : function() {
+                let self = this;
+                K.ctrl(document, 13, function() {
+                    self.sync();
+                    document.forms['activity_form'].submit();
+                });
+                K.ctrl(self.edit.doc, 13, function() {
+                    self.sync();
+                    document.forms['activity_form'].submit();
+                });
+            },
             afterUpload: function (url) {
-                alert("上传成功");
+                console.log(url);
             }
         });
-    });
-    //使用指定的模块
-    layui.use(['layer', 'form', 'laydate', 'upload', 'table'], function () {
-        var layer = layui.layer, form = layui.form, laydate = layui.laydate, upload = layui.upload, $ = layui.$;
-        var table = layui.table;
-        laydate.render({
-            elem: '#date1',
-            type: 'datetime',
-            format: 'yyyy-MM-dd H:m:s'
-        });
-        console.log("Editor:" + editor);
-        laydate.render({
-            elem: '#date2',
-            type: 'datetime',
-            format: 'yyyy-MM-dd H:m:s'
-        });
+        prettyPrint();
+        layui.use(['layer', 'form', 'laydate', 'upload', 'table'], function () {
+            let user = layui.data('user');
+            let layer = layui.layer, form = layui.form, laydate = layui.laydate, upload = layui.upload, $ = layui.$;
+            let filename = "";
+            laydate.render({
+                elem: '#date1',
+                type: 'datetime',
+                format: 'yyyy-MM-dd H:m:s'
+            });
+            laydate.render({
+                elem: '#date2',
+                type: 'datetime',
+                format: 'yyyy-MM-dd H:m:s'
+            });
 
-        upload.render({
-            elem: '#test10'
-            , url: '/upload/'
-            , before: function (obj) {
-                //预读本地文件示例，不支持ie8
-                obj.preview(function (index, file, result) {
-                    $('#test10').empty().append("<img src='" + result + "' width='300px' height='300px'>"); //图片链接（base64）
-                });
-            }, done: function (res) {
-                //如果上传失败
-                if (res.code > 0) {
-                    return layer.msg('上传失败');
+
+
+            let uploadInst = upload.render({
+                elem: '#coverImg'
+                , url: '/upload/'
+                , before: function (obj) {
+                    //预读本地文件示例，不支持ie8
+                    obj.preview(function (index, file, result) {
+                        $('#coverImg').empty().append("<img src='" + result + "' width='300px' height='300px'>"); //图片链接（base64）
+                    });
+                }, done: function (res) {
+                    //如果上传失败
+                    if (res.code > 0) {
+                        return layer.msg('上传失败');
+                    }
+                    filename = res.data.filename;
+                    //上传成功
+                }, error: function () {
+                    //演示失败状态，并实现重传
+                    let demoText = $('#demoText');
+                    demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                    demoText.find('.demo-reload').on('click', function () {
+                        uploadInst.upload();
+                    });
                 }
-                //上传成功
-            }, error: function () {
-                //演示失败状态，并实现重传
-                var demoText = $('#demoText');
-                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
-                demoText.find('.demo-reload').on('click', function () {
-                    uploadInst.upload();
-                });
-            }
-        });
+            });
 
+            form.verify({
+                activity_context: function (value) {
+                    editor.sync();
+                }
+            });
+
+            //监听提交
+            form.on('submit(addActivitySubmit)', function (data) {
+                data.field.activity_context = editor.html();
+                data.field.coverImg = filename;
+                data.field.login_name = user.user_id;
+                console.log(data.field);
+                $.post('addActivity',data.field,function (resp) {
+                    if(resp.code == "0"){
+                        layer.msg(resp.msg);
+                        let index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+
+                        //提交 Ajax 成功后，关闭当前弹层并重载表格
+                        //$.ajax({});
+                        parent.layui.table.reload('activity_table'); //重载表格
+                        parent.layer.close(index); //再执行关闭
+                    }else{
+
+                    }
+                })
+                return false;
+            });
+
+        });
     });
+
 
 
 </script>

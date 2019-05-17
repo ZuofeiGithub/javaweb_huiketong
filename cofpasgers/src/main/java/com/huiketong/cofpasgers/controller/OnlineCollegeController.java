@@ -47,6 +47,7 @@ public class OnlineCollegeController {
                     List<OnlineCollegeResp.DataBean> dataBeanList = new ArrayList<>();
                     for(OnlineCollege onlineCollege:collegeList){
                         OnlineCollegeResp.DataBean dataBean = new OnlineCollegeResp.DataBean();
+                        dataBean.setId(onlineCollege.getId());
                         dataBean.setTitle(onlineCollege.getTitle());
                         dataBean.setType(onlineCollege.getArticleType());
                         dataBean.setCreatetime(onlineCollege.getCreateTime());

@@ -10,4 +10,5 @@ public class URL {
     public static String ONLINECOLLEGE = Constant.PREFIX+"college/onlineshare.html";
 
     public static String ONLINEFORM = Constant.PREFIX+"college/onlineform.html";
+    public static String ACTIVITYDETAIL = Constant.PREFIX+"activitydetail.html"; //活动详情页
 }

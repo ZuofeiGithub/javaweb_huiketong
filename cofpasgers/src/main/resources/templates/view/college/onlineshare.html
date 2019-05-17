@@ -121,10 +121,10 @@
                 });
             },
             add: function () {
-                layer.open({
+               var index = layer.open({
                     type: 2
                     , title: '添加文章'
-                    , content: '/listform'
+                    , content: '/onlineform'
                     , maxmin: true
                     , area: ['550px', '550px']
                     , btn: ['确定', '取消']
@@ -134,6 +134,7 @@
                         submit.click();
                     }
                 });
+               layer.full(index);
             }
         };
 

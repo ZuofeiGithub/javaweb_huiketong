@@ -29,4 +29,8 @@ public class SerialGeneratorUtil {
         }
         return resultStr;
     }
+
+    public static void main(String[] args) {
+        System.out.println(SerialGeneratorUtil.GetRandomString(32));
+    }
 }

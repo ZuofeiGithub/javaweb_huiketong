@@ -90,7 +90,6 @@ $(function () {
         var usertype = getCookie("usertype");
         var user_id = getCookie("telphone");
         var headphoto = getCookie('headphoto');
-        console.log(user_id)
         if (usertype == "2") {
             $('#top_item').text("系統管理")
             $('#menu').append('<li><a class="J_menuItem" href="enterprise?user_id='+user_id+'" name="tabMenuItem" data-index="6">企业管理</a></li>')
@@ -111,7 +110,7 @@ $(function () {
                 .append('<li><a class="J_menuItem" id="fenyong" href="fenyongJsp" name="tabMenuItem" data-index="6">分佣指南</a></li>')
                 .append('<li><a class="J_menuItem layui-hide" id="integral" href="integralRuleJsp" name="tabMenuItem" data-index="6">积分规则</a></li>')
                 .append('<li><a class="J_menuItem layui-hide" id="cus_ser" href="cus_ser_list" name="tabMenuItem" data-index="6">客服</a></li>')
-                .append('<li><a class="J_menuItem layui-hide" id="extend" href="exten" name="tabMenuItem" data-index="6">推广活动</a></li>')
+                .append('<li><a class="J_menuItem" id="extend" href="exten" name="tabMenuItem" data-index="6">推广活动</a></li>')
                 .append('<li><a class="J_menuItem" id="extend" href="onlinecollege" name="tabMenuItem" data-index="6">在线学院</a></li>');
 
             $("#rule_comm").attr("href", 'yongjinGuiZeJsp?user_id=' + user_id);
