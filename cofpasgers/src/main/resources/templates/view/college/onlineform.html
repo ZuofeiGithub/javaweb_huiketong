@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>layuiAdmin 文章管理 iframe 框</title>
+    <title>在线学院</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
@@ -11,8 +11,19 @@
 </head>
 <body>
 
-<div class="layui-form" lay-filter="layuiadmin-app-form-list" id="layuiadmin-app-form-list"
+<form class="layui-form" lay-filter="college_list_form" id="college_list_form"
      style="padding: 20px 30px 0 0;">
+    <div class="layui-form-item">
+        <label class="layui-form-label">文章类型</label>
+        <div class="layui-input-inline">
+            <select name="sharetype" id="sharetype" lay-filter="sharetype">
+                <option value=""></option>
+                <option value="1">拓客技巧</option>
+                <option value="2">视频分享</option>
+                <option value="3">公司介绍</option>
+            </select>
+        </div>
+    </div>
     <div class="layui-form-item">
         <label class="layui-form-label">文章标题</label>
         <div class="layui-input-inline">
@@ -21,15 +32,15 @@
         </div>
     </div>
     <div class="layui-form-item layui-hide" id="video">
-        <label class="layui-form-label">视频播放链接url</label>
+        <label class="layui-form-label">视频播放链接</label>
         <div class="layui-input-inline">
-            <input type="text" name="videoUrl"  id="videoUrl">
+            <input type="text" name="videoUrl"  id="videoUrl" class="layui-input">
         </div>
     </div>
-    <div class="layui-form-item">
+    <div class="layui-form-item" id="detail">
         <label class="layui-form-label">文章详情</label>
         <div class="layui-input-inline">
-            <textarea name="particulars" lay-verify="required" id="particulars" style="width: 400px; height: 150px;" autocomplete="off"
+            <textarea name="particulars"  id="particulars" style="width: 600px; height: 150px;" autocomplete="off"
                       class="layui-textarea"></textarea>
         </div>
     </div>
@@ -37,7 +48,7 @@
     <div class="layui-form-item layui-hide" id="videointro">
         <label class="layui-form-label">视频简介</label>
         <div class="layui-input-inline">
-            <textarea name="content" style="width: 400px; height: 50px;" autocomplete="off"
+            <textarea name="videointro" style="width: 400px; height: 50px;" autocomplete="off"
                       class="layui-textarea"></textarea>
         </div>
     </div>
@@ -47,26 +58,90 @@
         <input type="button" lay-submit lay-filter="layuiadmin-app-form-edit" id="layuiadmin-app-form-edit"
                value="确认编辑">
     </div>
-</div>
+</form>
 
 <script src="/layui/layui.js"></script>
+<script src="kindeditor/kindeditor-all.js"></script>
+<script src="kindeditor/lang/zh-CN.js"></script>
 <script>
+
+    KindEditor.ready(function (K) {
+        window.KE = K.create('#particulars', {
+            items: ['source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+                'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+                'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage',
+                'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+                'anchor', 'link', 'unlink', '|', 'about'],
+            allowFileManager: true,
+            minHeight:400,
+            filePostName: 'file',//跟服务端参数对应
+            uploadJson: "/kindeditor/fileUpload",
+            fileManagerJson: "/kindeditor/fileManager",//指定浏览远程图片的服务器端程序
+            afterCreate : function() {
+                let self = this;
+                K.ctrl(document, 13, function() {
+                    self.sync();
+                    document.forms['activity_form'].submit();
+                });
+                K.ctrl(self.edit.doc, 13, function() {
+                    self.sync();
+                    document.forms['activity_form'].submit();
+                });
+            },
+            afterUpload: function (url) {
+                console.log(url);
+            }
+        });
+    });
     layui.config({
         base: '/layui/' //静态资源所在路径
     }).extend({
         index: 'lib/index' //主入口模块
     }).use(['index', 'form'], function () {
         let $ = layui.$, form = layui.form;
+        let user = layui.data("user");
 
+        function GetQueryString(name) {
+            let reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+            let r = window.location.search.substr(1).match(reg);
+            if(r!=null)return  unescape(r[2]); return null;
+        }
+        var id = GetQueryString("id");
         //监听提交
         form.on('submit(layuiadmin-app-form-submit)', function (data) {
             var field = data.field; //获取提交的字段
+            field.particulars = KE.html();
+            field.login_name = user.user_id;
             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-
+            console.log(field);
             //提交 Ajax 成功后，关闭当前弹层并重载表格
             //$.ajax({});
-            parent.layui.table.reload('LAY-app-content-list'); //重载表格
-            parent.layer.close(index); //再执行关闭
+            $.post('addShareContext',field,function (resp) {
+                if(resp.code == "0"){
+                    layer.msg(resp.msg);
+                    parent.layui.table.reload('sharelist'); //重载表格
+                    parent.layer.close(index); //再执行关闭
+                }else{
+                    layer.msg(resp.msg);
+                }
+            })
+
+        });
+
+        form.on('select(sharetype)', function(data){
+           if(data.value == "2"){
+               console.log("显示");
+               $('#video').removeClass('layui-hide');
+               $('#detail').addClass('layui-hide')
+               $('#videointro').removeClass('layui-hide');
+           }else{
+               $('#video').addClass('layui-hide');
+               $('#detail').removeClass('layui-hide');
+               $('#videointro').addClass('layui-hide');
+           }
         });
     })
 </script>

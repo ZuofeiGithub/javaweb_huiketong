@@ -220,7 +220,6 @@
          * @param obj
          */
         function showAgentCustomers(obj) {
-            console.log(obj);
             layer.open({
                 type: 2,
                 title: obj.agentName + "邀请的客户",
@@ -261,7 +260,6 @@
             var data = obj.data;
             if (obj.event === 'del') {
                 layer.confirm('确定删除此用户吗?', function (index) {
-                    console.log(data);
                     var jsondata = {};
                     jsondata.id = data.id;
                     $.post('removeagent', jsondata, function (resp) {
@@ -276,7 +274,6 @@
                 });
             } else if (obj.event === 'certification') {
                 layer.confirm('是否认证此用户?', function (index) {
-                    console.log(data);
                     var jsondata = {};
                     jsondata.id = data.id;
                     $.post('authuser', jsondata, function (resp) {

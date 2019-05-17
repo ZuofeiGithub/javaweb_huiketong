@@ -105,7 +105,6 @@
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象
             if (layEvent === 'copy') {
-                console.log(data);
                 var copyText = document.getElementById("copyText");
                 let url = [[${url}]];
                 copyText.innerText = url + "/m/act/detail?actAlias=" + data.actAlias;
@@ -115,7 +114,6 @@
 
             } else if (layEvent === 'del') {
                 layer.confirm('真的删除行么', function (index) {
-                    console.log(data);
                     $.post('delActivity', {'id': data.id}, function (resp) {
                         if (resp.code == "0") {
                             layer.msg(resp.msg);

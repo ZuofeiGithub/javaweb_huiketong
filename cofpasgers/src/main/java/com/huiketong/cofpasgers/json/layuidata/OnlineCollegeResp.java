@@ -48,6 +48,8 @@ public class OnlineCollegeResp {
         private Integer type;
         private Date createtime;
         private String particulars;
+        private String videoIntro;
+        private String videoUrl;
 
 
         public Integer getId() {
@@ -88,6 +90,22 @@ public class OnlineCollegeResp {
 
         public void setParticulars(String particulars) {
             this.particulars = particulars;
+        }
+
+        public String getVideoIntro() {
+            return videoIntro;
+        }
+
+        public void setVideoIntro(String videoIntro) {
+            this.videoIntro = videoIntro;
+        }
+
+        public String getVideoUrl() {
+            return videoUrl;
+        }
+
+        public void setVideoUrl(String videoUrl) {
+            this.videoUrl = videoUrl;
         }
     }
 }

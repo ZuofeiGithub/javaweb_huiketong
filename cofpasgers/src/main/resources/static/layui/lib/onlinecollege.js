@@ -1,19 +1,26 @@
 /** layuiAdmin.std-v1.2.1 LPPL License By http://www.layui.com/admin/ */
-;layui.define(["table", "form"], function (t) {
-    var e = layui.$, i = layui.table, n = layui.form;
+;layui.define(["table", "form","util"], function (t) {
+    var $ = layui.$, i = layui.table, n = layui.form, util = layui.util;
+    var user = layui.data("user");
     i.render({
-        elem: "#LAY-app-content-list",
+        elem: "#sharelist",
         //url: layui.setter.base + "json/content/list.js",
-        url: "json/list.json",
-        cols: [[{type: "checkbox", fixed: "left"}, {field: "id", width: 100, title: "文章ID", sort: !0}, {
-            field: "label",
-            title: "文章标签",
-            minWidth: 100
-        }, {field: "title", title: "文章标题"}, {field: "author", title: "作者"}, {
-            field: "uploadtime",
-            title: "上传时间",
-            sort: !0
-        }, {field: "status", title: "发布状态", templet: "#buttonTpl", minWidth: 80, align: "center"}, {
+        url: "onlinecollegelist?login_name="+user.user_id,
+        cols: [
+            [
+                {type: "checkbox", fixed: "left"},
+                {field: "title", title: "文章标题", align:"center"
+        }, {field: "type", title: "文章类型",templet:function (d) {
+                    if(d.type == 1){
+                        return "拓客技巧";
+                    }else if(d.type == 2){
+                        return "视频分享";
+                    }else if(d.type == 3){
+                        return "公司介绍";
+                    }
+                },align:'center'}, {field: "createtime", title: "创建时间",templet:function (d) {
+                    return util.toDateString(d.createtime);
+                },align:'center'}, {
             title: "操作",
             minWidth: 150,
             align: "center",
@@ -23,23 +30,42 @@
         page: !0,
         limit: 10,
         limits: [10, 15, 20, 25, 30],
-        text: "对不起，加载出现异常！"
-    }), i.on("tool(LAY-app-content-list)", function (t) {
-        var e = t.data;
-        "del" === t.event ? layer.confirm("确定删除此文章？", function (e) {
-            t.del(), layer.close(e)
+        text: {none:"暂无数据"}
+    }), i.on("tool(sharelist)", function (t) {
+        var field = t.data;
+        "del" === t.event ? layer.confirm("确定删除此分享？", function (e) {
+            $.post("delShareContext",{id:field.id},function (resp) {
+                if(resp.code == "0"){
+                    layer.msg(resp.msg);
+                    t.del(), layer.close(e);
+                }else{
+                    layer.msg(resp.msg);
+                    layer.close(e);
+                }
+            })
+
+
         }) : "edit" === t.event && layer.open({
             type: 2,
             title: "编辑文章",
-            content: "onlineform?id=" + e.id,
+            content: "onlineform?id=" + field.id,
             maxmin: !0,
             area: ["550px", "550px"],
             btn: ["确定", "取消"],
+            success:function(layero, index){
+                layer.full(index);
+                let body = layer.getChildFrame('body',index);
+                body.find('#sharetype')
+                $("#color option[value=${bean.color}]").attr("selected", "selected");
+                console.log(field);
+            },
             yes: function (e, i) {
-                var l = window["layui-layer-iframe" + e],
+                console.log("确定被点击")
+                let l = window["layui-layer-iframe" + e],
                     a = i.find("iframe").contents().find("#layuiadmin-app-form-edit");
                 l.layui.form.on("submit(layuiadmin-app-form-edit)", function (i) {
-                    var l = i.field;
+                    let l = i.field;
+                    console.log(l);
                     t.update({
                         label: l.label,
                         title: l.title,

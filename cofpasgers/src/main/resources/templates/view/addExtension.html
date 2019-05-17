@@ -108,7 +108,7 @@
                 });
             },
             afterUpload: function (url) {
-                console.log(url);
+
             }
         });
         prettyPrint();
@@ -165,7 +165,6 @@
                 data.field.activity_context = editor.html();
                 data.field.coverImg = filename;
                 data.field.login_name = user.user_id;
-                console.log(data.field);
                 $.post('addActivity',data.field,function (resp) {
                     if(resp.code == "0"){
                         layer.msg(resp.msg);

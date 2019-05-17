@@ -4,15 +4,19 @@ import com.huiketong.cofpasgers.constant.URL;
 import com.huiketong.cofpasgers.entity.Enterprise;
 import com.huiketong.cofpasgers.entity.OnlineCollege;
 import com.huiketong.cofpasgers.json.layuidata.OnlineCollegeResp;
+import com.huiketong.cofpasgers.json.response.BaseJsonResponse;
 import com.huiketong.cofpasgers.repository.EnterpriseRepository;
 import com.huiketong.cofpasgers.repository.OnlineCollegeRepository;
 import com.huiketong.cofpasgers.util.ObjectUtils;
+import org.codehaus.jackson.map.Serializers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -48,10 +52,12 @@ public class OnlineCollegeController {
                     for(OnlineCollege onlineCollege:collegeList){
                         OnlineCollegeResp.DataBean dataBean = new OnlineCollegeResp.DataBean();
                         dataBean.setId(onlineCollege.getId());
-                        dataBean.setTitle(onlineCollege.getTitle());
-                        dataBean.setType(onlineCollege.getArticleType());
+                        dataBean.setTitle(onlineCollege.getTitle() == null ? "":onlineCollege.getTitle());
+                        dataBean.setType(onlineCollege.getArticleType() == null ? 0: onlineCollege.getArticleType());
                         dataBean.setCreatetime(onlineCollege.getCreateTime());
-                        dataBean.setParticulars(onlineCollege.getParticulars() );
+                        dataBean.setParticulars(onlineCollege.getParticulars() == null ? "":onlineCollege.getParticulars());
+                        dataBean.setVideoIntro(onlineCollege.getVideoIntro() == null ? "":onlineCollege.getVideoIntro());
+                        dataBean.setVideoUrl(onlineCollege.getVideoUrl() == null ? "" : onlineCollege.getVideoUrl());
                         dataBeanList.add(dataBean);
                     }
                     resp.setMsg("");
@@ -67,5 +73,45 @@ public class OnlineCollegeController {
             }
         }
         return resp;
+    }
+
+    @PostMapping(value = "addShareContext")
+    @ResponseBody
+    public BaseJsonResponse addShareContext(String login_name,String title,Integer sharetype,String particulars,String videoUrl,String videointro){
+        BaseJsonResponse response = new BaseJsonResponse();
+        OnlineCollege onlineCollege = new OnlineCollege();
+        Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(login_name);
+        if(ObjectUtils.isNotEmpty(enterprise)){
+            onlineCollege.setCompanyId(enterprise.getId());
+            onlineCollege.setArticleType(sharetype);
+            onlineCollege.setCreateTime(new Date());
+            onlineCollege.setParticulars(particulars);
+            onlineCollege.setTitle(title);
+            onlineCollege.setVideoIntro(videointro);
+            onlineCollege.setVideoUrl(videoUrl);
+            try {
+                onlineCollegeRepository.save(onlineCollege);
+                response.setCode("0").setMsg("添加成功").setData(onlineCollege);
+            }catch (Exception e){
+                response.setCode("1").setMsg("添加失败");
+            }
+        }else{
+            response.setCode("1").setMsg("添加失败");
+        }
+        return response;
+    }
+
+    @PostMapping(value = "delShareContext")
+    @ResponseBody
+    public BaseJsonResponse delShareContext(Integer id){
+        BaseJsonResponse response = new BaseJsonResponse();
+        try {
+            onlineCollegeRepository.deleteById(id);
+            response.setMsg("删除成功").setCode("0");
+        }catch (Exception e){
+            response.setCode("1").setMsg("删除失败");
+        }
+
+        return  response;
     }
 }
