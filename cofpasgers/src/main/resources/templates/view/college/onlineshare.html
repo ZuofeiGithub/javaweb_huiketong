@@ -17,34 +17,9 @@
         <div class="layui-form layui-card-header layuiadmin-card-header-auto">
             <div class="layui-form-item">
                 <div class="layui-inline">
-                    <label class="layui-form-label">文章ID</label>
+                    <label class="layui-form-label">文章标题</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">作者</label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="author" placeholder="请输入" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">标题</label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="title" placeholder="请输入" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">文章标签</label>
-                    <div class="layui-input-inline">
-                        <select name="label">
-                            <option value="">请选择标签</option>
-                            <option value="0">美食</option>
-                            <option value="1">新闻</option>
-                            <option value="2">八卦</option>
-                            <option value="3">体育</option>
-                            <option value="4">音乐</option>
-                        </select>
+                        <input type="text" name="title" placeholder="请输入文章标题" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-inline">
@@ -93,7 +68,7 @@
         //监听搜索
         form.on('submit(LAY-app-contlist-search)', function (data) {
             var field = data.field;
-
+            console.log(field);
             //执行重载
             table.reload('sharelistt', {
                 where: field

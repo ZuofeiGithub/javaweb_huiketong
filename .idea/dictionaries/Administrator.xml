@@ -26,10 +26,12 @@
       <w>onlineform</w>
       <w>onlineshare</w>
       <w>promot</w>
+      <w>remeberme</w>
       <w>removebannerbyid</w>
       <w>sharetype</w>
       <w>telphone</w>
       <w>videointro</w>
+      <w>wantorder</w>
     </words>
   </dictionary>
 </component>

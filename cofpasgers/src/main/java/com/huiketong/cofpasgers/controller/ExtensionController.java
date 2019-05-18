@@ -39,7 +39,7 @@ public class ExtensionController {
     @GetMapping(value = "exten")
     public ModelAndView Extension(Model model, HttpServletRequest request) {
         ModelAndView mv = new ModelAndView(Constant.PREFIX + "extension");
-        model.addAttribute("url",request.getScheme() + "://"+request.getServerName());
+        model.addAttribute("url",Constant.URL);
         return mv;
     }
 
@@ -100,6 +100,7 @@ public class ExtensionController {
            model.addAttribute("title",promotActivity.getTitle());
            model.addAttribute("createtime",DateUtils.dateFormat(promotActivity.getCreateTime(),DateUtils.DATE_TIME_PATTERN));
            model.addAttribute("context",promotActivity.getDetail());
+           model.addAttribute("type",promotActivity.getType());
        }
         return URL.ACTIVITYDETAIL;
     }

@@ -15,6 +15,13 @@ $(function () {
     }
     getVerify($("#imgVerify")[0]);
 
+    let rem = $.cookie('remember');
+    console.log(rem);
+    if(rem){
+        $("#remeberme").prop("checked",true);
+        $("#user_telphone").val($.cookie("telphone"));
+        $("#user_passward").val($.cookie("password"));
+    }
     //事件
     $("#imgVerify").click(function () {
         getVerify(this);
@@ -41,7 +48,7 @@ $(function () {
                 layer.msg("请输入验证码");
                 return;
             }
-            remoberMe();
+            save_cookies();
             $.ajax({
                 url: '/login',
                 type: 'post',
@@ -96,6 +103,22 @@ $(function () {
         obj.src = "/getVerify?" + Math.random();
     }
 
+
+    //保存到cookie
+    function save_cookies(){
+        if($("#remeberme").prop("checked")){
+            var username = $("#user_telphone").val();
+            var password = $("#user_passward").val();
+
+            $.cookie("remember","true",{expires:7});
+            $.cookie("telphone",username,{expires:7 });
+            $.cookie("password",password,{expires:7 });
+        }else{
+            $.cookie("remember","false",{expires:-1});
+            $.cookie("telphone","",{ expires:-1 });
+            $.cookie("password","",{ expires:-1 });
+        }
+    };
     //记住密码
     function remoberMe() {
         $("#remeberme").change(function () {

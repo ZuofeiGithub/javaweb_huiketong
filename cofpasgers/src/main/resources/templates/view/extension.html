@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>推广活动</title>
-    <link rel="stylesheet" href="layui/css/layui.css">
-    <script src="layui/layui.js"></script>
-    <script src="kindeditor/kindeditor-all.js"></script>
-    <script src="kindeditor/lang/zh-CN.js"></script>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
+    <script src="/kindeditor/kindeditor-all.js"></script>
+    <script src="/kindeditor/lang/zh-CN.js"></script>
     <style>
         #copyText {
             width: 0;
@@ -62,8 +62,6 @@
                                 return "邀请经纪人活动";
                             } else if (d.activityType == 2) {
                                 return "推荐客户活动";
-                            } else if (d.activityType == 3) {
-                                return "红包活动";
                             }
                         }
                     },
@@ -107,7 +105,7 @@
             if (layEvent === 'copy') {
                 var copyText = document.getElementById("copyText");
                 let url = [[${url}]];
-                copyText.innerText = url + "/m/act/detail?actAlias=" + data.actAlias;
+                copyText.innerText = url + "m/act/detail?actAlias=" + data.actAlias;
                 copyText.select();
                 document.execCommand("copy");
                 layer.msg("复制成功", {anim: 2});
