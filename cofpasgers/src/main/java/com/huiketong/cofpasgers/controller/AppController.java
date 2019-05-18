@@ -112,6 +112,188 @@ public class AppController {
     AlipayClient alipayClient;
     @Autowired
     VoucherUserRepository voucherUserRepository;
+    @Autowired
+    OnlineCollegeRepository onlineCollegeRepository;
+
+
+    /**
+     * 视频分享列表
+     * @param user_id
+     * @param token
+     * @param page
+     * @param limit
+     * @return
+     * @throws ParseException
+     * @throws AlipayApiException
+     */
+    @PostMapping(value = "video_share_list")
+    @CrossOrigin
+    public BaseJsonResponse videoShareList(String user_id,String token,Integer page,Integer limit) throws ParseException, AlipayApiException {
+        BaseJsonResponse response = new BaseJsonResponse();
+       verifyUser(user_id, token, response, o -> {
+            Agent agent = (Agent) o;
+            List<OnlineCollege> onlineCollegeList = onlineCollegeRepository.findVideoShareListByCompanyIdLimit(agent.getCompanyId(),(page-1)*limit,limit);
+            if(onlineCollegeList.size() > 0){
+                List<VideoShareData> dataList = new ArrayList<>();
+                for(OnlineCollege onlineCollege:onlineCollegeList){
+                    VideoShareData data = new VideoShareData();
+                    data.setId(String.valueOf(onlineCollege.getId()));
+                    data.setAddtime(DateUtils.dateFormat(onlineCollege.getCreateTime(),DateUtils.DATE_PATTERN));
+                    data.setTitle(onlineCollege.getTitle() == null ? "":onlineCollege.getTitle());
+                    data.setIntro(onlineCollege.getVideoIntro() == null ? "" : onlineCollege.getVideoIntro());
+                    dataList.add(data);
+                }
+                response.setCode("1").setMsg("获取视频分享成功").setData(dataList);
+            }else{
+                response.setCode("1").setMsg("无数据").setData(new ArrayList<>());
+            }
+       });
+        return response;
+    }
+
+    /**
+     * 视频分享详情页
+     * @param user_id
+     * @param token
+     * @param id
+     * @return
+     * @throws ParseException
+     * @throws AlipayApiException
+     */
+    @PostMapping(value = "video_share_detail")
+    @CrossOrigin
+    public BaseJsonResponse videoShareDetail(String user_id,String token,String id) throws ParseException, AlipayApiException {
+        BaseJsonResponse response = new BaseJsonResponse();
+        verifyUser(user_id, token, response, o -> {
+            OnlineCollege onlineCollege = onlineCollegeRepository.findOnlineCollegeByIdAndArticleType(Integer.valueOf(id),2);
+            if(ObjectUtils.isNotEmpty(onlineCollege)){
+                VideoDetailData data = new VideoDetailData();
+                data.setTitle(onlineCollege.getTitle() == null ? "":onlineCollege.getTitle());
+                data.setIntro(onlineCollege.getVideoIntro() == null ?  "": onlineCollege.getVideoIntro());
+                data.setAddtime(DateUtils.dateFormat(onlineCollege.getCreateTime(),DateUtils.DATE_PATTERN));
+                data.setVideo_url(onlineCollege.getVideoUrl() == null ? "":onlineCollege.getVideoUrl());
+                response.setCode("1").setMsg("获取视频详情成功").setData(data);
+            }else{
+                response.setCode("0").setMsg("没有详情页").setData(null);
+            }
+        });
+        return response;
+    }
+
+    /**
+     * 拓客技巧列表
+     * @param user_id
+     * @param token
+     * @param page
+     * @param limit
+     * @return
+     * @throws ParseException
+     * @throws AlipayApiException
+     */
+    @PostMapping(value = "talk_skill_list")
+    @CrossOrigin
+    public BaseJsonResponse talkSkillList(String user_id,String token,Integer page,Integer limit) throws ParseException, AlipayApiException {
+        BaseJsonResponse response = new BaseJsonResponse();
+        verifyUser(user_id, token, response, o -> {
+            Agent agent = (Agent) o;
+            List<OnlineCollege> onlineCollegeList = onlineCollegeRepository.findTalkSkillListByCompanyIdLimit(agent.getCompanyId(),(page-1)*limit,limit);
+            if(onlineCollegeList.size() > 0){
+                List<TalkSkillData> dataList = new ArrayList<>();
+                for(OnlineCollege onlineCollege:onlineCollegeList){
+                    TalkSkillData data = new TalkSkillData();
+                    data.setTalk_id(String.valueOf(onlineCollege.getId()));
+                    data.setAddtime(DateUtils.dateFormat(onlineCollege.getCreateTime(),DateUtils.DATE_PATTERN));
+                    data.setTalk_title(onlineCollege.getTitle() == null ? "":onlineCollege.getTitle());
+                    dataList.add(data);
+                }
+                response.setCode("1").setMsg("获取拓客技巧列表成功").setData(dataList);
+            }else{
+                response.setCode("1").setMsg("无数据").setData(new ArrayList<>());
+            }
+        });
+        return response;
+    }
+
+    /**
+     * 拓客技巧详情页
+     * @param user_id
+     * @param token
+     * @param id
+     * @return
+     * @throws ParseException
+     * @throws AlipayApiException
+     */
+    @PostMapping(value = "talk_skill_detail")
+    @CrossOrigin
+    public BaseJsonResponse talkSkillDetail(String user_id,String token,String id) throws ParseException, AlipayApiException {
+        BaseJsonResponse response = new BaseJsonResponse();
+        verifyUser(user_id, token, response, o -> {
+            OnlineCollege onlineCollege = onlineCollegeRepository.findOnlineCollegeByIdAndArticleType(Integer.valueOf(id),1);
+            if(ObjectUtils.isNotEmpty(onlineCollege)){
+                TalkDetailData data = new TalkDetailData();
+                data.setAddtime(DateUtils.dateFormat(onlineCollege.getCreateTime(),DateUtils.DATE_PATTERN));
+                data.setContext(onlineCollege.getParticulars() == null ? "":onlineCollege.getParticulars());
+                data.setTitle(onlineCollege.getTitle() == null ? "":onlineCollege.getTitle());
+                response.setCode("1").setMsg("获取拓客技巧详情成功").setData(data);
+            }else{
+                response.setCode("0").setMsg("没有详情页").setData(null);
+            }
+        });
+        return response;
+    }
+
+    /**
+     * 获取公司介绍列表
+     * @param user_id
+     * @param token
+     * @param page
+     * @param limit
+     * @return
+     * @throws ParseException
+     * @throws AlipayApiException
+     */
+    @PostMapping(value = "company_introduce_list")
+    @CrossOrigin
+    public BaseJsonResponse companyIntroList(String user_id,String token,Integer page,Integer limit) throws ParseException, AlipayApiException {
+        BaseJsonResponse response = new BaseJsonResponse();
+        verifyUser(user_id, token, response, o -> {
+            Agent agent = (Agent) o;
+            List<OnlineCollege> onlineCollegeList = onlineCollegeRepository.findCompanyIntolListByCompanyIdLimit(agent.getCompanyId(),(page-1)*limit,limit);
+            if(onlineCollegeList.size() > 0){
+                List<CompanyIntroData> dataList = new ArrayList<>();
+                for(OnlineCollege onlineCollege:onlineCollegeList){
+                    CompanyIntroData data = new CompanyIntroData();
+                    data.setId(String.valueOf(onlineCollege.getId()));
+                    data.setAddtime(DateUtils.dateFormat(onlineCollege.getCreateTime(),DateUtils.DATE_PATTERN));
+                    data.setTitle(onlineCollege.getTitle() == null ? "":onlineCollege.getTitle());
+                    dataList.add(data);
+                }
+                response.setCode("1").setMsg("获取公司介绍列表成功").setData(dataList);
+            }else{
+                response.setCode("1").setMsg("无数据").setData(new ArrayList<>());
+            }
+        });
+        return response;
+    }
+
+    @PostMapping(value = "company_introduce_detail")
+    @CrossOrigin
+    public BaseJsonResponse companyIntroDetail(String user_id,String token,String id) throws ParseException, AlipayApiException {
+        BaseJsonResponse response = new BaseJsonResponse();
+        verifyUser(user_id, token, response, o -> {
+            OnlineCollege onlineCollege = onlineCollegeRepository.findOnlineCollegeByIdAndArticleType(Integer.valueOf(id),3);
+            if(ObjectUtils.isNotEmpty(onlineCollege)){
+                CompanyIntoDetail data = new CompanyIntoDetail();
+                data.setAddtime(DateUtils.dateFormat(onlineCollege.getCreateTime(),DateUtils.DATE_PATTERN));
+                data.setContent(onlineCollege.getParticulars() == null ? "":onlineCollege.getParticulars());
+                data.setTitle(onlineCollege.getTitle() == null ? "":onlineCollege.getTitle());
+                response.setCode("1").setMsg("获取公司详情成功").setData(data);
+            }else{
+                response.setCode("0").setMsg("没有详情页").setData(null);
+            }
+        });
+        return response;
+    }
 
     @PostMapping(value = "/get_version")
     @CrossOrigin

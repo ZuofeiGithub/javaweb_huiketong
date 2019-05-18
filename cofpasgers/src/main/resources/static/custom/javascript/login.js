@@ -41,6 +41,7 @@ $(function () {
                 layer.msg("请输入验证码");
                 return;
             }
+            remoberMe();
             $.ajax({
                 url: '/login',
                 type: 'post',
@@ -58,7 +59,6 @@ $(function () {
                         case 2:
                             layer.msg("登录成功");
                             loginSuccess(json.telphone, json.username, json.usertype, json.rightname, json.headphoto);
-                            remoberMe();
                             break;
                         case 3:
                             layer.msg("验证码错误");
