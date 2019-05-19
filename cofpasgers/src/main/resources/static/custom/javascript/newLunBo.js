@@ -33,7 +33,7 @@ layui.use(['form', 'table'], function () {
 
     table.render({
         elem: '#test'
-        , url: '/lunBoList?telphone=' + getCookie("telphone")
+        , url: '/banners?telphone=' + getCookie("telphone")
         , title: '用户数据表'
         , cols: [
             [

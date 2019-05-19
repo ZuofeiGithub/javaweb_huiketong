@@ -3,6 +3,7 @@ package com.huiketong.cofpasgers.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.huiketong.cofpasgers.constant.Constant;
 import com.huiketong.cofpasgers.constant.JSONData;
+import com.huiketong.cofpasgers.constant.URL;
 import com.huiketong.cofpasgers.entity.*;
 import com.huiketong.cofpasgers.repository.*;
 import com.huiketong.cofpasgers.util.FileUploadUtil;
@@ -78,13 +79,12 @@ public class CommodityController {
 
 
     /**
-     * 进入商品管理页面
-     *
+     * 商品列表
      * @return
      */
-    @RequestMapping(value = "/commodityJsp")
-    public ModelAndView commodityJsp() {
-        ModelAndView mv = new ModelAndView(Constant.PREFIX + "newCommodity");
+    @RequestMapping(value = "/commodity_list")
+    public ModelAndView commodityList() {
+        ModelAndView mv = new ModelAndView(URL.COMMODITYLIST);
         return mv;
     }
 

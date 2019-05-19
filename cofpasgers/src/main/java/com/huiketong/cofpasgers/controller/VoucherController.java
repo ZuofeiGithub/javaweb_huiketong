@@ -34,9 +34,9 @@ public class VoucherController {
     @Autowired
     VoucherUserRepository voucherUserRepository;
 
-    @GetMapping("diyongquan")
-    public String voucherDetail() {
-        return "view/vouchers/voucher.html";
+    @GetMapping("coupons_detail")
+    public String couponsDetail() {
+        return "view/vouchers/voucher_detail.html";
     }
 
     @GetMapping("voucher_share")

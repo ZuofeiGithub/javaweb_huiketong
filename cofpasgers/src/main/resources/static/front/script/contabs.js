@@ -99,24 +99,24 @@ $(function () {
             $('#headphoto').attr('src', 'http://image.jkt365.com/' + headphoto)
             // $('#menu li a').attr('href', 'agent').attr('data-index', "5").text("经纪人管理");
             $('#menu')
-                .append('<li><a class="J_menuItem" id="enterId" href="enterinfomain" name="tabMenuItem" data-index="6">企业信息</a></li>')
-                .append('<li><a class="J_menuItem" href="lunBoJsp" name="tabMenuItem" data-index="6">轮播图</a></li>')
+                .append('<li><a class="J_menuItem" id="enterId" href="enterprise_info" name="tabMenuItem" data-index="6">企业信息</a></li>')
+                .append('<li><a class="J_menuItem" href="banner_list" name="tabMenuItem" data-index="6">轮播图</a></li>')
                 .append('<li><a class="J_menuItem layui-hide" href="banner_url_context_edit" name="tabMenuItem" data-index="6">轮播图跳转内容管理</a></li>')
                 // .append('<li><a class="J_menuItem" href="agent" name="tabMenuItem" data-index="6">经纪人管理</a></li>')
                 // .append('<li><a class="J_menuItem" href="customer" name="tabMenuItem" data-index="6">客户管理</a></li>')
-                .append('<li><a class="J_menuItem" href="yongjinJsp" name="tabMenuItem" data-index="6">分享赚佣金</a></li>')
+                .append('<li><a class="J_menuItem" href="share_commissions_list" name="tabMenuItem" data-index="6">分享赚佣金</a></li>')
                 .append('<li><a class="J_menuItem layui-hide" href="shnagjiaJsp" name="tabMenuItem" data-index="6">合作商家</a></li>')
-                .append('<li><a class="J_menuItem" id="rule_comm" href="yongjinGuiZeJsp" name="tabMenuItem" data-index="6">佣金规则</a></li>')
-                .append('<li><a class="J_menuItem" id="fenyong" href="fenyongJsp" name="tabMenuItem" data-index="6">分佣指南</a></li>')
-                .append('<li><a class="J_menuItem layui-hide" id="integral" href="integralRuleJsp" name="tabMenuItem" data-index="6">积分规则</a></li>')
+                .append('<li><a class="J_menuItem" id="rule_comm" href="commission_rule" name="tabMenuItem" data-index="6">佣金规则</a></li>')
+                .append('<li><a class="J_menuItem" id="fenyong" href="share_commission_guide" name="tabMenuItem" data-index="6">分佣指南</a></li>')
+                .append('<li><a class="J_menuItem layui-hide" id="integral" href="integral_rule" name="tabMenuItem" data-index="6">积分规则</a></li>')
                 .append('<li><a class="J_menuItem layui-hide" id="cus_ser" href="cus_ser_list" name="tabMenuItem" data-index="6">客服</a></li>')
-                .append('<li><a class="J_menuItem" id="extend" href="exten" name="tabMenuItem" data-index="6">推广活动</a></li>')
+                .append('<li><a class="J_menuItem" id="extend" href="promotional_activity_list" name="tabMenuItem" data-index="6">推广活动</a></li>')
                 .append('<li><a class="J_menuItem" id="extend" href="onlinecollege" name="tabMenuItem" data-index="6">在线学院</a></li>');
 
-            $("#rule_comm").attr("href", 'yongjinGuiZeJsp?user_id=' + user_id);
-            $("#enterId").attr("href", "enterinfomain?user_id=" + user_id);
-            $("#integral").attr("href", "integralRuleJsp?user_id=" + user_id);
-            $("#fenyong").attr("href", "fenyongJsp?user_id=" + user_id);
+            $("#rule_comm").attr("href", 'commission_rule?user_id=' + user_id);
+            $("#enterId").attr("href", "enterprise_info?user_id=" + user_id);
+            $("#integral").attr("href", "integral_rule?user_id=" + user_id);
+            $("#fenyong").attr("href", "share_commission_guide?user_id=" + user_id);
 
             $("#side-menu").append('<li id="broker"></li>')
             $('#broker').append('<a><i class="fa fa-user-secret fa-fw" style="margin-right: 5px"></i><span class="nav-label">经纪人管理</span><span class="fa fa-angle-left" id="arrowId1" style="float: right"></span></a>')
@@ -133,16 +133,16 @@ $(function () {
             $("#side-menu").append('<li id="caiwu"></li>');
             $("#caiwu").append('<a><i class="fa fa-money fa-fw" style="margin-right: 5px"></i><span class="nav-label">财务管理</span><span class="fa fa-angle-left" id="arrowId1" style="float: right"></span></a>');
             $("#caiwu").append('<ul class="nav nav-second-level collapse" aria-expanded="true" id="menu1" style=""></ul>');
-            $("#menu1").append('<li><a class="J_menuItem" href="jiangliJsp" name="tabMenuItem" data-index="5">奖励明细</a></li>');
-            $("#menu1").append('<li><a class="J_menuItem" href="tixianJsp" name="tabMenuItem" data-index="5">提现明细</a></li>');
-            $("#menu1").append('<li><a class="J_menuItem" href="tixianspJsp" name="tabMenuItem" data-index="5">提现审批</a></li>');
+            $("#menu1").append('<li><a class="J_menuItem" href="reward_detail_list" name="tabMenuItem" data-index="5">奖励明细</a></li>');
+            $("#menu1").append('<li><a class="J_menuItem" href="withdrawal_detail_list" name="tabMenuItem" data-index="5">提现明细</a></li>');
+            $("#menu1").append('<li><a class="J_menuItem" href="withdrawal_approval_list" name="tabMenuItem" data-index="5">提现审批</a></li>');
 
             $("#side-menu").append('<li id="caiwu1"></li>');
             $("#caiwu1").append('<a><i class="fa fa-gift fa-fw" style="margin-right: 5px;"></i><span class="nav-label">商品管理</span><span class="fa fa-angle-left" id="arrowId2" style="float: right"></span></a>');
             $("#caiwu1").append('<ul class="nav nav-second-level collapse" aria-expanded="true" id="menu2" style=""></ul>');
             $("#menu2").append('<li><a class="J_menuItem layui-hide" href="commodityCategoryJsp" name="tabMenuItem" data-index="5">品类管理</a></li>')
                 .append('<li><a class="J_menuItem layui-hide" href="commodityStyleJsp" name="tabMenuItem" data-index="5">风格管理</a></li>')
-                .append('<li><a class="J_menuItem" href="commodityJsp" name="tabMenuItem" data-index="5">分享商品</a></li>')
+                .append('<li><a class="J_menuItem" href="commodity_list" name="tabMenuItem" data-index="5">分享商品</a></li>')
                 .append('<li><a class="J_menuItem layui-hide" href="orderManagementJsp" name="tabMenuItem" data-index="5">订单管理</a></li>');
 
             $("#side-menu").append('<li id="voucher"></li>');

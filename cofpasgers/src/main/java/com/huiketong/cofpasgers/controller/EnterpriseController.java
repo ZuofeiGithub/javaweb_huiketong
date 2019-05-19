@@ -2,10 +2,7 @@ package com.huiketong.cofpasgers.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.huiketong.cofpasgers.constant.AgentType;
-import com.huiketong.cofpasgers.constant.Constant;
-import com.huiketong.cofpasgers.constant.JSONData;
-import com.huiketong.cofpasgers.constant.UserType;
+import com.huiketong.cofpasgers.constant.*;
 import com.huiketong.cofpasgers.entity.*;
 import com.huiketong.cofpasgers.json.response.BaseJsonResponse;
 import com.huiketong.cofpasgers.repository.*;
@@ -66,9 +63,9 @@ public class EnterpriseController {
         return map;
     }
 
-    @GetMapping(value = "enterinfomain")
-    public Object EnterInfoMain(String user_id, Map<String, Object> map) throws ParseException {
-        ModelAndView mv = new ModelAndView(Constant.PREFIX + "enterinfomain");
+    @GetMapping(value = "enterprise_info")
+    public Object enterpriseInfo(String user_id, Map<String, Object> map) throws ParseException {
+        ModelAndView mv = new ModelAndView(URL.ENTERPRISEINFO);
         Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(user_id);
         if (ObjectUtils.isNotNull(enterprise)) {
             map.put("loginname", enterprise.getEnterLoginName());
@@ -121,7 +118,7 @@ public class EnterpriseController {
      */
     @GetMapping(value = "addenter")
     public ModelAndView AddEnter() {
-        ModelAndView mv = new ModelAndView(Constant.PREFIX + "addEnter");
+        ModelAndView mv = new ModelAndView(URL.CREATEENTERPRISE);
         return mv;
     }
 

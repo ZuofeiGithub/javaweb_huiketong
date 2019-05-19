@@ -3,6 +3,7 @@ package com.huiketong.cofpasgers.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huiketong.cofpasgers.constant.Constant;
+import com.huiketong.cofpasgers.constant.URL;
 import com.huiketong.cofpasgers.constant.UserType;
 import com.huiketong.cofpasgers.constant.EnumLogin;
 import com.huiketong.cofpasgers.entity.Agent;
@@ -50,7 +51,7 @@ public class LoginController {
     @GetMapping(value = "/login")
     //@GetMapping(value = "/")
     public ModelAndView Login(HttpSession session) {
-        ModelAndView mv = new ModelAndView(Constant.PREFIX + "newlogin");
+        ModelAndView mv = new ModelAndView(URL.LOGIN);
         session.setAttribute("userinfo", null);
         session.setAttribute("iswitch", null);
         //ModelAndView mv = new ModelAndView("cptsbpm/index");
@@ -71,7 +72,7 @@ public class LoginController {
 
     @GetMapping(value = "admin")
     public ModelAndView Admin(HttpServletRequest request, HttpServletResponse response, Map<String, Object> map) throws IOException {
-        ModelAndView mv = new ModelAndView(Constant.PREFIX + "huiketong");
+        ModelAndView mv = new ModelAndView(URL.HOME);
         HttpSession session = request.getSession();
         switch (isWhich) {
             case 0:

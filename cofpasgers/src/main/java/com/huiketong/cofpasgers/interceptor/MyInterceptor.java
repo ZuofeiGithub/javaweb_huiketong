@@ -106,7 +106,7 @@ public class MyInterceptor implements HandlerInterceptor {
         notLoginPaths.add("/yinsi.html");//隐私协议
         notLoginPaths.add("/about"); //关于我们
         notLoginPaths.add("/notify");//支付异步通知
-        notLoginPaths.add("/diyongquan");
+        notLoginPaths.add("/coupons");
         notLoginPaths.add("/product_details");//产品详情页
         notLoginPaths.add("/productdetails");
         notLoginPaths.add("/voucherdetail");

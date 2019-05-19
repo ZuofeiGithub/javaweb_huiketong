@@ -2,6 +2,7 @@ package com.huiketong.cofpasgers.controller;
 
 import com.huiketong.cofpasgers.constant.Constant;
 import com.huiketong.cofpasgers.constant.JSONData;
+import com.huiketong.cofpasgers.constant.URL;
 import com.huiketong.cofpasgers.entity.Earnings;
 import com.huiketong.cofpasgers.entity.Enterprise;
 import com.huiketong.cofpasgers.entity.ShareContext;
@@ -43,9 +44,9 @@ public class NewFinanceController {
      *
      * @return
      */
-    @RequestMapping(value = "/jiangliJsp")
-    public ModelAndView yongjinJsp() {
-        ModelAndView mv = new ModelAndView(Constant.PREFIX + "newjiangli");
+    @RequestMapping(value = "/reward_detail_list")
+    public ModelAndView rewardDetailList() {
+        ModelAndView mv = new ModelAndView(URL.REWARDDETAILLIST);
         return mv;
     }
 
@@ -54,9 +55,9 @@ public class NewFinanceController {
      *
      * @return
      */
-    @RequestMapping(value = "/tixianJsp")
-    public ModelAndView tixianJsp() {
-        ModelAndView mv = new ModelAndView(Constant.PREFIX + "newTixian");
+    @RequestMapping(value = "/withdrawal_detail_list")
+    public ModelAndView withdrawalDetailList() {
+        ModelAndView mv = new ModelAndView(URL.WITHDRAWALDETAILLIST);
         return mv;
     }
 
@@ -65,9 +66,9 @@ public class NewFinanceController {
      *
      * @return
      */
-    @RequestMapping(value = "/tixianspJsp")
-    public ModelAndView tixianspJsp() {
-        ModelAndView mv = new ModelAndView(Constant.PREFIX + "newTixianSp");
+    @RequestMapping(value = "/withdrawal_approval_list")
+    public ModelAndView withdrawalApprovalList() {
+        ModelAndView mv = new ModelAndView(URL.WITHDRAWALAPPROVALLIST);
         return mv;
     }
 

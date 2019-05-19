@@ -36,9 +36,9 @@ public class ExtensionController {
     @Autowired
     PromotActivityRepository promotActivityRepository;
 
-    @GetMapping(value = "exten")
-    public ModelAndView Extension(Model model, HttpServletRequest request) {
-        ModelAndView mv = new ModelAndView(Constant.PREFIX + "extension");
+    @GetMapping(value = "promotional_activity_list")
+    public ModelAndView promotionalActivityList(Model model, HttpServletRequest request) {
+        ModelAndView mv = new ModelAndView(URL.PROMOTIONALACTIVITYLIST);
         model.addAttribute("url",Constant.URL);
         return mv;
     }

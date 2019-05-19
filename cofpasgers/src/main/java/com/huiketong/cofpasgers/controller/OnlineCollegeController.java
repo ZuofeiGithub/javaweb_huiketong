@@ -27,7 +27,7 @@ public class OnlineCollegeController {
     EnterpriseRepository enterpriseRepository;
     @GetMapping("/onlinecollege")
     public String onlineCollege(){
-        return URL.ONLINECOLLEGE;
+        return URL.ONLINECOLLEGELIST;
     }
 
     @GetMapping("/onlineform")

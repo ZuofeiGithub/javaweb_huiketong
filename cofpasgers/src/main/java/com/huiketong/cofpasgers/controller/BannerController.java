@@ -1,179 +1,193 @@
 package com.huiketong.cofpasgers.controller;
 
+import com.huiketong.cofpasgers.constant.Constant;
+import com.huiketong.cofpasgers.constant.JSONData;
 import com.huiketong.cofpasgers.constant.URL;
-import com.huiketong.cofpasgers.constant.UserType;
 import com.huiketong.cofpasgers.entity.Banner;
-import com.huiketong.cofpasgers.entity.BannerContext;
 import com.huiketong.cofpasgers.entity.Enterprise;
-import com.huiketong.cofpasgers.entity.UserRights;
-import com.huiketong.cofpasgers.json.response.BaseJsonResponse;
-import com.huiketong.cofpasgers.repository.BannerContextRepository;
 import com.huiketong.cofpasgers.repository.BannerRepository;
 import com.huiketong.cofpasgers.repository.EnterpriseRepository;
-import com.huiketong.cofpasgers.repository.UserRightsRepository;
+import com.huiketong.cofpasgers.util.FileUploadUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
+@RequestMapping(value = "/")
 public class BannerController {
+
+    private final static Logger log = LoggerFactory.getLogger(BannerController.class);
+
     @Autowired
     BannerRepository bannerRepository;
     @Autowired
-    BannerContextRepository contextRepository;
-    @Autowired
     EnterpriseRepository enterpriseRepository;
-    @Autowired
-    UserRightsRepository rightsRepository;
 
-    @GetMapping(value = "banner")
-    public ModelAndView banner() {
-        ModelAndView mv = new ModelAndView("banner");
+    /**
+     * 进入轮播图操作页面
+     *
+     * @return
+     */
+    @RequestMapping(value = "/banner_list")
+    public ModelAndView bannerList() {
+        ModelAndView mv = new ModelAndView(URL.BANNERLIST);
         return mv;
     }
 
-    @GetMapping(value = "get_banner_info")
-    @ResponseBody
-    public Object GetBannerInfo() {
-        Map<String, Object> map = new HashMap<>();
-        List<Banner> bannerList = bannerRepository.findAll();
-        map.put("data", bannerList);
-        return map;
-    }
 
-    @PostMapping(value = "add_banner")
+    /**
+     * 轮播图列表
+     *
+     * @param page
+     * @param limit
+     * @param telphone
+     * @param searchMerName 轮播图名称
+     * @param status        轮播图状态
+     * @return
+     */
+    @RequestMapping(value = "/banners")
     @ResponseBody
-    public BaseJsonResponse AddBanner(HttpServletRequest request) {
-        BaseJsonResponse response = new BaseJsonResponse();
-        String banner_name = request.getParameter("banner_name");
-        String banner_desc = request.getParameter("banner_desc");
-        String company_login_id = request.getParameter("company_login_id");
+    public JSONData yongjinList(Integer page, Integer limit, String telphone, String searchMerName, String status) {
+        Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
+        int comId = enterprise.getId();
+        JSONData response = new JSONData();
+        List<Banner> shareContextList = bannerRepository.findPagesByLimit(comId, status, searchMerName, (page - 1) * limit, limit);
 
-        UserRights rights = rightsRepository.findUserRightsByUserTelAndUserRightOrLoginNameAndUserRight(company_login_id, 3, company_login_id, 3);
-        if (rights != null && rights.getUserRight().equals(UserType.COMPANY.ordinal())) {
-            Banner banner = new Banner();
-            if (banner_name != null && !banner_name.isEmpty()) {
-                banner.setName(banner_name);
-            } else {
-                response.setCode("-1");
-                response.setMsg("Banner名称不能为空");
-            }
-            if (banner_desc != null && !banner_desc.isEmpty()) {
-                banner.setDescript(banner_desc);
-            } else {
-                response.setCode("-1");
-                response.setMsg("Banner描述不能为空");
-            }
-            if (company_login_id != null && !company_login_id.isEmpty()) {
-                Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(company_login_id);
-                if (enterprise != null) {
-                    banner.setCompanyId(enterprise.getId());
-                    banner.setStatus(1);
-                    banner.setCreateDate(new Date());
-                    bannerRepository.save(banner);
-                    response.setCode("1");
-                    response.setMsg("添加Banner图成功");
-                }
-            }
+        if (shareContextList.size() > 0) {
+            response.setCode(0);
+            response.setData(shareContextList);
+            response.setCount((int) bannerRepository.count(comId, status, searchMerName));
+            response.setMsg("");
         } else {
-            response.setCode("500");
-            response.setMsg("您无权添加Banner");
+            response.setCode(0);
+            response.setData(new ArrayList<>());
+            response.setCount(0);
+            response.setMsg("");
         }
-
         return response;
     }
 
-    @PostMapping(value = "add_bannercontext")
+    /**
+     * 删除轮播图
+     *
+     * @param request
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/deleteLunBo")
     @ResponseBody
-    public BaseJsonResponse AddBannerContext(HttpServletRequest request) {
-        BaseJsonResponse response = new BaseJsonResponse();
-        String filename = request.getParameter("filename");
-        String pic_url = request.getParameter("pic_url");
-        String pic_desc = request.getParameter("pic_desc");
-        BannerContext context = new BannerContext();
-        List<Banner> banners = bannerRepository.findAll();
-        List<BannerContext> bannerContexts = contextRepository.findAll();
-        if (banners.size() == 1) {
-            context.setBannerId(banners.get(0).getBannerId());
+    public String deleteLunBo(HttpServletRequest request, Integer id) {
+        boolean flag = false;
+        try {
+            bannerRepository.updateLunBo(id);
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info(e.getMessage());
+        }
+        if (flag == true) {
+            return "1";
         } else {
-            for (int i = 0; i < banners.size(); i++) {
-                Integer banner_id = banners.get(i).getBannerId();
-                for (int j = 0; j < bannerContexts.size(); j++) {
-                    if (banner_id != bannerContexts.get(j).getBannerId()) {
-                        context.setBannerId(banner_id);
-                    }
-                }
+            return "0";
+        }
+
+    }
+
+
+    /**
+     * 上传轮播
+     */
+    @RequestMapping(value = "/uploadLunBo")
+    @ResponseBody
+    public String uploadLunBo(HttpServletRequest request, String name, String descript, String trankurl, Integer sort, String telphone, Integer type, @RequestParam("imgurl") MultipartFile file) {
+        Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
+        int comId = enterprise.getId();
+        String fileUrl = null;
+        try {
+            fileUrl = FileUploadUtil.upload(request, file);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ;
+        Banner banner = new Banner();
+        banner.setDescript(descript);
+        banner.setName(name);
+        banner.setStatus(1);
+        banner.setImgurl(fileUrl);
+        banner.setTrankurl(trankurl);
+        banner.setCompanyId(comId);
+        banner.setType(type);
+        banner.setSort(sort);
+        banner.setCreateDate(new Date());
+        boolean flag = false;
+        try {
+            bannerRepository.save(banner);
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info(e.getMessage());
+        }
+        if (flag == true) {
+            return "1";
+        } else {
+            return "0";
+        }
+    }
+
+    /**
+     * 修改轮播图
+     *
+     * @param request
+     * @param id
+     * @param imgSrc
+     * @param name
+     * @param descript
+     * @param trankurl
+     * @param sort
+     * @param telphone
+     * @param file
+     * @return
+     */
+    @RequestMapping(value = "/updateLunBo")
+    @ResponseBody
+    public String updateYongjin(HttpServletRequest request, Integer id, String imgSrc, String name, String descript, String trankurl, Integer sort, Integer type, String telphone, @RequestParam("imgurl") MultipartFile file) {
+
+        Enterprise enterprise = enterpriseRepository.findEnterpriseByEnterLoginName(telphone);
+        int comId = enterprise.getId();
+
+        if (file.getSize() > 0) {
+            try {
+                imgSrc = FileUploadUtil.upload(request, file);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
-        if (pic_desc != null && !pic_desc.isEmpty()) {
-            context.setPic_descript(pic_desc);
-        } else {
-            response.setMsg("Banner图片描述为空");
-            response.setCode("-1");
-        }
-        if (filename != null && !filename.isEmpty()) {
-            context.setPic_url(filename);
-        } else {
-            response.setCode("-1");
-            response.setMsg("Banner图片名字为空");
-        }
-        if (pic_url != null && !pic_url.isEmpty()) {
-            context.setPic_link_url(pic_url);
-        } else {
-            response.setCode("-1");
-            response.setMsg("Banner图片链接为空");
-        }
-        contextRepository.save(context);
-        response.setMsg("添加banner成功");
-        response.setCode("1");
-        return response;
-    }
-    @DeleteMapping(value = "removebanner")
-    @ResponseBody
-    public BaseJsonResponse RemoveBanner(HttpServletRequest request) {
-        String banner_name = request.getParameter("banner_name");
-        BaseJsonResponse response = new BaseJsonResponse();
-        Banner banner = bannerRepository.findBannerByName(banner_name);
-        if (banner != null) {
-            bannerRepository.deleteById(banner.getBannerId());
 
-            bannerRepository.deleteAll();
-            response.setMsg("删除成功");
-            response.setCode("1");
-        } else {
-            response.setCode("-1");
-            response.setMsg("删除失败");
+        boolean flag = false;
+        try {
+            bannerRepository.updateLunBo(name, descript, trankurl, imgSrc, sort, type, id);
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info(e.getMessage());
         }
-        return response;
-    }
-    @DeleteMapping(value = "removebannerbyid")
-    @ResponseBody
-    public BaseJsonResponse RemoveBannerById(HttpServletRequest request) {
-        BaseJsonResponse response = new BaseJsonResponse();
-        String banner_id = request.getParameter("banner_id");
-        if (banner_id != null) {
-            bannerRepository.deleteById(Integer.parseInt(banner_id));
-            contextRepository.deleteByBannerId(Integer.parseInt(banner_id));
-            response.setMsg("删除成功");
-            response.setCode("1");
+
+        if (flag == true) {
+            return "1";
         } else {
-            response.setCode("-1");
-            response.setMsg("删除失败");
+            return "0";
         }
-        return response;
-    }
-    @GetMapping(value = "/banner_url_context_edit")
-    public String bannerUrlContextEdit(){
-        return URL.BANNERCONTEXT;
+
     }
 }
