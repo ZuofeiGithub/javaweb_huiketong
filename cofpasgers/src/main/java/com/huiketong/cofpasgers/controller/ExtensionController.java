@@ -44,7 +44,12 @@ public class ExtensionController {
     }
 
     @GetMapping(value = "addexten")
-    public ModelAndView AddExten() {
+    public ModelAndView AddExten(Integer id,Model model) {
+
+        PromotActivity promotActivity = promotActivityRepository.findPromotActivityById(id);
+        if(ObjectUtils.isNotEmpty(promotActivity)){
+            model.addAttribute("detail",promotActivity.getDetail());
+        }
         ModelAndView mv = new ModelAndView(Constant.PREFIX + "addExtension");
         return mv;
     }
@@ -65,8 +70,10 @@ public class ExtensionController {
                     PromotActivityResp.DataBean dataBean = new PromotActivityResp.DataBean();
                     dataBean.setId(promotActivity.getId());
                     dataBean.setActivityTitle(promotActivity.getTitle() == null ? "" : promotActivity.getTitle());
-                    dataBean.setActivityType(promotActivity.getType() == null ? 0 : promotActivity.getType());
+                    dataBean.setActivityType(promotActivity.getActivityType() == null ? 0 : promotActivity.getActivityType());
                     dataBean.setActAlias(promotActivity.getActAlias() == null ? "":promotActivity.getActAlias());
+                    dataBean.setCoverImg(promotActivity.getCoverImg() == null ? "":promotActivity.getCoverImg());
+                    dataBean.setDetail(promotActivity.getDetail() == null ? "":promotActivity.getDetail());
                     if (promotActivity.getEndTime() != null) {
                         dataBean.setEndTime(promotActivity.getEndTime());
                         boolean flag = promotActivity.getEndTime().before(new Date());
@@ -100,7 +107,7 @@ public class ExtensionController {
            model.addAttribute("title",promotActivity.getTitle());
            model.addAttribute("createtime",DateUtils.dateFormat(promotActivity.getCreateTime(),DateUtils.DATE_TIME_PATTERN));
            model.addAttribute("context",promotActivity.getDetail());
-           model.addAttribute("type",promotActivity.getType());
+           model.addAttribute("type",promotActivity.getActivityType());
        }
         return URL.ACTIVITYDETAIL;
     }
@@ -118,7 +125,7 @@ public class ExtensionController {
         }
         promotActivity.setTitle(activitytitle);
         promotActivity.setCoverImg(coverImg);
-        promotActivity.setType(activitytype);
+        promotActivity.setActivityType(activitytype);
         promotActivity.setDetail(activity_context);
         promotActivity.setBeginTime(beginTime);
         promotActivity.setEndTime(endTime);
@@ -148,5 +155,16 @@ public class ExtensionController {
         return response;
     }
 
-
+    @PostMapping(value = "/editActivity")
+    @ResponseBody
+    public BaseJsonResponse editActivity(Integer id,Integer activitytype,String begintime,String endtime,String coverImg,String activitytitle,String activity_context) {
+        BaseJsonResponse response = new BaseJsonResponse();
+        try {
+            promotActivityRepository.updatePromotAcvitiyById(activitytitle,activity_context,DateUtils.dateParse(begintime,DateUtils.DATE_TIME_PATTERN),DateUtils.dateParse(endtime,DateUtils.DATE_TIME_PATTERN),activitytype,coverImg,id);
+            response.setCode("0").setMsg("修改成功");
+        }catch (Exception e){
+            response.setCode("1").setMsg("修改失败");
+        }
+        return response;
+    }
 }

@@ -24,7 +24,7 @@ public class PromotActivity {
     @Column(columnDefinition = "text  COMMENT '活动详情'")
     String detail;
     @Column(columnDefinition = "int(11) default 0 COMMENT '活动类型'")
-    Integer type;
+    Integer activityType;
     @Column(columnDefinition = "datetime COMMENT '开始时间'")
     Date beginTime;
     @Column(columnDefinition = "datetime COMMENT '结束时间'")

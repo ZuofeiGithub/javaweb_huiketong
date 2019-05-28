@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -28,7 +28,7 @@
                 <label class="layui-form-label"><i
                         style="color: #f00; margin-right: 5px">*</i>活动类型</label>
                 <div class="layui-input-block">
-                    <select name="activitytype" lay-verify="required">
+                    <select name="activitytype" lay-verify="required" id="activity_type">
                         <option value=""></option>
                         <option value="1">邀请经纪人活动</option>
                         <option value="2">推荐客户活动</option>
@@ -66,13 +66,14 @@
                 <label class="layui-form-label"><i
                         style="color: #f00; margin-right: 5px">*</i>活动详情</label>
                 <div class="layui-input-block">
-                    <textarea id="activity_context" class="layui-textarea" name="activity_context"></textarea>
+                    <textarea id="activity_context" class="layui-textarea" name="activity_context" th:text="${detail}"></textarea>
                 </div>
             </div>
             <div class="layui-form-item layui-hide">
                 <div class="layui-input-block">
                     <button class="layui-btn" lay-submit="" lay-filter="addActivitySubmit" id="addActivitySubmit">立即提交
                     </button>
+                    <button class="layui-btn" lay-submit="" lay-filter="editActivitySubmit" id="editActivitySubmit">立即修改</button>
                 </div>
             </div>
         </form>
@@ -176,6 +177,34 @@
                 })
                 return false;
             });
+            function GetQueryString(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]);
+                return null;
+            }
+            //监听修改
+            form.on('submit(editActivitySubmit)',function (data) {
+                let field  = data.field;
+                field.activity_context = editor.html();
+                if(filename != ""){
+                    field.coverImg = filename
+                }else{
+                    field.coverImg = GetQueryString("coverImg");
+                }
+
+                field.id = GetQueryString('id');
+                $.post('editActivity',field,function (resp) {
+                    if(resp.code == "0"){
+                        layer.msg(resp.msg);
+                        parent.layui.table.reload('activity_table'); //重载表格
+                        parent.layer.close(index); //再执行关闭
+                    }else{
+                        layer.msg(resp.msg);
+                    }
+                })
+                return false;
+            })
 
         });
     });

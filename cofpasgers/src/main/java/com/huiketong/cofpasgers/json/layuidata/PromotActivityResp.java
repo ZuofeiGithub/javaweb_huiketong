@@ -48,11 +48,13 @@ public class PromotActivityResp {
         Integer id;
         Integer activityType;
         String activityTitle;
+        String coverImg;
         Date beginTime;
         Date endTime;
         Date createTime;
         Integer activityStatus;
         String actAlias;
+        String detail;
 
 
         public Integer getId() {
@@ -116,6 +118,22 @@ public class PromotActivityResp {
 
         public void setActAlias(String actAlias) {
             this.actAlias = actAlias;
+        }
+
+        public String getCoverImg() {
+            return coverImg;
+        }
+
+        public void setCoverImg(String coverImg) {
+            this.coverImg = coverImg;
+        }
+
+        public String getDetail() {
+            return detail;
+        }
+
+        public void setDetail(String detail) {
+            this.detail = detail;
         }
     }
 }

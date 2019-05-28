@@ -85,6 +85,8 @@
                         field: 'activityStatus', title: '活动状态', align: "center", templet: function (d) {
                             if (d.activityStatus == 1) {
                                 return "<button class='layui-btn layui-btn-xs layui-btn-normal'>有效</button>"
+                            }else{
+                                return "<button class='layui-btn layui-btn-xs layui-btn-normal'>无效</button>"
                             }
                         }
                     },
@@ -127,16 +129,19 @@
                 var index = layer.open({
                     title: "编辑活动",
                     type: 2,
-                    content: "addexten?id=" + data.id,
+                    content: "addexten?id=" + data.id+"&coverImg="+data.coverImg,
                     success: function (layero, index) {
                         var body = layui.layer.getChildFrame('body', index);
                         body.find("#activitytitle").val(data.activityTitle);
-
+                        body.find("#activity_type").val(data.activityType);
+                        body.find("#date1").val(util.toDateString(data.beginTime, 'yyyy-MM-dd HH:mm:ss'));
+                        body.find("#date2").val(util.toDateString(data.endTime, 'yyyy-MM-dd HH:mm:ss'));
+                        body.find("#coverImg").empty().append("<img src='" + data.coverImg + "' width='300px' height='300px'>");
                     },
                     btn: ['确定提交'],
                     yes: function (index, layero) {
                         //点击确认触发 iframe 内容中的按钮提交
-                        let submit = layero.find('iframe').contents().find("#addActivitySubmit");
+                        let submit = layero.find('iframe').contents().find("#editActivitySubmit");
                         submit.click();
                     }
                 });
